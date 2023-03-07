@@ -1,6 +1,5 @@
-package seedu.duke.passwords;
+package seedu.duke.secrets;
 import java.util.regex.Pattern;
-// TO ASK: HOW TO DO IMPORTS BETWEEN PACKAGES
 
 /**
  * Represents the basic "Password-like" class, is supposed to be the parent class
@@ -10,21 +9,23 @@ import java.util.regex.Pattern;
  * Both will be kept in the event of an eventual shift
  */
 public class Secret {
+    private static final Pattern ILLEGAL_CHARS_PATTERN =
+            Pattern.compile("^.*[~#@*+%{}<>\\[\\]|\"\\_].*$");
     private String uid = "";
     private String name = "";
     private String folderName = "unlinked";
-    private static final Pattern ILLEGAL_CHARS_PATTERN =
-            Pattern.compile("^.*[~#@*+%{}<>\\[\\]|\"\\_].*$");
 
-    public static boolean isIllegalName(String name) {
-        return ILLEGAL_CHARS_PATTERN.matcher(name).matches();
-    }
     public Secret(String name, String folderName) {
         // Assumes that name is not illegal before creation
         this.name = name;
         uid = name; // current just a duplicated, can be changed later
         this.folderName = folderName;
     }
+    
+    public static boolean isIllegalName(String name) {
+        return ILLEGAL_CHARS_PATTERN.matcher(name).matches();
+    }
+
     public String getUid() {
         return uid;
     }

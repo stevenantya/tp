@@ -1,7 +1,10 @@
 package seedu.duke.storage;
 
-import seedu.duke.exceptions.*;
-import seedu.duke.passwords.Secret;
+import seedu.duke.exceptions.FolderExistsException;
+import seedu.duke.exceptions.NonExistentFolderException;
+import seedu.duke.exceptions.RepeatedIdException;
+import seedu.duke.exceptions.SecretNotFoundException;
+import seedu.duke.secrets.Secret;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,11 +16,11 @@ import java.util.HashSet;
  */
 public class SecretMaster {
     // use for quick finding
-    private final SecretSearcher secretSearcher = new SecretSearcher();
+    private final SecretSearcher secretSearcher = new SecretSearcher(); // Hash Table
     // use for listing secrets based on order it was added in
-    private final SecretEnumerator secretEnumerator= new SecretEnumerator();
+    private final SecretEnumerator secretEnumerator= new SecretEnumerator(); // Array view
     // to ensure folders and passwords are distinct
-    private HashSet<String> folders = new HashSet<>();
+    private HashSet<String> folders = new HashSet<String>();
     private HashSet<String> secretNames = new HashSet<String>();
 
     public Secret getByIndex(int index) {
@@ -69,11 +72,11 @@ public class SecretMaster {
         secretEnumerator.delete(secret);
         secretSearcher.delete(secret);
         // Deleting a folder if it is empty now done automatically
-//        if (!folders.contains(folderName)) {
-//            // Assumes folder doesnt already exist
-//            folders.add(folderName);
-//            secretEnumerator.deleteFolder(folderName);
-//            secretSearcher.deleteFolder(folderName);
-//        }
+        //    if (!folders.contains(folderName)) {
+        //        // Assumes folder doesnt already exist
+        //        folders.add(folderName);
+        //        secretEnumerator.deleteFolder(folderName);
+        //        secretSearcher.deleteFolder(folderName);
+        //    }
     }
 }

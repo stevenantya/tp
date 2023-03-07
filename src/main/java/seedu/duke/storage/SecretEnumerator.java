@@ -3,9 +3,8 @@ package seedu.duke.storage;
 import seedu.duke.exceptions.FolderExistsException;
 import seedu.duke.exceptions.FolderNotEmptyException;
 import seedu.duke.exceptions.FolderNotFoundException;
-import seedu.duke.passwords.Secret;
+import seedu.duke.secrets.Secret;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -44,12 +43,12 @@ public class SecretEnumerator {
 
     public Secret get(int index, String folderName) {
         // assumes folder already exists
-        ArrayList<Secret> temp_storage = folders.get(folderName);
+        ArrayList<Secret> tempStorage = folders.get(folderName);
 
-        if (index >= temp_storage.size()) {
+        if (index >= tempStorage.size()) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        return temp_storage.get(index);
+        return tempStorage.get(index);
     }
 
     public ArrayList<Secret> getList() {
