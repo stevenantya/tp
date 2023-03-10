@@ -22,9 +22,7 @@ public class secureNUS {
 
         while (!isExit) {
 
-            Command c;
-
-            c = parseCommand(c);
+            Command c = parseCommand();
 
             isExit = executeCommand(c);
 
@@ -40,7 +38,7 @@ public class secureNUS {
 
     public boolean executeCommand(Command command) {
         if (command != null) {
-            command.execute();
+            command.execute(ui);
             return command.isExit();
         }
         return false;
