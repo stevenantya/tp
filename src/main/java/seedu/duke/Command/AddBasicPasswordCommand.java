@@ -1,7 +1,10 @@
 package seedu.duke.Command;
 
 import seedu.duke.Ui;
+import seedu.duke.exceptions.FolderExistsException;
+import seedu.duke.exceptions.RepeatedIdException;
 import seedu.duke.secrets.BasicPassword;
+import seedu.duke.storage.SecretMaster;
 
 import java.util.Scanner;
 
@@ -23,9 +26,20 @@ public class AddBasicPasswordCommand extends Command{
         this.password = inquirePassword(input);
     }
     @Override
-    public void execute(Ui ui) {
-//        BasicPassword basicPasswordData = new BasicPassword(name,folderName,username,password,url);
-        System.out.println(name + "  " + password);
+    public void execute(Ui ui, SecretMaster secureNUSData) {
+        BasicPassword basicPasswordData = new BasicPassword(name,folderName,username,password,url);
+        try
+        {
+            secureNUSData.addSecret(basicPasswordData);
+        } catch (RepeatedIdException e) {
+            throw new RuntimeException(e);
+        } catch (FolderExistsException e) {
+            throw new RuntimeException(e);
+        }
+        String starsPassword = "*".repeat(8);
+        System.out.println("I have added a new basic password:\n");
+        System.out.println("name     =" + name + "\n" +
+                           "password = " + starsPassword);
     }
 
     public String extractName(String input) {

@@ -1,14 +1,17 @@
 package seedu.duke;
 
 import seedu.duke.Command.Command;
+import seedu.duke.storage.SecretMaster;
 
 public class secureNUS {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
     private final Ui ui;
+    private SecretMaster secureNUSData;
     public secureNUS() {
         ui = new Ui();
+        secureNUSData = new SecretMaster();
     }
 
     public static void main(String[] args) {
@@ -38,7 +41,7 @@ public class secureNUS {
 
     public boolean executeCommand(Command command) {
         if (command != null) {
-            command.execute(ui);
+            command.execute(ui, secureNUSData);
             return command.isExit();
         }
         return false;

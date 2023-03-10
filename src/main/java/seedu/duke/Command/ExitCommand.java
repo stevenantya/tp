@@ -1,6 +1,7 @@
 package seedu.duke.Command;
 
 import seedu.duke.Ui;
+import seedu.duke.storage.SecretMaster;
 
 /**
  * @author : Steven A. O. Waskito
@@ -16,7 +17,7 @@ public class ExitCommand extends Command{
     }
 
     @Override
-    public void execute(Ui ui) {
+    public void execute(Ui ui, SecretMaster secureNUSData) {
 
     }
 }
