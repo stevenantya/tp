@@ -26,7 +26,7 @@ public class secureNUS {
         while (!isExit) {
 
             Command c = parseCommand();
-
+            ui.printLine();
             isExit = executeCommand(c);
 
             ui.printLine();
