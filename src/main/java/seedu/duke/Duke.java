@@ -3,19 +3,19 @@ package seedu.duke;
 import seedu.duke.Command.Command;
 import seedu.duke.storage.SecretMaster;
 
-public class secureNUS {
+public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
     private final Ui ui;
     private SecretMaster secureNUSData;
-    public secureNUS() {
+    public Duke() {
         ui = new Ui();
         secureNUSData = new SecretMaster();
     }
 
     public static void main(String[] args) {
-        new secureNUS().run();
+        new Duke().run();
     }
 
     public void run() {

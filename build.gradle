@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClass = "seedu.duke.secureNUS"
+    mainClass = "seedu.duke.Duke"
 }
 
 shadowJar {
