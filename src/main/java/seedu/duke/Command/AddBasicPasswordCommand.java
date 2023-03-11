@@ -23,7 +23,7 @@ public class AddBasicPasswordCommand extends Command{
         this.folderName = extractFolderName(input);
         this.username = extractUsername(input);
         this.url = extractURL(input);
-        this.password = inquirePassword(input);
+        this.password = inquirePassword();
     }
     @Override
     public void execute(Ui ui, SecretMaster secureNUSData) {
@@ -52,7 +52,7 @@ public class AddBasicPasswordCommand extends Command{
     public String extractUsername(String input) {
         return "";
     }
-    public String inquirePassword(String input) {
+    public String inquirePassword() {
         System.out.println("Please enter your password: ");
         Scanner in = new Scanner(System.in);
         return in.nextLine();

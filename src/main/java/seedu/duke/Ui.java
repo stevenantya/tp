@@ -7,7 +7,9 @@ public class Ui {
     public void greetUser() {
         System.out.println("Welcome to secureNUS v1.0\n" +
                 "Current Features\n" +
-                "Adding a password: new [PASSWORD_NAME] \n");
+                "Adding a password      : new [NAME] \n" +
+                "Adding a NUSNet ID     : new o/NUSNet [NAME] \n" +
+                "Adding a Student ID    : new o/StudentID [NAME] \n");
     }
 
     public void printLine() {
