@@ -3,7 +3,6 @@ package seedu.duke.Command;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.FolderExistsException;
 import seedu.duke.exceptions.RepeatedIdException;
-import seedu.duke.secrets.NUSNet;
 import seedu.duke.secrets.StudentID;
 import seedu.duke.storage.SecretMaster;
 
@@ -19,7 +18,7 @@ public class AddStudentIDCommand extends Command {
     public AddStudentIDCommand(String input) {
         this.name = extractName(input);
         this.folderName = extractFolderName(input);
-        this.Student_ID = inquireNUSNet_ID();
+        this.Student_ID = inquireNUSNetID();
         if (this.name == null) {
             this.name = Student_ID;
         }
@@ -42,7 +41,7 @@ public class AddStudentIDCommand extends Command {
     }
 
     public String extractName(String input) {
-        String extractedNames[] = input.split("o/StudentID ");
+        String[] extractedNames = input.split("o/StudentID ");
         String extractedName;
         if (extractedNames.length == 2) {
             extractedName = extractedNames[1];
@@ -55,7 +54,7 @@ public class AddStudentIDCommand extends Command {
     public String extractFolderName(String input) {
         return "";
     }
-    public String inquireNUSNet_ID() {
+    public String inquireNUSNetID() {
         System.out.println("Please enter your Student ID: ");
         Scanner in = new Scanner(System.in);
         return in.nextLine();
