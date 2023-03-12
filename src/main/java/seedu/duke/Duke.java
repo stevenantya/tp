@@ -7,10 +7,8 @@ public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    private final Ui ui;
     private SecretMaster secureNUSData;
     public Duke() {
-        ui = new Ui();
         secureNUSData = new SecretMaster();
     }
 
@@ -19,29 +17,29 @@ public class Duke {
     }
 
     public void run() {
-        ui.greetUser();
+        Ui.greetUser();
 
         boolean isExit = false;
 
         while (!isExit) {
 
             Command c = parseCommand();
-            ui.printLine();
+            Ui.printLine();
             isExit = executeCommand(c);
 
-            ui.printLine();
+            Ui.printLine();
         }
     }
 
     public Command parseCommand() {
-        String command = ui.readCommand();
-        ui.printLine();
+        String command = Ui.readCommand();
+        Ui.printLine();
         return Parser.parse(command);
     }
 
     public boolean executeCommand(Command command) {
         if (command != null) {
-            command.execute(ui, secureNUSData);
+            command.execute(secureNUSData);
             return command.isExit();
         }
         return false;

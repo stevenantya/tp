@@ -26,7 +26,7 @@ public class AddNUSNetCommand extends Command{
         this.password = inquirePassword();
     }
     @Override
-    public void execute(Ui ui, SecretMaster secureNUSData) {
+    public void execute(SecretMaster secureNUSData) {
         NUSNet NUSNet_IDData = new NUSNet(name,folderName,NUSNet_ID,password);
         try
         {
@@ -60,13 +60,13 @@ public class AddNUSNetCommand extends Command{
     }
     public String inquireNUSNetID() {
         System.out.println("Please enter your NUS Net ID: ");
-        Scanner in = new Scanner(System.in);
-        return in.nextLine();
+        String NUSNetID = Ui.readCommand();
+        return NUSNetID;
     }
     public String inquirePassword() {
         System.out.println("Please enter your NUS Net password: ");
-        Scanner in = new Scanner(System.in);
-        return in.nextLine();
+        String password = Ui.readCommand();
+        return password;
     }
     public String extractURL(String input) {
         return "";

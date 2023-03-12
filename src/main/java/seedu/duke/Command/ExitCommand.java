@@ -17,7 +17,7 @@ public class ExitCommand extends Command{
     }
 
     @Override
-    public void execute(Ui ui, SecretMaster secureNUSData) {
+    public void execute(SecretMaster secureNUSData) {
 
     }
 }

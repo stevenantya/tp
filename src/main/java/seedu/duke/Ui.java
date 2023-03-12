@@ -2,9 +2,9 @@ package seedu.duke;
 
 import java.util.Scanner;
 public class Ui {
-    Scanner in = new Scanner(System.in);
 
-    public void greetUser() {
+
+    public static void greetUser() {
         System.out.println("Welcome to secureNUS v1.0\n" +
                 "Current Features\n" +
                 "Adding a password      : new [NAME] \n" +
@@ -12,12 +12,18 @@ public class Ui {
                 "Adding a Student ID    : new o/StudentID [NAME] \n");
     }
 
-    public void printLine() {
+    public static void printLine() {
         System.out.print("_____________________________________________________\n");
     }
 
-    public String readCommand() {
-        return in.nextLine();
+    public static String readCommand() {
+        Scanner in = new Scanner(System.in);
+
+        while (in.hasNextLine()) {
+            return in.nextLine();
+        }
+        in.close();
+        return "";
     }
 
 }

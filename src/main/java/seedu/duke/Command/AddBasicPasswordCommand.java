@@ -26,7 +26,7 @@ public class AddBasicPasswordCommand extends Command{
         this.password = inquirePassword();
     }
     @Override
-    public void execute(Ui ui, SecretMaster secureNUSData) {
+    public void execute(SecretMaster secureNUSData) {
         BasicPassword basicPasswordData = new BasicPassword(name,folderName,username,password,url);
         try
         {
@@ -54,8 +54,8 @@ public class AddBasicPasswordCommand extends Command{
     }
     public String inquirePassword() {
         System.out.println("Please enter your password: ");
-        Scanner in = new Scanner(System.in);
-        return in.nextLine();
+        String password = Ui.readCommand();
+        return password;
     }
     public String extractURL(String input) {
         return "";

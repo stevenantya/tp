@@ -18,13 +18,13 @@ public class AddStudentIDCommand extends Command {
     public AddStudentIDCommand(String input) {
         this.name = extractName(input);
         this.folderName = extractFolderName(input);
-        this.Student_ID = inquireNUSNetID();
+        this.Student_ID = inquireStudentID();
         if (this.name == null) {
             this.name = Student_ID;
         }
     }
     @Override
-    public void execute(Ui ui, SecretMaster secureNUSData) {
+    public void execute(SecretMaster secureNUSData) {
         StudentID Student_IDData = new StudentID(name,folderName,Student_ID);
         try
         {
@@ -54,10 +54,10 @@ public class AddStudentIDCommand extends Command {
     public String extractFolderName(String input) {
         return "";
     }
-    public String inquireNUSNetID() {
+    public String inquireStudentID() {
         System.out.println("Please enter your Student ID: ");
-        Scanner in = new Scanner(System.in);
-        return in.nextLine();
+        String StudentID = Ui.readCommand();
+        return StudentID;
     }
     public String extractURL(String input) {
         return "";
