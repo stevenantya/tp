@@ -1,12 +1,11 @@
 package seedu.duke;
 
-import seedu.duke.Command.*;
-
+import seedu.duke.Command.AddBasicPasswordCommand;
+import seedu.duke.Command.AddNUSNetCommand;
+import seedu.duke.Command.AddStudentIDCommand;
+import seedu.duke.Command.ExitCommand;
+import seedu.duke.Command.Command;
 public class Parser {
-
-    public Parser() {
-
-    }
     public static Command parse(String command) {
 
         if (command.startsWith("new o/NUSNet")) {

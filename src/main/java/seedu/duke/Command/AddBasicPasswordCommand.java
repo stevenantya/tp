@@ -6,7 +6,6 @@ import seedu.duke.exceptions.RepeatedIdException;
 import seedu.duke.secrets.BasicPassword;
 import seedu.duke.storage.SecretMaster;
 
-import java.util.Scanner;
 
 /**
  * @author : Steven A. O. Waskito

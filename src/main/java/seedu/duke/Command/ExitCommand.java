@@ -1,6 +1,5 @@
 package seedu.duke.Command;
 
-import seedu.duke.Ui;
 import seedu.duke.storage.SecretMaster;
 
 /**
