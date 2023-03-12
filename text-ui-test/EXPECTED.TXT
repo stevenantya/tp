@@ -1,0 +1,10 @@
+Welcome to secureNUS v1.0
+Current Features
+Adding a password      : new [NAME] 
+Adding a NUSNet ID     : new o/NUSNet [NAME] 
+Adding a Student ID    : new o/StudentID [NAME] 
+
+_____________________________________________________
+_____________________________________________________
+_____________________________________________________
+
