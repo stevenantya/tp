@@ -1,6 +1,6 @@
-package seedu.duke.Command;
+package seedu.duke.command;
 
-import seedu.duke.exceptions.SecretNotFoundException;
+import seedu.duke.exceptions.secrets.SecretNotFoundException;
 import seedu.duke.storage.SecretMaster;
 
 public abstract class Command {

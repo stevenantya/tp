@@ -13,17 +13,17 @@ public class Duke {
      */
     private SecretMaster secureNUSData;
     public Duke() throws FolderExistsException, IllegalFolderNameException {
-        secureNUSData = new SecretMaster();
+        secureNUSData = Backend.initialisation();
     }
 
     public static void main(String[] args) throws FolderExistsException, IllegalFolderNameException,
-            IllegalSecretNameException {
+            IllegalSecretNameException, SecretNotFoundException {
         
         Duke duke = new Duke();
         duke.run();
     }
 
-    public void run() throws IllegalFolderNameException, IllegalSecretNameException {
+    public void run() throws IllegalFolderNameException, IllegalSecretNameException, SecretNotFoundException {
         Ui.greetUser();
 
         boolean isExit = false;
@@ -36,6 +36,7 @@ public class Duke {
 
             Ui.printLine(); //end line
         }
+        Backend.updateStorage(this.secureNUSData.listSecrets());
     }
 
     public Command parseCommand() {
@@ -44,7 +45,7 @@ public class Duke {
         return Parser.parse(command);
     }
 
-    public boolean executeCommand(Command command) throws IllegalFolderNameException, IllegalSecretNameException {
+    public boolean executeCommand(Command command) throws IllegalFolderNameException, IllegalSecretNameException, SecretNotFoundException {
         if (command != null) {
             command.execute(secureNUSData);
             return command.isExit();

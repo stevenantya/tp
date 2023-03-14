@@ -59,4 +59,9 @@ public class Secret {
     public void setFolderName(String folderName) {
         this.folderName = folderName;
     }
+
+    public String toStringForDatabase() {
+        return this.uid + "," + this.name + "," +
+            this.folderName;
+    }
 }

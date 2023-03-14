@@ -27,12 +27,11 @@ public class SecretMaster {
     private HashSet<String> folders;
     private HashSet<String> secretNames;
 
-    public SecretMaster() throws FolderExistsException, IllegalFolderNameException {
-        this.secretEnumerator = new SecretEnumerator();
-        this.secretSearcher = new SecretSearcher();
-        this.folders = new HashSet<String>();
-        this.secretNames = new HashSet<String>();
-        createFolder(DEFAULT_FOLDER);
+    public SecretMaster(SecretSearcher secretSearcher, SecretEnumerator secretEnumerator) {
+        this.secretSearcher = secretSearcher;
+        this.secretEnumerator = secretEnumerator;
+        this.folders = secretEnumerator.getFolders();
+        this.secretNames = secretSearcher.getNames();
     }
 
     public boolean isLegalName(String name) {
@@ -67,7 +66,6 @@ public class SecretMaster {
             secretEnumerator.createFolder(folderName);
             secretSearcher.createFolder(folderName);
         }
-    }
 
     public Secret getByIndex(int index) {
         return secretEnumerator.get(index);
