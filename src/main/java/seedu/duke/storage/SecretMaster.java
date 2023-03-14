@@ -88,7 +88,10 @@ public class SecretMaster {
         return secretEnumerator.getList(folderName);
     }
 
-    public Secret getByName(String secretName) {
+    public Secret getByName(String secretName) throws SecretNotFoundException {
+        if (!secretNames.contains(secretName)) {
+            throw new SecretNotFoundException();
+        }
         return secretSearcher.get(secretName);
     }
 

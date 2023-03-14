@@ -4,6 +4,7 @@ import seedu.duke.command.Command;
 import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
+import seedu.duke.exceptions.secrets.SecretNotFoundException;
 import seedu.duke.storage.SecretMaster;
 
 public class Duke {
@@ -17,7 +18,9 @@ public class Duke {
 
     public static void main(String[] args) throws FolderExistsException, IllegalFolderNameException,
             IllegalSecretNameException {
-        new Duke().run();
+        
+        Duke duke = new Duke();
+        duke.run()
     }
 
     public void run() throws IllegalFolderNameException, IllegalSecretNameException {
@@ -28,16 +31,16 @@ public class Duke {
         while (!isExit) {
 
             Command c = parseCommand();
-            Ui.printLine();
+            Ui.printLine(); //middle line
             isExit = executeCommand(c);
 
-            Ui.printLine();
+            Ui.printLine(); //end line
         }
     }
 
     public Command parseCommand() {
         String command = Ui.readCommand();
-        Ui.printLine();
+        Ui.printLine(); //top most line
         return Parser.parse(command);
     }
 
