@@ -9,7 +9,9 @@ import seedu.duke.secrets.Secret;
 
 import java.util.HashSet;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class SecretMasterTest {
 
@@ -32,7 +34,7 @@ class SecretMasterTest {
         set.add("unnamed");
         assertEquals(set, secretMaster.getFolders());
         assertThrows(IllegalFolderNameException.class, () -> {
-           secretMaster.createFolder("\"jkfewrjfv90r93f47^&IO(*&^");
+            secretMaster.createFolder("\"jkfewrjfv90r93f47^&IO(*&^");
         });
         assertThrows(IllegalFolderNameException.class, () -> {
             secretMaster.createFolder("jhfe ");

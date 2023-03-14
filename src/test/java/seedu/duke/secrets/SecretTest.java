@@ -2,14 +2,14 @@ package seedu.duke.secrets;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SecretTest {
 
     @Test
     void isIllegalName_checkWeirdChars() {
         String[] names = {"$", "#", "!", "@", "%", "^",
-                "&", "*", "(", ")", "~", "`", "-", "+", "="};
+            "&", "*", "(", ")", "~", "`", "-", "+", "="};
         for (String name: names) {
             assertEquals(true, Secret.isIllegalName(name));
         }
