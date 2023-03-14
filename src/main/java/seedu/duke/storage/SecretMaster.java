@@ -16,17 +16,18 @@ import java.util.HashSet;
  */
 public class SecretMaster {
     // use for quick finding
-    private final SecretSearcher secretSearcher = new SecretSearcher(); // Hash Table
+    private final SecretSearcher secretSearcher; // Hash Table
     // use for listing secrets based on order it was added in
-    private final SecretEnumerator secretEnumerator= new SecretEnumerator(); // Array view
+    private final SecretEnumerator secretEnumerator; // Array view
     // to ensure folders and passwords are distinct
     private HashSet<String> folders = new HashSet<String>();
     private HashSet<String> secretNames = new HashSet<String>();
 
-    public SecretMaster() {
-        this.folders = new HashSet<>();
-        this.secretNames = new HashSet<>();
-
+    public SecretMaster(SecretSearcher secretSearcher, SecretEnumerator secretEmumerator) {
+        this.secretSearcher = secretSearcher;
+        this.secretEnumerator = secretEmumerator;
+        this.folders = secretEnumerator.getFolders();
+        this.secretNames = secretSearcher.getNames();
     }
 
     public Secret getByIndex(int index) {
