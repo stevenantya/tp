@@ -7,4 +7,11 @@ public class StudentID extends Secret {
         super(name, folderName);
         this.studentID = studentID;
     }
+
+    @Override
+    public String toStringForDatabase() {
+        String formattedString =  "studentID," + super.toStringForDatabase() +
+            "," + this.studentID;
+        return formattedString;
+    }
 }

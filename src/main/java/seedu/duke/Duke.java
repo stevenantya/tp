@@ -9,7 +9,7 @@ public class Duke {
      */
     private SecretMaster secureNUSData;
     public Duke() {
-        secureNUSData = new SecretMaster();
+        secureNUSData = Backend.initialisation();
     }
 
     public static void main(String[] args) {
@@ -29,6 +29,7 @@ public class Duke {
 
             Ui.printLine();
         }
+        Backend.updateStorage(this.secureNUSData.listSecrets());
     }
 
     public Command parseCommand() {
