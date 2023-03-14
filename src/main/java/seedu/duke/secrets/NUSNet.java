@@ -14,7 +14,7 @@ public class NUSNet extends Secret{
     @Override
     public String toStringForDatabase() {
         String formattedString =  "NUSNetID," + super.toStringForDatabase() +
-                "," + this.NUSNet_ID + "," + this.password;
+                "," + this.NUSNet_ID + "," + Backend.encode(this.password);
         return formattedString;
     }
 }

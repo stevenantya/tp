@@ -1,3 +1,0 @@
-Password,student,student,student,student,DKENCfo,DKENCDK
-NUSNetID,S1,S1,S1,folder1,11w21912e
-studentID,sdcnoiv,sdcnoiv,ok1,cln in eiv

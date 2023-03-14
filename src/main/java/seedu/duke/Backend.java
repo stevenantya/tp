@@ -82,11 +82,11 @@ public class Backend {
             database.add(secret);
         } else if (input[0].equals("NUSNetID")) {
             Secret secret = new NUSNet(input[1], input[2], input[3],
-                    input[4]);
+                    Backend.decode(input[4]));
             database.add(secret);
         } else if (input[0].equals("Password")) {
-            Secret secret = new BasicPassword(input[1], input[2], input[3],
-                    input[4], input[5]);
+            Secret secret = new BasicPassword(input[1], input[2], Backend.decode(input[3]),
+                    Backend.decode(input[4]), input[5]);
             database.add(secret);
         }
         //Password
@@ -122,6 +122,27 @@ public class Backend {
             hashtableFolders.put(folder, Backend.createNameHashtable(folderHashtable.get(folder)));
         }
         return hashtableFolders;
+    }
+
+
+    public static String encode(String field) {
+        String identifier = "DKENC";
+        String encodedField = "";
+        for (int i = 0; i < field.length(); i++) {
+            int ASCII = (int) (field.charAt(i) + 1);
+            encodedField += (char) ASCII;
+        }
+        return identifier + encodedField;
+    }
+
+    public static String decode(String field) {
+        String modifiedField = field.substring(5);
+        String actualField = "";
+        for (int i = 0; i < modifiedField.length(); i++) {
+            int ASCII = (int) (field.charAt(i) - 1);
+            actualField += (char) ASCII;
+        }
+        return actualField;
     }
 
     /**

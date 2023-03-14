@@ -16,7 +16,7 @@ public class BasicPassword extends Secret{
     @Override
     public String toStringForDatabase() {
         String formattedString =  "Password," + super.toStringForDatabase() +
-            "," + this.username + "," + this.password +
+            "," + Backend.encode(this.username) + "," + Backend.encode(this.password) +
                "," + this.url;
         return formattedString;
     }
