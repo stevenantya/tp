@@ -42,7 +42,12 @@ public class AddStudentIDCommand extends Command {
         String[] extractedNames = input.split("o/StudentID ");
         String extractedName;
         if (extractedNames.length == 2) {
-            extractedName = extractedNames[1];
+            if (extractedNames[1].split(" /f").length > 1) {
+                extractedName = extractedNames[1].split(" /f")[0];
+            }
+            else {
+                extractedName = null;
+            }
         }
         else {
             extractedName = null; //Default Name
@@ -50,7 +55,11 @@ public class AddStudentIDCommand extends Command {
         return extractedName;
     }
     public String extractFolderName(String input) {
-        return "";
+        String extractedFolderName = "unfiled";
+        if (input.split("/f ").length > 1) {
+            extractedFolderName = input.split("/f ")[1];
+        }
+        return extractedFolderName;
     }
     public String inquireStudentID() {
         System.out.println("Please enter your Student ID: ");
