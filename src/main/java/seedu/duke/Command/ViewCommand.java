@@ -12,7 +12,7 @@ public class ViewCommand extends Command {
         this.passwordName = extractName(input);
     }
     public String extractName(String input) {
-        return input.split("view")[1];
+        return input.split("view")[1].trim();
     }
 
     /*
@@ -25,11 +25,6 @@ public class ViewCommand extends Command {
     }
 
     @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    @Override
     public void execute(SecretMaster secureNUSData) {
         Secret passwordSecret;
         try {
@@ -37,6 +32,11 @@ public class ViewCommand extends Command {
         } catch (SecretNotFoundException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("Password:" + passwordSecret.getPassword());
+        // TODO: How to show password?
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 }

@@ -16,9 +16,9 @@ public class SearchCommand extends Command{
 
     public String extractName(String input) {
         if (input.contains("-f")) {
-            return input.substring(input.indexOf("n/") + 2, input.indexOf("-f"));
+            return input.substring(input.indexOf("n/") + 2, input.indexOf("-f")).trim();
         }
-        return input.substring(input.indexOf("n/") + 2);
+        return input.substring(input.indexOf("n/") + 2).trim();
     }
 
     /**
@@ -26,14 +26,9 @@ public class SearchCommand extends Command{
      */
     public String extractFolderName(String input) {
         if (input.contains("-f")) {
-            return input.substring(input.indexOf("f/") + 2);
+            return input.substring(input.indexOf("f/") + 2).trim();
         }
         return null;
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 
     @Override
@@ -51,11 +46,20 @@ public class SearchCommand extends Command{
             // search all passwords
             secrets = secureNUSData.listSecrets();
         }
+        int count = 0;
+        StringBuilder output = new StringBuilder();
         for (Secret secret : secrets) {
             if (secret.getName().contains(this.name)) { // case-sensitive search
-                continue;
-                // TODO: list all passwords that match
+                ++count;
+                output.append(" ID: ").append(count).append("\t|\t").append(secret.getName()).append("\t");
             }
         }
+        System.out.println("Found " + count + "match!");
+        System.out.println(output.toString());
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 }
