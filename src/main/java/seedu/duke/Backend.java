@@ -42,7 +42,9 @@ public class Backend {
             if (!database.createNewFile()) {
                 database.createNewFile();
             }
-        } catch (IOException e) {}
+        } catch (IOException e) {
+            System.out.println(e);
+        }
 
         try {
             Scanner reader = new Scanner(database);
@@ -51,7 +53,9 @@ public class Backend {
                 secretList = Backend.readAndUpdate(inputArray, secretList);
             }
             reader.close();
-        } catch (IOException e) {}
+        } catch (IOException e) {
+            System.out.println(e);
+        }
 
         //for secretEnumerator
         Hashtable<String, ArrayList<Secret>> foldersHashTable =
@@ -164,7 +168,9 @@ public class Backend {
                 myWriter.write(secret.toStringForDatabase() + "\n");
             }
             myWriter.close();
-        } catch (IOException e) {}
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 
 }
