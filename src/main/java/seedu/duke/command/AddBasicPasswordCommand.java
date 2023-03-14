@@ -1,8 +1,10 @@
-package seedu.duke.Command;
+package seedu.duke.command;
 
 import seedu.duke.Ui;
-import seedu.duke.exceptions.FolderExistsException;
+import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.RepeatedIdException;
+import seedu.duke.exceptions.secrets.IllegalFolderNameException;
+import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.secrets.BasicPassword;
 import seedu.duke.storage.SecretMaster;
 
@@ -25,10 +27,9 @@ public class AddBasicPasswordCommand extends Command{
         this.password = inquirePassword();
     }
     @Override
-    public void execute(SecretMaster secureNUSData) {
+    public void execute(SecretMaster secureNUSData) throws IllegalFolderNameException, IllegalSecretNameException {
         BasicPassword basicPasswordData = new BasicPassword(name,folderName,username,password,url);
-        try
-        {
+        try {
             secureNUSData.addSecret(basicPasswordData);
         } catch (RepeatedIdException e) {
             throw new RuntimeException(e);

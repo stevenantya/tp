@@ -1,8 +1,10 @@
-package seedu.duke.Command;
+package seedu.duke.command;
 
 import seedu.duke.Ui;
-import seedu.duke.exceptions.FolderExistsException;
+import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.RepeatedIdException;
+import seedu.duke.exceptions.secrets.IllegalFolderNameException;
+import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.secrets.NUSNet;
 import seedu.duke.storage.SecretMaster;
 
@@ -32,7 +34,7 @@ public class AddNUSNetCommand extends Command{
             secureNUSData.addSecret(NUSNet_IDData);
         } catch (RepeatedIdException e) {
             throw new RuntimeException(e);
-        } catch (FolderExistsException e) {
+        } catch (FolderExistsException | IllegalSecretNameException | IllegalFolderNameException e) {
             throw new RuntimeException(e);
         }
         String starsPassword = "*".repeat(8);

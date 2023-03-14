@@ -1,6 +1,9 @@
 package seedu.duke;
 
-import seedu.duke.Command.Command;
+import seedu.duke.command.Command;
+import seedu.duke.exceptions.secrets.FolderExistsException;
+import seedu.duke.exceptions.secrets.IllegalFolderNameException;
+import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.storage.SecretMaster;
 
 public class Duke {
@@ -8,15 +11,16 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     private SecretMaster secureNUSData;
-    public Duke() {
+    public Duke() throws FolderExistsException, IllegalFolderNameException {
         secureNUSData = new SecretMaster();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FolderExistsException, IllegalFolderNameException,
+            IllegalSecretNameException {
         new Duke().run();
     }
 
-    public void run() {
+    public void run() throws IllegalFolderNameException, IllegalSecretNameException {
         Ui.greetUser();
 
         boolean isExit = false;
@@ -37,7 +41,7 @@ public class Duke {
         return Parser.parse(command);
     }
 
-    public boolean executeCommand(Command command) {
+    public boolean executeCommand(Command command) throws IllegalFolderNameException, IllegalSecretNameException {
         if (command != null) {
             command.execute(secureNUSData);
             return command.isExit();
