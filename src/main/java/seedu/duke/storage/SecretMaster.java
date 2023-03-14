@@ -90,4 +90,23 @@ public class SecretMaster {
         //        secretSearcher.deleteFolder(folderName);
         //    }
     }
+
+    public ArrayList<String> listSecretNames() {
+        ArrayList<String> secretNamesList = new ArrayList<String>();
+        for (Secret secret : secretEnumerator.getList()) {
+            secretNamesList.add(secret.getName());
+        }
+        return secretNamesList;
+    }
+
+    public ArrayList <String> listSecretNames(String folderName) throws NonExistentFolderException {
+        if (!folders.contains(folderName)) {
+            throw new NonExistentFolderException();
+        }
+        ArrayList<String> secretNamesList = new ArrayList<String>();
+        for (Secret secret : secretEnumerator.getList(folderName)) {
+            secretNamesList.add(secret.getName());
+        }
+        return secretNamesList;
+    }
 }
