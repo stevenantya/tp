@@ -5,11 +5,15 @@ Adding a NUSNet ID     : new o/NUSNet [NAME]
 Adding a Student ID    : new o/StudentID [NAME] 
 
 _____________________________________________________
+Please enter the url: 
+Please enter your username: 
 Please enter your password: 
 _____________________________________________________
 I have added a new basic password:
 
 name     = basic password
+url      = 
+username = 
 password = ********
 _____________________________________________________
 _____________________________________________________

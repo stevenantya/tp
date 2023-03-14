@@ -20,8 +20,8 @@ public class AddBasicPasswordCommand extends Command{
     public AddBasicPasswordCommand(String input) {
         this.name = extractName(input);
         this.folderName = extractFolderName(input);
-        this.username = extractUsername(input);
-        this.url = extractURL(input);
+        this.url = inquireURL(input);
+        this.username = inquireUsername(input);
         this.password = inquirePassword();
     }
     @Override
@@ -37,27 +37,35 @@ public class AddBasicPasswordCommand extends Command{
         }
         String starsPassword = "*".repeat(8);
         System.out.println("I have added a new basic password:\n");
-        System.out.println("name     =" + name + "\n" +
+        System.out.println("name     = " + name + "\n" +
+                           "url      = " + url + "\n" +
+                           "username = " + username + "\n" +
                            "password = " + starsPassword);
     }
 
     public String extractName(String input) {
-        String extractedName = input.split("new")[1];
+        String extractedName = input.split("new ")[1];
         return extractedName;
     }
     public String extractFolderName(String input) {
         return "";
     }
-    public String extractUsername(String input) {
-        return "";
+    // Currently prompts the user to input the url separately
+    public String inquireUsername(String input) {
+        System.out.println("Please enter your username: ");
+        String username = Ui.readCommand();
+        return username;
     }
     public String inquirePassword() {
         System.out.println("Please enter your password: ");
         String password = Ui.readCommand();
         return password;
     }
-    public String extractURL(String input) {
-        return "";
+    // Currently prompts the user to input the url separately
+    public String inquireURL(String input) {
+        System.out.println("Please enter the url: ");
+        String url = Ui.readCommand();
+        return url;
     }
     @Override
     public boolean isExit() {

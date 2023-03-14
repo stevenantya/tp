@@ -1,2 +1,4 @@
 new basic password
+google.com
+username
 password
