@@ -1,12 +1,12 @@
 package seedu.duke;
 
-import seedu.duke.Command.AddBasicPasswordCommand;
-import seedu.duke.Command.AddStudentIDCommand;
-import seedu.duke.Command.AddNUSNetCommand;
-import seedu.duke.Command.Command;
-import seedu.duke.Command.DeleteCommand;
-import seedu.duke.Command.ListCommand;
-import seedu.duke.Command.ExitCommand;
+import seedu.duke.command.AddBasicPasswordCommand;
+import seedu.duke.command.AddNUSNetCommand;
+import seedu.duke.command.AddStudentIDCommand;
+import seedu.duke.command.ListCommand;
+import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.Command;
+import seedu.duke.command.ExitCommand;
 
 public class Parser {
     public static Command parse(String command) {

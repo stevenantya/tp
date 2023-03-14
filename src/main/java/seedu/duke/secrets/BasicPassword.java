@@ -6,6 +6,13 @@ public class BasicPassword extends Secret{
     private String username;
     private String password;
     private String url;
+    public BasicPassword(String name, String username,
+                         String password, String url) {
+        super(name);
+        this.password = password;
+        this.username = username;
+        this.url = url;
+    }
     public BasicPassword(String name, String folderName, String username,
                             String password, String url) {
         super(name, folderName);
@@ -13,6 +20,7 @@ public class BasicPassword extends Secret{
         this.username = username;
         this.url = url;
     }
+    
     @Override
     public String toStringForDatabase() {
         String formattedString =  "Password," + super.toStringForDatabase() +

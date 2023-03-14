@@ -1,8 +1,8 @@
 package seedu.duke.storage;
 
-import seedu.duke.exceptions.FolderExistsException;
-import seedu.duke.exceptions.FolderNotEmptyException;
-import seedu.duke.exceptions.FolderNotFoundException;
+import seedu.duke.exceptions.secrets.FolderExistsException;
+import seedu.duke.exceptions.secrets.FolderNotEmptyException;
+import seedu.duke.exceptions.secrets.FolderNotFoundException;
 import seedu.duke.secrets.Secret;
 
 import java.util.ArrayList;
