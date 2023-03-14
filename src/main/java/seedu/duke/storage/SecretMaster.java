@@ -23,6 +23,12 @@ public class SecretMaster {
     private HashSet<String> folders = new HashSet<String>();
     private HashSet<String> secretNames = new HashSet<String>();
 
+    public SecretMaster() {
+        this.folders = new HashSet<>();
+        this.secretNames = new HashSet<>();
+
+    }
+
     public Secret getByIndex(int index) {
         return secretEnumerator.get(index);
     }
@@ -62,6 +68,7 @@ public class SecretMaster {
         secretEnumerator.add(secret);
         secretSearcher.add(secret);
     }
+
 
     public void removeSecret(Secret secret) throws SecretNotFoundException {
         if (!secretNames.contains(secret.getUid())) {
