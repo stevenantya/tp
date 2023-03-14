@@ -5,6 +5,7 @@ import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.secrets.Secret;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -13,7 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 class SecretEnumeratorTest {
     @Test
     void emptyGetters() throws FolderExistsException {
-        SecretEnumerator enumerator = new SecretEnumerator();
+        ArrayList<Secret> list2 = new ArrayList<>();
+        Hashtable<String, ArrayList<Secret>> list3 = new Hashtable<String, ArrayList<Secret>>();
+        SecretEnumerator enumerator = new SecretEnumerator(list2, list3);
         assertEquals(new ArrayList<>(), enumerator.getList());
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
             enumerator.get(1);

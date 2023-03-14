@@ -45,7 +45,8 @@ public class Duke {
         return Parser.parse(command);
     }
 
-    public boolean executeCommand(Command command) throws IllegalFolderNameException, IllegalSecretNameException, SecretNotFoundException {
+    public boolean executeCommand(Command command) throws IllegalFolderNameException, IllegalSecretNameException,
+            SecretNotFoundException {
         if (command != null) {
             command.execute(secureNUSData);
             return command.isExit();

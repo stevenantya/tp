@@ -66,6 +66,7 @@ public class SecretMaster {
             secretEnumerator.createFolder(folderName);
             secretSearcher.createFolder(folderName);
         }
+    }
 
     public Secret getByIndex(int index) {
         return secretEnumerator.get(index);

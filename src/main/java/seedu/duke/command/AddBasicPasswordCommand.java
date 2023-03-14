@@ -27,13 +27,13 @@ public class AddBasicPasswordCommand extends Command{
         this.password = inquirePassword();
     }
     @Override
-    public void execute(SecretMaster secureNUSData) throws IllegalFolderNameException, IllegalSecretNameException {
+    public void execute(SecretMaster secureNUSData) {
         BasicPassword basicPasswordData = new BasicPassword(name,folderName,username,password,url);
         try {
             secureNUSData.addSecret(basicPasswordData);
         } catch (RepeatedIdException e) {
             throw new RuntimeException(e);
-        } catch (FolderExistsException e) {
+        } catch (FolderExistsException | IllegalSecretNameException | IllegalFolderNameException e) {
             throw new RuntimeException(e);
         }
         String starsPassword = "*".repeat(8);

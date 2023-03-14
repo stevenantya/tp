@@ -1,6 +1,6 @@
-package seedu.duke.Command;
+package seedu.duke.command;
 
-import seedu.duke.exceptions.NonExistentFolderException;
+import seedu.duke.exceptions.secrets.NonExistentFolderException;
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretMaster;
 
