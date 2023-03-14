@@ -39,6 +39,7 @@ public class AddNUSNetCommand extends Command{
         System.out.println("I have added a new NUS Net ID password:\n");
         System.out.println(
                 "name       = " + name + "\n" +
+                "folder     = " + folderName + "\n" +
                 "NUS Net ID = " + NUSNet_ID + "\n" +
                 "password   = " + starsPassword);
     }
@@ -47,7 +48,12 @@ public class AddNUSNetCommand extends Command{
         String[] extractedNames = input.split("o/NUSNet ");
         String extractedName;
         if (extractedNames.length == 2) {
-            extractedName = extractedNames[1];
+            if (extractedNames[1].split(" /f").length > 1) {
+                extractedName = extractedNames[1].split(" /f")[0];
+            }
+            else {
+                extractedName = null;
+            }
         }
         else {
             extractedName = null; //Default Name
@@ -55,7 +61,11 @@ public class AddNUSNetCommand extends Command{
         return extractedName;
     }
     public String extractFolderName(String input) {
-        return "";
+        String extractedFolderName = "unfiled";
+        if (input.split("/f ").length > 1) {
+            extractedFolderName = input.split("/f ")[1];
+        }
+        return extractedFolderName;
     }
     public String inquireNUSNetID() {
         System.out.println("Please enter your NUS Net ID: ");

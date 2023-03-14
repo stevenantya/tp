@@ -38,6 +38,7 @@ public class AddBasicPasswordCommand extends Command{
         String starsPassword = "*".repeat(8);
         System.out.println("I have added a new basic password:\n");
         System.out.println("name     = " + name + "\n" +
+                           "folder   = " + folderName + "\n" +
                            "url      = " + url + "\n" +
                            "username = " + username + "\n" +
                            "password = " + starsPassword);
@@ -45,10 +46,15 @@ public class AddBasicPasswordCommand extends Command{
 
     public String extractName(String input) {
         String extractedName = input.split("new ")[1];
+        extractedName = extractedName.split(" /f")[0];
         return extractedName;
     }
     public String extractFolderName(String input) {
-        return "";
+        String extractedFolderName = "unfiled";
+        if (input.split("/f ").length > 1) {
+            extractedFolderName = input.split("/f ")[1];
+        }
+        return extractedFolderName;
     }
     // Currently prompts the user to input the url separately
     public String inquireUsername(String input) {
