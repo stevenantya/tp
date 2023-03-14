@@ -3,9 +3,10 @@ package seedu.duke;
 import seedu.duke.command.AddBasicPasswordCommand;
 import seedu.duke.command.AddNUSNetCommand;
 import seedu.duke.command.AddStudentIDCommand;
-import seedu.duke.command.ExitCommand;
+import seedu.duke.command.ListCommand;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.Command;
+import seedu.duke.command.ExitCommand;
 
 public class Parser {
     public static Command parse(String command) {
@@ -21,6 +22,9 @@ public class Parser {
         }
         else if (command.startsWith("delete")) {
             return new DeleteCommand(command);
+        }
+        else if (command.startsWith("list")) {
+            return new ListCommand(command);
         }
 
         /*
