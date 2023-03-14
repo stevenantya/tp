@@ -1,21 +1,49 @@
 package seedu.duke;
 
-import java.util.Scanner;
+import seedu.duke.Command.Command;
+import seedu.duke.storage.SecretMaster;
 
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
-
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+    private SecretMaster secureNUSData;
+    public Duke() {
+        secureNUSData = Backend.initialisation();
     }
+
+    public static void main(String[] args) {
+        new Duke().run();
+    }
+
+    public void run() {
+        Ui.greetUser();
+
+        boolean isExit = false;
+
+        while (!isExit) {
+
+            Command c = parseCommand();
+            Ui.printLine();
+            isExit = executeCommand(c);
+
+            Ui.printLine();
+        }
+        Backend.updateStorage(this.secureNUSData.listSecrets());
+    }
+
+    public Command parseCommand() {
+        String command = Ui.readCommand();
+        Ui.printLine();
+        return Parser.parse(command);
+    }
+
+    public boolean executeCommand(Command command) {
+        if (command != null) {
+            command.execute(secureNUSData);
+            return command.isExit();
+        }
+        return false;
+    }
+
 }
