@@ -18,8 +18,8 @@ import java.util.HashSet;
  */
 public class SecretMaster {
     // use for quick finding
-    private final String DEFAULT_FOLDER = "unnamed";
-    private final String ALLOWED_NAMES_REGEX = "^[a-zA-Z0-9_]*$"; // only alphanumeric allowed
+    private static final String DEFAULT_FOLDER = "unnamed";
+    private static final String ALLOWED_NAMES_REGEX = "^[a-zA-Z0-9_]*$"; // only alphanumeric allowed
     private SecretSearcher secretSearcher; // Hash Table
     // use for listing secrets based on order it was added in
     private SecretEnumerator secretEnumerator; // Array view
