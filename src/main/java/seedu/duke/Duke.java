@@ -20,7 +20,7 @@ public class Duke {
             IllegalSecretNameException {
         
         Duke duke = new Duke();
-        duke.run()
+        duke.run();
     }
 
     public void run() throws IllegalFolderNameException, IllegalSecretNameException {
