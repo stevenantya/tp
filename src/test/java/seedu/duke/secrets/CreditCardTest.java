@@ -3,7 +3,8 @@ package seedu.duke.secrets;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CreditCardTest {
 
@@ -32,7 +33,7 @@ class CreditCardTest {
         assertEquals("12/23", creditCard.getExpiryDate());
     }
 
-    void LegalDatesTest() throws InvalidExpiryDateException {
+    void legalDatesTest() throws InvalidExpiryDateException {
         assertThrows(InvalidExpiryDateException.class, () -> {
             new CreditCard("creditCard1", "folder1",
                     "John Doe Lim Guang", "12345678909876543", 123,
@@ -40,40 +41,40 @@ class CreditCardTest {
             }
         );
         assertThrows(InvalidExpiryDateException.class, () -> {
-                    new CreditCard("creditCard1", "folder1",
-                            "John Doe Lim Guang", "12345678909876543", 123,
-                            "12/43");
-                }
+            new CreditCard("creditCard1", "folder1",
+                    "John Doe Lim Guang", "12345678909876543", 123,
+                    "12/43");
+            }
         );
         assertThrows(InvalidExpiryDateException.class, () -> {
-                    new CreditCard("creditCard1", "folder1",
-                            "John Doe Lim Guang", "12345678909876543", 123,
-                            "123/23");
-                }
+            new CreditCard("creditCard1", "folder1",
+                    "John Doe Lim Guang", "12345678909876543", 123,
+                    "123/23");
+            }
         );
         assertThrows(InvalidExpiryDateException.class, () -> {
-                    new CreditCard("creditCard1", "folder1",
-                            "John Doe Lim Guang", "12345678909876543", 123,
-                            "12/53");
-                }
+            new CreditCard("creditCard1", "folder1",
+                    "John Doe Lim Guang", "12345678909876543", 123,
+                    "12/53");
+            }
         );
         assertThrows(InvalidExpiryDateException.class, () -> {
-                    new CreditCard("creditCard1", "folder1",
-                            "John Doe Lim Guang", "12345678909876543", 123,
-                            "12/g");
-                }
+            new CreditCard("creditCard1", "folder1",
+                    "John Doe Lim Guang", "12345678909876543", 123,
+                    "12/g");
+            }
         );
         assertThrows(InvalidExpiryDateException.class, () -> {
-                    new CreditCard("creditCard1", "folder1",
-                            "John Doe Lim Guang", "12345678909876543", 123,
-                            "kfc");
-                }
+            new CreditCard("creditCard1", "folder1",
+                    "John Doe Lim Guang", "12345678909876543", 123,
+                    "kfc");
+            }
         );
         assertThrows(InvalidExpiryDateException.class, () -> {
-                    new CreditCard("creditCard1", "folder1",
-                            "John Doe Lim Guang", "12345678909876543", 123,
-                            "@#/$%");
-                }
+            new CreditCard("creditCard1", "folder1",
+                    "John Doe Lim Guang", "12345678909876543", 123,
+                    "@#/$%");
+            }
         );
     }
 }
