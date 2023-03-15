@@ -11,8 +11,8 @@ Please enter your password:
 _____________________________________________________
 I have added a new basic password:
 
-name     = basic password
-folder   = folder name
+name     = basicpassword
+folder   = foldername
 url      =
 username =
 password = ********
