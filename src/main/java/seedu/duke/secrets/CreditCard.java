@@ -34,7 +34,6 @@ public class CreditCard extends Secret {
 
     }
 
-
     public CreditCard(String name, String folderName,
                       String fullName, String creditCardNumber,
                       int cvcNumber, String expiryDate) throws InvalidExpiryDateException {
