@@ -13,8 +13,8 @@ I have added a new basic password:
 
 name     = basic password
 folder   = folder name
-url      = 
-username = 
+url      =
+username =
 password = ********
 _____________________________________________________
 _____________________________________________________
