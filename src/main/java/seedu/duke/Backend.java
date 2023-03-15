@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 
 public class Backend {
+    public static final String ENCRYPTION_IDENTIFIER = "DKENC";
 
     /**
      * Returns data from previous session as a SecretMaster Object.
@@ -82,15 +83,15 @@ public class Backend {
         //create different password based on constructor
         //studentID
         if (input[0].equals("studentID")) {
-            Secret secret = new StudentID(input[1], input[2], input[3]);
+            Secret secret = new StudentID(input[2], input[3], input[4]);
             database.add(secret);
         } else if (input[0].equals("NUSNetID")) {
-            Secret secret = new NUSNet(input[1], input[2], input[3],
-                    Backend.decode(input[4]));
+            Secret secret = new NUSNet(input[2], input[3], input[4],
+                    Backend.decode(input[5]));
             database.add(secret);
         } else if (input[0].equals("Password")) {
-            Secret secret = new BasicPassword(input[1], input[2], Backend.decode(input[3]),
-                    Backend.decode(input[4]), input[5]);
+            Secret secret = new BasicPassword(input[2], input[3], Backend.decode(input[4]),
+                    Backend.decode(input[5]), input[6]);
             database.add(secret);
         }
         //Password
@@ -130,21 +131,20 @@ public class Backend {
 
 
     public static String encode(String field) {
-        String identifier = "DKENC";
         String encodedField = "";
         for (int i = 0; i < field.length(); i++) {
-            int ASCII = (int) (field.charAt(i) + 1);
-            encodedField += (char) ASCII;
+            int asciiValue = (int) (field.charAt(i) + 1);
+            encodedField += (char) asciiValue;
         }
-        return identifier + encodedField;
+        return Backend.ENCRYPTION_IDENTIFIER + encodedField;
     }
 
     public static String decode(String field) {
         String modifiedField = field.substring(5);
         String actualField = "";
         for (int i = 0; i < modifiedField.length(); i++) {
-            int ASCII = (int) (field.charAt(i) - 1);
-            actualField += (char) ASCII;
+            int asciiValue = (int) (field.charAt(i) - 1);
+            actualField += (char) asciiValue;
         }
         return actualField;
     }
