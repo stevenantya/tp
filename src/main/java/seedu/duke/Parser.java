@@ -4,6 +4,9 @@ import seedu.duke.command.AddBasicPasswordCommand;
 import seedu.duke.command.AddNUSNetCommand;
 import seedu.duke.command.AddStudentIDCommand;
 import seedu.duke.command.ListCommand;
+import seedu.duke.command.SearchCommand;
+import seedu.duke.command.ViewCommand;
+import seedu.duke.command.EditCommand;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.ExitCommand;
@@ -25,6 +28,15 @@ public class Parser {
         }
         else if (command.startsWith("list")) {
             return new ListCommand(command);
+        }
+        else if (command.startsWith("search")) {
+            return new SearchCommand(command);
+        }
+        else if (command.startsWith("view")) {
+            return new ViewCommand(command);
+        }
+        else if (command.startsWith("edit")) {
+            return new EditCommand(command);
         }
 
         /*

@@ -24,10 +24,10 @@ public class EditCommand extends Command {
         String[] extractedFields = new String[4];
 
         // Define regular expression patterns
-        Pattern passwordPattern = Pattern.compile("p/([\\w-]+)");
-        Pattern folderPattern = Pattern.compile("-f nf/([\\w-]+)");
-        Pattern descriptionPattern = Pattern.compile("-d nd/([\\w-]+)");
-        Pattern newPasswordPattern = Pattern.compile("-N np/([\\w-]+)");
+        Pattern passwordPattern = Pattern.compile("p/([\\w\\s_-]+)");
+        Pattern folderPattern = Pattern.compile("-f nf/([\\w\\s_-]+)");
+        Pattern descriptionPattern = Pattern.compile("-d nd/([\\w\\s_-]+)");
+        Pattern newPasswordPattern = Pattern.compile("-N np/([\\w\\s_-]+)");
 
         // Extract values using regular expressions
         Matcher passwordMatcher = passwordPattern.matcher(input);
