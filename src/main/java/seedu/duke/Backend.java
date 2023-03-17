@@ -30,8 +30,8 @@ public class Backend {
         ArrayList<Secret> secretList = new ArrayList<Secret>();
 
         //create folder if it does not exist
-        String currDir = System.getProperty("user.dir");
-        String assetsPath = java.nio.file.Paths.get(currDir, "assets").toString();
+        String pathOfCurrentDirectory = System.getProperty("user.dir");
+        String assetsPath = java.nio.file.Paths.get(pathOfCurrentDirectory, "assets").toString();
         File assets = new File(assetsPath);
         if (!assets.exists()) {
             assets.mkdir();
