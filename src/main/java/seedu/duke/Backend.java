@@ -91,7 +91,7 @@ public class Backend {
             database.add(secret);
         } else if (input[0].equals("Password")) {
             Secret secret = new BasicPassword(input[2], input[3], Backend.decode(input[4]),
-                    Backend.decode(input[5]), input[6]);
+                    Backend.decode(input[5]), Backend.parseEmptyField(input[6]));
             database.add(secret);
         }
         //Password
@@ -147,6 +147,10 @@ public class Backend {
             actualField += (char) asciiValue;
         }
         return actualField;
+    }
+
+    public static String parseEmptyField(String field) {
+        return field.equals("empty") ? "" : field;
     }
 
     /**

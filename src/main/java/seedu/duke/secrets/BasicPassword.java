@@ -26,6 +26,9 @@ public class BasicPassword extends Secret{
         String formattedString =  "Password," + super.toStringForDatabase() +
             "," + Backend.encode(this.username) + "," + Backend.encode(this.password) +
                "," + this.url;
+        if (this.url.length() == 0) {
+            formattedString += "empty";
+        }
         return formattedString;
     }
 }
