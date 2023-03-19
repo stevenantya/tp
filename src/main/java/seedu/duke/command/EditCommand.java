@@ -24,10 +24,10 @@ public class EditCommand extends Command {
         String[] extractedFields = new String[4];
 
         // Define regular expression patterns
-        Pattern passwordPattern = Pattern.compile("p/([\\w\\s_-]+)");
-        Pattern folderPattern = Pattern.compile("-f nf/([\\w\\s_-]+)");
-        Pattern descriptionPattern = Pattern.compile("-d nd/([\\w\\s_-]+)");
-        Pattern newPasswordPattern = Pattern.compile("-N np/([\\w\\s_-]+)");
+        Pattern passwordPattern = Pattern.compile("p/([\\w\\s]+)");
+        Pattern folderPattern = Pattern.compile("-f nf/([\\w\\s]+)");
+        Pattern descriptionPattern = Pattern.compile("-d nd/([\\w\\s]+)");
+        Pattern newPasswordPattern = Pattern.compile("-N np/([\\w\\s]+)");
 
         // Extract values using regular expressions
         Matcher passwordMatcher = passwordPattern.matcher(input);
@@ -36,10 +36,10 @@ public class EditCommand extends Command {
         Matcher newPasswordMatcher = newPasswordPattern.matcher(input);
 
         // Check if there is a match and extract the value
-        extractedFields[0] = passwordMatcher.find() ? passwordMatcher.group(1) : null;
-        extractedFields[1] = folderMatcher.find() ? folderMatcher.group(1) : null;
-        extractedFields[2] = descriptionMatcher.find() ? descriptionMatcher.group(1) : null;
-        extractedFields[3] = newPasswordMatcher.find() ? newPasswordMatcher.group(1) : null;
+        extractedFields[0] = passwordMatcher.find() ? passwordMatcher.group(1).trim() : null;
+        extractedFields[1] = folderMatcher.find() ? folderMatcher.group(1).trim() : null;
+        extractedFields[2] = descriptionMatcher.find() ? descriptionMatcher.group(1).trim() : null;
+        extractedFields[3] = newPasswordMatcher.find() ? newPasswordMatcher.group(1).trim() : null;
 
         return extractedFields;
     }
