@@ -41,8 +41,7 @@ public class SearchCommand extends Command{
             } catch (NonExistentFolderException e) {
                 throw new RuntimeException(e);
             }
-        }
-        else {
+        } else {
             // search all passwords
             secrets = secureNUSData.listSecrets();
         }
@@ -51,7 +50,8 @@ public class SearchCommand extends Command{
         for (Secret secret : secrets) {
             if (secret.getName().contains(this.name)) { // case-sensitive search
                 ++count;
-                output.append("ID:").append("\t|\t").append(count).append("\t|\t").append(secret.getName()).append("\t");
+                output.append("ID:").append("\t|\t").append(count)
+                        .append("\t|\t").append(secret.getName()).append("\t");
             }
         }
         System.out.println("Found " + count + " matches!");
