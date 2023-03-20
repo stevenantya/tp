@@ -2,7 +2,9 @@ package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class SearchCommandTest {
 
@@ -29,9 +31,7 @@ class SearchCommandTest {
         assertEquals(searchCommand.extractFolderName("search n/Name123! -f f/Folder123!"), "Folder123!");
     }
 
-//    @Test
-//    void execute() {
-//    }
+    // TODO: execute()
 
     @Test
     void isExit() {
