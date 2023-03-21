@@ -11,7 +11,6 @@ import seedu.duke.secrets.StudentID;
 import seedu.duke.secrets.WifiPassword;
 import seedu.duke.secrets.NUSNet;
 
-
 class SecretSearcherTest {
     @Test
     void addAllPasswords() throws FolderExistsException, InvalidExpiryDateException, InvalidCreditCardNumberException {
