@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.secrets.InvalidURLException;
 import seedu.duke.secrets.BasicPassword;
 import seedu.duke.secrets.NUSNet;
 import seedu.duke.secrets.StudentID;
@@ -55,6 +56,8 @@ public class Backend {
             reader.close();
         } catch (IOException e) {
             System.out.println(e);
+        } catch (InvalidURLException e) {
+            throw new RuntimeException(e);
         }
 
         //for secretEnumerator
@@ -78,7 +81,7 @@ public class Backend {
      * @param database Current ArrayList of Secret.
      * @return ArrayList of Secret
      */
-    public static ArrayList<Secret> readAndUpdate(String[] input, ArrayList<Secret> database) {
+    public static ArrayList<Secret> readAndUpdate(String[] input, ArrayList<Secret> database) throws InvalidURLException {
         //create different password based on constructor
         //studentID
         if (input[0].equals("studentID")) {
