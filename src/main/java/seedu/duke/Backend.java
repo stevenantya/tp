@@ -81,13 +81,14 @@ public class Backend {
      * @param database Current ArrayList of Secret.
      * @return ArrayList of Secret
      */
-    public static ArrayList<Secret> readAndUpdate(String[] input, ArrayList<Secret> database) throws InvalidURLException {
+    public static ArrayList<Secret> readAndUpdate(String[] input, ArrayList<Secret> database)
+            throws InvalidURLException {
         //create different password based on constructor
         //studentID
         if (input[0].equals("studentID")) {
             Secret secret = new StudentID(input[1], input[2], input[3]);
             database.add(secret);
-        } else if (input[0].equals("NUSNetID")) {
+        } else if (input[0].equals("nusNetId")) {
             Secret secret = new NUSNet(input[1], input[2], input[3],
                     Backend.decode(input[4]));
             database.add(secret);

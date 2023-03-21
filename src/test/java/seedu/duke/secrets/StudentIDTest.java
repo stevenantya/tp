@@ -3,12 +3,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author : Steven A. O. Waskito
- * @mailto : e0851459@u.nus.edu
- * @created : 3 February 2023
  **/
 public class StudentIDTest {
     @Test
-    public void StudentIDTestNoFolder() {
+    public void studentIDTestNoFolder() {
         StudentID studentID = new StudentID("StudentID Name","A021313J");
         assertEquals("StudentID Name", studentID.getName());
         assertEquals("unnamed", studentID.getFolderName());
@@ -16,7 +14,7 @@ public class StudentIDTest {
     }
 
     @Test
-    public void StudentIDTestFolder() {
+    public void studentIDTestFolder() {
         StudentID studentID = new StudentID("StudentID2 Name", "StudentsOfNUS", "A021313G");
         assertEquals("StudentID2 Name", studentID.getName());
         assertEquals("StudentsOfNUS", studentID.getFolderName());

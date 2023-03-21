@@ -3,29 +3,29 @@ package seedu.duke.secrets;
 import seedu.duke.Backend;
 
 public class NUSNet extends Secret{
-    private String NUSNet_ID;
+    private String nusNetId;
     private String password;
-    public NUSNet(String name, String folderName, String NUSNet_ID, String password) {
+    public NUSNet(String name, String folderName, String nusNetId, String password) {
         super(name, folderName);
-        this.NUSNet_ID = NUSNet_ID;
+        this.nusNetId = nusNetId;
         this.password = password;
     }
-    public NUSNet(String name, String NUSNet_ID, String password) {
+    public NUSNet(String name, String nusNetId, String password) {
         super(name, "unnamed");
-        this.NUSNet_ID = NUSNet_ID;
+        this.nusNetId = nusNetId;
         this.password = password;
     }
     public String getPassword() {
         return password;
     }
-    public String getNUSNet_ID() {
-        return NUSNet_ID;
+    public String getnusNetId() {
+        return nusNetId;
     }
 
     @Override
     public String toStringForDatabase() {
-        String formattedString =  "NUSNetID," + super.toStringForDatabase() +
-                "," + this.NUSNet_ID + "," + Backend.encode(this.password);
+        String formattedString =  "nusNetId," + super.toStringForDatabase() +
+                "," + this.nusNetId + "," + Backend.encode(this.password);
         return formattedString;
     }
 }
