@@ -18,4 +18,8 @@ public class StudentID extends Secret {
             "," + this.studentID;
         return formattedString;
     }
+
+    public String getStudentID() {
+        return studentID;
+    }
 }

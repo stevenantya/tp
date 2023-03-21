@@ -29,12 +29,21 @@ public class BasicPassword extends Secret{
             throw new InvalidURLException();
         }
     }
-    
+    public String getPassword() {
+        return password;
+    }
+    public String getUrl() {
+        return url;
+    }
     @Override
     public String toStringForDatabase() {
         String formattedString =  "Password," + super.toStringForDatabase() +
             "," + Backend.encode(this.username) + "," + Backend.encode(this.password) +
                "," + this.url;
         return formattedString;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }

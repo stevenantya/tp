@@ -10,6 +10,17 @@ public class NUSNet extends Secret{
         this.NUSNet_ID = NUSNet_ID;
         this.password = password;
     }
+    public NUSNet(String name, String NUSNet_ID, String password) {
+        super(name, "unnamed");
+        this.NUSNet_ID = NUSNet_ID;
+        this.password = password;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public String getNUSNet_ID() {
+        return NUSNet_ID;
+    }
 
     @Override
     public String toStringForDatabase() {
