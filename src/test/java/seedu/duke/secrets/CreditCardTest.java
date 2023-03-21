@@ -79,23 +79,23 @@ class CreditCardTest {
         );
 
         assertThrows(InvalidCreditCardNumberException.class, () -> {
-                    new CreditCard("creditCard1", "folder1",
-                            "John Doe Lim Guang", "1234r567890123456", 123,
-                            "@#/$%");
-                }
+            new CreditCard("creditCard1", "folder1",
+                    "John Doe Lim Guang", "1234r567890123456", 123,
+                    "@#/$%");
+            }
         );
         assertThrows(InvalidCreditCardNumberException.class, () -> {
-                    new CreditCard("creditCard1", "folder1",
-                            "John Doe Lim Guang", "12341567890123456", 123,
-                            "@#/$%");
-                }
+            new CreditCard("creditCard1", "folder1",
+                    "John Doe Lim Guang", "12341567890123456", 123,
+                    "@#/$%");
+            }
         );
 
         assertThrows(InvalidCreditCardNumberException.class, () -> {
-                    new CreditCard("creditCard1", "folder1",
-                            "John Doe Lim Guang", "rtyuiohgfghjkjhgffghuytres", 123,
-                            "@#/$%");
-                }
+            new CreditCard("creditCard1", "folder1",
+                    "John Doe Lim Guang", "rtyuiohgfghjkjhgffghuytres", 123,
+                    "@#/$%");
+            }
         );
     }
     @Test

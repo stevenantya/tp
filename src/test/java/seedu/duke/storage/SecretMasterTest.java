@@ -2,9 +2,19 @@ package seedu.duke.storage;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.RepeatedIdException;
-import seedu.duke.exceptions.secrets.*;
-import seedu.duke.secrets.*;
 
+import seedu.duke.exceptions.secrets.InvalidCreditCardNumberException;
+import seedu.duke.exceptions.secrets.IllegalFolderNameException;
+import seedu.duke.exceptions.secrets.IllegalSecretNameException;
+import seedu.duke.exceptions.secrets.FolderExistsException;
+import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
+import seedu.duke.secrets.BasicPassword;
+import seedu.duke.secrets.CreditCard;
+import seedu.duke.secrets.Secret;
+import seedu.duke.secrets.CryptoWallet;
+import seedu.duke.secrets.StudentID;
+import seedu.duke.secrets.WifiPassword;
+import seedu.duke.secrets.NUSNet;
 import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,7 +36,7 @@ class SecretMasterTest {
 
     @Test
     void createFolder() throws IllegalFolderNameException, FolderExistsException, RepeatedIdException,
-            IllegalSecretNameException {
+            IllegalSecretNameException, IllegalFolderNameException, IllegalSecretNameException, FolderExistsException {
         SecretMaster secretMaster = new SecretMaster();
         HashSet<String> set = new HashSet<String>();
         set.add("unnamed");
@@ -54,7 +64,9 @@ class SecretMasterTest {
     }
 
     @Test
-    void addAllSecrets() throws FolderExistsException, InvalidExpiryDateException, IllegalFolderNameException, RepeatedIdException, IllegalSecretNameException, InvalidCreditCardNumberException {
+    void addAllSecrets() throws FolderExistsException, InvalidExpiryDateException, IllegalFolderNameException,
+            RepeatedIdException, IllegalSecretNameException, InvalidCreditCardNumberException,
+            InvalidExpiryDateException, InvalidCreditCardNumberException {
         SecretMaster secretMaster = new SecretMaster();
         secretMaster.addSecret(new BasicPassword("basic1", "username1", "Password1",
                 "http.com"));

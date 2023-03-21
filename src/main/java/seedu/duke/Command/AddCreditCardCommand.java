@@ -6,7 +6,6 @@ import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
 import seedu.duke.messages.Inquiries;
-import seedu.duke.secrets.BasicPassword;
 import seedu.duke.secrets.CreditCard;
 import seedu.duke.storage.SecretMaster;
 

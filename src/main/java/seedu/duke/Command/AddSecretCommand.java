@@ -5,7 +5,6 @@ import seedu.duke.exceptions.RepeatedIdException;
 import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
-import seedu.duke.secrets.BasicPassword;
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretMaster;
 

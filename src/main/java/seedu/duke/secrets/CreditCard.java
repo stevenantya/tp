@@ -22,7 +22,9 @@ public class CreditCard extends Secret {
     private final String credictCardNumberFmt = "\\d{16}";
     public CreditCard(String name, String fullName,
                       String creditCardNumber,
-                      int cvcNumber, String expiryDate) throws InvalidExpiryDateException, InvalidCreditCardNumberException {
+                      int cvcNumber, String expiryDate) throws
+            InvalidExpiryDateException, InvalidCreditCardNumberException {
+
 
         super(name);
         this.fullName = fullName;
