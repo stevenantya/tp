@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 
 public class Backend {
+    public static final String ENCRYPTION_IDENTIFIER = "DKENC";
 
     private static final String DATABASE_FOLDER = "assets";
     private static final String DATABASE_FILE = "database.txt";
@@ -32,8 +33,8 @@ public class Backend {
         ArrayList<Secret> secretList = new ArrayList<Secret>();
 
         //create folder if it does not exist
-        String currDir = System.getProperty("user.dir");
-        String assetsPath = java.nio.file.Paths.get(currDir, DATABASE_FOLDER).toString();
+        String pathOfCurrentDirectory = System.getProperty("user.dir");
+        String assetsPath = java.nio.file.Paths.get(pathOfCurrentDirectory, "assets").toString();
         File assets = new File(assetsPath);
         if (!assets.exists()) {
             assets.mkdir();
@@ -88,15 +89,15 @@ public class Backend {
         //create different password based on constructor
         //studentID
         if (input[0].equals("studentID")) {
-            Secret secret = new StudentID(input[1], input[2], input[3]);
+            Secret secret = new StudentID(input[2], input[3], input[4]);
             database.add(secret);
-        } else if (input[0].equals("nusNetId")) {
-            Secret secret = new NUSNet(input[1], input[2], input[3],
-                    Backend.decode(input[4]));
+        } else if (input[0].equals("nusNetID")) {
+            Secret secret = new NUSNet(input[2], input[3], input[4],
+                    Backend.decode(input[5]));
             database.add(secret);
         } else if (input[0].equals("Password")) {
-            Secret secret = new BasicPassword(input[1], input[2], Backend.decode(input[3]),
-                    Backend.decode(input[4]), input[5]);
+            Secret secret = new BasicPassword(input[2], input[3], Backend.decode(input[4]),
+                    Backend.decode(input[5]), Backend.parseEmptyField(input[6]));
             database.add(secret);
         }
         //Password
@@ -136,23 +137,26 @@ public class Backend {
 
 
     public static String encode(String field) {
-        String identifier = "DKENC";
         String encodedField = "";
         for (int i = 0; i < field.length(); i++) {
-            int ASCII = (int) (field.charAt(i) + 1);
-            encodedField += (char) ASCII;
+            int asciiValue = (int) (field.charAt(i) + 1);
+            encodedField += (char) asciiValue;
         }
-        return identifier + encodedField;
+        return Backend.ENCRYPTION_IDENTIFIER + encodedField;
     }
 
     public static String decode(String field) {
         String modifiedField = field.substring(5);
         String actualField = "";
         for (int i = 0; i < modifiedField.length(); i++) {
-            int ASCII = (int) (field.charAt(i) - 1);
-            actualField += (char) ASCII;
+            int asciiValue = (int) (modifiedField.charAt(i) - 1);
+            actualField += (char) asciiValue;
         }
         return actualField;
+    }
+
+    public static String parseEmptyField(String field) {
+        return field.equals("empty") ? "" : field;
     }
 
     /**
