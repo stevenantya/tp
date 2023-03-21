@@ -15,7 +15,7 @@ public class ListCommand extends Command {
     }
 
     public String extractFolderName(String input) {
-        String extractedFolderName = "unfiled";
+        String extractedFolderName = "unnamed";
         if (input.split(" ").length > 1) {
             extractedFolderName = input.split(" ")[1];
         }
@@ -31,7 +31,6 @@ public class ListCommand extends Command {
     public void execute(SecretMaster secureNUSData) {
         ArrayList<Secret> secrets;
         try {
-
             if (folderName.equals("unnamed")) {
                 secrets = secureNUSData.listSecrets();
             } else {
