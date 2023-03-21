@@ -31,6 +31,7 @@ public class ListCommand extends Command {
     public void execute(SecretMaster secureNUSData) {
         ArrayList<Secret> secrets;
         try {
+
             if (folderName.equals("unnamed")) {
                 secrets = secureNUSData.listSecrets();
             } else {
