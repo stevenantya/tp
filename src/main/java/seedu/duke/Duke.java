@@ -18,8 +18,7 @@ public class Duke {
 
     public static void main(String[] args) throws FolderExistsException, IllegalFolderNameException,
             IllegalSecretNameException, SecretNotFoundException {
-
-        assert false : "dummy assertion set to fail";
+            
         Duke duke = new Duke();
         duke.run();
 
@@ -55,5 +54,4 @@ public class Duke {
         }
         return false;
     }
-
 }
