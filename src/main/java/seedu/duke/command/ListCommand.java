@@ -1,6 +1,6 @@
-package seedu.duke.Command;
+package seedu.duke.command;
 
-import seedu.duke.exceptions.NonExistentFolderException;
+import seedu.duke.exceptions.secrets.NonExistentFolderException;
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretMaster;
 
@@ -31,7 +31,7 @@ public class ListCommand extends Command {
     public void execute(SecretMaster secureNUSData) {
         ArrayList<Secret> secrets;
         try {
-            if (folderName.equals("unfiled")) {
+            if (folderName.equals("unnamed")) {
                 secrets = secureNUSData.listSecrets();
             } else {
                 secrets = secureNUSData.listSecrets(folderName);
