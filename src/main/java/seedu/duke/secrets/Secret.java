@@ -64,4 +64,7 @@ public class Secret {
         return this.uid + "," + this.name + "," +
             this.folderName;
     }
+    public String getRevealStr() {
+        return "";
+    }
 }

@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.secrets.InvalidURLException;
 import seedu.duke.secrets.BasicPassword;
 import seedu.duke.secrets.NUSNet;
 import seedu.duke.secrets.StudentID;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 public class Backend {
     public static final String ENCRYPTION_IDENTIFIER = "DKENC";
 
+    private static final String DATABASE_FOLDER = "assets";
+    private static final String DATABASE_FILE = "database.txt";
     /**
      * Returns data from previous session as a SecretMaster Object.
      * If data is not available, a new file is created.
@@ -37,7 +40,7 @@ public class Backend {
             assets.mkdir();
         }
         //create file if it does not exist
-        String databasePath = java.nio.file.Paths.get(assetsPath, "database.txt").toString();
+        String databasePath = java.nio.file.Paths.get(assetsPath, DATABASE_FILE).toString();
         File database = new File(databasePath);
         try {
             if (!database.createNewFile()) {
@@ -56,6 +59,8 @@ public class Backend {
             reader.close();
         } catch (IOException e) {
             System.out.println(e);
+        } catch (InvalidURLException e) {
+            throw new RuntimeException(e);
         }
 
         //for secretEnumerator
@@ -79,13 +84,14 @@ public class Backend {
      * @param database Current ArrayList of Secret.
      * @return ArrayList of Secret
      */
-    public static ArrayList<Secret> readAndUpdate(String[] input, ArrayList<Secret> database) {
+    public static ArrayList<Secret> readAndUpdate(String[] input, ArrayList<Secret> database)
+            throws InvalidURLException {
         //create different password based on constructor
         //studentID
         if (input[0].equals("studentID")) {
             Secret secret = new StudentID(input[2], input[3], input[4]);
             database.add(secret);
-        } else if (input[0].equals("NUSNetID")) {
+        } else if (input[0].equals("nusNetID")) {
             Secret secret = new NUSNet(input[2], input[3], input[4],
                     Backend.decode(input[5]));
             database.add(secret);
@@ -176,5 +182,4 @@ public class Backend {
             System.out.println(e);
         }
     }
-
 }

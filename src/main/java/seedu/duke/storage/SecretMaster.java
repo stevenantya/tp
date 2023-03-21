@@ -27,6 +27,13 @@ public class SecretMaster {
     private HashSet<String> folders;
     private HashSet<String> secretNames;
 
+
+    public SecretMaster() {
+        secretSearcher = new SecretSearcher();
+        secretEnumerator = new SecretEnumerator();
+        folders = new HashSet<String>();
+        secretNames = new HashSet<String>();
+    }
     public SecretMaster(SecretSearcher secretSearcher, SecretEnumerator secretEnumerator) {
         this.secretSearcher = secretSearcher;
         this.secretEnumerator = secretEnumerator;
@@ -67,7 +74,6 @@ public class SecretMaster {
             secretSearcher.createFolder(folderName);
         }
     }
-
     public Secret getByIndex(int index) {
         return secretEnumerator.get(index);
     }

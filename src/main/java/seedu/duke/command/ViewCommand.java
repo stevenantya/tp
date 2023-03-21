@@ -15,11 +15,6 @@ public class ViewCommand extends Command {
         return input.split("view")[1].trim();
     }
 
-
-
-    /*
-     * For passwords that are 'password-required', a secret password is required to reveal.
-     */
     public String inquirePassword() {
         System.out.println("Enter secret password to reveal \"" + this.passwordName + "\":");
         Scanner in = new Scanner(System.in);

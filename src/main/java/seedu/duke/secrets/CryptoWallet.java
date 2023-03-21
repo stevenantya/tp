@@ -11,22 +11,22 @@ import java.util.ArrayList;
  * seedPhrase: Str
  * urls: Str[]
  */
-public class CryptoWalletCredentials extends Secret {
+public class CryptoWallet extends Secret {
     private String username;
     private String privateKey;
     private String seedPhrase;
     private ArrayList<String> urls;
 
-    public CryptoWalletCredentials(String name, String username,
-                                   String privateKey, String seedPhrase) {
+    public CryptoWallet(String name, String username,
+                        String privateKey, String seedPhrase) {
         super(name);
         urls = new ArrayList<String>();
         this.username = username;
         this.seedPhrase = seedPhrase;
         this.privateKey = privateKey;
     }
-    public CryptoWalletCredentials(String name, String folderName, String username,
-                                   String privateKey, String seedPhrase) {
+    public CryptoWallet(String name, String folderName, String username,
+                        String privateKey, String seedPhrase) {
         super(name, folderName);
         urls = new ArrayList<String>();
         this.username = username;
@@ -64,5 +64,9 @@ public class CryptoWalletCredentials extends Secret {
 
     public void addUrl(String url) {
         urls.add(url);
+    }
+    @Override
+    public String getRevealStr() {
+        return String.format("Seed Phrase: %s", seedPhrase);
     }
 }
