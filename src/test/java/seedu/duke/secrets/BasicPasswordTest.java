@@ -15,8 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class BasicPasswordTest {
     @Test
     public void BasicPasswordNoFolder() throws InvalidURLException {
-        BasicPassword basicPassword = new BasicPassword("basicPassword1", "basicUsername", "Lorem Ipsum 112", "google.com");
-        assertEquals("basicPassword1", basicPassword.getName());
+        BasicPassword basicPassword = new BasicPassword("basicPassword11", "basicUsername", "Lorem Ipsum 112", "google.com");
+        assertEquals("basicPassword11", basicPassword.getName());
         assertEquals("unnamed", basicPassword.getFolderName());
         assertEquals("basicUsername", basicPassword.getUsername());
         assertEquals("Lorem Ipsum 112", basicPassword.getPassword());
