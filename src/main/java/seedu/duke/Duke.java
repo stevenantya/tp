@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.ExceptionMain;
+import seedu.duke.exceptions.InvalidCommandException;
 import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
@@ -32,6 +33,9 @@ public class Duke {
 
         while (!isExit) {
             Command c = parseCommand();
+            if (c == null) {
+                continue;
+            }
             Ui.printLine(); //middle line
             isExit = executeCommand(c);
             
@@ -43,7 +47,12 @@ public class Duke {
     public Command parseCommand() {
         String command = Ui.readCommand();
         Ui.printLine(); //top most line
-        return Parser.parse(command);
+        try {
+            return Parser.parse(command);
+        } catch(InvalidCommandException e) {
+            Ui.printError("Invalid Command");
+            return null;
+        }
     }
 
     public boolean executeCommand(Command command) throws IllegalFolderNameException, IllegalSecretNameException,
