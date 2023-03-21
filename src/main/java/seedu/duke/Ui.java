@@ -9,7 +9,11 @@ public class Ui {
                 "Current Features\n" +
                 "Adding a password      : new [NAME] /f [FOLDER_NAME]\n" +
                 "Adding a NUSNet ID     : new o/NUSNet [NAME] /f [FOLDER_NAME]\n" +
-                "Adding a Student ID    : new o/StudentID [NAME] /f [FOLDER_NAME] \n");
+                "Adding a Student ID    : new o/StudentID [NAME] /f [FOLDER_NAME] \n" +
+                "Listing a password \n" +
+                "in a folder:           : list /f [FOLDER_NAME] \n" +
+                "Listing all passwords  : list"
+        );
     }
 
     public static void printLine() {

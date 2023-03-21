@@ -18,7 +18,6 @@ public class Duke {
 
     public static void main(String[] args) throws FolderExistsException, IllegalFolderNameException,
             IllegalSecretNameException, SecretNotFoundException {
-        
         Duke duke = new Duke();
         duke.run();
     }
