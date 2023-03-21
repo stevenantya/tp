@@ -1,5 +1,6 @@
 package seedu.duke.secrets;
 
+import seedu.duke.exceptions.secrets.InvalidCreditCardNumberException;
 import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
 
 /**
@@ -11,21 +12,26 @@ import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
  * cvcNumber: int
  * expiryDate: Str
  *
- * TODO: Add way to check if creditCardNumber is correct
  */
 public class CreditCard extends Secret {
     private String fullName;
     private String creditCardNumber;
     private int cvcNumber;
     private String expiryDate;
-    private final String expiryDateFmt = "[0-1][0-9]/[0-2][0-9]";
+    private final String expiryDateFmt = "[0-1][0-9]/[0-3][0-9]";
+    private final String credictCardNumberFmt = "\\d{16}";
     public CreditCard(String name, String fullName,
                       String creditCardNumber,
-                      int cvcNumber, String expiryDate) throws InvalidExpiryDateException {
+                      int cvcNumber, String expiryDate) throws
+            InvalidExpiryDateException, InvalidCreditCardNumberException {
+
 
         super(name);
         this.fullName = fullName;
         this.creditCardNumber = creditCardNumber;
+        if (!creditCardNumber.matches(credictCardNumberFmt)) {
+            throw new InvalidCreditCardNumberException();
+        }
         this.cvcNumber = cvcNumber;
         if (!expiryDate.matches(expiryDateFmt)) {
             throw new InvalidExpiryDateException();
@@ -76,5 +82,13 @@ public class CreditCard extends Secret {
 
     public void setCvcNumber(int cvcNumber) {
         this.cvcNumber = cvcNumber;
+    }
+
+    @Override
+    public String getRevealStr() {
+        return String.format("Credit Card Number: %s\n" +
+                "CVC Number: %d\n" +
+                "Expiry Date: %s", creditCardNumber, cvcNumber,
+                expiryDate);
     }
 }

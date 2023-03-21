@@ -14,10 +14,16 @@ public class SecretSearcher {
     // index using folder (FOR FUTURE FIND LIKE WITH FOLDER)
     private final Hashtable<String, Hashtable<String, Secret>> folders;
 
+    public SecretSearcher() {
+        storage = new Hashtable<String, Secret>();
+        folders = new Hashtable<String, Hashtable<String, Secret>>();
+    }
+
     public SecretSearcher(Hashtable<String, Secret> storage, Hashtable<String, Hashtable<String, Secret>> folders) {
         this.storage = storage;
         this.folders = folders;
     }
+
 
     public Secret get(String secretId) {
         return storage.get(secretId);

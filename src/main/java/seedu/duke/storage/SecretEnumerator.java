@@ -15,6 +15,11 @@ public class SecretEnumerator {
     // index using folder (FOR FUTURE FIND LIKE WITH FOLDER)
     private final Hashtable<String, ArrayList<Secret>> folders;
 
+    public SecretEnumerator() {
+        storage = new ArrayList<Secret>();
+        folders = new Hashtable<String, ArrayList<Secret>>();
+    }
+
     public SecretEnumerator(ArrayList<Secret> storage, Hashtable<String, ArrayList<Secret>> folders) {
         this.storage = storage;
         this.folders = folders;

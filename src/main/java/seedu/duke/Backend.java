@@ -20,6 +20,8 @@ import java.util.ArrayList;
 
 public class Backend {
 
+    private static final String DATABASE_FOLDER = "assets";
+    private static final String DATABASE_FILE = "database.txt";
     /**
      * Returns data from previous session as a SecretMaster Object.
      * If data is not available, a new file is created.
@@ -31,13 +33,13 @@ public class Backend {
 
         //create folder if it does not exist
         String currDir = System.getProperty("user.dir");
-        String assetsPath = java.nio.file.Paths.get(currDir, "assets").toString();
+        String assetsPath = java.nio.file.Paths.get(currDir, DATABASE_FOLDER).toString();
         File assets = new File(assetsPath);
         if (!assets.exists()) {
             assets.mkdir();
         }
         //create file if it does not exist
-        String databasePath = java.nio.file.Paths.get(assetsPath, "database.txt").toString();
+        String databasePath = java.nio.file.Paths.get(assetsPath, DATABASE_FILE).toString();
         File database = new File(databasePath);
         try {
             if (!database.createNewFile()) {
@@ -176,5 +178,4 @@ public class Backend {
             System.out.println(e);
         }
     }
-
 }
