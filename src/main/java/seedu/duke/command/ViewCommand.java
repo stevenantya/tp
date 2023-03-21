@@ -16,7 +16,7 @@ public class ViewCommand extends Command {
     }
 
     /*
-     * For passwords that are “password-required”, a secret password is required to reveal.
+     * For passwords that are password-locked, a secret password is required to reveal.
      */
     public String inquirePassword() {
         System.out.println("Enter secret password to reveal \"" + this.passwordName + "\":");
