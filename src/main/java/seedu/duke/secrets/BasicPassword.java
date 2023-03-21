@@ -46,6 +46,14 @@ public class BasicPassword extends Secret{
         return formattedString;
     }
 
+    @Override
+    public String getRevealStr() {
+        return String.format("Name: %s\n" +
+                        "Url: %s\n" +
+                        "Username: %s\n" +
+                        "Password: %s",
+                getName(), url, username, password);
+    }
     public String getUsername() {
         return username;
     }
