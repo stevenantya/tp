@@ -20,6 +20,9 @@ public class Parser {
         else if (command.startsWith("new o/StudentID")) {
             return new AddStudentIDCommand(command);
         }
+        else if (command.startsWith("new o/CryptoWallet")) {
+            return new AddStudentIDCommand(command);
+        }
         else if (command.startsWith("new")) {
             return new AddBasicPasswordCommand(command);
         }
@@ -39,15 +42,11 @@ public class Parser {
             return new EditCommand(command);
         }
 
-        /*
-        else if (command.startsWith("new o/StudentID")) {
-            return new AddStudentIDCommand(command);
-        }
         else if (command.startsWith("bye")) {
             return new ExitCommand();
         }
-        */
         else {
+            // represents accidental wrong input
             return new ExitCommand();
         }
     }

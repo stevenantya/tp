@@ -46,4 +46,12 @@ class SecretTest {
         assertEquals("name", secret.getName());
         assertEquals("newFolder", secret.getFolderName());
     }
+
+    @Test
+    void testRevealOutput() {
+        Secret secret = new Secret("name", "folder");
+        assertEquals("", secret.getRevealStr());
+        Secret secret2 = new Secret("name");
+        assertEquals("", secret2.getRevealStr());
+    }
 }

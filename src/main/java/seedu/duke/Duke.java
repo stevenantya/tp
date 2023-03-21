@@ -18,9 +18,11 @@ public class Duke {
 
     public static void main(String[] args) throws FolderExistsException, IllegalFolderNameException,
             IllegalSecretNameException, SecretNotFoundException {
-        
+
+        assert false : "dummy assertion set to fail";
         Duke duke = new Duke();
         duke.run();
+
     }
 
     public void run() throws IllegalFolderNameException, IllegalSecretNameException, SecretNotFoundException {
