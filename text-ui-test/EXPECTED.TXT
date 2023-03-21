@@ -5,5 +5,18 @@ Adding a NUSNet ID     : new o/NUSNet [NAME] /f [FOLDER_NAME]
 Adding a Student ID    : new o/StudentID [NAME] /f [FOLDER_NAME] 
 
 _____________________________________________________
+Please enter the url: 
+Please enter your username: 
+Please enter your password: 
+_____________________________________________________
+I have added a new basic password:
+
+name     = basic password
+folder   = folder name
+url      = 
+username = 
+password = ********
+_____________________________________________________
+_____________________________________________________
 _____________________________________________________
 _____________________________________________________

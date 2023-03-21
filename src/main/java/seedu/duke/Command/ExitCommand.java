@@ -1,4 +1,4 @@
-package seedu.duke.command;
+package seedu.duke.Command;
 
 import seedu.duke.storage.SecretMaster;
 

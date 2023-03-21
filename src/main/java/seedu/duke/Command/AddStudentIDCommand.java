@@ -1,10 +1,8 @@
-package seedu.duke.command;
+package seedu.duke.Command;
 
 import seedu.duke.Ui;
-import seedu.duke.exceptions.secrets.FolderExistsException;
+import seedu.duke.exceptions.FolderExistsException;
 import seedu.duke.exceptions.RepeatedIdException;
-import seedu.duke.exceptions.secrets.IllegalFolderNameException;
-import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.secrets.StudentID;
 import seedu.duke.storage.SecretMaster;
 
@@ -31,7 +29,7 @@ public class AddStudentIDCommand extends Command {
             secureNUSData.addSecret(Student_IDData);
         } catch (RepeatedIdException e) {
             throw new RuntimeException(e);
-        } catch (FolderExistsException | IllegalSecretNameException | IllegalFolderNameException e) {
+        } catch (FolderExistsException e) {
             throw new RuntimeException(e);
         }
         System.out.println("I have added a new Student_ID:\n");
@@ -57,7 +55,7 @@ public class AddStudentIDCommand extends Command {
         return extractedName;
     }
     public String extractFolderName(String input) {
-        String extractedFolderName = "unnamed";
+        String extractedFolderName = "unfiled";
         if (input.split("/f ").length > 1) {
             extractedFolderName = input.split("/f ")[1];
         }
