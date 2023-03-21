@@ -1,6 +1,6 @@
-package seedu.duke.Command;
+package seedu.duke.command;
 
-import seedu.duke.exceptions.SecretNotFoundException;
+import seedu.duke.exceptions.secrets.SecretNotFoundException;
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretMaster;
 
@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
         return extractedName;
     }
     public String extractFolderName(String input) {
-        String extractedFolderName = "unfiled";
+        String extractedFolderName = "unnamed";
         if (input.split("/f ").length > 1) {
             extractedFolderName = input.split("/f ")[1];
         }
@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(SecretMaster secureNUSData) throws SecretNotFoundException {
+    public void execute(SecretMaster secureNUSData) throws SecretNotFoundException, SecretNotFoundException {
         Secret deleteData = secureNUSData.getByName(secretName);
 
         secureNUSData.removeSecret(deleteData);
