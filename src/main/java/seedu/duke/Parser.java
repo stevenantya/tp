@@ -26,15 +26,9 @@ public class Parser {
         else if (command.startsWith("list")) {
             return new ListCommand(command);
         }
-
-        /*
-        else if (command.startsWith("new o/StudentID")) {
-            return new AddStudentIDCommand(command);
-        }
         else if (command.startsWith("bye")) {
             return new ExitCommand();
-        }
-        */
+        } //ADD INVALID COMMAND EXCEPTION
         else {
             return new ExitCommand();
         }
