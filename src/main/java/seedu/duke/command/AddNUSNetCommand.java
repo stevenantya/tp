@@ -15,23 +15,22 @@ import seedu.duke.storage.SecretMaster;
 public class AddNUSNetCommand extends Command{
     private String name;
     private String folderName;
-    private String NUSNet_ID;
+    private String nusNetId;
     private String password;
     public AddNUSNetCommand(String input) {
         this.name = extractName(input);
         this.folderName = extractFolderName(input);
-        this.NUSNet_ID = inquireNUSNetID();
+        this.nusNetId = inquirenusNetId();
         if (this.name == null) {
-            this.name = NUSNet_ID;
+            this.name = nusNetId;
         }
         this.password = inquirePassword();
     }
     @Override
     public void execute(SecretMaster secureNUSData) {
-        NUSNet NUSNet_IDData = new NUSNet(name,folderName,NUSNet_ID,password);
-        try
-        {
-            secureNUSData.addSecret(NUSNet_IDData);
+        NUSNet nusNetIdData = new NUSNet(name,folderName,nusNetId,password);
+        try {
+            secureNUSData.addSecret(nusNetIdData);
         } catch (RepeatedIdException e) {
             throw new RuntimeException(e);
         } catch (FolderExistsException | IllegalSecretNameException | IllegalFolderNameException e) {
@@ -42,7 +41,7 @@ public class AddNUSNetCommand extends Command{
         System.out.println(
                 "name       = " + name + "\n" +
                 "folder     = " + folderName + "\n" +
-                "NUS Net ID = " + NUSNet_ID + "\n" +
+                "NUS Net ID = " + nusNetId + "\n" +
                 "password   = " + starsPassword);
     }
 
@@ -52,12 +51,10 @@ public class AddNUSNetCommand extends Command{
         if (extractedNames.length == 2) {
             if (extractedNames[1].split(" /f").length > 1) {
                 extractedName = extractedNames[1].split(" /f")[0];
-            }
-            else {
+            } else {
                 extractedName = null;
             }
-        }
-        else {
+        } else {
             extractedName = null; //Default Name
         }
         return extractedName;
@@ -69,10 +66,10 @@ public class AddNUSNetCommand extends Command{
         }
         return extractedFolderName;
     }
-    public String inquireNUSNetID() {
+    public String inquirenusNetId() {
         System.out.println("Please enter your NUS Net ID: ");
-        String NUSNetID = Ui.readCommand();
-        return NUSNetID;
+        String nusNetId = Ui.readCommand();
+        return nusNetId;
     }
     public String inquirePassword() {
         System.out.println("Please enter your NUS Net password: ");

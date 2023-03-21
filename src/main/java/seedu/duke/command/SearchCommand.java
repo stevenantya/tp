@@ -41,8 +41,7 @@ public class SearchCommand extends Command{
             } catch (NonExistentFolderException e) {
                 throw new RuntimeException(e);
             }
-        }
-        else {
+        } else {
             // search all passwords
             secrets = secureNUSData.listSecrets();
         }

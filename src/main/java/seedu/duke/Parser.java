@@ -13,24 +13,18 @@ public class Parser {
 
         if (command.startsWith("new o/NUSNet")) {
             return new AddNUSNetCommand(command);
-        }
-        else if (command.startsWith("new o/StudentID")) {
+        } else if (command.startsWith("new o/StudentID")) {
             return new AddStudentIDCommand(command);
-        }
-        else if (command.startsWith("new")) {
+        } else if (command.startsWith("new")) {
             return new AddBasicPasswordCommand(command);
-        }
-        else if (command.startsWith("delete")) {
+        } else if (command.startsWith("delete")) {
             return new DeleteCommand(command);
-        }
-        else if (command.startsWith("list")) {
+        } else if (command.startsWith("list")) {
             return new ListCommand(command);
-        }
-        else if (command.startsWith("bye")) {
+        } else if (command.startsWith("bye")) {
             return new ExitCommand();
-        } //ADD INVALID COMMAND EXCEPTION
-        else {
-            return new ExitCommand();
+        } else {
+            return new ExitCommand(); //ADD INVALID COMMAND EXCEPTION
         }
     }
 
