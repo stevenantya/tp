@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * @created : 3 February 2023
  **/
 public class BasicPasswordTest {
+    //Basic Password
     @Test
     public void BasicPasswordNoFolder() throws InvalidURLException {
         BasicPassword basicPassword = new BasicPassword("basicPassword1", "basicUsername", "Lorem Ipsum 112", "google.com");
