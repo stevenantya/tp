@@ -1,4 +1,4 @@
-package seedu.duke.exceptions;
+package seedu.duke.exceptions.secrets;
 
 public class FolderNotEmptyException extends Exception {
 }
