@@ -143,7 +143,7 @@ public class Backend {
         String modifiedField = field.substring(5);
         String actualField = "";
         for (int i = 0; i < modifiedField.length(); i++) {
-            int asciiValue = (int) (field.charAt(i) - 1);
+            int asciiValue = (int) (modifiedField.charAt(i) - 1);
             actualField += (char) asciiValue;
         }
         return actualField;
