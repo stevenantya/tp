@@ -57,7 +57,7 @@ public class AddStudentIDCommand extends Command {
         return extractedName;
     }
     public String extractFolderName(String input) {
-        String extractedFolderName = "unfiled";
+        String extractedFolderName = "unnamed";
         if (input.split("/f ").length > 1) {
             extractedFolderName = input.split("/f ")[1];
         }
