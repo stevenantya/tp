@@ -1,12 +1,8 @@
-package seedu.duke.command;
+package seedu.duke.Command;
 
 import seedu.duke.Ui;
-import seedu.duke.exceptions.ExceptionMain;
-import seedu.duke.exceptions.secrets.FolderExistsException;
+import seedu.duke.exceptions.FolderExistsException;
 import seedu.duke.exceptions.RepeatedIdException;
-import seedu.duke.exceptions.secrets.IllegalFolderNameException;
-import seedu.duke.exceptions.secrets.IllegalSecretNameException;
-import seedu.duke.exceptions.secrets.InvalidURLException;
 import seedu.duke.secrets.BasicPassword;
 import seedu.duke.storage.SecretMaster;
 
@@ -29,19 +25,14 @@ public class AddBasicPasswordCommand extends Command{
         this.password = inquirePassword();
     }
     @Override
-    public void execute(SecretMaster secureNUSData) throws ExceptionMain {
-        BasicPassword basicPasswordData;
-        try {
-            basicPasswordData = new BasicPassword(name,folderName,username,password,url);
-        } catch (InvalidURLException e) {
-            throw new ExceptionMain("Invalid URL!");
-        }
-
-        try {
+    public void execute(SecretMaster secureNUSData) {
+        BasicPassword basicPasswordData = new BasicPassword(name,folderName,username,password,url);
+        try
+        {
             secureNUSData.addSecret(basicPasswordData);
         } catch (RepeatedIdException e) {
             throw new RuntimeException(e);
-        } catch (FolderExistsException | IllegalSecretNameException | IllegalFolderNameException e) {
+        } catch (FolderExistsException e) {
             throw new RuntimeException(e);
         }
         String starsPassword = "*".repeat(8);
@@ -59,7 +50,7 @@ public class AddBasicPasswordCommand extends Command{
         return extractedName;
     }
     public String extractFolderName(String input) {
-        String extractedFolderName = "unnamed";
+        String extractedFolderName = "unfiled";
         if (input.split("/f ").length > 1) {
             extractedFolderName = input.split("/f ")[1];
         }

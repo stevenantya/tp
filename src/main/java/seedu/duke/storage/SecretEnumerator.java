@@ -1,24 +1,20 @@
 package seedu.duke.storage;
 
-import seedu.duke.exceptions.secrets.FolderExistsException;
-import seedu.duke.exceptions.secrets.FolderNotEmptyException;
-import seedu.duke.exceptions.secrets.FolderNotFoundException;
+import seedu.duke.exceptions.FolderExistsException;
+import seedu.duke.exceptions.FolderNotEmptyException;
+import seedu.duke.exceptions.FolderNotFoundException;
 import seedu.duke.secrets.Secret;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Hashtable;
 
 public class SecretEnumerator {
-    private final ArrayList<Secret> storage;
+    private final ArrayList<Secret> storage =
+            new ArrayList<Secret>();
 
     // index using folder (FOR FUTURE FIND LIKE WITH FOLDER)
-    private final Hashtable<String, ArrayList<Secret>> folders;
-
-    public SecretEnumerator(ArrayList<Secret> storage, Hashtable<String, ArrayList<Secret>> folders) {
-        this.storage = storage;
-        this.folders = folders;
-    }
+    private final Hashtable<String, ArrayList<Secret>> folders =
+            new Hashtable<String, ArrayList<Secret>>();
 
     public void createFolder(String folderName) throws FolderExistsException {
         if (folders.containsKey(folderName)) {
@@ -79,17 +75,5 @@ public class SecretEnumerator {
         if (folders.get(secret.getFolderName()).isEmpty()) {
             folders.remove(secret.getFolderName());
         }
-    }
-
-    public int size() {
-        return this.storage.size();
-    }
-
-    public HashSet getFolders() {
-        HashSet<String> folderHashset = new HashSet();
-        for (String name : this.folders.keySet()) {
-            folderHashset.add(name);
-        }
-        return folderHashset;
     }
 }

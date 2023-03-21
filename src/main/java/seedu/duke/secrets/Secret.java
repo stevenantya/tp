@@ -10,17 +10,10 @@ import java.util.regex.Pattern;
  */
 public class Secret {
     private static final Pattern ILLEGAL_CHARS_PATTERN =
-            Pattern.compile("^.*[~!@#$%^&*()_+=\\-`{}<>()\\[\\]|\"\\_].*$");
-
-    protected String folderName = "unnamed";
+            Pattern.compile("^.*[~#@*+%{}<>\\[\\]|\"\\_].*$");
     private String uid = "";
     private String name = "";
-
-    public Secret(String name) {
-        // Assumes that name is not illegal before creation
-        this.name = name;
-        uid = name; // current just a duplicated, can be changed later
-    }
+    private String folderName = "unlinked";
 
     public Secret(String name, String folderName) {
         // Assumes that name is not illegal before creation
@@ -37,18 +30,12 @@ public class Secret {
         return uid;
     }
 
-    public void setName(String name) {
-        this.name = name;
-        this.uid = name; // since they are linked now
-    }
-
     public String getName() {
         return name;
     }
 
 
     public void editName(String newName) {
-        uid = newName;
         name = newName;
     }
 
@@ -59,10 +46,4 @@ public class Secret {
     public void setFolderName(String folderName) {
         this.folderName = folderName;
     }
-
-    public String toStringForDatabase() {
-        return this.uid + "," + this.name + "," +
-            this.folderName;
-    }
-
 }

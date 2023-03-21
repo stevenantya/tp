@@ -1,23 +1,19 @@
 package seedu.duke.storage;
 
-import seedu.duke.exceptions.secrets.FolderExistsException;
-import seedu.duke.exceptions.secrets.FolderNotEmptyException;
-import seedu.duke.exceptions.secrets.FolderNotFoundException;
+import seedu.duke.exceptions.FolderExistsException;
+import seedu.duke.exceptions.FolderNotEmptyException;
+import seedu.duke.exceptions.FolderNotFoundException;
 import seedu.duke.secrets.Secret;
 
 import java.util.Hashtable;
-import java.util.HashSet;
 
 public class SecretSearcher {
-    private final Hashtable<String, Secret> storage;
+    private final Hashtable<String, Secret> storage =
+            new Hashtable<String, Secret>();
 
     // index using folder (FOR FUTURE FIND LIKE WITH FOLDER)
-    private final Hashtable<String, Hashtable<String, Secret>> folders;
-
-    public SecretSearcher(Hashtable<String, Secret> storage, Hashtable<String, Hashtable<String, Secret>> folders) {
-        this.storage = storage;
-        this.folders = folders;
-    }
+    private final Hashtable<String, Hashtable<String, Secret>> folders =
+            new Hashtable<String, Hashtable<String, Secret>>();
 
     public Secret get(String secretId) {
         return storage.get(secretId);
@@ -55,13 +51,5 @@ public class SecretSearcher {
         if (folders.get(secret.getFolderName()).isEmpty()) {
             folders.remove(secret.getFolderName());
         }
-    }
-
-    public HashSet getNames() {
-        HashSet<String> nameHashset = new HashSet();
-        for (String name : this.storage.keySet()) {
-            nameHashset.add(name);
-        }
-        return nameHashset;
     }
 }
