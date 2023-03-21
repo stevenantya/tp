@@ -1,51 +1,47 @@
-package seedu.duke.Command;
+package seedu.duke.command;
 
 import seedu.duke.Ui;
-import seedu.duke.exceptions.FolderExistsException;
+import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.RepeatedIdException;
-import seedu.duke.secrets.NUSNet;
+import seedu.duke.exceptions.secrets.IllegalFolderNameException;
+import seedu.duke.exceptions.secrets.IllegalSecretNameException;
+import seedu.duke.secrets.StudentID;
 import seedu.duke.storage.SecretMaster;
-
 
 /**
  * @author : Steven A. O. Waskito
  **/
-public class AddNUSNetCommand extends Command{
+public class AddStudentIDCommand extends Command {
     private String name;
     private String folderName;
-    private String NUSNet_ID;
-    private String password;
-    public AddNUSNetCommand(String input) {
+    private String Student_ID;
+    public AddStudentIDCommand(String input) {
         this.name = extractName(input);
         this.folderName = extractFolderName(input);
-        this.NUSNet_ID = inquireNUSNetID();
+        this.Student_ID = inquireStudentID();
         if (this.name == null) {
-            this.name = NUSNet_ID;
+            this.name = Student_ID;
         }
-        this.password = inquirePassword();
     }
     @Override
     public void execute(SecretMaster secureNUSData) {
-        NUSNet NUSNet_IDData = new NUSNet(name,folderName,NUSNet_ID,password);
+        StudentID Student_IDData = new StudentID(name,folderName,Student_ID);
         try
         {
-            secureNUSData.addSecret(NUSNet_IDData);
+            secureNUSData.addSecret(Student_IDData);
         } catch (RepeatedIdException e) {
             throw new RuntimeException(e);
-        } catch (FolderExistsException e) {
+        } catch (FolderExistsException | IllegalSecretNameException | IllegalFolderNameException e) {
             throw new RuntimeException(e);
         }
-        String starsPassword = "*".repeat(8);
-        System.out.println("I have added a new NUS Net ID password:\n");
+        System.out.println("I have added a new Student_ID:\n");
         System.out.println(
                 "name       = " + name + "\n" +
-                "folder     = " + folderName + "\n" +
-                "NUS Net ID = " + NUSNet_ID + "\n" +
-                "password   = " + starsPassword);
+                "Student ID = " + Student_ID);
     }
 
     public String extractName(String input) {
-        String[] extractedNames = input.split("o/NUSNet ");
+        String[] extractedNames = input.split("o/StudentID ");
         String extractedName;
         if (extractedNames.length == 2) {
             if (extractedNames[1].split(" /f").length > 1) {
@@ -67,15 +63,10 @@ public class AddNUSNetCommand extends Command{
         }
         return extractedFolderName;
     }
-    public String inquireNUSNetID() {
-        System.out.println("Please enter your NUS Net ID: ");
-        String NUSNetID = Ui.readCommand();
-        return NUSNetID;
-    }
-    public String inquirePassword() {
-        System.out.println("Please enter your NUS Net password: ");
-        String password = Ui.readCommand();
-        return password;
+    public String inquireStudentID() {
+        System.out.println("Please enter your Student ID: ");
+        String StudentID = Ui.readCommand();
+        return StudentID;
     }
     public String extractURL(String input) {
         return "";

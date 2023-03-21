@@ -1,4 +1,4 @@
-new basic password /f folder name
+new basicpassword /f foldername
 google.com
 username
 password
