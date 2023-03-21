@@ -45,4 +45,9 @@ public class WifiPassword extends Secret{
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public String getRevealStr() {
+        return String.format("Password: %s", password);
+    }
 }

@@ -18,8 +18,8 @@ import java.util.HashSet;
  */
 public class SecretMaster {
     // use for quick finding
-    private final String DEFAULT_FOLDER = "unnamed";
-    private final String ALLOWED_NAMES_REGEX = "^[a-zA-Z0-9_]*$"; // only alphanumeric allowed
+    private static final String DEFAULT_FOLDER = "unnamed";
+    private static final String ALLOWED_NAMES_REGEX = "^[a-zA-Z0-9_]*$"; // only alphanumeric allowed
     private SecretSearcher secretSearcher; // Hash Table
     // use for listing secrets based on order it was added in
     private SecretEnumerator secretEnumerator; // Array view
@@ -27,12 +27,18 @@ public class SecretMaster {
     private HashSet<String> folders;
     private HashSet<String> secretNames;
 
-    public SecretMaster() throws FolderExistsException, IllegalFolderNameException {
-        this.secretEnumerator = new SecretEnumerator();
-        this.secretSearcher = new SecretSearcher();
-        this.folders = new HashSet<String>();
-        this.secretNames = new HashSet<String>();
-        createFolder(DEFAULT_FOLDER);
+
+    public SecretMaster() {
+        secretSearcher = new SecretSearcher();
+        secretEnumerator = new SecretEnumerator();
+        folders = new HashSet<String>();
+        secretNames = new HashSet<String>();
+    }
+    public SecretMaster(SecretSearcher secretSearcher, SecretEnumerator secretEnumerator) {
+        this.secretSearcher = secretSearcher;
+        this.secretEnumerator = secretEnumerator;
+        this.folders = secretEnumerator.getFolders();
+        this.secretNames = secretSearcher.getNames();
     }
 
     public boolean isLegalName(String name) {
@@ -68,7 +74,6 @@ public class SecretMaster {
             secretSearcher.createFolder(folderName);
         }
     }
-
     public Secret getByIndex(int index) {
         return secretEnumerator.get(index);
     }
@@ -88,7 +93,10 @@ public class SecretMaster {
         return secretEnumerator.getList(folderName);
     }
 
-    public Secret getByName(String secretName) {
+    public Secret getByName(String secretName) throws SecretNotFoundException {
+        if (!secretNames.contains(secretName)) {
+            throw new SecretNotFoundException();
+        }
         return secretSearcher.get(secretName);
     }
 
@@ -127,5 +135,24 @@ public class SecretMaster {
         //        secretEnumerator.deleteFolder(folderName);
         //        secretSearcher.deleteFolder(folderName);
         //    }
+    }
+
+    public ArrayList<String> listSecretNames() {
+        ArrayList<String> secretNamesList = new ArrayList<String>();
+        for (Secret secret : secretEnumerator.getList()) {
+            secretNamesList.add(secret.getName());
+        }
+        return secretNamesList;
+    }
+
+    public ArrayList <String> listSecretNames(String folderName) throws NonExistentFolderException {
+        if (!folders.contains(folderName)) {
+            throw new NonExistentFolderException();
+        }
+        ArrayList<String> secretNamesList = new ArrayList<String>();
+        for (Secret secret : secretEnumerator.getList(folderName)) {
+            secretNamesList.add(secret.getName());
+        }
+        return secretNamesList;
     }
 }

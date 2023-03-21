@@ -2,10 +2,8 @@ package seedu.duke.storage;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.RepeatedIdException;
-import seedu.duke.exceptions.secrets.FolderExistsException;
-import seedu.duke.exceptions.secrets.IllegalFolderNameException;
-import seedu.duke.exceptions.secrets.IllegalSecretNameException;
-import seedu.duke.secrets.Secret;
+import seedu.duke.exceptions.secrets.*;
+import seedu.duke.secrets.*;
 
 import java.util.HashSet;
 
@@ -32,14 +30,14 @@ class SecretMasterTest {
         SecretMaster secretMaster = new SecretMaster();
         HashSet<String> set = new HashSet<String>();
         set.add("unnamed");
-        assertEquals(set, secretMaster.getFolders());
+        assertEquals(new HashSet<String>(), secretMaster.getFolders());
         assertThrows(IllegalFolderNameException.class, () -> {
             secretMaster.createFolder("\"jkfewrjfv90r93f47^&IO(*&^");
         });
         assertThrows(IllegalFolderNameException.class, () -> {
             secretMaster.createFolder("jhfe ");
         });
-        assertEquals(set, secretMaster.getFolders());
+        assertEquals(new HashSet<String>(), secretMaster.getFolders());
         Secret secret1 = new Secret("blimp");
         secretMaster.addSecret(secret1);
         assertEquals(set, secretMaster.getFolders());
@@ -56,30 +54,16 @@ class SecretMasterTest {
     }
 
     @Test
-    void getByIndex() {
-    }
-
-    @Test
-    void testGetByIndex() {
-    }
-
-    @Test
-    void listSecrets() {
-    }
-
-    @Test
-    void testListSecrets() {
-    }
-
-    @Test
-    void getByName() {
-    }
-
-    @Test
-    void addSecret() {
-    }
-
-    @Test
-    void removeSecret() {
+    void addAllSecrets() throws FolderExistsException, InvalidExpiryDateException, IllegalFolderNameException, RepeatedIdException, IllegalSecretNameException, InvalidCreditCardNumberException {
+        SecretMaster secretMaster = new SecretMaster();
+        secretMaster.addSecret(new BasicPassword("basic1", "username1", "Password1",
+                "http.com"));
+        secretMaster.addSecret(new CreditCard("credit1", "HJ HJ UI", "1234567890123456", 123,
+                "12/23"));
+        secretMaster.addSecret(new CryptoWallet("crypto1", "hjhbj", "fdertyuiytyui876ytfgyuit5rt",
+                "hb jnjkm kjijh ijhui hjhb iujh uhbgv gfcd"));
+        secretMaster.addSecret(new NUSNet("nusnet1", "folder1", "e0987654", "oitfghjmjh"));
+        secretMaster.addSecret(new StudentID("hi", "T0987490A"));
+        secretMaster.addSecret(new WifiPassword("wifi1", "username1", "password1"));
     }
 }
