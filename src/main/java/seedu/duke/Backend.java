@@ -1,14 +1,5 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.secrets.InvalidURLException;
-import seedu.duke.secrets.BasicPassword;
-import seedu.duke.secrets.NUSNet;
-import seedu.duke.secrets.StudentID;
-import seedu.duke.storage.SecretEnumerator;
-import seedu.duke.storage.SecretMaster;
-import seedu.duke.secrets.Secret;
-import seedu.duke.storage.SecretSearcher;
-
 import java.io.IOException;
 import java.io.File;
 import java.io.FileWriter;
@@ -16,10 +7,23 @@ import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
+import seedu.duke.exceptions.secrets.InvalidURLException;
+import seedu.duke.secrets.BasicPassword;
+import seedu.duke.secrets.CreditCard;
+import seedu.duke.secrets.CryptoWallet;
+import seedu.duke.secrets.NUSNet;
+import seedu.duke.secrets.StudentID;
+import seedu.duke.secrets.WifiPassword;
+import seedu.duke.storage.SecretEnumerator;
+import seedu.duke.storage.SecretMaster;
+import seedu.duke.secrets.Secret;
+import seedu.duke.storage.SecretSearcher;
 
 
 public class Backend {
     public static final String ENCRYPTION_IDENTIFIER = "DKENC";
+    public static final int DECRYPTION_STARTING_INDEX = 5;
 
     private static final String DATABASE_FOLDER = "assets";
     private static final String DATABASE_FILE = "database.txt";
@@ -61,6 +65,8 @@ public class Backend {
             System.out.println(e);
         } catch (InvalidURLException e) {
             throw new RuntimeException(e);
+        } catch (InvalidExpiryDateException e) {
+            throw new RuntimeException(e);
         }
 
         //for secretEnumerator
@@ -85,19 +91,36 @@ public class Backend {
      * @return ArrayList of Secret
      */
     public static ArrayList<Secret> readAndUpdate(String[] input, ArrayList<Secret> database)
-            throws InvalidURLException {
+            throws InvalidURLException, InvalidExpiryDateException {
         //create different password based on constructor
         //studentID
-        if (input[0].equals("studentID")) {
+        if (input[0].equals("Password")) {
+            Secret secret = new BasicPassword(input[2], input[3], Backend.decode(input[4]),
+                    Backend.decode(input[5]), Backend.parseEmptyField(input[6]));
+            database.add(secret);
+        } else if (input[0].equals("CreditCard")) {
+            Secret secret = new CreditCard(input[2], input[3], input[4],
+                    Backend.decode(input[5]), Integer.parseInt(Backend.decode(input[6])),
+                        input[7]);
+            database.add(secret);
+        } else if (input[0].equals("CryptoWallet")) {
+            Secret secret = new CryptoWallet(input[2], input[3], Backend.decode(input[4]),
+                    Backend.decode(input[5]), Backend.decode(input[6]),
+                        Backend.createURLArrayList(input));
+            database.add(secret);
+        } else if (input[0].equals("studentID")) {
             Secret secret = new StudentID(input[2], input[3], input[4]);
             database.add(secret);
         } else if (input[0].equals("nusNetID")) {
             Secret secret = new NUSNet(input[2], input[3], input[4],
                     Backend.decode(input[5]));
             database.add(secret);
-        } else if (input[0].equals("Password")) {
-            Secret secret = new BasicPassword(input[2], input[3], Backend.decode(input[4]),
-                    Backend.decode(input[5]), Backend.parseEmptyField(input[6]));
+        } else if (input[0].equals("studentID")) {
+            Secret secret = new StudentID(input[2], input[3], input[4]);
+            database.add(secret);
+        } else if (input[0].equals("wifiPassword")) {
+            Secret secret = new WifiPassword(input[2], input[3], Backend.decode(input[4]),
+                    Backend.decode(input[5]));
             database.add(secret);
         }
         //Password
@@ -135,6 +158,14 @@ public class Backend {
         return hashtableFolders;
     }
 
+    public static ArrayList<String> createURLArrayList(String[] input) {
+        ArrayList<String> URLArrayList = new ArrayList<String>();
+        for (int i = 7; i < input.length; i++) {
+            URLArrayList.add(input[i]);
+        }
+        return URLArrayList;
+    }
+
 
     public static String encode(String field) {
         String encodedField = "";
@@ -146,7 +177,7 @@ public class Backend {
     }
 
     public static String decode(String field) {
-        String modifiedField = field.substring(5);
+        String modifiedField = field.substring(Backend.DECRYPTION_STARTING_INDEX);
         String actualField = "";
         for (int i = 0; i < modifiedField.length(); i++) {
             int asciiValue = (int) (modifiedField.charAt(i) - 1);
