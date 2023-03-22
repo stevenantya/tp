@@ -22,11 +22,22 @@ import seedu.duke.storage.SecretSearcher;
 
 
 public class Backend {
-    public static final String ENCRYPTION_IDENTIFIER = "DKENC";
-    public static final int DECRYPTION_STARTING_INDEX = 5;
-
+    private static final int DECRYPTION_STARTING_INDEX = 5;
     private static final String DATABASE_FOLDER = "assets";
     private static final String DATABASE_FILE = "database.txt";
+    private static final String DELIMITER = ",";
+    private static final String ENCRYPTION_IDENTIFIER = "DKENC";
+    private static final String EMPTY_FIELD_IDENTIFIER = "empty";
+    private static final String USER_DIRECTORY_IDENTIFIER = "user.dir";
+    private static final String PASSWORD_IDENTIFIER = "Password";
+    private static final String CREDIT_CARD_IDENTIFIER = "CreditCard";
+    private static final String CRYPTOWALLET_IDENTIFIER = "CryptoWallet";
+    private static final String NUSNETID_IDENTIFIER = "nusNetID";
+    private static final String STUDENTID_IDENTIFIER = "studentID";
+    private static final String WIFI_PASSWORD_IDENTIFIER = "wifiPassword";
+
+
+
     /**
      * Returns data from previous session as a SecretMaster Object.
      * If data is not available, a new file is created.
@@ -37,14 +48,14 @@ public class Backend {
         ArrayList<Secret> secretList = new ArrayList<Secret>();
 
         //create folder if it does not exist
-        String pathOfCurrentDirectory = System.getProperty("user.dir");
-        String assetsPath = java.nio.file.Paths.get(pathOfCurrentDirectory, "assets").toString();
+        String pathOfCurrentDirectory = System.getProperty(Backend.USER_DIRECTORY_IDENTIFIER);
+        String assetsPath = java.nio.file.Paths.get(pathOfCurrentDirectory, Backend.DATABASE_FOLDER).toString();
         File assets = new File(assetsPath);
         if (!assets.exists()) {
             assets.mkdir();
         }
         //create file if it does not exist
-        String databasePath = java.nio.file.Paths.get(assetsPath, DATABASE_FILE).toString();
+        String databasePath = java.nio.file.Paths.get(assetsPath, Backend.DATABASE_FILE).toString();
         File database = new File(databasePath);
         try {
             if (!database.createNewFile()) {
@@ -57,7 +68,7 @@ public class Backend {
         try {
             Scanner reader = new Scanner(database);
             while (reader.hasNextLine()) {
-                String[] inputArray = reader.nextLine().split(",");
+                String[] inputArray = reader.nextLine().split(Backend.DELIMITER);
                 secretList = Backend.readAndUpdate(inputArray, secretList);
             }
             reader.close();
@@ -94,31 +105,28 @@ public class Backend {
             throws InvalidURLException, InvalidExpiryDateException {
         //create different password based on constructor
         //studentID
-        if (input[0].equals("Password")) {
+        if (input[0].equals(Backend.PASSWORD_IDENTIFIER)) {
             Secret secret = new BasicPassword(input[2], input[3], Backend.decode(input[4]),
                     Backend.decode(input[5]), Backend.parseEmptyField(input[6]));
             database.add(secret);
-        } else if (input[0].equals("CreditCard")) {
+        } else if (input[0].equals(Backend.CREDIT_CARD_IDENTIFIER)) {
             Secret secret = new CreditCard(input[2], input[3], input[4],
                     Backend.decode(input[5]), Integer.parseInt(Backend.decode(input[6])),
                         input[7]);
             database.add(secret);
-        } else if (input[0].equals("CryptoWallet")) {
+        } else if (input[0].equals(Backend.CRYPTOWALLET_IDENTIFIER)) {
             Secret secret = new CryptoWallet(input[2], input[3], Backend.decode(input[4]),
                     Backend.decode(input[5]), Backend.decode(input[6]),
                         Backend.createURLArrayList(input));
             database.add(secret);
-        } else if (input[0].equals("studentID")) {
-            Secret secret = new StudentID(input[2], input[3], input[4]);
-            database.add(secret);
-        } else if (input[0].equals("nusNetID")) {
+        } else if (input[0].equals(Backend.NUSNETID_IDENTIFIER)) {
             Secret secret = new NUSNet(input[2], input[3], input[4],
                     Backend.decode(input[5]));
             database.add(secret);
-        } else if (input[0].equals("studentID")) {
+        } else if (input[0].equals(Backend.STUDENTID_IDENTIFIER)) {
             Secret secret = new StudentID(input[2], input[3], input[4]);
             database.add(secret);
-        } else if (input[0].equals("wifiPassword")) {
+        } else if (input[0].equals(Backend.WIFI_PASSWORD_IDENTIFIER)) {
             Secret secret = new WifiPassword(input[2], input[3], Backend.decode(input[4]),
                     Backend.decode(input[5]));
             database.add(secret);
@@ -187,7 +195,7 @@ public class Backend {
     }
 
     public static String parseEmptyField(String field) {
-        return field.equals("empty") ? "" : field;
+        return field.equals(Backend.EMPTY_FIELD_IDENTIFIER) ? "" : field;
     }
 
     /**
@@ -197,9 +205,9 @@ public class Backend {
      * @param input the list of secrets provided by user.
      */
     public static void updateStorage(ArrayList<Secret> input) {
-        String currDir = System.getProperty("user.dir");
+        String currDir = System.getProperty(Backend.USER_DIRECTORY_IDENTIFIER);
         String databasePath = java.nio.file.Paths.get(currDir,
-                "assets", "database.txt").toString();
+                Backend.DATABASE_FOLDER, Backend.DATABASE_FILE).toString();
         File database = new File(databasePath);
 
         try {
