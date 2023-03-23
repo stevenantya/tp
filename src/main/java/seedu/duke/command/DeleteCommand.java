@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(SecretMaster secureNUSData) throws SecretNotFoundException, SecretNotFoundException {
+    public void execute(SecretMaster secureNUSData) throws SecretNotFoundException {
         Secret deleteData = secureNUSData.getByName(secretName);
 
         secureNUSData.removeSecret(deleteData);
