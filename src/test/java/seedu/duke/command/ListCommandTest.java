@@ -52,12 +52,18 @@ public class ListCommandTest {
         SecretMaster secretMaster = new SecretMaster();
 
         try {
-            secretMaster.addSecret(new BasicPassword("BasicPassword1", "Username1", "Password1", "Url1.com"));
-            secretMaster.addSecret(new CreditCard("CreditCard1", "John Doe", "1234567812345678", 123, "12/25"));
-            secretMaster.addSecret(new CryptoWallet("CryptoWallet1", "Folder1", "DeepsD", "PrivateKey1", "SeedPhrase1"));
-            secretMaster.addSecret(new NUSNet("NUSNet1", "NUSNetId1", "Password1"));
-            secretMaster.addSecret(new StudentID("StudentID1", "StudentID1"));
-            secretMaster.addSecret(new WifiPassword("WifiPassword1", "Username1", "Password1"));
+            secretMaster.addSecret(new BasicPassword("BasicPassword1", "Username1",
+                    "Password1", "Url1.com"));
+            secretMaster.addSecret(new CreditCard("CreditCard1", "John Doe",
+                    "1234567812345678", 123, "12/25"));
+            secretMaster.addSecret(new CryptoWallet("CryptoWallet1", "Folder1",
+                    "DeepsD", "PrivateKey1", "SeedPhrase1"));
+            secretMaster.addSecret(new NUSNet("NUSNet1", "NUSNetId1",
+                    "Password1"));
+            secretMaster.addSecret(new StudentID("StudentID1",
+                    "StudentID1"));
+            secretMaster.addSecret(new WifiPassword("WifiPassword1", "Username1",
+                    "Password1"));
 
             ListCommand listCommand = new ListCommand("list");
             listCommand.execute(secretMaster);
