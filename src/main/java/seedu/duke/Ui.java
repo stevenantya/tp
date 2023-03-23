@@ -26,4 +26,7 @@ public class Ui {
         return "";
     }
 
+    public static void printError(String message) {
+        System.out.println("Oops! Error encountered "+ message);
+    }
 }

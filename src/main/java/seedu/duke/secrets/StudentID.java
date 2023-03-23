@@ -18,4 +18,14 @@ public class StudentID extends Secret {
             "," + this.studentID;
         return formattedString;
     }
+
+    public String getStudentID() {
+        return studentID;
+    }
+    @Override
+    public String getRevealStr() {
+        return String.format("Name: %s\n" +
+                        "StudentID: %s",
+                getName(), studentID);
+    }
 }
