@@ -1,4 +1,0 @@
-new basicpassword1
-google.com
-username1
-password1
