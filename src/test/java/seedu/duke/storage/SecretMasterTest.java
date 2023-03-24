@@ -79,4 +79,18 @@ class SecretMasterTest {
         secretMaster.addSecret(new StudentID("hi", "T0987490A"));
         secretMaster.addSecret(new WifiPassword("wifi1", "username1", "password1"));
     }
+
+    @Test
+    void addSecretsWithCharacter() throws InvalidURLException, IllegalFolderNameException, RepeatedIdException,
+            IllegalSecretNameException, FolderExistsException {
+        SecretMaster secretMaster = new SecretMaster();
+        secretMaster.addSecret(new BasicPassword("BasicPassword1", "username1", "Password1",
+                "http.com"));
+        secretMaster.addSecret(new BasicPassword("BasicPassword2_", "username1", "Password1",
+                "http.com"));
+        secretMaster.addSecret(new BasicPassword("BasicPassword2", "Folder9", "username1", "Password1",
+                "http.com"));
+        secretMaster.addSecret(new BasicPassword("BasicPassword4", "Folder9_", "username1", "Password1",
+                "http.com"));
+    }
 }
