@@ -1,3 +1,4 @@
+[//]: # (@@author DeepanjaliDhawan)
 # Developer Guide
 
 
@@ -67,7 +68,7 @@ Tip: Optionally, you can follow the guide [[se-edu/guides] Using Checkstyle](htt
 
 ---
 
-
+[//]: # (@@author ollayf)
 # Design & Implementation
 
 
@@ -135,7 +136,14 @@ responses/ feedback to the User.
 
 This is the main component that initialises all other components and connects them when the application is running.
 
+## SecretStorage Component
 
+<img src="./DGDiagramsCreator/DGUsedDiagrams/SecretStorageComponent.png" width="100%" />
+
+The Secret Storage component abstracts the data that is to be stored into many views/ indexes. This optimizes the speed of queries for many types of queries without developers needing to access the individual data structures used. The data structures, namely Hash Table and Array are stored in the SecretSearcher and SecretEnumerator class respectively. Finally, during the initialisation of the application, the Backend will connect past data to the SecretMaster. During shutdown, the Backend will handle saving it into an encrypted file.
+
+
+[//]: # (@@author stevenantya)
 ## Command Component
 
 The API of this component is specified in Command.java
@@ -149,13 +157,6 @@ Command is an abstract class that is inherited by various components such as Add
 The Command consist of Command abstract class that handles all of its command constructors and executions through its child classes. The user inputs command in Ui, that is parsed in Parser, and then institiated in and then executed in Command classes.
 
 
-## SecretStorage Component
-
-<img src="./DGDiagramsCreator/DGUsedDiagrams/SecretStorageComponent.png" width="100%" />
-
-The Secret Storage component abstracts the data that is to be stored into many views/ indexes. This optimizes the speed of queries for many types of queries without developers needing to access the individual data structures used. The data structures, namely Hash Table and Array are stored in the SecretSearcher and SecretEnumerator class respectively. Finally, during the initialisation of the application, the Backend will connect past data to the SecretMaster. During shutdown, the Backend will handle saving it into an encrypted file.
-
-
 ## Backend Component
 <img src="./DGDiagramsCreator/DGUsedDiagrams/BackendComponent.png" width="100%" />
 
@@ -165,7 +166,7 @@ The backend manages the saving and loading of data from the database.txt file. T
 
 ---
 
-
+[//]: # (@@author euzhengxi)
 # Product Scope
 
 
@@ -187,7 +188,7 @@ The backend manages the saving and loading of data from the database.txt file. T
 
 ---
 
-
+[//]: # (@@author kairuler)
 # User Stories
 
 
