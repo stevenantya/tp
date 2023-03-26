@@ -1,6 +1,9 @@
 package seedu.duke;
 
 import seedu.duke.command.AddBasicPasswordCommand;
+import seedu.duke.command.AddCreditCardCommand;
+//import seedu.duke.command.AddCryptoWalletCommand;
+//import seedu.duke.command.AddWifiPasswordCommand;
 import seedu.duke.command.AddNUSNetCommand;
 import seedu.duke.command.AddStudentIDCommand;
 import seedu.duke.command.ListCommand;
@@ -16,11 +19,17 @@ public class Parser {
     public static Command parse(String command) throws InvalidCommandException {
 
         if (command.startsWith("new o/NUSNet")) {
+    public static Command parse(String command) {
+        if (command.startsWith("new o/CreditCard")) {
+            return new AddCreditCardCommand(command);
+        } else if (command.startsWith("new o/CryptoWallet")) {
+            return new AddStudentIDCommand(command); // Have to change to AddCryptoWalletCommand
+        } else if (command.startsWith("new o/NUSNet")) {
             return new AddNUSNetCommand(command);
         } else if (command.startsWith("new o/StudentID")) {
             return new AddStudentIDCommand(command);
-        } else if (command.startsWith("new o/CryptoWallet")) {
-            return new AddStudentIDCommand(command);
+        } else if (command.startsWith("new o/WifiPassword")) {
+            return new AddStudentIDCommand(command); // Have to change to AddWifiPasswordCommand
         } else if (command.startsWith("new")) {
             return new AddBasicPasswordCommand(command);
         } else if (command.startsWith("delete")) {
@@ -40,6 +49,4 @@ public class Parser {
             throw new InvalidCommandException();
         }
     }
-
-
 }
