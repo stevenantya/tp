@@ -52,7 +52,7 @@ public class EditCommand extends Command {
         } catch (SecretNotFoundException e) {
             throw new RuntimeException(e);
         }
-        passwordSecret.editName(newName);
+        passwordSecret.editName(this.newName);
         // TODO: editFolderName()
         // TODO: editDescription()
     }

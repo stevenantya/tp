@@ -17,9 +17,6 @@ import seedu.duke.exceptions.InvalidCommandException;
 
 public class Parser {
     public static Command parse(String command) throws InvalidCommandException {
-
-        if (command.startsWith("new o/NUSNet")) {
-    public static Command parse(String command) {
         if (command.startsWith("new o/CreditCard")) {
             return new AddCreditCardCommand(command);
         } else if (command.startsWith("new o/CryptoWallet")) {
