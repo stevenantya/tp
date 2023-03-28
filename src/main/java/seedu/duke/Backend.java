@@ -125,7 +125,7 @@ public class Backend {
         } else if (input[0].equals(Backend.CRYPTOWALLET_IDENTIFIER)) {
             Secret secret = new CryptoWallet(input[2], input[3], Backend.decode(input[4]),
                     Backend.decode(input[5]), Backend.decode(input[6]),
-                        Backend.createURLArrayList(input));
+                        Backend.createUrlArrayList(input));
             database.add(secret);
         } else if (input[0].equals(Backend.NUSNETID_IDENTIFIER)) {
             Secret secret = new NUSNet(input[2], input[3], input[4],
@@ -174,7 +174,7 @@ public class Backend {
         return hashtableFolders;
     }
 
-    public static ArrayList<String> createURLArrayList(String[] input) {
+    public static ArrayList<String> createUrlArrayList(String[] input) {
         ArrayList<String> URLArrayList = new ArrayList<String>();
         for (int i = 7; i < input.length; i++) {
             URLArrayList.add(input[i]);
