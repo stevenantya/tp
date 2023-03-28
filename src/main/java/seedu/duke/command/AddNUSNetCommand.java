@@ -38,7 +38,7 @@ public class AddNUSNetCommand extends Command{
         this.nusNetId = nusNet.getnusNetId();
         this.password = nusNet.getPassword();
     }
-
+    
     /**
      * Executes the command to add the NUSNet account to the SecretMaster.
      *
@@ -48,6 +48,7 @@ public class AddNUSNetCommand extends Command{
      *                          or IllegalSecretNameException
      *                          or IllegalFolderNameException.
      */
+
     @Override
     public void execute(SecretMaster secureNUSData) {
         NUSNet nusNetIdData = new NUSNet(name,folderName,nusNetId,password);

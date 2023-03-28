@@ -48,7 +48,7 @@ public class AddBasicPasswordCommand extends Command{
         this.username = basicPassword.getUsername();
         this.password = basicPassword.getPassword();
     }
-
+    
     /**
      * Executes the AddBasicPasswordCommand.
      * Creates a new BasicPassword object with the provided name, folderName, username, password, and url.

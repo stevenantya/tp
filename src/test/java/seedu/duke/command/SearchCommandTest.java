@@ -16,8 +16,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * This class represents the unit tests for the SearchCommand class.
@@ -66,6 +66,7 @@ class SearchCommandTest {
     public void setUpStreams() {
         System.setOut(new PrintStream(output));
     }
+
     /**
      * Tests the extraction of name from input.
      * The test case checks for extraction of name only.

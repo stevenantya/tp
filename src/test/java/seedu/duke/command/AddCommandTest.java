@@ -16,27 +16,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AddCommandTest {
     @Test
     public void studentIDTestFolder() throws SecretNotFoundException, ExceptionMain {
-        SecretMaster sm = new SecretMaster();
+        SecretMaster SM = new SecretMaster();
         StudentID studentID = new StudentID("StudentID2Name", "StudentsOfNUS", "A021313G");
         Command addStudentId = new AddStudentIDCommand(studentID);
-        addStudentId.execute(sm);
-        assertEquals("StudentID2Name",sm.getByName("StudentID2Name").getName());
+        addStudentId.execute(SM);
+        assertEquals("StudentID2Name",SM.getByName("StudentID2Name").getName());
     }
     @Test
     public void nusNetFolder() throws SecretNotFoundException, ExceptionMain {
-        SecretMaster sm = new SecretMaster();
+        SecretMaster SM = new SecretMaster();
         NUSNet nusNet = new NUSNet("NUSNetName2", "FolderName", "e081888@u.nus.edu", "Lorem Ipsum 12");
         Command addNusNet = new AddNUSNetCommand(nusNet);
-        addNusNet.execute(sm);
-        assertEquals("NUSNetName2", sm.getByName("NUSNetName2").getName());
+        addNusNet.execute(SM);
+        assertEquals("NUSNetName2", SM.getByName("NUSNetName2").getName());
     }
     @Test
     void basicPasswordFolder() throws InvalidURLException, SecretNotFoundException, ExceptionMain {
-        SecretMaster sm = new SecretMaster();
+        SecretMaster SM = new SecretMaster();
         BasicPassword basicPassword =
                 new BasicPassword("basicPassword1", "FolderName", "basicUsername", "Lorem Ipsum 112", "google.com");
         Command addBasicPassword = new AddBasicPasswordCommand(basicPassword);
-        addBasicPassword.execute(sm);
-        assertEquals("basicPassword1", sm.getByName("basicPassword1").getName());
+        addBasicPassword.execute(SM);
+        assertEquals("basicPassword1", SM.getByName("basicPassword1").getName());
     }
 }
