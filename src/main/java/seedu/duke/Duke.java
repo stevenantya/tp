@@ -25,7 +25,6 @@ public class Duke {
     public Duke() throws FolderExistsException, IllegalFolderNameException {
         secureNUSData = Backend.initialisation();
     }
-
     /**
      * Main entry-point for the Duke application.
      * Initializes a Duke object and runs the application.
@@ -38,7 +37,7 @@ public class Duke {
      */
     public static void main(String[] args) throws FolderExistsException, IllegalFolderNameException,
             IllegalSecretNameException, SecretNotFoundException {
-            
+
         Duke duke = new Duke();
         duke.run();
 

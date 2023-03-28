@@ -3,18 +3,25 @@ package seedu.duke;
 import seedu.duke.command.AddBasicPasswordCommand;
 import seedu.duke.command.AddCreditCardCommand;
 //import seedu.duke.command.AddCryptoWalletCommand;
-//import seedu.duke.command.AddWifiPasswordCommand;
 import seedu.duke.command.AddNUSNetCommand;
 import seedu.duke.command.AddStudentIDCommand;
+//import seedu.duke.command.AddWifiPasswordCommand;
+import seedu.duke.command.Command;
+import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.EditCommand;
+import seedu.duke.command.ExitCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.MenuCommand;
 import seedu.duke.command.SearchCommand;
 import seedu.duke.command.ViewCommand;
+<<<<<<<<< Temporary merge branch 1
 import seedu.duke.command.EditCommand;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.ExitCommand;
 import seedu.duke.exceptions.InvalidCommandException;
+=========
+>>>>>>>>> Temporary merge branch 2
 
 /**
  * Parses user commands and returns the corresponding command object.
