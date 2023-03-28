@@ -9,6 +9,11 @@ import seedu.duke.messages.Inquiries;
 import seedu.duke.secrets.CreditCard;
 import seedu.duke.storage.SecretMaster;
 
+/**
+ * A class to add a new credit card to the user's secureNUSData.
+ * Inherits from AddSecretCommand, which contains the common attributes
+ * and methods needed to add a secret to the user's secureNUSData.
+ */
 public class AddCreditCardCommand extends AddSecretCommand {
     private String name;
     private String folderName = "unnamed";
@@ -17,6 +22,13 @@ public class AddCreditCardCommand extends AddSecretCommand {
     private int cvcNumber;
     private String expiryDate;
 
+    /**
+     * Constructor for AddCreditCardCommand class.
+     * Extracts the necessary information from the input string using the super constructor
+     * and prompts the user for additional information.
+     *
+     * @param input User input command string.
+     */
     public AddCreditCardCommand(String input) {
         super(input);
         fullName = inquire(Inquiries.FULLNAME);
@@ -25,6 +37,12 @@ public class AddCreditCardCommand extends AddSecretCommand {
         expiryDate = inquire(Inquiries.EXPIRY_DATE);
     }
 
+    /**
+     * Adds a new credit card to the user's secureNUSData.
+     *
+     * @param secureNUSData The user's secureNUSData object.
+     * @throws RuntimeException if there is a repeated id or if there is an issue with the name or folder name.
+     */
     @Override
     public void execute(SecretMaster secureNUSData) {
 

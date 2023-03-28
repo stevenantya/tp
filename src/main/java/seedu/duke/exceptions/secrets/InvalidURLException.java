@@ -1,7 +1,7 @@
 package seedu.duke.exceptions.secrets;
 
 /**
- * @author : Steven A. O. Waskito
- **/
+ * Exception thrown when the URL inputted by the user is of incorrect format
+ */
 public class InvalidURLException extends Exception {
 }
