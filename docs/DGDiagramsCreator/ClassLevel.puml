@@ -1,0 +1,17 @@
+@startuml
+!include Style.puml
+
+package Application {
+
+    Commands <- Parser
+    Parser <- UI
+    Commands --> SecureNUS
+    SecureNUS --> SecretMaster
+    SecretMaster --> SecretSearcher
+    SecretMaster --> SecretEnumerator
+    SecretMaster <-> Backend
+}
+InputCLI.User -> UI
+Backend <-> OutputFile.database
+
+@enduml

@@ -5,8 +5,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+/**
+ * The EditCommandTest class tests the EditCommand class.
+ */
 class EditCommandTest {
-
+    /**
+     * Test the extract method in EditCommand class.
+     */
     @Test
     void extract() {
         EditCommand editCommand = new EditCommand("edit p/PASSWORD_NAME -f nf/NEW_FOLDER_NAME " +
@@ -19,6 +24,9 @@ class EditCommandTest {
 
     // TODO: execute()
 
+    /**
+     * Test the isExit method in EditCommand class.
+     */
     @Test
     void isExit() {
         EditCommand editCommand = new EditCommand("edit p/Test");
