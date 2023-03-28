@@ -3,10 +3,24 @@ package seedu.duke.secrets;
 import seedu.duke.Backend;
 import seedu.duke.exceptions.secrets.InvalidURLException;
 
+/**
+ * BasicPassword class represents a basic password entry that contains a username,
+ * password, and URL.
+ */
 public class BasicPassword extends Secret{
     private String username;
     private String password;
     private String url;
+
+    /**
+     * Constructs a BasicPassword object with the specified name, username, password, and URL.
+     *
+     * @param name name of the basic password entry
+     * @param username username of the basic password entry
+     * @param password password of the basic password entry
+     * @param url URL of the basic password entry
+     * @throws InvalidURLException if the provided URL is not a valid URL
+     */
     public BasicPassword(String name, String username,
                          String password, String url) throws InvalidURLException {
         super(name);
@@ -18,6 +32,17 @@ public class BasicPassword extends Secret{
             throw new InvalidURLException();
         }
     }
+
+    /**
+     * Constructs a BasicPassword object with the specified name, folder name, username, password, and URL.
+     *
+     * @param name name of the basic password entry
+     * @param folderName name of the folder that the basic password entry is stored in
+     * @param username username of the basic password entry
+     * @param password password of the basic password entry
+     * @param url URL of the basic password entry
+     * @throws InvalidURLException if the provided URL is not a valid URL
+     */
     public BasicPassword(String name, String folderName, String username,
                             String password, String url) throws InvalidURLException {
         super(name, folderName);
@@ -29,12 +54,30 @@ public class BasicPassword extends Secret{
             throw new InvalidURLException();
         }
     }
+
+    /**
+     * Returns the password of the basic password entry.
+     *
+     * @return password of the basic password entry
+     */
     public String getPassword() {
         return password;
     }
+
+    /**
+     * Returns the URL of the basic password entry.
+     *
+     * @return URL of the basic password entry
+     */
     public String getUrl() {
         return url;
     }
+
+    /**
+     * Returns a formatted string representation of the BasicPassword object for the database.
+     *
+     * @return formatted string representation of the BasicPassword object for the database
+     */
     @Override
     public String toStringForDatabase() {
         String formattedString =  "Password," + super.toStringForDatabase() +
@@ -46,6 +89,11 @@ public class BasicPassword extends Secret{
         return formattedString;
     }
 
+    /**
+     * Returns a string representation of the BasicPassword object for revealing the password.
+     *
+     * @return string representation of the BasicPassword object for revealing the password
+     */
     @Override
     public String getRevealStr() {
         return String.format("Name: %s\n" +
@@ -54,6 +102,12 @@ public class BasicPassword extends Secret{
                         "Password: %s",
                 getName(), url, username, password);
     }
+
+    /**
+     * Returns the username associated with the password.
+     *
+     * @return the username of the password
+     */
     public String getUsername() {
         return username;
     }

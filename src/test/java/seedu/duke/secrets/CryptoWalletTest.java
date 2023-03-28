@@ -6,8 +6,14 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * JUnit tests for the CryptoWallet class.
+ */
 class CryptoWalletTest {
 
+    /**
+     * Tests creation of a CryptoWallet with no folder specified.
+     */
     @Test
     void noFolderCryptoWalletCreationTest() {
         CryptoWallet cryptoWallet =
@@ -21,6 +27,9 @@ class CryptoWalletTest {
         assertEquals("cryptoWallet1", cryptoWallet.getUid());
     }
 
+    /**
+     * Tests creation of a CryptoWallet with a folder specified.
+     */
     @Test
     void withFolderCryptoWalletCreationTest() {
         CryptoWallet cryptoWallet =
@@ -34,6 +43,9 @@ class CryptoWalletTest {
         assertEquals("cryptoWallet1", cryptoWallet.getUid());
     }
 
+    /**
+     * Tests editing of CryptoWallet details.
+     */
     void editingDetails() {
         CryptoWallet cryptoWallet =
                 new CryptoWallet("cryptoWallet1", "folder1", "hoseang",
@@ -61,6 +73,9 @@ class CryptoWalletTest {
         assertEquals("cryptoWallet2", cryptoWallet.getUid());
     }
 
+    /**
+     * Test code to verify the RevealOutput method
+     */
     @Test
     void testRevealOutput() {
         CryptoWallet cryptoWallet =

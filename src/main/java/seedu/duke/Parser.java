@@ -3,18 +3,28 @@ package seedu.duke;
 import seedu.duke.command.AddBasicPasswordCommand;
 import seedu.duke.command.AddCreditCardCommand;
 //import seedu.duke.command.AddCryptoWalletCommand;
-//import seedu.duke.command.AddWifiPasswordCommand;
 import seedu.duke.command.AddNUSNetCommand;
 import seedu.duke.command.AddStudentIDCommand;
+//import seedu.duke.command.AddWifiPasswordCommand;
+import seedu.duke.command.Command;
+import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.EditCommand;
+import seedu.duke.command.ExitCommand;
 import seedu.duke.command.ListCommand;
+import seedu.duke.command.MenuCommand;
 import seedu.duke.command.SearchCommand;
 import seedu.duke.command.ViewCommand;
-import seedu.duke.command.EditCommand;
-import seedu.duke.command.DeleteCommand;
-import seedu.duke.command.Command;
-import seedu.duke.command.ExitCommand;
 
+/**
+ * Parses user commands and returns the corresponding command object.
+ */
 public class Parser {
+
+    /**
+     * Parses user input and returns the corresponding command object.
+     * @param command user input command string
+     * @return Command object corresponding to the user input
+     */
     public static Command parse(String command) {
         if (command.startsWith("new o/CreditCard")) {
             return new AddCreditCardCommand(command);
@@ -38,6 +48,8 @@ public class Parser {
             return new ViewCommand(command);
         } else if (command.startsWith("edit")) {
             return new EditCommand(command);
+        } else if (command.startsWith("menu")) {
+            return new MenuCommand();
         } else if (command.startsWith("bye")) {
             return new ExitCommand();
         } else {
