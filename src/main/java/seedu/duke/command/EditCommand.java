@@ -1,5 +1,7 @@
 package seedu.duke.command;
 
+import seedu.duke.Ui;
+import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretMaster;
@@ -59,7 +61,7 @@ public class EditCommand extends Command {
 
         // Check if there is a match and extract the value
         extractedFields[0] = passwordMatcher.find() ? passwordMatcher.group(1).trim() : null;
-        extractedFields[1] = folderMatcher.find() ? folderMatcher.group(1).trim() : null;
+        extractedFields[1] = folderMatcher.find() ? folderMatcher.group(1).trim() : "unnamed";
         extractedFields[2] = descriptionMatcher.find() ? descriptionMatcher.group(1).trim() : null;
         extractedFields[3] = newPasswordMatcher.find() ? newPasswordMatcher.group(1).trim() : null;
 
@@ -75,13 +77,13 @@ public class EditCommand extends Command {
     public void execute(SecretMaster secureNUSData) {
         Secret passwordSecret;
         try {
-            passwordSecret = secureNUSData.getByName(this.name);
+            passwordSecret = secureNUSData.getByName(name);
+            secureNUSData.editSecret(passwordSecret, newName, newFolderName);
         } catch (SecretNotFoundException e) {
-            throw new RuntimeException(e);
+            Ui.printError("(The password is not found).");
+        } catch (FolderExistsException e) {
+            Ui.printError("(The folder being created already exists).");
         }
-        passwordSecret.editName(this.newName);
-        // TODO: editFolderName()
-        // TODO: editDescription()
     }
 
     /**
