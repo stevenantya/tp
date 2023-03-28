@@ -15,12 +15,12 @@ import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
  *
  */
 public class CreditCard extends Secret {
+    private static final String expiryDateFmt = "[0-1][0-9]/[0-3][0-9]";
+    private static final String creditCardNumberFmt = "\\d{16}";
     private String fullName;
     private String creditCardNumber;
     private int cvcNumber;
     private String expiryDate;
-    private static final String expiryDateFmt = "[0-1][0-9]/[0-3][0-9]";
-    private static final String credictCardNumberFmt = "\\d{16}";
     public CreditCard(String name, String fullName,
                       String creditCardNumber,
                       int cvcNumber, String expiryDate) throws
@@ -30,7 +30,7 @@ public class CreditCard extends Secret {
         super(name);
         this.fullName = fullName;
         this.creditCardNumber = creditCardNumber;
-        if (!creditCardNumber.matches(credictCardNumberFmt)) {
+        if (!creditCardNumber.matches(creditCardNumberFmt)) {
             throw new InvalidCreditCardNumberException();
         }
         this.cvcNumber = cvcNumber;

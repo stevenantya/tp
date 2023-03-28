@@ -8,10 +8,11 @@ import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
 import seedu.duke.storage.SecretMaster;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class Duke {
+    private static final Logger LOGGER = DukeLogger.LOGGER;
     private static final String DUKE_LOG_EXECUTECOMMAND_IDENTIFIER = "Duke - executeCommand";
     /**
      * Main entry-point for the java.duke.Duke application.
@@ -58,7 +59,7 @@ public class Duke {
                 return command.isExit();
             } catch (ExceptionMain e) {
                 Ui.printError(e.getMessage()); //do they want UI to handle it or?
-                DukeLogger.logger.log(Level.SEVERE, DUKE_LOG_EXECUTECOMMAND_IDENTIFIER, e);
+                LOGGER.log(Level.SEVERE, DUKE_LOG_EXECUTECOMMAND_IDENTIFIER, e);
                 DukeLogger.close();
             }
         }

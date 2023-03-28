@@ -1,25 +1,31 @@
 package seedu.duke;
 
 import java.io.File;
-import java.util.logging.*;
+import java.nio.file.Paths;
+import java.util.logging.Logger;
+import java.util.logging.LogManager;
+import java.util.logging.Level;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
 
 public class DukeLogger {
-    public static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    public static final Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final String USER_DIRECTORY_IDENTIFIER = "user.dir";
     private static final String LOGGER_FOLDER = "assets";
     private static final String LOGGER_FILE = "logFiles.txt";
 
     public static void setUpLogger() {
         LogManager.getLogManager().reset();
-        logger.setLevel(Level.ALL);
+        LOGGER.setLevel(Level.ALL);
 
         ConsoleHandler consoleHandler = new ConsoleHandler();
         consoleHandler.setLevel(Level.SEVERE);
-        logger.addHandler(consoleHandler);
+        LOGGER.addHandler(consoleHandler);
 
         try {
             String currentPath = System.getProperty(DukeLogger.USER_DIRECTORY_IDENTIFIER);
-            String logFilesPath = java.nio.file.Paths.get(currentPath,
+            String logFilesPath = Paths.get(currentPath,
                     DukeLogger.LOGGER_FOLDER, DukeLogger.LOGGER_FILE).toString();
             File logFiles = new File(logFilesPath);
             if (!logFiles.createNewFile()) {
@@ -27,15 +33,15 @@ public class DukeLogger {
             }
             FileHandler fileHandler = new FileHandler(logFilesPath, true);
             fileHandler.setLevel(Level.WARNING);
-            logger.addHandler(fileHandler);
+            LOGGER.addHandler(fileHandler);
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "DUKE logger is not working!");
+            LOGGER.log(Level.SEVERE, "DUKE logger is not working!");
         }
 
     }
 
     public static void close() {
-        for (Handler handler : logger.getHandlers()) {
+        for (Handler handler : LOGGER.getHandlers()) {
             handler.close();
         }
     }

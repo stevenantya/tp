@@ -3,6 +3,7 @@ package seedu.duke;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileWriter;
+import java.nio.file.Paths;
 import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import seedu.duke.storage.SecretSearcher;
 
 
 public class Backend {
-    private static final Logger logger = DukeLogger.logger;
+    private static final Logger LOGGER = DukeLogger.LOGGER;
     private static final String BACKEND_LOG_INITIALISATION_IDENTIFIER
         = "Backend - Initialisation : ";
     private static final String BACKEND_LOG_UPDATESTORAGE_IDENTIFIER
@@ -56,20 +57,20 @@ public class Backend {
 
         //create folder if it does not exist
         String pathOfCurrentDirectory = System.getProperty(Backend.USER_DIRECTORY_IDENTIFIER);
-        String assetsPath = java.nio.file.Paths.get(pathOfCurrentDirectory, Backend.DATABASE_FOLDER).toString();
+        String assetsPath = Paths.get(pathOfCurrentDirectory, Backend.DATABASE_FOLDER).toString();
         File assets = new File(assetsPath);
         if (!assets.exists()) {
             assets.mkdir();
         }
         //create file if it does not exist
-        String databasePath = java.nio.file.Paths.get(assetsPath, Backend.DATABASE_FILE).toString();
+        String databasePath = Paths.get(assetsPath, Backend.DATABASE_FILE).toString();
         File database = new File(databasePath);
         try {
             if (!database.createNewFile()) {
                 database.createNewFile();
             }
         } catch (IOException e) {
-            logger.log(Level.SEVERE, BACKEND_LOG_INITIALISATION_IDENTIFIER, e);
+            LOGGER.log(Level.SEVERE, BACKEND_LOG_INITIALISATION_IDENTIFIER, e);
         }
 
         try {
@@ -80,7 +81,7 @@ public class Backend {
             }
             reader.close();
         } catch (IOException e) {
-            logger.log(Level.SEVERE, BACKEND_LOG_INITIALISATION_IDENTIFIER, e);
+            LOGGER.log(Level.SEVERE, BACKEND_LOG_INITIALISATION_IDENTIFIER, e);
         } catch (InvalidURLException e) {
             throw new RuntimeException(e);
         } catch (InvalidExpiryDateException e) {
@@ -213,7 +214,7 @@ public class Backend {
      */
     public static void updateStorage(ArrayList<Secret> input) {
         String currDir = System.getProperty(Backend.USER_DIRECTORY_IDENTIFIER);
-        String databasePath = java.nio.file.Paths.get(currDir,
+        String databasePath = Paths.get(currDir,
                 Backend.DATABASE_FOLDER, Backend.DATABASE_FILE).toString();
         File database = new File(databasePath);
 
@@ -225,7 +226,7 @@ public class Backend {
             }
             myWriter.close();
         } catch (IOException e) {
-            logger.log(Level.SEVERE, BACKEND_LOG_UPDATESTORAGE_IDENTIFIER, e);
+            LOGGER.log(Level.SEVERE, BACKEND_LOG_UPDATESTORAGE_IDENTIFIER, e);
         }
     }
 }
