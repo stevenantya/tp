@@ -20,7 +20,7 @@ class DukeTest {
             Assertions.assertTrue(duke.executeCommand(Parser.parse("hellooooo")));
         } catch (Exception e) {
             DukeLogger.setUpLogger();
-            DukeLogger.logger.log(Level.WARNING, DukeTest.DUKETEST_LOG_EXECUTECOMMANDEXITTRUE_IDENTIFIER, e);
+            DukeLogger.LOGGER.log(Level.WARNING, DukeTest.DUKETEST_LOG_EXECUTECOMMANDEXITTRUE_IDENTIFIER, e);
             DukeLogger.close();
         }
     }
@@ -39,7 +39,7 @@ class DukeTest {
             Assertions.assertFalse(duke.executeCommand(Parser.parse("edit")));
         } catch (Exception e) {
             DukeLogger.setUpLogger();
-            DukeLogger.logger.log(Level.WARNING,
+            DukeLogger.LOGGER.log(Level.WARNING,
                 DukeTest.DUKETEST_LOG_EXECUTECOMMANDNOTEXITFALSE_IDENTIFIER, e);
             DukeLogger.close();
         }
