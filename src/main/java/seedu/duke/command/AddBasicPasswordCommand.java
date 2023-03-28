@@ -69,7 +69,7 @@ public class AddBasicPasswordCommand extends Command{
         } catch (FolderExistsException | IllegalSecretNameException | IllegalFolderNameException e) {
             throw new RuntimeException(e);
         }
-        String starsPassword = "*".repeat(8);
+        String starsPassword = "********";
         System.out.println("I have added a new basic password:\n");
         System.out.println("name     = " + name + "\n" +
                            "folder   = " + folderName + "\n" +

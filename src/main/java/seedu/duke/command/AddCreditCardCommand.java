@@ -59,7 +59,7 @@ public class AddCreditCardCommand extends AddSecretCommand {
         } catch (FolderExistsException | IllegalSecretNameException | IllegalFolderNameException e) {
             throw new RuntimeException(e);
         }
-        String starsPassword = "*".repeat(8);
+        String starsPassword = "********";
         System.out.println("I have added a new Credit Card:\n");
         System.out.println("Name     = " + name + "\n" +
                 "Folder   = " + folderName + "\n" +

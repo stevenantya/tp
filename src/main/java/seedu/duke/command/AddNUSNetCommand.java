@@ -52,7 +52,7 @@ public class AddNUSNetCommand extends Command{
         } catch (FolderExistsException | IllegalSecretNameException | IllegalFolderNameException e) {
             throw new RuntimeException(e);
         }
-        String starsPassword = "*".repeat(8);
+        String starsPassword = "********";
         System.out.println("I have added a new NUS Net ID password:\n");
         System.out.println(
                 "name       = " + name + "\n" +
