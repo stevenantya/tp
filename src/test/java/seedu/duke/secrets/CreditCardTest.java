@@ -7,8 +7,17 @@ import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * JUnit tests for the CreditCard class.
+ */
+
 class CreditCardTest {
 
+    /**
+     * Test without creation of folder
+     * @throws InvalidExpiryDateException if the expiry date is of incorrect format
+     * @throws InvalidCreditCardNumberException when an invalid credit card number is detected during validation
+     */
     @Test
     void noFolderCreationTest () throws InvalidExpiryDateException, InvalidCreditCardNumberException {
         CreditCard creditCard = new CreditCard("creditCard1",
@@ -22,6 +31,9 @@ class CreditCardTest {
         assertEquals("12/23", creditCard.getExpiryDate());
     }
 
+    /**
+     * Test with creation of folder.
+     */
     void withFolderCreationTest () throws InvalidExpiryDateException {
         CreditCard creditCard = new CreditCard("creditCard1", "folder1",
                 "John Doe Lim Guang", "12341567890123456", 123,
@@ -34,6 +46,9 @@ class CreditCardTest {
         assertEquals("12/23", creditCard.getExpiryDate());
     }
 
+    /**
+     * Test legal dates.
+     */
     void legalDatesTest() throws InvalidExpiryDateException {
         assertThrows(InvalidExpiryDateException.class, () -> {
             new CreditCard("creditCard1", "folder1",
@@ -98,6 +113,13 @@ class CreditCardTest {
             }
         );
     }
+
+
+    /**
+     * Test the getRevealStr method of the CreditCard class
+     * @throws InvalidExpiryDateException if the expiry date is invalid
+     * @throws InvalidCreditCardNumberException if the credit card number is invalid
+     */
     @Test
     void testRevealOutput() throws InvalidExpiryDateException, InvalidCreditCardNumberException {
         CreditCard creditCard = new CreditCard("creditCard1", "folder1",

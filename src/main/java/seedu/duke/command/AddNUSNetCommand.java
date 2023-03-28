@@ -8,15 +8,21 @@ import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.secrets.NUSNet;
 import seedu.duke.storage.SecretMaster;
 
-
 /**
- * @author : Steven A. O. Waskito
- **/
+ * Represents a Class to giva a command to add a NUSNet account.
+ * Extends the Command class.
+ */
 public class AddNUSNetCommand extends Command{
     private String name;
     private String folderName;
     private String nusNetId;
     private String password;
+
+    /**
+     * Constructs an AddNUSNetCommand object.
+     *
+     * @param input The input string containing the details of the account to add.
+     */
     public AddNUSNetCommand(String input) {
         this.name = extractName(input);
         this.folderName = extractFolderName(input);
@@ -26,6 +32,16 @@ public class AddNUSNetCommand extends Command{
         }
         this.password = inquirePassword();
     }
+
+    /**
+     * Executes the command to add the NUSNet account to the SecretMaster.
+     *
+     * @param secureNUSData The SecretMaster that stores the NUSNet account.
+     * @throws RuntimeException if there is a RepeatedIdException
+     *                          or FolderExistsException
+     *                          or IllegalSecretNameException
+     *                          or IllegalFolderNameException.
+     */
     @Override
     public void execute(SecretMaster secureNUSData) {
         NUSNet nusNetIdData = new NUSNet(name,folderName,nusNetId,password);
@@ -36,7 +52,7 @@ public class AddNUSNetCommand extends Command{
         } catch (FolderExistsException | IllegalSecretNameException | IllegalFolderNameException e) {
             throw new RuntimeException(e);
         }
-        String starsPassword = "*".repeat(8);
+        String starsPassword = "********";
         System.out.println("I have added a new NUS Net ID password:\n");
         System.out.println(
                 "name       = " + name + "\n" +
@@ -45,6 +61,12 @@ public class AddNUSNetCommand extends Command{
                 "password   = " + starsPassword);
     }
 
+    /**
+     * Extracts the name of the account from the input string.
+     *
+     * @param input The input string containing the details of the account to add.
+     * @return The name of the account.
+     */
     public String extractName(String input) {
         String[] extractedNames = input.split("o/NUSNet ");
         String extractedName;
@@ -59,6 +81,13 @@ public class AddNUSNetCommand extends Command{
         }
         return extractedName;
     }
+
+    /**
+     * Extracts the folder name from the user's input.
+     *
+     * @param input the user's input string
+     * @return the folder name string, or "unnamed" if not found
+     */
     public String extractFolderName(String input) {
         String extractedFolderName = "unnamed";
         if (input.split("/f ").length > 1) {
@@ -66,16 +95,35 @@ public class AddNUSNetCommand extends Command{
         }
         return extractedFolderName;
     }
+
+    /**
+     * Prompts the user to enter their NUS Net ID.
+     *
+     * @return the user's NUS Net ID string input
+     */
     public String inquirenusNetId() {
         System.out.println("Please enter your NUS Net ID: ");
         String nusNetId = Ui.readCommand();
         return nusNetId;
     }
+
+    /**
+     * Prompts the user to enter their NUS Net ID.
+     *
+     * @return the user's NUS Net ID string input
+     */
     public String inquirePassword() {
         System.out.println("Please enter your NUS Net password: ");
         String password = Ui.readCommand();
         return password;
     }
+
+    /**
+     * Extracts the URL from the user's input.
+     *
+     * @param input the user's input string
+     * @return an empty string
+     */
     public String extractURL(String input) {
         return "";
     }
