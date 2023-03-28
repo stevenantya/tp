@@ -1,0 +1,15 @@
+@startuml
+!include Style.puml
+title Command Diagram
+actor User
+file "database"
+circle Ui
+circle Parser
+Ui -> Parser
+frame Command {
+    abstract Command
+
+}
+'Ui <-left- User
+'Application.Backend.Backend <-left-> database
+@enduml

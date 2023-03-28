@@ -3,7 +3,15 @@ package seedu.duke.secrets;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+/**
+ * JUnit test class for the WifiPassword class.
+ */
 class WifiPasswordTest {
+
+    /**
+     * Tests the creation of a WifiPassword object without a folder.
+     */
     @Test
     void noFolderWifiPasswordCreationTest() {
         WifiPassword wifiPassword = new WifiPassword("wifi1", "admin", "Password");
@@ -26,6 +34,9 @@ class WifiPasswordTest {
         assertEquals("P@ssw0rd2", wifiPassword2.getPassword());
     }
 
+    /**
+     * Tests the creation of a WifiPassword object with a folder.
+     */
     @Test
     void withFolderWifiPasswordCreationTest() {
         WifiPassword wifiPassword = new WifiPassword("wifi1", "folder1", "admin",
@@ -50,6 +61,9 @@ class WifiPasswordTest {
         assertEquals("P@ssw0rd2", wifiPassword2.getPassword());
     }
 
+    /**
+     * Tests the getRevealStr() method of the WifiPassword class.
+     */
     @Test
     void testRevealOutput() {
         WifiPassword wifiPassword = new WifiPassword("wifi1", "folder1", "admin",

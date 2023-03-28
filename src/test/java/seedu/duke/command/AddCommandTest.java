@@ -8,7 +8,7 @@ import seedu.duke.secrets.NUSNet;
 import seedu.duke.secrets.StudentID;
 import seedu.duke.storage.SecretMaster;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author : Steven A. O. Waskito
