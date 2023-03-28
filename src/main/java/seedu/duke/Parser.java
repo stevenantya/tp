@@ -18,11 +18,9 @@ public class Parser {
             return new AddNUSNetCommand(command);
         } else if (command.startsWith("new o/StudentID")) {
             return new AddStudentIDCommand(command);
-        }
-        else if (command.startsWith("new o/CryptoWallet")) {
+        } else if (command.startsWith("new o/CryptoWallet")) {
             return new AddStudentIDCommand(command);
-        }
-        else if (command.startsWith("new")) {
+        } else if (command.startsWith("new")) {
             return new AddBasicPasswordCommand(command);
         } else if (command.startsWith("delete")) {
             return new DeleteCommand(command);

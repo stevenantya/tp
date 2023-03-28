@@ -20,7 +20,7 @@ public class ListCommandTest {
     @Test
     void getList_noFolder() {
         ListCommand listCommand = new ListCommand("list");
-        assertEquals(listCommand.extractFolderName("list"), "unfiled");
+        assertEquals(listCommand.extractFolderName("list"), "unnamed");
     }
 
     @Test

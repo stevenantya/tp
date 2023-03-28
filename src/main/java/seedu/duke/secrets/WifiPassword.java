@@ -1,5 +1,7 @@
 package seedu.duke.secrets;
 
+import seedu.duke.Backend;
+
 /**
  * Main things to export
  * name: Str
@@ -49,5 +51,12 @@ public class WifiPassword extends Secret{
     @Override
     public String getRevealStr() {
         return String.format("Password: %s", password);
+    }
+
+    @Override
+    public String toStringForDatabase() {
+        String formattedString =  "wifiPassword," + super.toStringForDatabase() +
+                "," + Backend.encode(this.username) + "," + Backend.encode(this.password);
+        return formattedString;
     }
 }
