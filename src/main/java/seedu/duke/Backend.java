@@ -23,7 +23,6 @@ import seedu.duke.storage.SecretMaster;
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretSearcher;
 
-
 public class Backend {
     private static final Logger LOGGER = DukeLogger.LOGGER;
     private static final String BACKEND_LOG_INITIALISATION_IDENTIFIER
@@ -43,8 +42,6 @@ public class Backend {
     private static final String NUSNETID_IDENTIFIER = "nusNetID";
     private static final String STUDENTID_IDENTIFIER = "studentID";
     private static final String WIFI_PASSWORD_IDENTIFIER = "wifiPassword";
-
-
 
     /**
      * Returns data from previous session as a SecretMaster Object.
@@ -143,6 +140,12 @@ public class Backend {
         return database;
     }
 
+    /**
+     * Creates and returns a hashtable of all the secrets grouped by folder.
+     *
+     * @param secretList the list of secrets to group by folder.
+     * @return Hashtable of secrets grouped by folder.
+     */
     public static Hashtable<String, ArrayList<Secret>> createFolderHashtable(ArrayList<Secret> secretList) {
         Hashtable<String, ArrayList<Secret>> folderHashtable = new
             Hashtable<String, ArrayList<Secret>>();
@@ -157,6 +160,13 @@ public class Backend {
         }
         return folderHashtable;
     }
+
+    /**
+     * Creates and returns a hashtable of all the secrets by their name.
+     *
+     * @param secretList the list of secrets to group by name.
+     * @return Hashtable of secrets grouped by name.
+     */
     public static Hashtable<String, Secret> createNameHashtable(ArrayList<Secret> secretList) {
         Hashtable<String, Secret> nameHashtable = new Hashtable<String, Secret>();
         for (Secret secret : secretList) {
@@ -164,6 +174,13 @@ public class Backend {
         }
         return nameHashtable;
     }
+
+    /**
+     * Creates and returns a hashtable of all the secrets grouped by folder and name.
+     *
+     * @param folderHashtable the hashtable of secrets grouped by folder.
+     * @return Hashtable of secrets grouped by folder and name.
+     */
     public static Hashtable<String, Hashtable<String, Secret>> createHashtableFolders(
             Hashtable<String, ArrayList<Secret>> folderHashtable) {
         Hashtable<String, Hashtable<String, Secret>> hashtableFolders =
@@ -183,6 +200,12 @@ public class Backend {
     }
 
 
+    /**
+     * Encodes a given field using a custom encryption method.
+     *
+     * @param field the field to be encoded.
+     * @return the encoded field.
+     */
     public static String encode(String field) {
         String encodedField = "";
         for (int i = 0; i < field.length(); i++) {
@@ -192,6 +215,12 @@ public class Backend {
         return Backend.ENCRYPTION_IDENTIFIER + encodedField;
     }
 
+    /**
+     * Decodes a given field that was encoded using a custom encryption method.
+     *
+     * @param field the field to be decoded.
+     * @return the decoded field.
+     */
     public static String decode(String field) {
         String modifiedField = field.substring(Backend.DECRYPTION_STARTING_INDEX);
         String actualField = "";
@@ -202,6 +231,12 @@ public class Backend {
         return actualField;
     }
 
+    /**
+     * Parses an empty field to return an empty string if it is "empty".
+     *
+     * @param field the field to be parsed.
+     * @return an empty string if field is "empty", else returns the field.
+     */
     public static String parseEmptyField(String field) {
         return field.equals(Backend.EMPTY_FIELD_IDENTIFIER) ? "" : field;
     }

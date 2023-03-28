@@ -2,8 +2,11 @@ package seedu.duke;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import java.util.logging.Level;
+
+/**
+ * JUnit test class for Duke class.
+ */
 
 class DukeTest {
     private static final String DUKETEST_LOG_EXECUTECOMMANDEXITTRUE_IDENTIFIER

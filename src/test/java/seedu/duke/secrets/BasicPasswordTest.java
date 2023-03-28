@@ -6,10 +6,13 @@ import seedu.duke.exceptions.secrets.InvalidURLException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * @author : Steven A. O. Waskito
- **/
+ * JUnit Test for the constructor of the BasicPassword class.
+ */
 public class BasicPasswordTest {
-    //Basic Password
+    /**
+     * Tests creation of basic password without folder.
+     * @throws InvalidURLException if URL format is invalid
+     */
     @Test
     public void basicPasswordNoFolder() throws InvalidURLException {
         BasicPassword basicPassword =
@@ -21,6 +24,10 @@ public class BasicPasswordTest {
         assertEquals("google.com", basicPassword.getUrl());
     }
 
+    /**
+     * Tests creation of basic password with folder.
+     * @throws InvalidURLException if URL format is invalid
+     */
     @Test
     public void basicPasswordFolder() throws InvalidURLException {
         BasicPassword basicPassword =

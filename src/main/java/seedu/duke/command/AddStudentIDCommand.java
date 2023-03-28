@@ -9,12 +9,18 @@ import seedu.duke.secrets.StudentID;
 import seedu.duke.storage.SecretMaster;
 
 /**
- * @author : Steven A. O. Waskito
- **/
+ * Represents the class to give a command to add a new Student ID to the SecureNUS system.
+ */
 public class AddStudentIDCommand extends Command {
     private String name;
     private String folderName;
     private String studentId;
+
+    /**
+     * Constructs an AddStudentIDCommand object with the user input as the command parameter.
+     *
+     * @param input The command input entered by the user.
+     */
     public AddStudentIDCommand(String input) {
         this.name = extractName(input);
         this.folderName = extractFolderName(input);
@@ -23,6 +29,17 @@ public class AddStudentIDCommand extends Command {
             this.name = studentId;
         }
     }
+    public AddStudentIDCommand(StudentID studentID) {
+        this.name = studentID.getName();
+        this.folderName = studentID.getFolderName();
+        this.studentId = studentID.getStudentID();
+    }
+
+    /**
+     * Executes the AddStudentIDCommand to add a new Student ID to the SecureNUS system.
+     *
+     * @param secureNUSData
+     */
     @Override
     public void execute(SecretMaster secureNUSData) {
         StudentID studentIdData = new StudentID(name,folderName,studentId);
@@ -39,6 +56,13 @@ public class AddStudentIDCommand extends Command {
                 "Student ID = " + studentId);
     }
 
+    /**
+     * Extracts the name of the Student ID from the user input.
+     *
+     * @param input The command input entered by the user.
+     * @return The name of the Student ID.
+     */
+
     public String extractName(String input) {
         String[] extractedNames = input.split("o/StudentID ");
         String extractedName;
@@ -53,6 +77,13 @@ public class AddStudentIDCommand extends Command {
         }
         return extractedName;
     }
+
+    /**
+     * Extracts the folder name of the Student ID from the user input.
+     *
+     * @param input The command input entered by the user.
+     * @return The folder name of the Student ID.
+     */
     public String extractFolderName(String input) {
         String extractedFolderName = "unnamed";
         if (input.split("/f ").length > 1) {
@@ -60,14 +91,32 @@ public class AddStudentIDCommand extends Command {
         }
         return extractedFolderName;
     }
+
+    /**
+     * Prompts the user to enter the Student ID.
+     *
+     * @return The Student ID entered by the user.
+     */
     public String inquireStudentID() {
         System.out.println("Please enter your Student ID: ");
         String studentID = Ui.readCommand();
         return studentID;
     }
+
+    /**
+    * Extracts the URL of the Student ID from the user input.
+    *
+    * @param input The command input entered by the user.
+    */
     public String extractURL(String input) {
         return "";
     }
+
+    /**
+     * Indicates whether the command is an exit command.
+     *
+     * @return false, as it is not an exit command
+     */
     @Override
     public boolean isExit() {
         return false;
