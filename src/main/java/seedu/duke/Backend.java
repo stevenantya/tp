@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
 import seedu.duke.exceptions.secrets.InvalidURLException;
@@ -22,6 +24,11 @@ import seedu.duke.storage.SecretSearcher;
 
 
 public class Backend {
+    private static final Logger logger = DukeLogger.logger;
+    private static final String BACKEND_LOG_INITIALISATION_IDENTIFIER
+        = "Backend - Initialisation : ";
+    private static final String BACKEND_LOG_UPDATESTORAGE_IDENTIFIER
+            = "Backend - updateStorage : ";
     private static final int DECRYPTION_STARTING_INDEX = 5;
     private static final String DATABASE_FOLDER = "assets";
     private static final String DATABASE_FILE = "database.txt";
@@ -62,7 +69,7 @@ public class Backend {
                 database.createNewFile();
             }
         } catch (IOException e) {
-            System.out.println(e);
+            logger.log(Level.SEVERE, BACKEND_LOG_INITIALISATION_IDENTIFIER, e);
         }
 
         try {
@@ -73,7 +80,7 @@ public class Backend {
             }
             reader.close();
         } catch (IOException e) {
-            System.out.println(e);
+            logger.log(Level.SEVERE, BACKEND_LOG_INITIALISATION_IDENTIFIER, e);
         } catch (InvalidURLException e) {
             throw new RuntimeException(e);
         } catch (InvalidExpiryDateException e) {
@@ -218,7 +225,7 @@ public class Backend {
             }
             myWriter.close();
         } catch (IOException e) {
-            System.out.println(e);
+            logger.log(Level.SEVERE, BACKEND_LOG_UPDATESTORAGE_IDENTIFIER, e);
         }
     }
 }

@@ -8,13 +8,18 @@ import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
 import seedu.duke.storage.SecretMaster;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Duke {
+    private static final String DUKE_LOG_EXECUTECOMMAND_IDENTIFIER = "Duke - executeCommand";
     /**
      * Main entry-point for the java.duke.Duke application.
      */
     private SecretMaster secureNUSData;
     public Duke() throws FolderExistsException, IllegalFolderNameException {
         secureNUSData = Backend.initialisation();
+        DukeLogger.setUpLogger();
     }
 
     public static void main(String[] args) throws FolderExistsException, IllegalFolderNameException,
@@ -29,7 +34,6 @@ public class Duke {
         Ui.greetUser();
 
         boolean isExit = false;
-
         while (!isExit) {
             Command c = parseCommand();
             Ui.printLine(); //middle line
@@ -53,7 +57,9 @@ public class Duke {
                 command.execute(secureNUSData);
                 return command.isExit();
             } catch (ExceptionMain e) {
-                Ui.printError(e.getMessage());
+                Ui.printError(e.getMessage()); //do they want UI to handle it or?
+                DukeLogger.logger.log(Level.SEVERE, DUKE_LOG_EXECUTECOMMAND_IDENTIFIER, e);
+                DukeLogger.close();
             }
         }
         return false;
