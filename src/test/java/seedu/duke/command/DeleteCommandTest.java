@@ -2,13 +2,9 @@ package seedu.duke.command;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.ExceptionMain;
 
-import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
 import seedu.duke.exceptions.secrets.InvalidURLException;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
 import seedu.duke.secrets.BasicPassword;
-import seedu.duke.secrets.CreditCard;
-import seedu.duke.secrets.CryptoWallet;
-import seedu.duke.secrets.WifiPassword;
 
 import seedu.duke.secrets.NUSNet;
 import seedu.duke.secrets.StudentID;
