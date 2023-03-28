@@ -12,7 +12,7 @@ public class MenuCommand extends Command {
      */
     public void displayMenu() {
         System.out.println("SecureNUS Command Menu:\n" +
-                "1. Add a general password: new [NAME] /f [FOLDER_NAME]\n" +
+                "1. Add a general password: new [PASSWORD_NAME] /f [FOLDER_NAME]\n" +
                 "2. Add password for websites needing Credit Card details: " +
                 "new o/CreditCard [NAME] /f [FOLDER_NAME]\n" +
                 "3. Add password for websites needing Crypto Wallet details: " +
