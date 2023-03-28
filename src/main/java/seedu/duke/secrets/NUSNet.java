@@ -28,4 +28,11 @@ public class NUSNet extends Secret{
                 "," + this.nusNetId + "," + Backend.encode(this.password);
         return formattedString;
     }
+    @Override
+    public String getRevealStr() {
+        return String.format("Name: %s\n" +
+                        "NUSNet ID: %s\n" +
+                        "Password: %s",
+                getName(), nusNetId, password);
+    }
 }

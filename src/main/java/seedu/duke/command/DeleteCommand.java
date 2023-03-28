@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.Ui;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretMaster;
@@ -31,10 +32,19 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(SecretMaster secureNUSData) throws SecretNotFoundException, SecretNotFoundException {
-        Secret deleteData = secureNUSData.getByName(secretName);
+    public void execute(SecretMaster secureNUSData) throws SecretNotFoundException {
+        Secret deleteData;
+        try {
+            deleteData = secureNUSData.getByName(secretName);
+            try {
+                secureNUSData.removeSecret(deleteData);
+            } catch (SecretNotFoundException e) {
+                Ui.printError("Data not found!");
+            }
+        } catch (SecretNotFoundException e) {
+            Ui.printError("Data not found!");
+        }
 
-        secureNUSData.removeSecret(deleteData);
         System.out.println("You deleted " + secretName + " in " + folderName + "\n");
     }
 }

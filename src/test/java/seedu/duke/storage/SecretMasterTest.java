@@ -8,6 +8,7 @@ import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
+import seedu.duke.exceptions.secrets.InvalidURLException;
 import seedu.duke.secrets.BasicPassword;
 import seedu.duke.secrets.CreditCard;
 import seedu.duke.secrets.Secret;
@@ -66,7 +67,7 @@ class SecretMasterTest {
     @Test
     void addAllSecrets() throws FolderExistsException, InvalidExpiryDateException, IllegalFolderNameException,
             RepeatedIdException, IllegalSecretNameException, InvalidCreditCardNumberException,
-            InvalidExpiryDateException, InvalidCreditCardNumberException {
+            InvalidExpiryDateException, InvalidCreditCardNumberException, InvalidURLException {
         SecretMaster secretMaster = new SecretMaster();
         secretMaster.addSecret(new BasicPassword("basic1", "username1", "Password1",
                 "http.com"));

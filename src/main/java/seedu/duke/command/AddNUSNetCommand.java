@@ -26,6 +26,12 @@ public class AddNUSNetCommand extends Command{
         }
         this.password = inquirePassword();
     }
+    public AddNUSNetCommand(NUSNet nusNet) {
+        this.name = nusNet.getName();
+        this.folderName = nusNet.getFolderName();
+        this.nusNetId = nusNet.getnusNetId();
+        this.password = nusNet.getPassword();
+    }
     @Override
     public void execute(SecretMaster secureNUSData) {
         NUSNet nusNetIdData = new NUSNet(name,folderName,nusNetId,password);

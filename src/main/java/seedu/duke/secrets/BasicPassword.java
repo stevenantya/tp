@@ -40,9 +40,20 @@ public class BasicPassword extends Secret{
         String formattedString =  "Password," + super.toStringForDatabase() +
             "," + Backend.encode(this.username) + "," + Backend.encode(this.password) +
                "," + this.url;
+        if (this.url.length() == 0) {
+            formattedString += "empty";
+        }
         return formattedString;
     }
 
+    @Override
+    public String getRevealStr() {
+        return String.format("Name: %s\n" +
+                        "Url: %s\n" +
+                        "Username: %s\n" +
+                        "Password: %s",
+                getName(), url, username, password);
+    }
     public String getUsername() {
         return username;
     }
