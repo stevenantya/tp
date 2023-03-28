@@ -14,6 +14,7 @@ import seedu.duke.command.ListCommand;
 import seedu.duke.command.MenuCommand;
 import seedu.duke.command.SearchCommand;
 import seedu.duke.command.ViewCommand;
+import seedu.duke.exceptions.InvalidCommandException;
 
 /**
  * Parses user commands and returns the corresponding command object.
@@ -25,7 +26,7 @@ public class Parser {
      * @param command user input command string
      * @return Command object corresponding to the user input
      */
-    public static Command parse(String command) {
+    public static Command parse(String command) throws InvalidCommandException {
         if (command.startsWith("new o/CreditCard")) {
             return new AddCreditCardCommand(command);
         } else if (command.startsWith("new o/CryptoWallet")) {
@@ -54,7 +55,7 @@ public class Parser {
             return new ExitCommand();
         } else {
             // represents accidental wrong input
-            return new ExitCommand();
+            throw new InvalidCommandException();
         }
     }
 }

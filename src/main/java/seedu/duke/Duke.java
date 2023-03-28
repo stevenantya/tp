@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.ExceptionMain;
+import seedu.duke.exceptions.InvalidCommandException;
 import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
@@ -24,7 +25,6 @@ public class Duke {
     public Duke() throws FolderExistsException, IllegalFolderNameException {
         secureNUSData = Backend.initialisation();
     }
-
     /**
      * Main entry-point for the Duke application.
      * Initializes a Duke object and runs the application.
@@ -37,7 +37,7 @@ public class Duke {
      */
     public static void main(String[] args) throws FolderExistsException, IllegalFolderNameException,
             IllegalSecretNameException, SecretNotFoundException {
-            
+
         Duke duke = new Duke();
         duke.run();
 
@@ -58,6 +58,9 @@ public class Duke {
 
         while (!isExit) {
             Command c = parseCommand();
+            if (c == null) {
+                continue;
+            }
             Ui.printLine(); //middle line
             isExit = executeCommand(c);
             
@@ -75,7 +78,12 @@ public class Duke {
     public Command parseCommand() {
         String command = Ui.readCommand();
         Ui.printLine(); //top most line
-        return Parser.parse(command);
+        try {
+            return Parser.parse(command);
+        } catch(InvalidCommandException e) {
+            Ui.printError("Invalid Command");
+            return null;
+        }
     }
 
     /**

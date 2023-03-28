@@ -41,6 +41,13 @@ public class AddBasicPasswordCommand extends Command{
         this.username = inquireUsername(input);
         this.password = inquirePassword();
     }
+    public AddBasicPasswordCommand(BasicPassword basicPassword) {
+        this.name = basicPassword.getName();
+        this.folderName = basicPassword.getFolderName();
+        this.url = basicPassword.getUrl();
+        this.username = basicPassword.getUsername();
+        this.password = basicPassword.getPassword();
+    }
 
     /**
      * Executes the AddBasicPasswordCommand.

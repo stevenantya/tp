@@ -32,6 +32,12 @@ public class AddNUSNetCommand extends Command{
         }
         this.password = inquirePassword();
     }
+    public AddNUSNetCommand(NUSNet nusNet) {
+        this.name = nusNet.getName();
+        this.folderName = nusNet.getFolderName();
+        this.nusNetId = nusNet.getnusNetId();
+        this.password = nusNet.getPassword();
+    }
 
     /**
      * Executes the command to add the NUSNet account to the SecretMaster.
