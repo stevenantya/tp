@@ -57,7 +57,7 @@ public class Parser {
         } else if (command.startsWith("edit")) {
             return new EditCommand(command);
         } else if (command.startsWith("exit") || command.startsWith("bye")) {
-          return new ExitCommand();
+            return new ExitCommand();
         } else if (command.startsWith("menu")) {
             return new MenuCommand();
         } else {
