@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
             Ui.printError("Data not found!");
             isValid = false;
         }
-        if (isValid) {
+        if (isValid && (deleteData != null)) {
             System.out.println("You deleted " + secretName + " in folder: " + folderName);
             try {
                 secureNUSData.removeSecret(deleteData);
