@@ -215,6 +215,26 @@ public class SecretMaster {
     }
 
     /**
+     * Updates a Secret's name and folder as well as its name in secretNames, and
+     * itself in secretSearcher and secretEnumerator.
+     *
+     * @param secret Secret object to be edited.
+     * @param newName updated name of the Secret object.
+     * @param newFolderName updated folder of the Secret object.
+     * @throws FolderExistsException if the folder specified in the Secret already exists and cannot be created.
+     */
+    public void editSecret(Secret secret, String newName, String newFolderName) throws FolderExistsException {
+        secretNames.remove(secret.getName());
+        secretSearcher.delete(secret);
+        secretEnumerator.delete(secret);
+        secret.setName(newName);
+        secret.setFolderName(newFolderName);
+        secretNames.add(secret.getName());
+        secretSearcher.add(secret);
+        secretEnumerator.add(secret);
+    }
+
+    /**
      * Removes a Secret from the storage system.
      *
      * @param secret Secret object to be removed.
@@ -229,6 +249,7 @@ public class SecretMaster {
         secretEnumerator.delete(secret);
         secretSearcher.delete(secret);
     }
+
 
     /**
      * Retrieves an ArrayList of all Secret names.

@@ -20,7 +20,6 @@ import seedu.duke.exceptions.InvalidCommandException;
  * Parses user commands and returns the corresponding command object.
  */
 public class Parser {
-
     /**
      * Parses user input and returns the corresponding command object.
      * @param command user input command string
