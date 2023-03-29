@@ -24,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * It checks the following functionalities:
  * Extraction of name from input
  * Extraction of folder name from input
+ * execute method
  * isExit method
  */
 class SearchCommandTest {
@@ -65,7 +66,7 @@ class SearchCommandTest {
     public void setUpStreams() {
         System.setOut(new PrintStream(output));
     }
-    
+
     /**
      * Tests the extraction of name from input.
      * The test case checks for extraction of name only.
@@ -120,9 +121,6 @@ class SearchCommandTest {
         assertEquals("Found 1 matches!\nID: 1\t|\tFacebook\t|\n", output.toString().replace("\r",""));
     }
 
-    /**
-     * Tests the isExit method.
-     */
     @Test
     public void execute_nameAndFolder() throws IllegalFolderNameException,
             RepeatedIdException, IllegalSecretNameException, FolderExistsException {
@@ -135,6 +133,9 @@ class SearchCommandTest {
 
         assertEquals("Found 1 matches!\nID: 1\t|\tFacebook\t|\n", output.toString().replace("\r",""));
     }
+    /**
+     * Tests the isExit method.
+     */
     @Test
     void isExit() {
         SearchCommand searchCommand = new SearchCommand("search n/Name123!");

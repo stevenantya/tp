@@ -23,7 +23,6 @@ import seedu.duke.storage.SecretMaster;
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretSearcher;
 
-
 /**
  * Class which represents the backend of the SecureNUS application.
  * Handles file input/output and secret creation and manipulation.
@@ -47,8 +46,6 @@ public class Backend {
     private static final String NUSNETID_IDENTIFIER = "nusNetID";
     private static final String STUDENTID_IDENTIFIER = "studentID";
     private static final String WIFI_PASSWORD_IDENTIFIER = "wifiPassword";
-
-
 
     /**
      * Returns data from previous session as a SecretMaster Object.
@@ -198,6 +195,7 @@ public class Backend {
         return hashtableFolders;
     }
 
+<<<<<<<<< Temporary merge branch 1
     /**
      * Encodes a given field using a custom encryption method.
      *
