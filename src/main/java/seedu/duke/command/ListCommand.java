@@ -88,7 +88,7 @@ public class ListCommand extends Command {
                     "Name: " + nusNet.getName() + "\n" +
                     "Folder: " + nusNet.getFolderName() + "\n" +
                     "NUSNet ID: " + nusNet.getnusNetId() + "\n" +
-                    "Password: " + NUSnet.getPassword() + "\n";
+                    "Password: " + nusNet.getPassword() + "\n";
 
         } else if (secret instanceof StudentID) {
             StudentID studentID = (StudentID) secret;
