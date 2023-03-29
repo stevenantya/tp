@@ -37,6 +37,7 @@ public class Parser {
         } else if (command.startsWith("new o/WifiPassword")) {
             return new AddStudentIDCommand(command); // Have to change to AddWifiPasswordCommand
         } else if (command.startsWith("new")) {
+        }
             return new AddBasicPasswordCommand(command);
         } else if (command.startsWith("delete")) {
             return new DeleteCommand(command);
