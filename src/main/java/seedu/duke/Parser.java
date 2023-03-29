@@ -22,7 +22,11 @@ public class Parser {
         } else if (command.startsWith("new o/CryptoWallet")) {
             return new AddStudentIDCommand(command);
         } else if (command.startsWith("new o/")) {
-            System.out.println("o/ option is invalid\nValid options are: \nnew o/NUSNet\nnew o/Student ID\nnew o/CryptoWallet");
+            System.out.println("o/ option is invalid\n" +
+                    "Valid options are: \n" +
+                    "new o/NUSNet\n" +
+                    "new o/Student ID\n" +
+                    "new o/CryptoWallet");
             throw new InvalidCommandException();
         } else if (command.startsWith("new")) {
             return new AddBasicPasswordCommand(command);
@@ -43,6 +47,4 @@ public class Parser {
             throw new InvalidCommandException();
         }
     }
-
-
 }
