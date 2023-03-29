@@ -33,18 +33,24 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(SecretMaster secureNUSData) throws SecretNotFoundException {
-        Secret deleteData;
+        Secret deleteData = null;
+        boolean isValid = false;
         try {
             deleteData = secureNUSData.getByName(secretName);
+            isValid = true;
+        } catch (SecretNotFoundException e) {
+            Ui.printError("Data not found!");
+            isValid = false;
+        }
+        if (isValid) {
+            System.out.println("You deleted " + secretName + " in folder: " + folderName);
             try {
                 secureNUSData.removeSecret(deleteData);
             } catch (SecretNotFoundException e) {
                 Ui.printError("Data not found!");
             }
-        } catch (SecretNotFoundException e) {
-            Ui.printError("Data not found!");
+        } else {
+            System.out.println("Please enter a valid secret name!");
         }
-
-        System.out.println("You deleted " + secretName + " in " + folderName + "\n");
     }
 }
