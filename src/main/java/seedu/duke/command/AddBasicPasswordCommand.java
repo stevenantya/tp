@@ -66,7 +66,7 @@ public class AddBasicPasswordCommand extends Command{
         try {
             basicPasswordData = new BasicPassword(name,folderName,username,password,url);
         } catch (InvalidURLException e) {
-            throw new ExceptionMain("Invalid URL!");
+            throw new ExceptionMain("Invalid URL! Please enter a valid url with the domain! e.g. google.com");
         }
 
         try {
