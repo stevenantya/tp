@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+circle Ui
+circle Parser
+Ui -> Parser
+frame Command {
+    rectangle Command
+    Parser -> Command
+    rectangle AddBasicPasswordCommand
+    Command -down-> AddBasicPasswordCommand
+    rectangle AddCreditCardCommand
+    Command -down-> AddCreditCardCommand
+    rectangle AddNUSNetCommand
+    Command -down-> AddNUSNetCommand
+    rectangle OtherCommands
+    Command -down-> OtherCommands
+
+}
+
+@enduml

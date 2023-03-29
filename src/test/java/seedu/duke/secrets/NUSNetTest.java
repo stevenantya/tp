@@ -1,10 +1,15 @@
 package seedu.duke.secrets;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 /**
- * @author : Steven A. O. Waskito
- **/
+ * JUnit test for NUSNet class.
+ */
 public class NUSNetTest {
+
+    /**
+     * Test NUSNet creation without folder.
+     */
     @Test
     public void nusNetNoFolder() {
         NUSNet nusNet = new NUSNet("NUSNet Name", "e088888@u.nus.edu","aSecurePassword2");
@@ -14,6 +19,9 @@ public class NUSNetTest {
         assertEquals("aSecurePassword2", nusNet.getPassword());
     }
 
+    /**
+     * Test NUSNet creation with folder.
+     */
     @Test
     public void nusNetFolder() {
         NUSNet nusNet = new NUSNet("NUSNet Name 2", "FolderName", "e081888@u.nus.edu", "Lorem Ipsum 12");

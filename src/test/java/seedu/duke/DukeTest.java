@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * JUnit test class for Duke class.
+ */
+
 class DukeTest {
     @Test
     public void sampleTest() {

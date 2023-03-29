@@ -22,31 +22,50 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+/**
+ * JUnit tests for the ListCommand class.
+ */
 public class ListCommandTest {
+
+    /**
+     * Tests the isExit method when there is no folder name.
+     */
     @Test
     void isExit_noFolder() {
         ListCommand listCommand = new ListCommand("list");
         assertFalse(listCommand.isExit());
     }
 
+    /**
+     * Tests the isExit method when there is a folder name.
+     */
     @Test
     void isExit_withFolder() {
         ListCommand listCommand = new ListCommand("list f/Folder123!");
         assertFalse(listCommand.isExit());
     }
 
+    /**
+     * Tests the extractFolderName method when there is no folder name.
+     */
     @Test
     void getList_noFolder() {
         ListCommand listCommand = new ListCommand("list");
         assertEquals(listCommand.extractFolderName("list"), "unnamed");
     }
 
+    /**
+     * Tests the extractFolderName method when there is a folder name.
+     */
     @Test
     void getList_withFolder() {
         ListCommand listCommand = new ListCommand("list f/Folder123!");
         assertEquals(listCommand.extractFolderName("list f/Folder123!"), "f/Folder123!");
     }
 
+    /**
+     * Tests the ListCommand method for different secret types.
+     */
     @Test
     void testSecretTypes() {
         SecretMaster secretMaster = new SecretMaster();
