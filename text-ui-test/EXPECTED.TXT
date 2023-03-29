@@ -1,9 +1,35 @@
+_____________________________________________________
+No Save File Detected
+_____________________________________________________
 Welcome to secureNUS v1.0
 Current Features
 Adding a password      : new [NAME] /f [FOLDER_NAME]
 Adding a NUSNet ID     : new o/NUSNet [NAME] /f [FOLDER_NAME]
 Adding a Student ID    : new o/StudentID [NAME] /f [FOLDER_NAME] 
 
+_____________________________________________________
+Please enter the url: 
+Please enter your username: 
+Please enter your password: 
+_____________________________________________________
+I have added a new basic password:
+
+name     = password1
+folder   = unnamed
+url      = gg.com
+username = username1
+password = ********
+_____________________________________________________
+_____________________________________________________
+_____________________________________________________
+List of secrets:
+1. Type of Secret: Basic Password
+Name: password1
+Folder: unnamed
+Username: username1
+URL: gg.com
+Password: password1
+_____________________________________________________
 _____________________________________________________
 _____________________________________________________
 _____________________________________________________
