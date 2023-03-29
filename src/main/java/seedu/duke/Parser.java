@@ -21,6 +21,9 @@ public class Parser {
             return new AddStudentIDCommand(command);
         } else if (command.startsWith("new o/CryptoWallet")) {
             return new AddStudentIDCommand(command);
+        } else if (command.startsWith("new o/")) {
+            System.out.println("o/ option is invalid\nValid options are: \nnew o/NUSNet\nnew o/Student ID\nnew o/CryptoWallet");
+            throw new InvalidCommandException();
         } else if (command.startsWith("new")) {
             return new AddBasicPasswordCommand(command);
         } else if (command.startsWith("delete")) {
