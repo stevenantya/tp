@@ -66,12 +66,12 @@ public class ListCommand extends Command {
                     "Seed Phrase: " + cryptoWallet.getSeedPhrase();
 
         } else if (secret instanceof NUSNet) {
-            NUSNet NUSnet = (NUSNet) secret;
+            NUSNet nusNet = (NUSNet) secret;
             return "Type of Secret: NUSNet ID" + "\n" +
-                    "Name: " + NUSnet.getName() + "\n" +
-                    "Folder: " + NUSnet.getFolderName() + "\n" +
-                    "NUSNet ID: " + NUSnet.getnusNetId() + "\n" +
-                    "Password: " + NUSnet.getPassword();
+                    "Name: " + nusNet.getName() + "\n" +
+                    "Folder: " + nusNet.getFolderName() + "\n" +
+                    "NUSNet ID: " + nusNet.getnusNetId() + "\n" +
+                    "Password: " + nusNet.getPassword();
 
         } else if (secret instanceof StudentID) {
             StudentID studentID = (StudentID) secret;
