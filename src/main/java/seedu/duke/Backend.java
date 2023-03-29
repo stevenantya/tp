@@ -195,21 +195,20 @@ public class Backend {
         return hashtableFolders;
     }
 
-<<<<<<<<< Temporary merge branch 1
+    public static ArrayList<String> createUrlArrayList(String[] input) {
+        ArrayList<String> urlArrayList = new ArrayList<String>();
+        for (int i = 7; i < input.length; i++) {
+            urlArrayList.add(input[i]);
+        }
+        return urlArrayList;
+    }
+
     /**
      * Encodes a given field using a custom encryption method.
      *
      * @param field the field to be encoded.
      * @return the encoded field.
      */
-    public static ArrayList<String> createUrlArrayList(String[] input) {
-        ArrayList<String> URLArrayList = new ArrayList<String>();
-        for (int i = 7; i < input.length; i++) {
-            URLArrayList.add(input[i]);
-        }
-        return URLArrayList;
-    }
-
     public static String encode(String field) {
         String encodedField = "";
         for (int i = 0; i < field.length(); i++) {
