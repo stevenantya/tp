@@ -49,8 +49,8 @@ class EditCommandTest {
 
         assertNull(output[0]);
         assertEquals("unnamed", output[1]);
-        assertNull(output[2]);
-        assertNull(output[3]);
+        assertEquals("", output[2]);
+        assertEquals("", output[3]);
     }
 
     @Test
