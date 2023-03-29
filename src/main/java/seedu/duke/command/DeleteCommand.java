@@ -69,7 +69,6 @@ public class DeleteCommand extends Command {
         } catch (SecretNotFoundException e) {
             Ui.printError("Data not found!");
         }
-
         System.out.println("You deleted " + secretName + " in " + folderName + "\n");
     }
 
