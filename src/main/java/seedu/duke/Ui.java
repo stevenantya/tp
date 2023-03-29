@@ -28,5 +28,6 @@ public class Ui {
 
     public static void printError(String message) {
         System.out.println("Oops! Error encountered "+ message);
+        printLine();
     }
 }
