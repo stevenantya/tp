@@ -33,7 +33,7 @@ public class Parser {
             return new ViewCommand(command);
         } else if (command.startsWith("edit")) {
             return new EditCommand(command);
-        } else if (command.startsWith("bye")) {
+        } else if (command.startsWith("exit") || command.startsWith("bye")) {
             return new ExitCommand();
         } else {
             // represents accidental wrong input
