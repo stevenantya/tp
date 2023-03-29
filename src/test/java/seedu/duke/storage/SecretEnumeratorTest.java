@@ -10,7 +10,12 @@ import java.util.Hashtable;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-
+/**
+ * JUnit test class for SecretEnumerator class.
+ * This class tests the behavior of the class when the list of secrets and the hashtable of secrets are empty.
+ * Specifically, it tests the getter methods when there is nothing to get, adding a secret to the list,
+ * and getting the list and elements from the list.
+ */
 class SecretEnumeratorTest {
     @Test
     void emptyGetters() throws FolderExistsException {
