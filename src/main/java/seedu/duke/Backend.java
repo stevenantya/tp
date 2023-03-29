@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.secrets.InvalidURLException;
 import seedu.duke.secrets.BasicPassword;
 import seedu.duke.secrets.NUSNet;
 import seedu.duke.secrets.StudentID;
@@ -15,12 +16,15 @@ import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-
-
+/**
+ * Class which represents the backend of the SecureNUS application.
+ * Handles file input/output and secret creation and manipulation.
+ */
 public class Backend {
-
+    public static final String ENCRYPTION_IDENTIFIER = "DKENC";
     private static final String DATABASE_FOLDER = "assets";
     private static final String DATABASE_FILE = "database.txt";
+
     /**
      * Returns data from previous session as a SecretMaster Object.
      * If data is not available, a new file is created.
@@ -31,8 +35,8 @@ public class Backend {
         ArrayList<Secret> secretList = new ArrayList<Secret>();
 
         //create folder if it does not exist
-        String currDir = System.getProperty("user.dir");
-        String assetsPath = java.nio.file.Paths.get(currDir, DATABASE_FOLDER).toString();
+        String pathOfCurrentDirectory = System.getProperty("user.dir");
+        String assetsPath = java.nio.file.Paths.get(pathOfCurrentDirectory, "assets").toString();
         File assets = new File(assetsPath);
         if (!assets.exists()) {
             assets.mkdir();
@@ -57,6 +61,8 @@ public class Backend {
             reader.close();
         } catch (IOException e) {
             System.out.println(e);
+        } catch (InvalidURLException e) {
+            throw new RuntimeException(e);
         }
 
         //for secretEnumerator
@@ -80,25 +86,32 @@ public class Backend {
      * @param database Current ArrayList of Secret.
      * @return ArrayList of Secret
      */
-    public static ArrayList<Secret> readAndUpdate(String[] input, ArrayList<Secret> database) {
+    public static ArrayList<Secret> readAndUpdate(String[] input, ArrayList<Secret> database)
+            throws InvalidURLException {
         //create different password based on constructor
         //studentID
         if (input[0].equals("studentID")) {
-            Secret secret = new StudentID(input[1], input[2], input[3]);
+            Secret secret = new StudentID(input[2], input[3], input[4]);
             database.add(secret);
-        } else if (input[0].equals("NUSNetID")) {
-            Secret secret = new NUSNet(input[1], input[2], input[3],
-                    Backend.decode(input[4]));
+        } else if (input[0].equals("nusNetID")) {
+            Secret secret = new NUSNet(input[2], input[3], input[4],
+                    Backend.decode(input[5]));
             database.add(secret);
         } else if (input[0].equals("Password")) {
-            Secret secret = new BasicPassword(input[1], input[2], Backend.decode(input[3]),
-                    Backend.decode(input[4]), input[5]);
+            Secret secret = new BasicPassword(input[2], input[3], Backend.decode(input[4]),
+                    Backend.decode(input[5]), Backend.parseEmptyField(input[6]));
             database.add(secret);
         }
         //Password
         return database;
     }
 
+    /**
+     * Creates and returns a hashtable of all the secrets grouped by folder.
+     *
+     * @param secretList the list of secrets to group by folder.
+     * @return Hashtable of secrets grouped by folder.
+     */
     public static Hashtable<String, ArrayList<Secret>> createFolderHashtable(ArrayList<Secret> secretList) {
         Hashtable<String, ArrayList<Secret>> folderHashtable = new
             Hashtable<String, ArrayList<Secret>>();
@@ -113,6 +126,13 @@ public class Backend {
         }
         return folderHashtable;
     }
+
+    /**
+     * Creates and returns a hashtable of all the secrets by their name.
+     *
+     * @param secretList the list of secrets to group by name.
+     * @return Hashtable of secrets grouped by name.
+     */
     public static Hashtable<String, Secret> createNameHashtable(ArrayList<Secret> secretList) {
         Hashtable<String, Secret> nameHashtable = new Hashtable<String, Secret>();
         for (Secret secret : secretList) {
@@ -120,6 +140,13 @@ public class Backend {
         }
         return nameHashtable;
     }
+
+    /**
+     * Creates and returns a hashtable of all the secrets grouped by folder and name.
+     *
+     * @param folderHashtable the hashtable of secrets grouped by folder.
+     * @return Hashtable of secrets grouped by folder and name.
+     */
     public static Hashtable<String, Hashtable<String, Secret>> createHashtableFolders(
             Hashtable<String, ArrayList<Secret>> folderHashtable) {
         Hashtable<String, Hashtable<String, Secret>> hashtableFolders =
@@ -130,25 +157,45 @@ public class Backend {
         return hashtableFolders;
     }
 
-
+    /**
+     * Encodes a given field using a custom encryption method.
+     *
+     * @param field the field to be encoded.
+     * @return the encoded field.
+     */
     public static String encode(String field) {
-        String identifier = "DKENC";
         String encodedField = "";
         for (int i = 0; i < field.length(); i++) {
-            int ASCII = (int) (field.charAt(i) + 1);
-            encodedField += (char) ASCII;
+            int asciiValue = (int) (field.charAt(i) + 1);
+            encodedField += (char) asciiValue;
         }
-        return identifier + encodedField;
+        return Backend.ENCRYPTION_IDENTIFIER + encodedField;
     }
 
+    /**
+     * Decodes a given field that was encoded using a custom encryption method.
+     *
+     * @param field the field to be decoded.
+     * @return the decoded field.
+     */
     public static String decode(String field) {
         String modifiedField = field.substring(5);
         String actualField = "";
         for (int i = 0; i < modifiedField.length(); i++) {
-            int ASCII = (int) (field.charAt(i) - 1);
-            actualField += (char) ASCII;
+            int asciiValue = (int) (modifiedField.charAt(i) - 1);
+            actualField += (char) asciiValue;
         }
         return actualField;
+    }
+
+    /**
+     * Parses an empty field to return an empty string if it is "empty".
+     *
+     * @param field the field to be parsed.
+     * @return an empty string if field is "empty", else returns the field.
+     */
+    public static String parseEmptyField(String field) {
+        return field.equals("empty") ? "" : field;
     }
 
     /**
@@ -174,5 +221,4 @@ public class Backend {
             System.out.println(e);
         }
     }
-
 }

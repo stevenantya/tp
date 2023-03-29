@@ -1,0 +1,17 @@
+@startuml
+!include Style.puml
+title UI Component Diagram
+actor User
+node SecureNUS
+node SecretStorage
+frame "UI" {
+    node Ui UI_COLOR
+    node Parser
+    rectangle Commands COMMAND_COLOR
+    Ui -> Parser
+    Parser -[dotted]-> Commands :creates
+}
+Commands -[dotted]right-> SecureNUS :executes in
+SecureNUS -[dotted]up-> SecretStorage :makes changes in
+Ui <-down- User
+@enduml

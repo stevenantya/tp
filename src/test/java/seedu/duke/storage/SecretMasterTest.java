@@ -8,6 +8,7 @@ import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
+import seedu.duke.exceptions.secrets.InvalidURLException;
 import seedu.duke.secrets.BasicPassword;
 import seedu.duke.secrets.CreditCard;
 import seedu.duke.secrets.Secret;
@@ -21,8 +22,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+/**
+ * JUnit tests for the SecretMaster class in the storage package.
+ */
 class SecretMasterTest {
 
+    /**
+     * Tests the isLegalName method in the SecretMaster class.
+     *
+     * @throws IllegalFolderNameException if the folder name is illegal
+     * @throws FolderExistsException if the folder already exists
+     */
     @Test
     void isLegalName() throws IllegalFolderNameException, FolderExistsException {
         SecretMaster secretMaster = new SecretMaster();
@@ -34,6 +44,14 @@ class SecretMasterTest {
         assertEquals(false, secretMaster.isLegalName("jkfewrjfv90r93f47^&IO(*&^"));
     }
 
+    /**
+     * Tests the createFolder method in the SecretMaster class.
+     *
+     * @throws IllegalFolderNameException if the folder name is illegal
+     * @throws FolderExistsException if the folder already exists
+     * @throws RepeatedIdException if the id of a secret is repeated
+     * @throws IllegalSecretNameException if the secret name is illegal
+     */
     @Test
     void createFolder() throws IllegalFolderNameException, FolderExistsException, RepeatedIdException,
             IllegalSecretNameException, IllegalFolderNameException, IllegalSecretNameException, FolderExistsException {
@@ -63,10 +81,20 @@ class SecretMasterTest {
         assertEquals(set, secretMaster.getFolders());
     }
 
+    /**
+     * Tests the addSecret methods of the SecretMaster class for all secret types.
+     * @throws FolderExistsException if a folder already exists with the same name
+     * @throws InvalidExpiryDateException if an invalid expiry date is provided for a secret
+     * @throws IllegalFolderNameException if an illegal folder name is used
+     * @throws RepeatedIdException if a secret with the same ID already exists
+     * @throws IllegalSecretNameException if an illegal secret name is used
+     * @throws InvalidCreditCardNumberException if an invalid credit card number is provided for a credit card secret
+     * @throws InvalidURLException if an invalid URL is provided for a basic password secret
+     */
     @Test
     void addAllSecrets() throws FolderExistsException, InvalidExpiryDateException, IllegalFolderNameException,
             RepeatedIdException, IllegalSecretNameException, InvalidCreditCardNumberException,
-            InvalidExpiryDateException, InvalidCreditCardNumberException {
+            InvalidExpiryDateException, InvalidCreditCardNumberException, InvalidURLException {
         SecretMaster secretMaster = new SecretMaster();
         secretMaster.addSecret(new BasicPassword("basic1", "username1", "Password1",
                 "http.com"));
@@ -77,5 +105,28 @@ class SecretMasterTest {
         secretMaster.addSecret(new NUSNet("nusnet1", "folder1", "e0987654", "oitfghjmjh"));
         secretMaster.addSecret(new StudentID("hi", "T0987490A"));
         secretMaster.addSecret(new WifiPassword("wifi1", "username1", "password1"));
+    }
+
+    /**
+     * Test for adding secrets with special characters in their names to SecretMaster.
+     *
+     * @throws InvalidURLException if an invalid URL is provided for a basic password secret
+     * @throws IllegalFolderNameException if an illegal folder name is used
+     * @throws RepeatedIdException if a secret with the same ID already exists
+     * @throws IllegalSecretNameException if an illegal secret name is used
+     * @throws FolderExistsException if a folder already exists with the same name
+     */
+    @Test
+    void addSecretsWithCharacter() throws InvalidURLException, IllegalFolderNameException, RepeatedIdException,
+            IllegalSecretNameException, FolderExistsException {
+        SecretMaster secretMaster = new SecretMaster();
+        secretMaster.addSecret(new BasicPassword("BasicPassword1", "username1", "Password1",
+                "http.com"));
+        secretMaster.addSecret(new BasicPassword("BasicPassword2_", "username1", "Password1",
+                "http.com"));
+        secretMaster.addSecret(new BasicPassword("BasicPassword2", "Folder9", "username1", "Password1",
+                "http.com"));
+        secretMaster.addSecret(new BasicPassword("BasicPassword4", "Folder9_", "username1", "Password1",
+                "http.com"));
     }
 }

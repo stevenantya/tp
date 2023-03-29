@@ -1,0 +1,34 @@
+@startuml
+!include Style.puml
+title Class Connectivity Diagram
+actor User
+file "database"
+frame "Application" {
+    frame "UI" {
+        node Ui
+        node Parser
+        node Commands
+        Ui -> Parser
+        Parser -> Commands
+    }
+    frame SecureNUS {
+        node SecureNUS
+    }
+    frame SecretStorage {
+        node SecretMaster
+        node SecretEnumerator
+        node SecretSearcher
+    }
+    frame Backend {
+        node Backend
+    }
+    Commands --> SecureNUS.SecureNUS
+    SecureNUS.SecureNUS --> SecretMaster
+    SecretMaster --> SecretSearcher
+    SecretMaster --> SecretEnumerator
+    SecretMaster <-> Backend.Backend
+
+}
+Ui <-left- User
+Application.Backend.Backend <-left-> database
+@enduml
