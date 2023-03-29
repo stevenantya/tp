@@ -23,6 +23,10 @@ import seedu.duke.storage.SecretMaster;
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretSearcher;
 
+/**
+ * Class which represents the backend of the SecureNUS application.
+ * Handles file input/output and secret creation and manipulation.
+ */
 public class Backend {
     private static final Logger LOGGER = DukeLogger.LOGGER;
     private static final String BACKEND_LOG_INITIALISATION_IDENTIFIER
@@ -191,6 +195,13 @@ public class Backend {
         return hashtableFolders;
     }
 
+<<<<<<<<< Temporary merge branch 1
+    /**
+     * Encodes a given field using a custom encryption method.
+     *
+     * @param field the field to be encoded.
+     * @return the encoded field.
+     */
     public static ArrayList<String> createUrlArrayList(String[] input) {
         ArrayList<String> URLArrayList = new ArrayList<String>();
         for (int i = 7; i < input.length; i++) {
@@ -199,13 +210,6 @@ public class Backend {
         return URLArrayList;
     }
 
-
-    /**
-     * Encodes a given field using a custom encryption method.
-     *
-     * @param field the field to be encoded.
-     * @return the encoded field.
-     */
     public static String encode(String field) {
         String encodedField = "";
         for (int i = 0; i < field.length(); i++) {

@@ -17,6 +17,10 @@ public class CreditCard extends Secret {
     private String creditCardNumber;
     private int cvcNumber;
     private String expiryDate;
+<<<<<<<<< Temporary merge branch 1
+=========
+    private final String expiryDateFmt = "[0-1][0-9]/[0-3][0-9]";
+    private final String creditCardNumberFmt = "\\d{16}";
 
     /**
      * Constructor for a CreditCard object.
