@@ -1,10 +1,15 @@
 package seedu.duke.secrets;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 /**
- * @author : Steven A. O. Waskito
- **/
+ * JUnit test for StudentID class in seedu.duke.secrets package.
+ */
 public class StudentIDTest {
+
+    /**
+     * Test for creating a StudentID object with no folder name.
+     */
     @Test
     public void studentIDTestNoFolder() {
         StudentID studentID = new StudentID("StudentID Name","A021313J");
@@ -13,6 +18,9 @@ public class StudentIDTest {
         assertEquals("A021313J", studentID.getStudentID());
     }
 
+    /**
+     * Test for creating a StudentID object with a folder name.
+     */
     @Test
     public void studentIDTestFolder() {
         StudentID studentID = new StudentID("StudentID2 Name", "StudentsOfNUS", "A021313G");
