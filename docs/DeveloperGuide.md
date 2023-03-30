@@ -108,13 +108,15 @@ ___
 
 The Sequence Diagram below shows how the components interact with each other for the scenario where the user creates a new basic password initiated using the command `new password.`
 
+[//]: # (@@author stevenantya)
+
 Sequence Diagram
 
 <img src="./DGDiagramsCreator/DGUsedDiagrams/SequenceDiagramNew.png" width="100%" />
 
 Each of the six main components (also shown in the diagram above)
 
-
+[//]: # (@@author ollayf)
 
 * defines its API in an interface with the same name as the Component.
 

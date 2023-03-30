@@ -72,6 +72,9 @@ new password_name
 new password_name /f folder_name 
 new o/CreditCard password123
 new o/CryptoWallet password234 f/ folder_name
+new o/NUSNet My nus net
+new o/StudentID A02888888
+new o/WifiPassword Home wifi
 ```
 <br>
 
@@ -197,6 +200,9 @@ Enter your new password:
 
 **A**: By default, the program will save the last copy of the passwords before exiting in the filepath ./logs/last_exit if allowed to exit gracefully
 
+**Q**: What if I create a password without a folder?
+
+**A**: Do not worry! Your password is still saved in the unnamed folder.
 
 ## **<span style="text-decoration:underline;">Command Summary</span>**
 
