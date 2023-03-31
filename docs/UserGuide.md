@@ -51,6 +51,7 @@ update them](#general-format--edit-ppasswordname--f-nfnewfoldername--d-ndnew des
 * Extraneous parameters for commands that do not take in parameters (such as `menu`, and `exit`) will be ignored. <br>
 e.g. if the command specifies `menu 234`, it will be interpreted as `menu`.
 
+<br>
 
 ### [Add a new password: `new`](#span-styletext-decorationunderlinefeature-listspan)
 - Adds a new password in SecureNUS based on the type of the password.
@@ -72,6 +73,9 @@ new password_name
 new password_name /f folder_name 
 new o/CreditCard password123
 new o/CryptoWallet password234 f/ folder_name
+new o/NUSNet My nus net
+new o/StudentID A02888888
+new o/WifiPassword Home wifi
 ```
 <br>
 
@@ -185,11 +189,15 @@ Enter your new password:
 
 ###### General Format: `menu`
 
+<br>
+
 ### [Exiting the Program: `exit`](#span-styletext-decorationunderlinefeature-listspan)
 - Exits the program. 
 - Shows a message with all possible commands and syntax.
 
 ###### General Format: `exit`
+
+<br>
 
 ## **<span style="text-decoration:underline;">FAQ's</span>**
 
@@ -197,6 +205,9 @@ Enter your new password:
 
 **A**: By default, the program will save the last copy of the passwords before exiting in the filepath ./logs/last_exit if allowed to exit gracefully
 
+**Q**: What if I create a password without a folder?
+
+**A**: Do not worry! Your password is still saved in the unnamed folder.
 
 ## **<span style="text-decoration:underline;">Command Summary</span>**
 

@@ -23,6 +23,10 @@ import seedu.duke.storage.SecretMaster;
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretSearcher;
 
+/**
+ * Class which represents the backend of the SecureNUS application.
+ * Handles file input/output and secret creation and manipulation.
+ */
 public class Backend {
     private static final Logger LOGGER = DukeLogger.LOGGER;
     private static final String BACKEND_LOG_INITIALISATION_IDENTIFIER
@@ -192,13 +196,12 @@ public class Backend {
     }
 
     public static ArrayList<String> createUrlArrayList(String[] input) {
-        ArrayList<String> URLArrayList = new ArrayList<String>();
+        ArrayList<String> urlArrayList = new ArrayList<String>();
         for (int i = 7; i < input.length; i++) {
-            URLArrayList.add(input[i]);
+            urlArrayList.add(input[i]);
         }
-        return URLArrayList;
+        return urlArrayList;
     }
-
 
     /**
      * Encodes a given field using a custom encryption method.

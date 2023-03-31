@@ -87,6 +87,7 @@ public class Duke {
             return Parser.parse(command);
         } catch(InvalidCommandException e) {
             Ui.printError("Invalid Command");
+            Ui.printLine();
             return null;
         }
     }
