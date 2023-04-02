@@ -46,6 +46,6 @@ public class Ui {
      * @param message Error message to be printed.
      */
     public static void printError(String message) {
-        System.out.println("Oops! Error encountered "+ message);
+        System.out.println("Oops! Error encountered\n"+ message);
     }
 }

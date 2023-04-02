@@ -9,7 +9,12 @@ import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
 import seedu.duke.storage.SecretMaster;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 public class Duke {
+    private static final Logger LOGGER = DukeLogger.LOGGER;
+    private static final String DUKE_LOG_EXECUTECOMMAND_IDENTIFIER = "Duke - executeCommand";
     /**
      * Duke class handles the main entry-point for the application, parsing of user commands and execution of commands.
      * Duke class also initializes a SecretMaster object to store and manage the secrets for the application.
@@ -24,6 +29,7 @@ public class Duke {
      */
     public Duke() throws FolderExistsException, IllegalFolderNameException {
         secureNUSData = Backend.initialisation();
+        DukeLogger.setUpLogger();
     }
     /**
      * Main entry-point for the Duke application.
@@ -55,7 +61,6 @@ public class Duke {
         Ui.greetUser();
 
         boolean isExit = false;
-
         while (!isExit) {
             Command c = parseCommand();
             if (c == null) {
@@ -82,6 +87,7 @@ public class Duke {
             return Parser.parse(command);
         } catch(InvalidCommandException e) {
             Ui.printError("Invalid Command");
+            Ui.printLine();
             return null;
         }
     }
@@ -102,7 +108,9 @@ public class Duke {
                 command.execute(secureNUSData);
                 return command.isExit();
             } catch (ExceptionMain e) {
-                Ui.printError(e.getMessage());
+                Ui.printError(e.getMessage()); //do they want UI to handle it or?
+                LOGGER.log(Level.SEVERE, DUKE_LOG_EXECUTECOMMAND_IDENTIFIER, e);
+                DukeLogger.close();
             }
         }
         return false;
