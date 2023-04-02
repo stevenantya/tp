@@ -23,8 +23,8 @@ public class MenuCommand extends Command {
                 "new o/StudentID [NAME] /f [FOLDER_NAME]\n" +
                 "6. Add passwords for websites needing Wifi Passwords: " +
                 "new o/WifiPassword [NAME] /f [FOLDER_NAME]\n" +
-                "7. Delete the unwanted password: delete p1/[PASSWORD_NAME]\n" +
-                "8. List all the passwords: list [FOLDER_NAME]\n" +
+                "7. Delete the unwanted password: delete\n" +
+                "8. List all the passwords: list [f/FOLDER_NAME]\n" +
                 "9. View password: view p/PASSWORD_NAME \n" +
                 "10. Search for password: search n/NAME_LIKE [-f f/FOLDER_LIKE]\n" +
                 "11. Save the password in .txt file: save\n" +
