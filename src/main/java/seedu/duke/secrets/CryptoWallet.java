@@ -89,6 +89,10 @@ public class CryptoWallet extends Secret {
         return privateKey;
     }
 
+    public void setPrivateKey(String privateKey) {
+        this.privateKey = privateKey;
+    }
+
     /**
      * Returns the seed phrase associated with the CryptoWallet.
      *

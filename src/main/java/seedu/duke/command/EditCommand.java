@@ -3,7 +3,12 @@ package seedu.duke.command;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
+
 import seedu.duke.secrets.Secret;
+import seedu.duke.secrets.BasicPassword;
+import seedu.duke.secrets.CreditCard;
+import seedu.duke.secrets.NUSNet;
+import seedu.duke.secrets.StudentID;
 import seedu.duke.storage.SecretMaster;
 
 import java.util.regex.Pattern;
@@ -20,7 +25,6 @@ import java.util.regex.Matcher;
 public class EditCommand extends Command {
     private final String name;
     private final String newFolderName;
-    private final String newDescription;
     private final String newName;
 
     /**
@@ -33,8 +37,50 @@ public class EditCommand extends Command {
         String[] extractedFields = extract(input);
         this.name = extractedFields[0];
         this.newFolderName = extractedFields[1];
-        this.newDescription = extractedFields[2];
-        this.newName = extractedFields[3];
+        this.newName = extractedFields[2];
+    }
+
+    /**
+     * Asks user for the new fields that will replace the old fields.
+     *
+     * @return The new fields
+     */
+    public String[] inquireFields(Secret secret) {
+        String[] inquiredFields = null;
+
+        if (secret instanceof BasicPassword) {
+            inquiredFields = new String[3];
+            System.out.println("Enter the new Username: ");
+            inquiredFields[0] = Ui.readCommand();
+            System.out.println("Enter the new Password: ");
+            inquiredFields[1] = Ui.readCommand();
+            System.out.println("Enter the new URL: ");
+            inquiredFields[2] = Ui.readCommand();
+        } else if (secret instanceof CreditCard) {
+            inquiredFields = new String[4];
+            System.out.println("Enter the new Full Name: ");
+            inquiredFields[0] = Ui.readCommand();
+            System.out.println("Enter the new Credit Card Number: ");
+            inquiredFields[1] = Ui.readCommand();
+            System.out.println("Enter the new CVC Number: ");
+            inquiredFields[2] = Ui.readCommand();
+            System.out.println("Enter the new Expiry Date: ");
+            inquiredFields[3] = Ui.readCommand();
+        } else if (secret instanceof NUSNet) {
+            inquiredFields = new String[2];
+            System.out.println("Enter the new NUSNet ID: ");
+            inquiredFields[0] = Ui.readCommand();
+            System.out.println("Enter the new Credit Card Number: ");
+            inquiredFields[1] = Ui.readCommand();
+        } else if (secret instanceof StudentID) {
+            inquiredFields = new String[1];
+            System.out.println("Enter the new Student ID: ");
+            inquiredFields[0] = Ui.readCommand();
+        }
+
+        // TODO: inquire fields for CryptoWallet and WifiPassword
+
+        return inquiredFields;
     }
 
     /**
@@ -45,29 +91,22 @@ public class EditCommand extends Command {
      * @return an array of Strings containing the extracted values of the fields to be updated.
      */
     public String[] extract(String input) {
-        String[] extractedFields = new String[4];
+        String[] extractedFields = new String[3];
 
         // Define regular expression patterns
-        Pattern namePattern = Pattern.compile("p/([\\w\\s]+)");
-        Pattern newFolderPattern = Pattern.compile("-f nf/([\\w\\s]+)");
-        Pattern newDescriptionPattern = Pattern.compile("-d nd/([\\w\\s]+)");
-        Pattern newNamePattern = Pattern.compile("-N np/([\\w\\s]+)");
+        final Pattern namePattern = Pattern.compile("p/([\\w\\s]+)");
+        final Pattern newFolderPattern = Pattern.compile("-f nf/([\\w\\s]+)");
+        final Pattern newNamePattern = Pattern.compile("-N np/([\\w\\s]+)");  // rmb to check for valid Name
 
         // Extract values using regular expressions
         Matcher nameMatcher = namePattern.matcher(input);
         Matcher newFolderMatcher = newFolderPattern.matcher(input);
-        Matcher newDescriptionMatcher = newDescriptionPattern.matcher(input);
         Matcher newNameMatcher = newNamePattern.matcher(input);
 
         // Check if there is a match and extract the value
         extractedFields[0] = nameMatcher.find() ? nameMatcher.group(1).trim() : null;
-        extractedFields[1] = newFolderMatcher.find() ? newFolderMatcher.group(1).trim() : "unnamed";
-        extractedFields[2] = newDescriptionMatcher.find() ? newDescriptionMatcher.group(1).trim() : "";
-        extractedFields[3] = newNameMatcher.find() ? newNameMatcher.group(1).trim() : "";
-
-        if (extractedFields[0] == null) {
-            Ui.printError("(Invalid input)");
-        }
+        extractedFields[1] = newFolderMatcher.find() ? newFolderMatcher.group(1).trim() : null;
+        extractedFields[2] = newNameMatcher.find() ? newNameMatcher.group(1).trim() : null;
 
         return extractedFields;
     }
@@ -82,11 +121,12 @@ public class EditCommand extends Command {
         Secret passwordSecret;
         try {
             passwordSecret = secureNUSData.getByName(name);
-            secureNUSData.editSecret(passwordSecret, newName, newFolderName);
+            String[] inquiredFields = inquireFields(passwordSecret);
+            secureNUSData.editSecret(passwordSecret, newName, newFolderName, inquiredFields);
         } catch (SecretNotFoundException e) {
-            Ui.printError("(The password is not found).");
+            Ui.printError("(Make sure you follow this format: \"edit p/PASSWORD_NAME\")");
         } catch (FolderExistsException e) {
-            Ui.printError("(The folder being created already exists).");
+            Ui.printError("(That folder already exists)");
         }
     }
 

@@ -35,7 +35,7 @@ public class AddNUSNetCommand extends Command{
     public AddNUSNetCommand(NUSNet nusNet) {
         this.name = nusNet.getName();
         this.folderName = nusNet.getFolderName();
-        this.nusNetId = nusNet.getnusNetId();
+        this.nusNetId = nusNet.getNusNetId();
         this.password = nusNet.getPassword();
     }
     
