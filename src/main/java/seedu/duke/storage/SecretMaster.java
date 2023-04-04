@@ -11,11 +11,13 @@ import seedu.duke.exceptions.secrets.NonExistentFolderException;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
 
 import seedu.duke.exceptions.RepeatedIdException;
-import seedu.duke.secrets.Secret;
 import seedu.duke.secrets.BasicPassword;
 import seedu.duke.secrets.CreditCard;
+import seedu.duke.secrets.CryptoWallet;
 import seedu.duke.secrets.NUSNet;
+import seedu.duke.secrets.Secret;
 import seedu.duke.secrets.StudentID;
+import seedu.duke.secrets.WifiPassword;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -269,9 +271,14 @@ public class SecretMaster {
             ((NUSNet) secret).setPassword(inquiredFields[1]);
         } else if (secret instanceof StudentID) {
             ((StudentID) secret).setStudentID(inquiredFields[0]);
+        } else if (secret instanceof WifiPassword) {
+            ((WifiPassword) secret).setUsername(inquiredFields[0]);
+            ((WifiPassword) secret).setPassword(inquiredFields[1]);
+        } else if (secret instanceof CryptoWallet) {
+            ((CryptoWallet) secret).setUsername(inquiredFields[0]);
+            ((CryptoWallet) secret).setPrivateKey(inquiredFields[1]);
+            ((CryptoWallet) secret).setSeedPhrase(inquiredFields[2]);
         }
-
-        // TODO: inquire fields for CryptoWallet and WifiPassword
 
         secretNames.add(secret.getName());
         secretSearcher.add(secret);
