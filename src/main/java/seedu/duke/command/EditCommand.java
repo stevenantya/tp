@@ -4,11 +4,13 @@ import seedu.duke.Ui;
 import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
 
-import seedu.duke.secrets.Secret;
 import seedu.duke.secrets.BasicPassword;
 import seedu.duke.secrets.CreditCard;
+import seedu.duke.secrets.CryptoWallet;
 import seedu.duke.secrets.NUSNet;
+import seedu.duke.secrets.Secret;
 import seedu.duke.secrets.StudentID;
+import seedu.duke.secrets.WifiPassword;
 import seedu.duke.storage.SecretMaster;
 
 import java.util.regex.Pattern;
@@ -76,9 +78,21 @@ public class EditCommand extends Command {
             inquiredFields = new String[1];
             System.out.println("Enter the new Student ID: ");
             inquiredFields[0] = Ui.readCommand();
+        } else if (secret instanceof WifiPassword) {
+            inquiredFields = new String[2];
+            System.out.println("Enter the new Username: ");
+            inquiredFields[0] = Ui.readCommand();
+            System.out.println("Enter the new Password: ");
+            inquiredFields[1] = Ui.readCommand();
+        } else if (secret instanceof CryptoWallet) {
+            inquiredFields = new String[3];
+            System.out.println("Enter the new Username: ");
+            inquiredFields[0] = Ui.readCommand();
+            System.out.println("Enter the new Private Key: ");
+            inquiredFields[1] = Ui.readCommand();
+            System.out.println("Enter the new Seed Phrase: ");
+            inquiredFields[2] = Ui.readCommand();
         }
-
-        // TODO: inquire fields for CryptoWallet and WifiPassword
 
         return inquiredFields;
     }
