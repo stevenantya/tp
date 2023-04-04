@@ -40,12 +40,7 @@ _____________________________________________________
 _____________________________________________________
 _____________________________________________________
 List of secrets:
-1. Type of Secret: Student ID
-Name: student2
-Folder: unnamed
-Student ID: A0123456R
-
-2. Type of Secret: Basic Password
+1. Type of Secret: Basic Password
 Name: password1
 Folder: unnamed
 Username: username1
