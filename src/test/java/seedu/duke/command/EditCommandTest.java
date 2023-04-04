@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * The EditCommandTest class tests the EditCommand class.
@@ -45,9 +46,9 @@ class EditCommandTest {
 
         String[] output = editCommand.extract("invalid input");
 
-        // assertNull(output[0]); // i erased this to try to stop the error
-        assertEquals("unnamed", output[1]);
-        assertEquals("", output[2]);
+        assertNull(output[0]);
+        assertNull(output[1]);
+        assertNull(output[2]);
     }
 
     @Test
