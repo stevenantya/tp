@@ -1,18 +1,25 @@
 package seedu.duke;
 
+import seedu.duke.ui.Parser;
+import seedu.duke.ui.Ui;
 import seedu.duke.command.Command;
 import seedu.duke.exceptions.ExceptionMain;
+import seedu.duke.exceptions.InsufficientParamsException;
 import seedu.duke.exceptions.InvalidCommandException;
+import seedu.duke.exceptions.InvalidFieldException;
+import seedu.duke.exceptions.OperationCancelException;
+import seedu.duke.exceptions.RepeatedIdException;
 import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
+import seedu.duke.messages.ErrorMessages;
 import seedu.duke.storage.SecretMaster;
 
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-public class Duke {
+public class SecureNUS {
     private static final Logger LOGGER = DukeLogger.LOGGER;
     private static final String DUKE_LOG_EXECUTECOMMAND_IDENTIFIER = "Duke - executeCommand";
     /**
@@ -27,7 +34,7 @@ public class Duke {
      * @throws FolderExistsException         If the database folder already exists.
      * @throws IllegalFolderNameException    If the name of a folder is not valid.
      */
-    public Duke() throws FolderExistsException, IllegalFolderNameException {
+    public SecureNUS() throws FolderExistsException, IllegalFolderNameException {
         secureNUSData = Backend.initialisation();
         DukeLogger.setUpLogger();
     }
@@ -44,8 +51,8 @@ public class Duke {
     public static void main(String[] args) throws FolderExistsException, IllegalFolderNameException,
             IllegalSecretNameException, SecretNotFoundException {
 
-        Duke duke = new Duke();
-        duke.run();
+        SecureNUS secureNUS = new SecureNUS();
+        secureNUS.run();
 
     }
 
@@ -67,7 +74,12 @@ public class Duke {
                 continue;
             }
             Ui.printLine(); //middle line
-            isExit = executeCommand(c);
+            try {
+                isExit = executeCommand(c);
+            } catch (ExceptionMain e) {
+                Ui.inform("Unknown issue");
+                return;
+            }
             
             Ui.printLine(); //end line
         }
@@ -82,14 +94,28 @@ public class Duke {
      * @return A Command object that represents the user input command.
      */
     public Command parseCommand() {
-        String command = Ui.readCommand();
+        String input = Ui.readCommand();
+        Command command = null;
         Ui.printLine(); //top most line
         try {
-            return Parser.parse(command);
+            command = Parser.parse(input, secureNUSData.getSecretNames());
         } catch(InvalidCommandException e) {
-            Ui.printError("Invalid Command");
+            Ui.printError(ErrorMessages.INVALID_COMMAND);
             return null;
+        } catch (InsufficientParamsException e) {
+            Ui.printError(ErrorMessages.INSUFFICIENT_PARAMS);
+        } catch (IllegalSecretNameException e) {
+            Ui.printError(ErrorMessages.ILLEGAL_SECRET_NAME);
+        } catch (IllegalFolderNameException e) {
+            Ui.printError(ErrorMessages.ILLEGAL_FOLDER_NAME);
+        } catch (OperationCancelException e) {
+            Ui.informOperationCancel();
+        } catch (RepeatedIdException e) {
+            Ui.printError(ErrorMessages.REPEATED_ID);
+        } catch (InvalidFieldException e) {
+            Ui.printError(ErrorMessages.INVALID_FIELD);
         }
+        return command;
     }
 
     /**
@@ -102,7 +128,7 @@ public class Duke {
      * @throws SecretNotFoundException       If the specified secret cannot be found.
      */
     public boolean executeCommand(Command command) throws IllegalFolderNameException, IllegalSecretNameException,
-            SecretNotFoundException {
+            SecretNotFoundException, ExceptionMain {
         if (command != null) {
             try {
                 command.execute(secureNUSData);

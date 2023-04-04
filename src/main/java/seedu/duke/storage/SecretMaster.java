@@ -15,9 +15,9 @@ import java.util.HashSet;
  * Master class that manages the storage and retrieval of secrets and folders.
  */
 public class SecretMaster {
+    public static final String ALLOWED_NAMES_REGEX = "^[a-zA-Z0-9_]*$"; // only alphanumeric allowed
     // use for quick finding
-    private static final String DEFAULT_FOLDER = "unnamed";
-    private static final String ALLOWED_NAMES_REGEX = "^[a-zA-Z0-9_]*$"; // only alphanumeric allowed
+    public static final String DEFAULT_FOLDER = "unnamed";
 
     /**
      * Object that manages searching for secrets.
@@ -68,7 +68,7 @@ public class SecretMaster {
      * @param name String name to check.
      * @return boolean indicating whether the name is legal.
      */
-    public boolean isLegalName(String name) {
+    public static boolean isLegalFolderName(String name) {
         return name.matches(ALLOWED_NAMES_REGEX);
     }
 
@@ -117,7 +117,7 @@ public class SecretMaster {
      */
     public void createFolder(String folderName) throws FolderExistsException, IllegalFolderNameException {
 
-        if (!isLegalName(folderName)) {
+        if (!isLegalFolderName(folderName)) {
             throw new IllegalFolderNameException();
         }
 
@@ -197,7 +197,7 @@ public class SecretMaster {
      */
     public void addSecret(Secret secret) throws FolderExistsException, RepeatedIdException,
             IllegalSecretNameException, IllegalFolderNameException {
-        if (!isLegalName(secret.getName())) {
+        if (!isLegalFolderName(secret.getName())) {
             throw new IllegalSecretNameException();
         }
         if (secretNames.contains(secret.getUid())) {
@@ -244,41 +244,8 @@ public class SecretMaster {
         if (!secretNames.contains(secret.getUid())) {
             throw new SecretNotFoundException();
         }
-        String folderName = secret.getFolderName();
         secretNames.remove(secret.getName());
         secretEnumerator.delete(secret);
         secretSearcher.delete(secret);
-    }
-
-
-    /**
-     * Retrieves an ArrayList of all Secret names.
-     *
-     * @return ArrayList of all Secret names.
-     */
-    public ArrayList<String> listSecretNames() {
-        ArrayList<String> secretNamesList = new ArrayList<String>();
-        for (Secret secret : secretEnumerator.getList()) {
-            secretNamesList.add(secret.getName());
-        }
-        return secretNamesList;
-    }
-
-    /**
-     * Retrieves an ArrayList of all Secret names within the given folder.
-     *
-     * @param folderName String name of the folder to retrieve Secret names from.
-     * @return ArrayList of all Secret names within the given folder.
-     * @throws NonExistentFolderException if the folder does not exist.
-     */
-    public ArrayList <String> listSecretNames(String folderName) throws NonExistentFolderException {
-        if (!folders.contains(folderName)) {
-            throw new NonExistentFolderException();
-        }
-        ArrayList<String> secretNamesList = new ArrayList<String>();
-        for (Secret secret : secretEnumerator.getList(folderName)) {
-            secretNamesList.add(secret.getName());
-        }
-        return secretNamesList;
     }
 }

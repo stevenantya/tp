@@ -11,11 +11,13 @@ import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
  * "MM/YY".
  */
 public class CreditCard extends Secret {
-    private static final String expiryDateFmt = "[0-1][0-9]/[0-3][0-9]";
-    private static final String creditCardNumberFmt = "\\d{16}";
+    private static final String EXPIRY_DATE_FMT = "[0-1][0-9]/[0-3][0-9]";
+    private static final String CREDIT_CARD_NUMBER_FMT = "\\d{16}";
+
+    private static final String CVC_NUMBER_FMT = "\\d{3}";
     private String fullName;
     private String creditCardNumber;
-    private int cvcNumber;
+    private String cvcNumber;
     private String expiryDate;
 
     /**
@@ -31,18 +33,18 @@ public class CreditCard extends Secret {
      */
     public CreditCard(String name, String fullName,
                       String creditCardNumber,
-                      int cvcNumber, String expiryDate) throws
+                      String cvcNumber, String expiryDate) throws
             InvalidExpiryDateException, InvalidCreditCardNumberException {
 
 
         super(name);
         this.fullName = fullName;
         this.creditCardNumber = creditCardNumber;
-        if (!creditCardNumber.matches(creditCardNumberFmt)) {
+        if (!creditCardNumber.matches(CREDIT_CARD_NUMBER_FMT)) {
             throw new InvalidCreditCardNumberException();
         }
         this.cvcNumber = cvcNumber;
-        if (!expiryDate.matches(expiryDateFmt)) {
+        if (!expiryDate.matches(EXPIRY_DATE_FMT)) {
             throw new InvalidExpiryDateException();
         }
         this.expiryDate = expiryDate;
@@ -62,17 +64,28 @@ public class CreditCard extends Secret {
      */
     public CreditCard(String name, String folderName,
                       String fullName, String creditCardNumber,
-                      int cvcNumber, String expiryDate) throws InvalidExpiryDateException {
+                      String cvcNumber, String expiryDate) throws InvalidExpiryDateException {
         super(name, folderName);
         this.fullName = fullName;
         this.creditCardNumber = creditCardNumber;
         this.cvcNumber = cvcNumber;
-        if (!expiryDate.matches(expiryDateFmt)) {
+        if (!isLegalExpiryDate(expiryDate)) {
             throw new InvalidExpiryDateException();
         }
         this.expiryDate = expiryDate;
     }
 
+    public static boolean isLegalExpiryDate(String expiryDate) {
+        return expiryDate.matches(EXPIRY_DATE_FMT);
+    }
+
+    public static boolean isLegalCreditCardNumber(String creditCardNumber) {
+        return creditCardNumber.matches(CREDIT_CARD_NUMBER_FMT);
+    }
+
+    public static boolean isLegalCvcNumber(String number) {
+        return number.matches(CVC_NUMBER_FMT);
+    }
 
     /**
      * Returns the expiry date of the credit card.
@@ -133,7 +146,7 @@ public class CreditCard extends Secret {
      *
      * @return the CVC number
      */
-    public int getCvcNumber() {
+    public String getCvcNumber() {
         return cvcNumber;
     }
 
@@ -142,7 +155,7 @@ public class CreditCard extends Secret {
      *
      * @param cvcNumber the new CVC number
      */
-    public void setCvcNumber(int cvcNumber) {
+    public void setCvcNumber(String cvcNumber) {
         this.cvcNumber = cvcNumber;
     }
 
@@ -155,7 +168,7 @@ public class CreditCard extends Secret {
     @Override
     public String getRevealStr() {
         return String.format("Credit Card Number: %s\n" +
-                "CVC Number: %d\n" +
+                "CVC Number: %s\n" +
                 "Expiry Date: %s", creditCardNumber, cvcNumber,
                 expiryDate);
     }

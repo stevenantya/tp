@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.RepeatedIdException;
 import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
-import seedu.duke.exceptions.secrets.InvalidURLException;
 import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.secrets.BasicPassword;
 import seedu.duke.secrets.Secret;
@@ -30,35 +29,21 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 class SearchCommandTest {
     private final Secret mockBasicPassword1;
     {
-        try {
-            mockBasicPassword1 = new BasicPassword("Facebook", "Tom123", "password123", "facebook.com");
-        } catch (InvalidURLException e) {
-            throw new RuntimeException(e);
-        }
+        mockBasicPassword1 = new BasicPassword("Facebook", "Tom123", "password123", "facebook.com");
     }
     private final Secret mockBasicPassword2;
     {
-        try {
-            mockBasicPassword2 = new BasicPassword("Instagram", "Tom123", "password123", "instagram.com");
-        } catch (InvalidURLException e) {
-            throw new RuntimeException(e);
-        }
+        mockBasicPassword2 = new BasicPassword("Instagram", "Tom123", "password123", "instagram.com");
     }
     private final Secret mockBasicPasswordWithFolder1;
     {
-        try {
-            mockBasicPasswordWithFolder1 = new BasicPassword("Facebook", "Socials", "Tom123", "password123", "fb.com");
-        } catch (InvalidURLException e) {
-            throw new RuntimeException(e);
-        }
+        mockBasicPasswordWithFolder1 = new BasicPassword("Facebook", "Socials", "Tom123",
+                "password123", "fb.com");
     }
     private final Secret mockBasicPasswordWithFolder2;
     {
-        try {
-            mockBasicPasswordWithFolder2 = new BasicPassword("Instagram", "Socials", "Tom123", "password123", "ig.com");
-        } catch (InvalidURLException e) {
-            throw new RuntimeException(e);
-        }
+        mockBasicPasswordWithFolder2 = new BasicPassword("Instagram", "Socials", "Tom123",
+                "password123", "ig.com");
     }
     private final ByteArrayOutputStream output = new ByteArrayOutputStream();
 
@@ -118,7 +103,8 @@ class SearchCommandTest {
         SearchCommand command = new SearchCommand("search n/Facebook");
         command.execute(mockSecureNUSData);
 
-        assertEquals("Found 1 matches!\nID: 1\t|\tFacebook\t|\n", output.toString().replace("\r",""));
+        assertEquals("Found 1 matches!\nID: 1\t|\tFacebook\t|\n",
+                output.toString().replace("\r",""));
     }
 
     @Test
@@ -131,7 +117,8 @@ class SearchCommandTest {
         SearchCommand command = new SearchCommand("search n/Facebook -f f/Socials");
         command.execute(mockSecureNUSData);
 
-        assertEquals("Found 1 matches!\nID: 1\t|\tFacebook\t|\n", output.toString().replace("\r",""));
+        assertEquals("Found 1 matches!\nID: 1\t|\tFacebook\t|\n",
+                output.toString().replace("\r",""));
     }
     /**
      * Tests the isExit method.

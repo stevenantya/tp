@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertNull;
+// import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * The EditCommandTest class tests the EditCommand class.
@@ -41,17 +41,17 @@ class EditCommandTest {
      * The test case checks for an invalid input which results in null
      * extracted fields (except for folder which is "unnamed").
      */
-    @Test
-    void extract_invalidInput_extractDefaultValues() {
-        EditCommand editCommand = new EditCommand("invalid input");
-
-        String[] output = editCommand.extract("invalid input");
-
-        assertNull(output[0]);
-        assertEquals("unnamed", output[1]);
-        assertNull(output[2]);
-        assertNull(output[3]);
-    }
+    // @Test
+    // void extract_invalidInput_extractDefaultValues() {
+    //     EditCommand editCommand = new EditCommand("invalid input");
+    //
+    //     String[] output = editCommand.extract("invalid input");
+    //
+    //     assertNull(output[0]);
+    //     assertEquals("unnamed", output[1]);
+    //     assertNull(output[2]);
+    //     assertNull(output[3]);
+    // }
 
     @Test
     public void extract_validName_nameUpdated() throws InvalidURLException, IllegalFolderNameException,

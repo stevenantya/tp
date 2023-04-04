@@ -5,11 +5,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.nio.file.Paths;
 import java.util.Hashtable;
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
+import seedu.duke.ui.Ui;
 import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
 import seedu.duke.exceptions.secrets.InvalidURLException;
 import seedu.duke.secrets.BasicPassword;
@@ -24,12 +24,7 @@ import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretSearcher;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.FileReader;
-import java.io.IOException;
-import java.util.Hashtable;
-import java.util.ArrayList;
 
 /**
  * Class which represents the backend of the SecureNUS application.
@@ -84,9 +79,11 @@ public class Backend {
         }
 
         try {
-            Scanner reader = new Scanner(database);
-            while (reader.hasNextLine()) {
-                String[] inputArray = reader.nextLine().split(Backend.DELIMITER);
+            // Scanner reader = new Scanner(database);
+            BufferedReader reader = new BufferedReader(new FileReader(DATABASE_FILEPATH));
+            String line = reader.readLine();
+            while (line != null) {
+                String[] inputArray = reader.readLine().split(",");
                 secretList = Backend.readAndUpdate(inputArray, secretList);
             }
             reader.close();
@@ -96,7 +93,7 @@ public class Backend {
             throw new RuntimeException(e);
         } catch (NullPointerException e) {
             // to change with UI
-            Ui.print("No Save File Detected");
+            Ui.inform("No Save File Detected");
         } catch (InvalidExpiryDateException e) {
             throw new RuntimeException(e);
         }
@@ -132,7 +129,7 @@ public class Backend {
             database.add(secret);
         } else if (input[0].equals(Backend.CREDIT_CARD_IDENTIFIER)) {
             Secret secret = new CreditCard(input[2], input[3], input[4],
-                    Backend.decode(input[5]), Integer.parseInt(Backend.decode(input[6])),
+                    Backend.decode(input[5]), Backend.decode(input[6]),
                         input[7]);
             database.add(secret);
         } else if (input[0].equals(Backend.CRYPTOWALLET_IDENTIFIER)) {
