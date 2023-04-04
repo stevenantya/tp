@@ -87,7 +87,7 @@ public class ListCommand extends Command {
             return "Type of Secret: NUSNet ID" + "\n" +
                     "Name: " + nusNet.getName() + "\n" +
                     "Folder: " + nusNet.getFolderName() + "\n" +
-                    "NUSNet ID: " + nusNet.getnusNetId() + "\n" +
+                    "NUSNet ID: " + nusNet.getNusNetId() + "\n" +
                     "Password: " + nusNet.getPassword() + "\n";
 
 

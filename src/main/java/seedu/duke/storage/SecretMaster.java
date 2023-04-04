@@ -1,12 +1,21 @@
 package seedu.duke.storage;
 
+import seedu.duke.Ui;
+import seedu.duke.exceptions.secrets.InvalidURLException;
+import seedu.duke.exceptions.secrets.InvalidCreditCardNumberException;
+import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
 import seedu.duke.exceptions.secrets.FolderExistsException;
-import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.exceptions.secrets.IllegalFolderNameException;
+import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.exceptions.secrets.NonExistentFolderException;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
+
 import seedu.duke.exceptions.RepeatedIdException;
 import seedu.duke.secrets.Secret;
+import seedu.duke.secrets.BasicPassword;
+import seedu.duke.secrets.CreditCard;
+import seedu.duke.secrets.NUSNet;
+import seedu.duke.secrets.StudentID;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -218,17 +227,48 @@ public class SecretMaster {
      * Updates a Secret's name and folder as well as its name in secretNames, and
      * itself in secretSearcher and secretEnumerator.
      *
-     * @param secret Secret object to be edited.
-     * @param newName updated name of the Secret object.
-     * @param newFolderName updated folder of the Secret object.
+     * @param secret         Secret object to be edited.
+     * @param newName        updated name of the Secret object.
+     * @param newFolderName  updated folder of the Secret object.
+     * @param inquiredFields
      * @throws FolderExistsException if the folder specified in the Secret already exists and cannot be created.
      */
-    public void editSecret(Secret secret, String newName, String newFolderName) throws FolderExistsException {
+    public void editSecret(Secret secret, String newName, String newFolderName,
+                           String[] inquiredFields) throws FolderExistsException {
         secretNames.remove(secret.getName());
         secretSearcher.delete(secret);
         secretEnumerator.delete(secret);
+
         secret.setName(newName);
         secret.setFolderName(newFolderName);
+        if (secret instanceof BasicPassword) {
+            try {
+                ((BasicPassword) secret).setUsername(inquiredFields[0]);
+                ((BasicPassword) secret).setPassword(inquiredFields[1]);
+                ((BasicPassword) secret).setUrl(inquiredFields[2]);
+            } catch (InvalidURLException e) {
+                Ui.printError("Invalid URL! Please enter a valid url with the domain! e.g. google.com");
+            }
+        } else if (secret instanceof CreditCard) {
+            try {
+                ((CreditCard) secret).setFullName(inquiredFields[0]);
+                ((CreditCard) secret).setCreditCardNumber(inquiredFields[1]);
+                ((CreditCard) secret).setCvcNumber(Integer.parseInt(inquiredFields[2]));
+                ((CreditCard) secret).setExpiryDate(inquiredFields[3]);
+            } catch (InvalidCreditCardNumberException e) {
+                Ui.printError("Invalid Credit Card Number! Must be 16 digits long");
+            } catch (InvalidExpiryDateException e) {
+                Ui.printError("Invalid Expiry Date! Must be in the format \"MM/YY\"");
+            }
+        } else if (secret instanceof NUSNet) {
+            ((NUSNet) secret).setNusNetId(inquiredFields[0]);
+            ((NUSNet) secret).setPassword(inquiredFields[1]);
+        } else if (secret instanceof StudentID) {
+            ((StudentID) secret).setStudentID(inquiredFields[0]);
+        }
+
+        // TODO: inquire fields for CryptoWallet and WifiPassword
+
         secretNames.add(secret.getName());
         secretSearcher.add(secret);
         secretEnumerator.add(secret);
