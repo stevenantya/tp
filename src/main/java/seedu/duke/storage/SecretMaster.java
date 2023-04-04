@@ -239,8 +239,12 @@ public class SecretMaster {
         secretSearcher.delete(secret);
         secretEnumerator.delete(secret);
 
-        secret.setName(newName);
-        secret.setFolderName(newFolderName);
+        if (newName != null) {
+            secret.setName(newName);
+        }
+        if (newFolderName != null) {
+            secret.setFolderName(newFolderName);
+        }
         if (secret instanceof BasicPassword) {
             try {
                 ((BasicPassword) secret).setUsername(inquiredFields[0]);

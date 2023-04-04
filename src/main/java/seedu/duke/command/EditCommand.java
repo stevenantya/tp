@@ -53,9 +53,9 @@ public class EditCommand extends Command {
             System.out.println("Enter the new Username: ");
             inquiredFields[0] = Ui.readCommand();
             System.out.println("Enter the new Password: ");
-            inquiredFields[0] = Ui.readCommand();
+            inquiredFields[1] = Ui.readCommand();
             System.out.println("Enter the new URL: ");
-            inquiredFields[0] = Ui.readCommand();
+            inquiredFields[2] = Ui.readCommand();
         } else if (secret instanceof CreditCard) {
             inquiredFields = new String[4];
             System.out.println("Enter the new Full Name: ");
@@ -98,7 +98,6 @@ public class EditCommand extends Command {
         final Pattern newFolderPattern = Pattern.compile("-f nf/([\\w\\s]+)");
         final Pattern newNamePattern = Pattern.compile("-N np/([\\w\\s]+)");  // rmb to check for valid Name
 
-
         // Extract values using regular expressions
         Matcher nameMatcher = namePattern.matcher(input);
         Matcher newFolderMatcher = newFolderPattern.matcher(input);
@@ -106,12 +105,8 @@ public class EditCommand extends Command {
 
         // Check if there is a match and extract the value
         extractedFields[0] = nameMatcher.find() ? nameMatcher.group(1).trim() : null;
-        extractedFields[1] = newFolderMatcher.find() ? newFolderMatcher.group(1).trim() : "unnamed";
-        extractedFields[2] = newNameMatcher.find() ? newNameMatcher.group(1).trim() : "";
-
-        if (extractedFields[0] == null) {
-            Ui.printError("(Invalid input - no name found in input)");
-        }
+        extractedFields[1] = newFolderMatcher.find() ? newFolderMatcher.group(1).trim() : null;
+        extractedFields[2] = newNameMatcher.find() ? newNameMatcher.group(1).trim() : null;
 
         return extractedFields;
     }
@@ -129,9 +124,9 @@ public class EditCommand extends Command {
             String[] inquiredFields = inquireFields(passwordSecret);
             secureNUSData.editSecret(passwordSecret, newName, newFolderName, inquiredFields);
         } catch (SecretNotFoundException e) {
-            Ui.printError("(The password is not found).");
+            Ui.printError("(Make sure you follow this format: \"edit p/PASSWORD_NAME\")");
         } catch (FolderExistsException e) {
-            Ui.printError("(The folder being created already exists).");
+            Ui.printError("(That folder already exists)");
         }
     }
 
