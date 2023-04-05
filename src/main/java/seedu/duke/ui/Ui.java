@@ -1,4 +1,6 @@
-package seedu.duke;
+package seedu.duke.ui;
+
+import seedu.duke.messages.OperationMessages;
 
 import java.util.Scanner;
 
@@ -14,11 +16,7 @@ public class Ui {
      * Greets the user upon start up of the application.
      */
     public static void greetUser() {
-        System.out.println("Welcome to secureNUS v1.0\n" +
-                "Current Features\n" +
-                "Adding a password      : new [NAME] /f [FOLDER_NAME]\n" +
-                "Adding a NUSNet ID     : new o/NUSNet [NAME] /f [FOLDER_NAME]\n" +
-                "Adding a Student ID    : new o/StudentID [NAME] /f [FOLDER_NAME]\n");
+        System.out.println(OperationMessages.INITIALISE);
     }
 
     /**
@@ -70,10 +68,9 @@ public class Ui {
     public static void printError(String message) {
         System.out.println("Oops! Error encountered "+ message);
     }
-
-
-
-
+    public static void informOperationCancel () {
+        System.out.println(OperationMessages.CANCEL_OPERATION);
+    }
 
     public static void close() {
         in.close();

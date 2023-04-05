@@ -1,6 +1,6 @@
 package seedu.duke.command;
 
-import seedu.duke.Ui;
+import seedu.duke.ui.Ui;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretMaster;

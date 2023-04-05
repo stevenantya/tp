@@ -1,6 +1,6 @@
 package seedu.duke.command;
 
-import seedu.duke.Ui;
+import seedu.duke.ui.Ui;
 import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
 
@@ -53,21 +53,21 @@ public class EditCommand extends Command {
         if (secret instanceof BasicPassword) {
             inquiredFields = new String[3];
             System.out.println("Enter the new Username: ");
-            inquiredFields[0] = Ui.readCommand();
+            inquiredFields[0] = Ui.readLine();
             System.out.println("Enter the new Password: ");
-            inquiredFields[1] = Ui.readCommand();
+            inquiredFields[1] = Ui.readLine();
             System.out.println("Enter the new URL: ");
-            inquiredFields[2] = Ui.readCommand();
+            inquiredFields[2] = Ui.readLine();
         } else if (secret instanceof CreditCard) {
             inquiredFields = new String[4];
             System.out.println("Enter the new Full Name: ");
-            inquiredFields[0] = Ui.readCommand();
+            inquiredFields[0] = Ui.readLine();
             System.out.println("Enter the new Credit Card Number: ");
-            inquiredFields[1] = Ui.readCommand();
+            inquiredFields[1] = Ui.readLine();
             System.out.println("Enter the new CVC Number: ");
-            inquiredFields[2] = Ui.readCommand();
+            inquiredFields[2] = Ui.readLine();
             System.out.println("Enter the new Expiry Date: ");
-            inquiredFields[3] = Ui.readCommand();
+            inquiredFields[3] = Ui.readLine();
         } else if (secret instanceof NUSNet) {
             inquiredFields = new String[2];
             System.out.println("Enter the new NUSNet ID: ");

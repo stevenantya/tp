@@ -90,7 +90,7 @@ public class ListCommand extends Command {
                     "Folder: " + creditCard.getFolderName() + "\n" +
                     "Full Name: " + creditCard.getFullName() + "\n" +
                     "Credit Card Number: " + maskStringPassword(creditCard.getCreditCardNumber()) + "\n" +
-                    "CVC Number: " + maskIntPasswordAsString(creditCard.getCvcNumber()) + "\n" +
+                    "CVC Number: " + maskStringPassword(creditCard.getCvcNumber()) + "\n" +
                     "Expiry Date: " + maskStringPassword(creditCard.getExpiryDate())+ "\n";
 
         } else if (secret instanceof CryptoWallet) {

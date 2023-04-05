@@ -8,9 +8,7 @@ cd ..
 
 cd text-ui-test
 
-echo yeet
 java -ea -jar $(find ../build/libs/ -mindepth 1 -print -quit) < input.txt > ACTUAL.TXT
-echo yeet2
 
 # Remove trailing whitespaces
 sed -i 's/[[:blank:]]*$//' EXPECTED.TXT

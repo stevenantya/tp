@@ -1,0 +1,59 @@
+_____________________________________________________
+No Save File Detected
+_____________________________________________________
+Welcome to secureNUS v2.1
+     .--------.
+    / .------. \
+   / /        \ \
+   | |        | |
+  _| |________| |_
+.' |_|        |_| '.
+'._____ ____ _____.'
+|     .'____'.     |
+'.__.'.'    '.'.__.'
+'.__  | NUS  |  __.'
+|   '.'.____.'.'   |
+'.____'.____.'____.'
+'.________________.'
+
+Current Features
+Adding a password      : new NAME [f/FOLDER_NAME]
+Adding a NUSNet ID     : new o/NUSNet NAME [f/FOLDER_NAME]
+Adding a Student ID    : new o/StudentID NAME [f/FOLDER_NAME]
+Adding a Credit Card   : new o/CreditCard NAME [f/FOLDER_NAME]
+Adding a Wifi Password : new o/WifiPassword NAME [f/FOLDER_NAME]
+Adding a Crypto Wallet : new o/Crypto NAME [f/FOLDER_NAME]
+
+_____________________________________________________
+Please enter YOUR NUS Net ID:
+Please enter your password:
+_____________________________________________________
+I have added a new NUS Net ID password:
+
+name       = nusnet1
+folder     = unnamed
+NUS Net ID = e0123456
+password   = *******
+_____________________________________________________
+_____________________________________________________
+Oops! Error encountered RepeatedId: This name has been used before. Use a different name
+_____________________________________________________
+Oops! Error encountered Invalid Command: Type 'menu' command to see the list of usable commands
+_____________________________________________________
+_____________________________________________________
+List of secrets:
+1. Type of Secret: Student ID
+Name: student2
+Folder: unnamed
+Student ID: A0123456R
+
+2. Type of Secret: NUSNet ID
+Name: nusnet1
+Folder: unnamed
+NUSNet ID: e0123456
+Password: ********
+
+_____________________________________________________
+_____________________________________________________
+_____________________________________________________
+_____________________________________________________
