@@ -94,7 +94,9 @@ public class WifiPassword extends Secret{
      */
     @Override
     public String getRevealStr() {
-        return String.format("Password: %s", password);
+        return String.format("Name: %s\n"+
+                "Username: %s\n" +
+                "Password: %s", getName(), username, password);
     }
 
     @Override

@@ -150,7 +150,9 @@ public class CryptoWallet extends Secret {
      */
     @Override
     public String getRevealStr() {
-        return String.format("Seed Phrase: %s", seedPhrase);
+        return String.format("Name: %s\n" +
+                "Seed Phrase: %s\n" +
+                "Private Key: %s", getName(), seedPhrase, privateKey);
     }
 
     @Override
