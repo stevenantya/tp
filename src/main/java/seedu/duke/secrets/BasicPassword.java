@@ -111,4 +111,20 @@ public class BasicPassword extends Secret{
     public String getUsername() {
         return username;
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setUrl(String url) throws InvalidURLException {
+        if (url.contains(".") && (url.indexOf(".") == url.lastIndexOf("."))) {
+            this.url = url;
+        } else {
+            throw new InvalidURLException();
+        }
+    }
 }
