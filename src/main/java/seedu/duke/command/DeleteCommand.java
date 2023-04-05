@@ -12,7 +12,7 @@ import seedu.duke.storage.SecretMaster;
 public class DeleteCommand extends Command {
 
     private String secretName;
-    private String folderName;
+    private String[] secretNames;
 
     /**
      * Class constructor that extracts the name of the secret and its folder from the input string.
@@ -20,8 +20,7 @@ public class DeleteCommand extends Command {
      * @param input the input string from the user
      */
     public DeleteCommand(String input) {
-        this.secretName = extractName(input);
-        this.folderName = extractFolderName(input);
+        this.secretNames = extractName(input);
     }
 
     /**
@@ -30,24 +29,13 @@ public class DeleteCommand extends Command {
      * @param input the input string from the user
      * @return the name of the secret to be deleted
      */
-    public String extractName(String input) {
-        String extractedName = input.split("delete ")[1];
-        extractedName = extractedName.split(" /f")[0];
-        return extractedName;
-    }
-
-    /**
-     * Extracts the name of the folder in which the secret to be deleted is located from the input string.
-     *
-     * @param input the input string from the user
-     * @return the name of the folder in which the secret to be deleted is located
-     */
-    public String extractFolderName(String input) {
-        String extractedFolderName = "unnamed";
-        if (input.split("/f ").length > 1) {
-            extractedFolderName = input.split("/f ")[1];
+    public String[] extractName(String input) {
+        String extractedName = input.split("delete ")[1].strip();
+        String[] extractedNames = extractedName.split("p/");
+        for (int ix = 1; ix < extractedNames.length; ix += 1) {
+            extractedNames[ix] = extractedNames[ix].strip();
         }
-        return extractedFolderName;
+        return extractedNames;
     }
 
     /**
@@ -58,24 +46,27 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(SecretMaster secureNUSData) throws SecretNotFoundException {
-        Secret deleteData = null;
-        boolean isValid = false;
-        try {
-            deleteData = secureNUSData.getByName(secretName);
-            isValid = true;
-        } catch (SecretNotFoundException e) {
-            Ui.printError("Data not found!");
-            isValid = false;
-        }
-        if (isValid && (deleteData != null)) {
-            System.out.println("You deleted " + secretName + " in folder: " + folderName);
+        for (int index = 1; index < secretNames.length; index += 1) {
+            secretName = secretNames[index];
+            Secret deleteData = null;
+            boolean isValid = false;
             try {
-                secureNUSData.removeSecret(deleteData);
+                deleteData = secureNUSData.getByName(secretName);
+                isValid = true;
             } catch (SecretNotFoundException e) {
                 Ui.printError("Data not found!");
+                isValid = false;
             }
-        } else {
-            System.out.println("Please enter a valid secret name!");
+            if (isValid && (deleteData != null)) {
+                System.out.println("You deleted " + secretName);
+                try {
+                    secureNUSData.removeSecret(deleteData);
+                } catch (SecretNotFoundException e) {
+                    Ui.printError("Data not found!");
+                }
+            } else {
+                System.out.println("Please enter a valid secret name!");
+            }
         }
     }
 

@@ -1,0 +1,146 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class SecureNUS {
+-secureNUSData: SecretMaster
++ Duke()
++ run()
++ parseCommand()
++ executeCommand()
+}
+
+
+skinparam groupInheritance 3
+SecureNUS <|-- Command
+Command <|-- DeleteCommand
+Command <|-- EditCommand
+Command <|-- ExitCommand
+Command <|-- ListCommand
+Command <|-- MenuCommand
+Command <|-- SearchCommand
+Command <|-- ViewCommand
+Command <|-- AddSecretCommand
+AddSecretCommand <|-- AddBasicPasswordCommand
+AddSecretCommand <|-- AddCreditCardCommand
+AddSecretCommand <|-- AddNUSNetCommand
+AddSecretCommand <|-- AddStudentIDCommand
+
+abstract class Command {
+{abstract}+ isExit(): boolean
+{abstract}+ execute(SecretMaster): void
+}
+
+class AddBasicPasswordCommand {
+- username: String
+- passwordName: String
+- url: String
++ AddBasicPasswordCommand(String): void
++ AddBasicPasswordCommand(BasicPassword): void
++ extractName(String): String
++ inquireUsername(String): String
++ inquirePassword(String): String
++ inquireURL(String): String
++ execute(SecretMaster): void
+}
+
+class AddCreditCardCommand {
+- fullName: String
+- creditCardNumber: String
+- cvcNumber: int
+- expiryDate: String
++ AddCreditCardCommand(String): void
++ execute(SecretMaster): void
+}
+
+class AddNUSNetCommand {
+- nusNetId: String
+- password: String
++ AddNUSNetCommand(String): void
++ AddNUSNetCommand(NUSNet): void
++ extractName(String): String
++ inquirenusNetId(): String
++ inquirePassword(): String
++ execute(SecretMaster): void
+}
+
+class AddSecretCommand {
+- name: String
+- folderName: String
++ AddSecretCommand(String): void
++ extractName(String): String
++ extractFolderName(String): String
++ inquire(String): String
++ execute(SecretMaster): void
++ isExit(): boolean
+}
+
+class AddStudentIDCommand {
+- studentID: String
++ AddStudentIDCommand(String): void
++ AddStudentIDCommand(StudentID): void
++ extractName(String): String
++ inquireStudentID(): String
++ execute(SecretMaster): void
+}
+
+class DeleteCommand {
+- secretName: String
+- folderName: String
++ DeleteCommand(String): void
++ extractName(String): String
++ extractFolderName(String): String
++ isExit(): boolean
++ execute(SecretMaster): void
+}
+
+class EditCommand {
+- name: String
+- newFolderName: String
+- newDescription: String
+- newName: String
++ EditCommand(String): void
++ extract(String) : String[]
++ isExit(): boolean
++ execute(SecretMaster): void
+}
+
+class ExitCommand {
++ ExitCommand(): void
++ isExit(): boolean
++ execute(SecretMaster): void
+}
+
+class ListCommand {
+- folderName: String
++ ListCommand(String): void
++ extractFolderName(String): String
+- getSecretTypeInfo(Secret): String
++ isExit(): boolean
++ execute(SecretMaster): void
+}
+
+class MenuCommand {
++ displayMenu: void
++ isExit(): boolean
++ execute(SecretMaster): void
+}
+
+class SearchCommand {
+- name
+- folderName
+- newDescription
++ SearchCommand(String): void
++ extractName(String): String
++ extractFolderName(String): String
++ isExit(): boolean
++ execute(SecretMaster): void
+}
+
+class ViewCommand {
+- passwordName
++ ViewCommand(String): void
++ extractName(String): String
++ isExit(): boolean
++ execute(SecretMaster): void
+}
+@enduml
