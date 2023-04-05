@@ -4,6 +4,13 @@
 **SecureNUS**, a Command Line Interface (CLI) based password manager for students in National University of
 Singapore (NUS) to store and refer to their passwords in a jiffy.
 
+The application offers various functionalities such as creating, removing, displaying, finding, storing, and 
+retrieving passwords, as well as modifying password information.
+
+Additionally, the app provides a menu function that displays summaries and syntax for commands.
+
+Users can easily navigate and operate the app, which is designed to be user-friendly and effective. 
+
 ### Summary of Contributions
 #### Code Contributed: 
 * List of all the passwords entered by the user. 
@@ -46,8 +53,11 @@ to store).
 * Helped in reiterating timelines and submission requirements to the team for timely and quality submissions. 
 
 #### Contributions beyond the project team:
-* Reported bugs in other projects (mention team names) during the PE Dry Run and PE
-* Gave suggestions and feedbacks to other teams about the DG and Code Quality 
+* Reported bugs in other projects (mention team names) during the PE Dry Run and PE.\
+[View the PE-D contribution here](https://github.com/DeepanjaliDhawan/ped/issues)
+* Gave suggestions and feedbacks to other teams about the DG and Code Quality.
+[View the DG contribution here](https://github.com/nus-cs2113-AY2223S2/tp/pull/20/files)
 * Contributed in giving inputs to other team after reviewing their draft User guide
+
 
 
