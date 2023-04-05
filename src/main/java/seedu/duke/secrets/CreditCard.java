@@ -178,10 +178,11 @@ public class CreditCard extends Secret {
     @Override
     public String getRevealStr() {
         return String.format(
-                "Name: %s\n"+
+                "Name: %s\n" +
+                "Full Name: %s\n" +
                 "Credit Card Number: %s\n" +
                 "CVC Number: %s\n" +
-                "Expiry Date: %s", getName(), creditCardNumber, cvcNumber,
+                "Expiry Date: %s", getName(), getFullName(), creditCardNumber, cvcNumber,
                 expiryDate);
     }
 

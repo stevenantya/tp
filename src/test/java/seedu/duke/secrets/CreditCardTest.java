@@ -125,13 +125,17 @@ class CreditCardTest {
         CreditCard creditCard = new CreditCard("creditCard1", "folder1",
                 "John Doe Lim Guang", "1234567890123456", "123",
                 "12/23");
-        assertEquals("Credit Card Number: 1234567890123456\n" +
+        assertEquals("Name: creditCard1\n" +
+                "Full Name: John Doe Lim Guang\n" +
+                "Credit Card Number: 1234567890123456\n" +
                 "CVC Number: 123\n" +
                 "Expiry Date: 12/23", creditCard.getRevealStr());
         CreditCard creditCard2 = new CreditCard("creditCard1",
                 "John Doe Lim Guang", "1234567890123456", "123",
                 "12/23");
-        assertEquals("Credit Card Number: 1234567890123456\n" +
+        assertEquals("Name: creditCard1\n" +
+                "Full Name: John Doe Lim Guang\n" +
+                "Credit Card Number: 1234567890123456\n" +
                 "CVC Number: 123\n" +
                 "Expiry Date: 12/23", creditCard2.getRevealStr());
     }

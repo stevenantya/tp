@@ -71,7 +71,7 @@ class ViewCommandTest {
         ViewCommand viewCommand = new ViewCommand("view " + TEST_NAME, mockSecureNUSData.getSecretNames());
         viewCommand.execute(mockSecureNUSData);
 
-        assertEquals(TEST_REVEAL_STR, output.toString());
+        assertEquals(TEST_REVEAL_STR, output.toString().trim());
     }
 
     @Test
