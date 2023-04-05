@@ -22,12 +22,12 @@ public class SecretMaster {
     /**
      * Object that manages searching for secrets.
      */
-    private SecretSearcher secretSearcher; // Hash Table
+    private SecretSearcher secretSearcher;
 
     /**
      * Object that manages enumerating secrets or listing secrets in the order it was added in.
      */
-    private SecretEnumerator secretEnumerator; // Array view
+    private SecretEnumerator secretEnumerator;
 
     /**
      * HashSet that stores the names of folders and ensure folders and passwords are distinct.
@@ -204,7 +204,6 @@ public class SecretMaster {
             throw new RepeatedIdException();
         }
         String folderName = secret.getFolderName();
-        // Creating a new folder
 
         if (folderName != null) {
             createFolder(folderName);
