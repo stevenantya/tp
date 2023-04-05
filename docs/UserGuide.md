@@ -51,6 +51,7 @@ update them](#general-format--edit-ppasswordname--f-nfnewfoldername--d-ndnew des
 * Extraneous parameters for commands that do not take in parameters (such as `menu`, and `exit`) will be ignored. <br>
 e.g. if the command specifies `menu 234`, it will be interpreted as `menu`.
 
+<br>
 
 ### [Add a new password: `new`](#span-styletext-decorationunderlinefeature-listspan)
 - Adds a new password in SecureNUS based on the type of the password.
@@ -188,11 +189,15 @@ Enter your new password:
 
 ###### General Format: `menu`
 
+<br>
+
 ### [Exiting the Program: `exit`](#span-styletext-decorationunderlinefeature-listspan)
 - Exits the program. 
 - Shows a message with all possible commands and syntax.
 
 ###### General Format: `exit`
+
+<br>
 
 ## **<span style="text-decoration:underline;">FAQ's</span>**
 
