@@ -124,15 +124,6 @@ public class AddNUSNetCommand extends Command{
         return password;
     }
 
-    /**
-     * Extracts the URL from the user's input.
-     *
-     * @param input the user's input string
-     * @return an empty string
-     */
-    public String extractURL(String input) {
-        return "";
-    }
     @Override
     public boolean isExit() {
         return false;
