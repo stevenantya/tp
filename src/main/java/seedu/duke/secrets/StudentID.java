@@ -67,4 +67,8 @@ public class StudentID extends Secret {
                         "StudentID: %s",
                 getName(), studentID);
     }
+
+    public void setStudentID(String studentID) {
+        this.studentID = studentID;
+    }
 }

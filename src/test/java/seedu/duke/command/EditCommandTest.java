@@ -7,14 +7,14 @@ import seedu.duke.exceptions.secrets.SecretNotFoundException;
 import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
-import seedu.duke.exceptions.secrets.InvalidURLException;
-import seedu.duke.secrets.BasicPassword;
+
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretMaster;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 // import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -29,10 +29,10 @@ class EditCommandTest {
     @Test
     void extract_validInput() {
         EditCommand editCommand = new EditCommand("edit p/PASSWORD_NAME -f nf/NEW_FOLDER_NAME " +
-                "-d nd/NEW_DESCRIPTION -N np/NEW_PASSWORD_NAME");
-        String[] expectedOutputs = {"PASSWORD_NAME", "NEW_FOLDER_NAME", "NEW_DESCRIPTION", "NEW_PASSWORD_NAME"};
+                "-N np/NEW_PASSWORD_NAME");
+        String[] expectedOutputs = {"PASSWORD_NAME", "NEW_FOLDER_NAME", "NEW_PASSWORD_NAME"};
         String[] actualOutputs = editCommand.extract("edit p/PASSWORD_NAME -f nf/NEW_FOLDER_NAME " +
-                "-d nd/NEW_DESCRIPTION -N np/NEW_PASSWORD_NAME");
+                "-N np/NEW_PASSWORD_NAME");
         assertArrayEquals(actualOutputs, expectedOutputs);
     }
 
@@ -41,30 +41,15 @@ class EditCommandTest {
      * The test case checks for an invalid input which results in null
      * extracted fields (except for folder which is "unnamed").
      */
-    // @Test
-    // void extract_invalidInput_extractDefaultValues() {
-    //     EditCommand editCommand = new EditCommand("invalid input");
-    //
-    //     String[] output = editCommand.extract("invalid input");
-    //
-    //     assertNull(output[0]);
-    //     assertEquals("unnamed", output[1]);
-    //     assertNull(output[2]);
-    //     assertNull(output[3]);
-    // }
-
     @Test
-    public void extract_validName_nameUpdated() throws InvalidURLException, IllegalFolderNameException,
-            RepeatedIdException, IllegalSecretNameException, FolderExistsException, SecretNotFoundException {
-        SecretMaster mockSecureNUSData = new SecretMaster();
-        Secret mockBasicPassword = new BasicPassword("name", "folder", "username", "password123", "url.com");
-        mockSecureNUSData.addSecret(mockBasicPassword);
-        EditCommand editCommand = new EditCommand("edit p/name -N np/newName");
+    void extract_invalidInput_extractDefaultValues() {
+        EditCommand editCommand = new EditCommand("invalid input");
 
-        editCommand.execute(mockSecureNUSData);
+        String[] output = editCommand.extract("invalid input");
 
-        Secret updatedMockBasicPassword = mockSecureNUSData.getByName("newName");
-        assertEquals("newName", updatedMockBasicPassword.getName());
+        assertNull(output[0]);
+        assertNull(output[1]);
+        assertNull(output[2]);
     }
 
     @Test

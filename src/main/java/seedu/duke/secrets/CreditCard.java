@@ -101,7 +101,10 @@ public class CreditCard extends Secret {
      *
      * @param expiryDate Expiry date of the credit card in the format "MM/YY".
      */
-    public void setExpiryDate(String expiryDate) {
+    public void setExpiryDate(String expiryDate) throws InvalidExpiryDateException {
+        if (!expiryDate.matches(EXPIRY_DATE_FMT)) {
+            throw new InvalidExpiryDateException();
+        }
         this.expiryDate = expiryDate;
     }
 
@@ -155,7 +158,10 @@ public class CreditCard extends Secret {
      *
      * @param cvcNumber the new CVC number
      */
-    public void setCvcNumber(String cvcNumber) {
+    public void setCvcNumber(String cvcNumber) throws InvalidCreditCardNumberException {
+        if (!creditCardNumber.matches(CREDIT_CARD_NUMBER_FMT)) {
+            throw new InvalidCreditCardNumberException();
+        }
         this.cvcNumber = cvcNumber;
     }
 

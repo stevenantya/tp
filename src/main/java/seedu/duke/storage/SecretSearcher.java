@@ -96,7 +96,6 @@ public class SecretSearcher {
      */
     public void add(Secret secret) throws FolderExistsException {
         storage.put(secret.getUid(), secret);
-        // creates a folder if it doesn't already exist (MIGHT remove in future)
         if (!folders.containsKey(secret.getFolderName())) {
             createFolder(secret.getFolderName());
         }

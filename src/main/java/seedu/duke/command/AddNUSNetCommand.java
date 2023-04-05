@@ -35,7 +35,7 @@ public class AddNUSNetCommand extends AddSecretCommand {
     }
     public AddNUSNetCommand(NUSNet nusNet) {
         super(nusNet);
-        this.nusNetId = nusNet.getnusNetId();
+        this.nusNetId = nusNet.getNusNetId();
         this.password = nusNet.getPassword();
     }
 

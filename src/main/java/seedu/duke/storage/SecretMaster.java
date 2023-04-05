@@ -1,12 +1,22 @@
 package seedu.duke.storage;
 
+import seedu.duke.ui.Ui;
+import seedu.duke.exceptions.secrets.InvalidCreditCardNumberException;
+import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
 import seedu.duke.exceptions.secrets.FolderExistsException;
-import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.exceptions.secrets.IllegalFolderNameException;
+import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.exceptions.secrets.NonExistentFolderException;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
+
 import seedu.duke.exceptions.RepeatedIdException;
+import seedu.duke.secrets.BasicPassword;
+import seedu.duke.secrets.CreditCard;
+import seedu.duke.secrets.CryptoWallet;
+import seedu.duke.secrets.NUSNet;
 import seedu.duke.secrets.Secret;
+import seedu.duke.secrets.StudentID;
+import seedu.duke.secrets.WifiPassword;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,12 +32,12 @@ public class SecretMaster {
     /**
      * Object that manages searching for secrets.
      */
-    private SecretSearcher secretSearcher; // Hash Table
+    private SecretSearcher secretSearcher;
 
     /**
      * Object that manages enumerating secrets or listing secrets in the order it was added in.
      */
-    private SecretEnumerator secretEnumerator; // Array view
+    private SecretEnumerator secretEnumerator;
 
     /**
      * HashSet that stores the names of folders and ensure folders and passwords are distinct.
@@ -204,7 +214,6 @@ public class SecretMaster {
             throw new RepeatedIdException();
         }
         String folderName = secret.getFolderName();
-        // Creating a new folder
 
         if (folderName != null) {
             createFolder(folderName);
@@ -218,17 +227,53 @@ public class SecretMaster {
      * Updates a Secret's name and folder as well as its name in secretNames, and
      * itself in secretSearcher and secretEnumerator.
      *
-     * @param secret Secret object to be edited.
-     * @param newName updated name of the Secret object.
-     * @param newFolderName updated folder of the Secret object.
+     * @param secret         Secret object to be edited.
+     * @param newName        updated name of the Secret object.
+     * @param newFolderName  updated folder of the Secret object.
+     * @param inquiredFields
      * @throws FolderExistsException if the folder specified in the Secret already exists and cannot be created.
      */
-    public void editSecret(Secret secret, String newName, String newFolderName) throws FolderExistsException {
+    public void editSecret(Secret secret, String newName, String newFolderName,
+                           String[] inquiredFields) throws FolderExistsException {
         secretNames.remove(secret.getName());
         secretSearcher.delete(secret);
         secretEnumerator.delete(secret);
-        secret.setName(newName);
-        secret.setFolderName(newFolderName);
+
+        if (newName != null) {
+            secret.setName(newName);
+        }
+        if (newFolderName != null) {
+            secret.setFolderName(newFolderName);
+        }
+        if (secret instanceof BasicPassword) {
+            ((BasicPassword) secret).setUsername(inquiredFields[0]);
+            ((BasicPassword) secret).setPassword(inquiredFields[1]);
+            ((BasicPassword) secret).setUrl(inquiredFields[2]);
+        } else if (secret instanceof CreditCard) {
+            try {
+                ((CreditCard) secret).setFullName(inquiredFields[0]);
+                ((CreditCard) secret).setCreditCardNumber(inquiredFields[1]);
+                ((CreditCard) secret).setCvcNumber(inquiredFields[2]);
+                ((CreditCard) secret).setExpiryDate(inquiredFields[3]);
+            } catch (InvalidCreditCardNumberException e) {
+                Ui.printError("Invalid Credit Card Number! Must be 16 digits long");
+            } catch (InvalidExpiryDateException e) {
+                Ui.printError("Invalid Expiry Date! Must be in the format \"MM/YY\"");
+            }
+        } else if (secret instanceof NUSNet) {
+            ((NUSNet) secret).setNusNetId(inquiredFields[0]);
+            ((NUSNet) secret).setPassword(inquiredFields[1]);
+        } else if (secret instanceof StudentID) {
+            ((StudentID) secret).setStudentID(inquiredFields[0]);
+        } else if (secret instanceof WifiPassword) {
+            ((WifiPassword) secret).setUsername(inquiredFields[0]);
+            ((WifiPassword) secret).setPassword(inquiredFields[1]);
+        } else if (secret instanceof CryptoWallet) {
+            ((CryptoWallet) secret).setUsername(inquiredFields[0]);
+            ((CryptoWallet) secret).setPrivateKey(inquiredFields[1]);
+            ((CryptoWallet) secret).setSeedPhrase(inquiredFields[2]);
+        }
+
         secretNames.add(secret.getName());
         secretSearcher.add(secret);
         secretEnumerator.add(secret);

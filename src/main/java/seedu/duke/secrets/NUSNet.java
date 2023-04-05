@@ -52,12 +52,21 @@ public class NUSNet extends Secret{
         return password;
     }
 
+    public void setNusNetId(String nusNetId) {
+        this.nusNetId = nusNetId;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
     /**
      * Returns the NUSNet ID of the NUSNet account
      *
      * @return The NUSNet ID of the NUSNet account.
      */
-    public String getnusNetId() {
+    public String getNusNetId() {
         return nusNetId;
     }
 
