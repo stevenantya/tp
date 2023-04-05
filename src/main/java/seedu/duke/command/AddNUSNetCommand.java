@@ -9,6 +9,7 @@ import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.messages.InquiryMessages;
 import seedu.duke.secrets.NUSNet;
 import seedu.duke.storage.SecretMaster;
+import seedu.duke.ui.Ui;
 
 import java.util.HashSet;
 
@@ -58,8 +59,7 @@ public class AddNUSNetCommand extends AddSecretCommand {
         } catch (FolderExistsException | IllegalSecretNameException | IllegalFolderNameException e) {
             throw new ExceptionMain(e.getMessage());
         }
-        System.out.println("I have added a new NUS Net ID password:\n");
-        System.out.println(
+        Ui.inform("I have added a new NUS Net ID password:\n" +
                 "name       = " + name + "\n" +
                 "folder     = " + folderName + "\n" +
                 "NUS Net ID = " + nusNetId + "\n" +
@@ -72,7 +72,7 @@ public class AddNUSNetCommand extends AddSecretCommand {
      * @return the user's NUS Net ID string input
      */
     public String inquireNusNetId() throws OperationCancelException {
-        nusNetId = inquire(InquiryMessages.NUSNET_ID, "NUSNet ID");
+        String nusNetId = inquire(InquiryMessages.NUSNET_ID, "NUSNet ID");
         while (!NUSNet.isLegalId(nusNetId)) {
             nusNetId = inquire(InquiryMessages.NUSNET_ID_RETRY, "NUSNet ID");
         }

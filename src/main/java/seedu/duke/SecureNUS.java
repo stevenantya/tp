@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.secrets.FolderNotFoundException;
+import seedu.duke.exceptions.secrets.NonExistentFolderException;
 import seedu.duke.ui.Parser;
 import seedu.duke.ui.Ui;
 import seedu.duke.command.Command;
@@ -73,7 +75,6 @@ public class SecureNUS {
             if (c == null) {
                 continue;
             }
-            Ui.printLine(); //middle line
             try {
                 isExit = executeCommand(c);
             } catch (ExceptionMain e) {
@@ -81,7 +82,6 @@ public class SecureNUS {
                 return;
             }
             
-            Ui.printLine(); //end line
         }
         Ui.close();
         Backend.updateStorage(this.secureNUSData.listSecrets());
@@ -96,9 +96,8 @@ public class SecureNUS {
     public Command parseCommand() {
         String input = Ui.readCommand();
         Command command = null;
-        Ui.printLine(); //top most line
         try {
-            command = Parser.parse(input, secureNUSData.getSecretNames());
+            command = Parser.parse(input, secureNUSData.getSecretNames(), secureNUSData.getFolders());
         } catch(InvalidCommandException e) {
             Ui.printError(ErrorMessages.INVALID_COMMAND);
             return null;
@@ -114,6 +113,10 @@ public class SecureNUS {
             Ui.printError(ErrorMessages.REPEATED_ID);
         } catch (InvalidFieldException e) {
             Ui.printError(ErrorMessages.INVALID_FIELD);
+        } catch (SecretNotFoundException e) {
+            Ui.printError(ErrorMessages.SECRET_NOT_FOUND);
+        } catch (FolderNotFoundException e) {
+            Ui.printError(ErrorMessages.FOLDER_NOT_FOUND);
         }
         return command;
     }
@@ -127,8 +130,7 @@ public class SecureNUS {
      * @throws IllegalSecretNameException    If the name of a secret is not valid.
      * @throws SecretNotFoundException       If the specified secret cannot be found.
      */
-    public boolean executeCommand(Command command) throws IllegalFolderNameException, IllegalSecretNameException,
-            SecretNotFoundException, ExceptionMain {
+    public boolean executeCommand(Command command) throws ExceptionMain {
         if (command != null) {
             try {
                 command.execute(secureNUSData);
@@ -137,6 +139,14 @@ public class SecureNUS {
                 Ui.printError(e.getMessage()); //do they want UI to handle it or?
                 LOGGER.log(Level.SEVERE, DUKE_LOG_EXECUTECOMMAND_IDENTIFIER, e);
                 DukeLogger.close();
+            } catch (NonExistentFolderException e) {
+                Ui.printError("Folder Input does not exist");
+            } catch (SecretNotFoundException e) {
+                Ui.printError("Make sure you follow this format: \"edit p/PASSWORD_NAME\"");
+            } catch (FolderExistsException e) {
+                Ui.printError("Unknown Error: That folder already exists");
+            } catch (OperationCancelException e) { // no issue, just cancel operation
+                Ui.informOperationCancel();
             }
         }
         return false;

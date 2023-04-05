@@ -1,15 +1,13 @@
 package seedu.duke.command;
 
-import seedu.duke.ui.Ui;
 import seedu.duke.exceptions.ExceptionMain;
-import seedu.duke.exceptions.OperationCancelException;
 import seedu.duke.exceptions.RepeatedIdException;
 import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
-import seedu.duke.messages.InquiryMessages;
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretMaster;
+import seedu.duke.ui.Ui;
 
 import java.util.HashSet;
 
@@ -17,9 +15,7 @@ import java.util.HashSet;
  * Represents the Class to give a command to add a secret.
  */
 public abstract class AddSecretCommand extends Command {
-    protected static final String HIDDEN_FIELD = "*******";
-    protected static final String CANCEL_COMMAND = "c/";
-    private static final String EMPTY_STRING_REGEX = "[ ]*";
+
     protected String name;
     protected String folderName;
 
@@ -56,63 +52,6 @@ public abstract class AddSecretCommand extends Command {
             throw new RepeatedIdException();
         }
     }
-    /**
-     * Extracts the name of the secret from the input command.
-     * 
-     * @param input the input command string
-     * @return the name of the secret
-     */
-    public String extractName(String input, String keyword) {
-        String extractedName = input.split(keyword + " ")[1];
-        extractedName = extractedName.split(" f/")[0];
-        return extractedName;
-    }
-
-    /**
-     * Extracts the folder name of the secret from the input command.
-     *
-     * @param input the input command string
-     * @return the folder name of the secret
-     */
-    public String extractFolderName(String input) {
-        String extractedFolderName = "unnamed";
-        if (input.split(" f/").length > 1) {
-            extractedFolderName = input.split(" f/")[1];
-            extractedFolderName = extractedFolderName.split(" ")[0];
-        }
-        return extractedFolderName;
-    }
-
-    public boolean isEmptyEntry(String input) {
-        return input.equals("") ||
-                input.matches(EMPTY_STRING_REGEX) ||
-                input == null;
-    }
-
-
-    /**
-     * Prompts the user for input and returns the user's response.
-     * 
-     * @param question the question to ask the user
-     * @return return the user's response
-     */
-    public String inquire(String question, String fieldName) throws OperationCancelException {
-        String result = query(question);
-        while (isEmptyEntry(result)) {
-            System.out.println(String.format(InquiryMessages.TEMPLATE_EMPTY, fieldName));
-            result = query(question);
-        }
-        return result;
-    }
-
-    public String query(String question) throws OperationCancelException {
-        System.out.println(question);
-        String line = Ui.readLine();
-        if (line.equals(CANCEL_COMMAND)) {
-            throw new OperationCancelException();
-        }
-        return line;
-    }
 
     /**
      * Executes the AddSecretCommand.
@@ -130,8 +69,8 @@ public abstract class AddSecretCommand extends Command {
         } catch (FolderExistsException | IllegalSecretNameException | IllegalFolderNameException e) {
             throw new ExceptionMain(e.getMessage());
         }
-        System.out.println("I have added a new Secret:\n");
-        System.out.println("name     = " + name + "\n" +
+        Ui.inform("I have added a new Secret:\n" +
+                "name     = " + name + "\n" +
                 "folder   = " + folderName + "\n");
     }
 

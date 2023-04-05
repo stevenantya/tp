@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.InsufficientParamsException;
 import seedu.duke.ui.Ui;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
 import seedu.duke.secrets.Secret;
@@ -19,8 +20,11 @@ public class DeleteCommand extends Command {
      *
      * @param input the input string from the user
      */
-    public DeleteCommand(String input) {
+    public DeleteCommand(String input) throws InsufficientParamsException {
         this.secretNames = extractName(input);
+        if (secretNames.length == 0) {
+            throw new InsufficientParamsException();
+        }
     }
 
     /**
@@ -54,7 +58,7 @@ public class DeleteCommand extends Command {
                 deleteData = secureNUSData.getByName(secretName);
                 isValid = true;
             } catch (SecretNotFoundException e) {
-                Ui.printError("Data not found!");
+                Ui.printError("Secret Not Found: " + secretName);
                 isValid = false;
             }
             if (isValid && (deleteData != null)) {
@@ -62,7 +66,7 @@ public class DeleteCommand extends Command {
                 try {
                     secureNUSData.removeSecret(deleteData);
                 } catch (SecretNotFoundException e) {
-                    Ui.printError("Data not found!");
+                    Ui.printError("Secret Not Found: " + secretName);
                 }
             } else {
                 System.out.println("Please enter a valid secret name!");

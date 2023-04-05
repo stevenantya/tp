@@ -10,6 +10,7 @@ import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.messages.InquiryMessages;
 import seedu.duke.secrets.BasicPassword;
 import seedu.duke.storage.SecretMaster;
+import seedu.duke.ui.Ui;
 
 import java.util.HashSet;
 
@@ -77,12 +78,12 @@ public class AddBasicPasswordCommand extends AddSecretCommand {
         } catch (IllegalFolderNameException e) {
             throw new ExceptionMain("Unknown Error: Basic Password Command");
         }
-        System.out.println("I have added a new basic password:\n");
-        System.out.println("name     = " + name + "\n" +
-                           "folder   = " + folderName + "\n" +
-                           "url      = " + url + "\n" +
-                           "username = " + username + "\n" +
-                           "password = " + HIDDEN_FIELD);
+        Ui.inform("I have added a new basic password:\n" +
+                "name     = " + name + "\n" +
+               "folder   = " + folderName + "\n" +
+               "url      = " + url + "\n" +
+               "username = " + username + "\n" +
+               "password = " + HIDDEN_FIELD);
     }
 
     /**

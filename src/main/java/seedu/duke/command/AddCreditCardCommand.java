@@ -71,8 +71,7 @@ public class AddCreditCardCommand extends AddSecretCommand {
         } catch (IllegalFolderNameException e) {
             Ui.printError(ErrorMessages.ILLEGAL_FOLDER_NAME);
         }
-        System.out.println("I have added a new Credit Card:\n");
-        System.out.println(
+        Ui.inform("I have added a new Credit Card:\n" +
                 "Name           = " + name + "\n" +
                 "Folder         = " + folderName + "\n" +
                 "Full Name      = " + fullName + "\n" +
@@ -82,7 +81,7 @@ public class AddCreditCardCommand extends AddSecretCommand {
     }
 
     public String inquireCreditCardNumber() throws OperationCancelException {
-        creditCardNumber = inquire(InquiryMessages.CREDIT_CARD_NUMBER, "Credit Card Number");;
+        String creditCardNumber = inquire(InquiryMessages.CREDIT_CARD_NUMBER, "Credit Card Number");;
         while(!CreditCard.isLegalCreditCardNumber(creditCardNumber)) {
             System.out.println(InquiryMessages.CREDIT_CARD_NUMBER_RETRY);
             creditCardNumber = inquire(InquiryMessages.CREDIT_CARD_NUMBER, "Credit Card Number");

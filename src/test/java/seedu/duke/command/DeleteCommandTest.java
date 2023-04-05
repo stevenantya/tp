@@ -2,7 +2,11 @@ package seedu.duke.command;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.ExceptionMain;
 
+import seedu.duke.exceptions.InsufficientParamsException;
+import seedu.duke.exceptions.OperationCancelException;
+import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.InvalidURLException;
+import seedu.duke.exceptions.secrets.NonExistentFolderException;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
 import seedu.duke.secrets.BasicPassword;
 
@@ -19,7 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class DeleteCommandTest {
     //Missing Wi-Fi password
     @Test
-    public void studentIDTestFolder() throws SecretNotFoundException, ExceptionMain, InvalidURLException {
+    public void studentIDTestFolder() throws SecretNotFoundException, ExceptionMain, InvalidURLException,
+            InsufficientParamsException, OperationCancelException, FolderExistsException, NonExistentFolderException {
         SecretMaster sm = new SecretMaster();
 
         StudentID studentID = new StudentID("StudentID2Name", "StudentsOfNUS", "A021313G");

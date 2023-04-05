@@ -68,9 +68,13 @@ class WifiPasswordTest {
     void testRevealOutput() {
         WifiPassword wifiPassword = new WifiPassword("wifi1", "folder1", "admin",
                 "P@ssword1");
-        assertEquals("Password: P@ssword1", wifiPassword.getRevealStr());
+        assertEquals("Name: wifi1\n" +
+                "Username: admin\n" +
+                "Password: P@ssword1", wifiPassword.getRevealStr());
         WifiPassword wifiPassword2 = new WifiPassword("wifi1", "admin",
                 "P@ssword1");
-        assertEquals("Password: P@ssword1", wifiPassword2.getRevealStr());
+        assertEquals("Name: wifi1\n" +
+                "Username: admin\n" +
+                "Password: P@ssword1", wifiPassword2.getRevealStr());
     }
 }

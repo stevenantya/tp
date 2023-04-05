@@ -25,18 +25,18 @@ Adding a Wifi Password : new o/WifiPassword NAME [f/FOLDER_NAME]
 Adding a Crypto Wallet : new o/Crypto NAME [f/FOLDER_NAME]
 
 _____________________________________________________
+There are no secrets in this folder.
+_____________________________________________________
 Please enter the URL:
 Please enter your username:
 Please enter your password:
 _____________________________________________________
 I have added a new basic password:
-
 name     = password1
 folder   = unnamed
 url      = gg.com
 username = username1
 password = *******
-_____________________________________________________
 _____________________________________________________
 _____________________________________________________
 List of secrets:
@@ -47,7 +47,4 @@ Username: username1
 URL: gg.com
 Password: ********
 
-_____________________________________________________
-_____________________________________________________
-_____________________________________________________
 _____________________________________________________

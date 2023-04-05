@@ -9,6 +9,7 @@ import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.messages.InquiryMessages;
 import seedu.duke.secrets.CryptoWallet;
 import seedu.duke.storage.SecretMaster;
+import seedu.duke.ui.Ui;
 
 import java.util.HashSet;
 
@@ -61,13 +62,12 @@ public class AddCryptoWalletCommand extends AddSecretCommand {
         } catch (IllegalFolderNameException e) {
             throw new ExceptionMain(e.getMessage());
         }
-        System.out.println("I have added a new Student ID:\n");
-        System.out.println(
+        Ui.inform("I have added a new Student ID:\n" +
                 "name       = " + name + "\n" +
                 "Folder     = " + folderName + "\n" +
                 "Username   = " + username + "\n" +
-                "Private Key= " + privateKey + "\n" +
-                "Seed Phrase= " + seedPhrase);
+                "Private Key= " + HIDDEN_FIELD + "\n" +
+                "Seed Phrase= " + HIDDEN_FIELD);
     }
 
     /**

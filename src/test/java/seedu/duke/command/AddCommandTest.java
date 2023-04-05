@@ -1,7 +1,10 @@
 package seedu.duke.command;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.ExceptionMain;
+import seedu.duke.exceptions.OperationCancelException;
+import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.InvalidURLException;
+import seedu.duke.exceptions.secrets.NonExistentFolderException;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
 import seedu.duke.secrets.BasicPassword;
 import seedu.duke.secrets.NUSNet;
@@ -15,7 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  **/
 public class AddCommandTest {
     @Test
-    public void studentIDTestFolder() throws SecretNotFoundException, ExceptionMain {
+    public void studentIDTestFolder() throws SecretNotFoundException, ExceptionMain,
+            OperationCancelException, FolderExistsException, NonExistentFolderException {
         SecretMaster sm = new SecretMaster();
         StudentID studentID = new StudentID("StudentID2Name", "StudentsOfNUS", "A021313G");
         Command addStudentId = new AddStudentIDCommand(studentID);
@@ -23,7 +27,8 @@ public class AddCommandTest {
         assertEquals("StudentID2Name",sm.getByName("StudentID2Name").getName());
     }
     @Test
-    public void nusNetFolder() throws SecretNotFoundException, ExceptionMain {
+    public void nusNetFolder() throws SecretNotFoundException, ExceptionMain, OperationCancelException,
+            FolderExistsException, NonExistentFolderException {
         SecretMaster sm = new SecretMaster();
         NUSNet nusNet = new NUSNet("NUSNetName2", "FolderName", "e081888@u.nus.edu", "Lorem Ipsum 12");
         Command addNusNet = new AddNUSNetCommand(nusNet);
@@ -31,7 +36,9 @@ public class AddCommandTest {
         assertEquals("NUSNetName2", sm.getByName("NUSNetName2").getName());
     }
     @Test
-    void basicPasswordFolder() throws InvalidURLException, SecretNotFoundException, ExceptionMain {
+    void basicPasswordFolder() throws InvalidURLException,
+            SecretNotFoundException, ExceptionMain, OperationCancelException, FolderExistsException,
+            NonExistentFolderException {
         SecretMaster sm = new SecretMaster();
         BasicPassword basicPassword =
                 new BasicPassword("basicPassword1", "FolderName", "basicUsername", "Lorem Ipsum 112", "google.com");

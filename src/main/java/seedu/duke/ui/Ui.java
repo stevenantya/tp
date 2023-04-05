@@ -66,7 +66,7 @@ public class Ui {
      * @param message Error message to be printed.
      */
     public static void printError(String message) {
-        System.out.println("Oops! Error encountered "+ message);
+        System.out.println("Oops! Error encountered: "+ message);
     }
     public static void informOperationCancel () {
         System.out.println(OperationMessages.CANCEL_OPERATION);
