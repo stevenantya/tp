@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 public class CryptoWallet extends Secret {
 
+    public static final String TYPE = "CryptoWallet";
     /**
      * Username associated with the wallet.
      */
@@ -60,6 +61,9 @@ public class CryptoWallet extends Secret {
         this.username = username;
         this.seedPhrase = seedPhrase;
         this.privateKey = privateKey;
+    }
+    public String getType() {
+        return TYPE;
     }
 
     /**

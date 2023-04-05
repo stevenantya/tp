@@ -72,7 +72,7 @@ public class AddNUSNetCommand extends AddSecretCommand {
      * @return the user's NUS Net ID string input
      */
     public String inquireNusNetId() throws OperationCancelException {
-        nusNetId = inquire(InquiryMessages.NUSNET_ID, "NUSNet ID");
+        String nusNetId = inquire(InquiryMessages.NUSNET_ID, "NUSNet ID");
         while (!NUSNet.isLegalId(nusNetId)) {
             nusNetId = inquire(InquiryMessages.NUSNET_ID_RETRY, "NUSNet ID");
         }

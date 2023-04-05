@@ -1,5 +1,9 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.OperationCancelException;
+import seedu.duke.exceptions.secrets.IllegalFolderNameException;
+import seedu.duke.exceptions.secrets.IllegalSecretNameException;
+import seedu.duke.messages.InquiryMessages;
 import seedu.duke.ui.Ui;
 import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
@@ -35,11 +39,16 @@ public class EditCommand extends Command {
      *
      * @param input the input string that specifies which secret to edit and the new values of the fields to be updated.
      */
-    public EditCommand(String input) {
+    public EditCommand(String input) throws IllegalSecretNameException, IllegalFolderNameException {
         String[] extractedFields = extract(input);
         this.name = extractedFields[0];
         this.newFolderName = extractedFields[1];
         this.newName = extractedFields[2];
+        if (Secret.isIllegalName(name) || Secret.isIllegalName(newName)) {
+            throw new IllegalSecretNameException();
+        } else if (SecretMaster.isLegalFolderName(newFolderName)) {
+            throw new IllegalFolderNameException();
+        }
     }
 
     /**
@@ -47,53 +56,36 @@ public class EditCommand extends Command {
      *
      * @return The new fields
      */
-    public String[] inquireFields(Secret secret) {
+    public String[] inquireFields(Secret secret) throws OperationCancelException {
         String[] inquiredFields = null;
-
         if (secret instanceof BasicPassword) {
             inquiredFields = new String[3];
-            System.out.println("Enter the new Username: ");
-            inquiredFields[0] = Ui.readLine();
-            System.out.println("Enter the new Password: ");
-            inquiredFields[1] = Ui.readLine();
-            System.out.println("Enter the new URL: ");
-            inquiredFields[2] = Ui.readLine();
+            inquiredFields[0] = inquire(InquiryMessages.USERNAME_EDIT, "Username");
+            inquiredFields[1] = inquire(InquiryMessages.PASSWORD_EDIT, "Password");
+            inquiredFields[2] = inquire(InquiryMessages.URL_EDIT, "URL");
         } else if (secret instanceof CreditCard) {
             inquiredFields = new String[4];
-            System.out.println("Enter the new Full Name: ");
-            inquiredFields[0] = Ui.readLine();
-            System.out.println("Enter the new Credit Card Number: ");
-            inquiredFields[1] = Ui.readLine();
-            System.out.println("Enter the new CVC Number: ");
-            inquiredFields[2] = Ui.readLine();
-            System.out.println("Enter the new Expiry Date: ");
-            inquiredFields[3] = Ui.readLine();
+            inquiredFields[0] = inquire(InquiryMessages.FULLNAME_EDIT, "Full Name");
+            inquiredFields[1] = inquireCreditCardNumber();
+            inquiredFields[2] = inquireCvcNumber();
+            inquiredFields[3] = inquireExpiryDate();
         } else if (secret instanceof NUSNet) {
             inquiredFields = new String[2];
-            System.out.println("Enter the new NUSNet ID: ");
-            inquiredFields[0] = Ui.readCommand();
-            System.out.println("Enter the new Credit Card Number: ");
-            inquiredFields[1] = Ui.readCommand();
+            inquiredFields[0] = inquireNusNetId();
+            inquiredFields[1] = inquire(InquiryMessages.PASSWORD_EDIT, "Password");
         } else if (secret instanceof StudentID) {
             inquiredFields = new String[1];
-            System.out.println("Enter the new Student ID: ");
-            inquiredFields[0] = Ui.readCommand();
+            inquiredFields[0] = inquireStudentID();
         } else if (secret instanceof WifiPassword) {
             inquiredFields = new String[2];
-            System.out.println("Enter the new Username: ");
-            inquiredFields[0] = Ui.readCommand();
-            System.out.println("Enter the new Password: ");
-            inquiredFields[1] = Ui.readCommand();
+            inquiredFields[0] = inquire(InquiryMessages.USERNAME_EDIT, "Username");
+            inquiredFields[1] = inquire(InquiryMessages.PASSWORD_EDIT, "Password");
         } else if (secret instanceof CryptoWallet) {
             inquiredFields = new String[3];
-            System.out.println("Enter the new Username: ");
-            inquiredFields[0] = Ui.readCommand();
-            System.out.println("Enter the new Private Key: ");
-            inquiredFields[1] = Ui.readCommand();
-            System.out.println("Enter the new Seed Phrase: ");
-            inquiredFields[2] = Ui.readCommand();
+            inquiredFields[0] = inquire(InquiryMessages.USERNAME_EDIT, "Username");
+            inquiredFields[1] = inquire(InquiryMessages.PRIVATE_KEY_EDIT, "Private Key");
+            inquiredFields[2] = inquire(InquiryMessages.SEED_PHRASE_EDIT, "Seed Phrase");
         }
-
         return inquiredFields;
     }
 
@@ -109,20 +101,64 @@ public class EditCommand extends Command {
 
         // Define regular expression patterns
         final Pattern namePattern = Pattern.compile("p/([\\w\\s]+)");
-        final Pattern newFolderPattern = Pattern.compile("-f nf/([\\w\\s]+)");
-        final Pattern newNamePattern = Pattern.compile("-N np/([\\w\\s]+)");  // rmb to check for valid Name
+        final Pattern newFolderPattern = Pattern.compile("nf/([\\w\\s]+)");
+        final Pattern newNamePattern = Pattern.compile("np/([\\w\\s]+)");  // rmb to check for valid Name
 
         // Extract values using regular expressions
         Matcher nameMatcher = namePattern.matcher(input);
         Matcher newFolderMatcher = newFolderPattern.matcher(input);
         Matcher newNameMatcher = newNamePattern.matcher(input);
 
-        // Check if there is a match and extract the value
         extractedFields[0] = nameMatcher.find() ? nameMatcher.group(1).trim() : null;
         extractedFields[1] = newFolderMatcher.find() ? newFolderMatcher.group(1).trim() : null;
         extractedFields[2] = newNameMatcher.find() ? newNameMatcher.group(1).trim() : null;
 
         return extractedFields;
+    }
+
+    // FOR QUICKER INQUIRY
+    public String inquireCreditCardNumber() throws OperationCancelException {
+        String creditCardNumber = inquire(InquiryMessages.CREDIT_CARD_NUMBER_EDIT, "Credit Card Number");
+        while(!CreditCard.isLegalCreditCardNumber(creditCardNumber)) {
+            System.out.println(InquiryMessages.CREDIT_CARD_NUMBER_RETRY);
+            creditCardNumber = inquire(InquiryMessages.CREDIT_CARD_NUMBER_EDIT, "Credit Card Number");
+        }
+        return creditCardNumber;
+    }
+
+
+    public String inquireCvcNumber() throws OperationCancelException {
+        String number = inquire(InquiryMessages.CVC_NUMBER_EDIT, "CVC Number");
+        while(!CreditCard.isLegalCvcNumber(number)) {
+            System.out.println(InquiryMessages.CVC_NUMBER_RETRY);
+            number = inquire(InquiryMessages.CVC_NUMBER_EDIT, "CVC Number");
+        }
+        return number;
+    }
+
+    public String inquireExpiryDate() throws OperationCancelException {
+        String number = inquire(InquiryMessages.EXPIRY_DATE_EDIT, "Expiry Date");
+        while(!CreditCard.isLegalExpiryDate(number)) {
+            System.out.println(InquiryMessages.EXPIRY_DATE_RETRY);
+            number = inquire(InquiryMessages.EXPIRY_DATE_EDIT, "Expiry Date");
+        }
+        return number;
+    }
+
+    public String inquireNusNetId() throws OperationCancelException {
+        String nusNetId = inquire(InquiryMessages.NUSNET_ID_EDIT, "NUSNet ID");
+        while (!NUSNet.isLegalId(nusNetId)) {
+            nusNetId = inquire(InquiryMessages.NUSNET_ID_RETRY, "NUSNet ID");
+        }
+        return nusNetId;
+    }
+
+    public String inquireStudentID() throws OperationCancelException {
+        String studentID = inquire(InquiryMessages.STUDENT_ID_EDIT, "Student ID");
+        while (!StudentID.isLegalId(studentID)) {
+            studentID = inquire(InquiryMessages.STUDENT_ID_RETRY, "Student ID");
+        }
+        return studentID;
     }
 
     /**
@@ -131,17 +167,12 @@ public class EditCommand extends Command {
      * @param secureNUSData the SecretMaster object containing the list of secrets.
      */
     @Override
-    public void execute(SecretMaster secureNUSData) {
+    public void execute(SecretMaster secureNUSData) throws SecretNotFoundException, OperationCancelException,
+            FolderExistsException {
         Secret passwordSecret;
-        try {
-            passwordSecret = secureNUSData.getByName(name);
-            String[] inquiredFields = inquireFields(passwordSecret);
-            secureNUSData.editSecret(passwordSecret, newName, newFolderName, inquiredFields);
-        } catch (SecretNotFoundException e) {
-            Ui.printError("(Make sure you follow this format: \"edit p/PASSWORD_NAME\")");
-        } catch (FolderExistsException e) {
-            Ui.printError("(That folder already exists)");
-        }
+        passwordSecret = secureNUSData.getByName(name);
+        String[] inquiredFields = inquireFields(passwordSecret);
+        secureNUSData.editSecret(passwordSecret, newName, newFolderName, inquiredFields);
     }
 
     /**

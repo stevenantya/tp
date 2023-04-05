@@ -82,7 +82,7 @@ public class AddCreditCardCommand extends AddSecretCommand {
     }
 
     public String inquireCreditCardNumber() throws OperationCancelException {
-        creditCardNumber = inquire(InquiryMessages.CREDIT_CARD_NUMBER, "Credit Card Number");;
+        String creditCardNumber = inquire(InquiryMessages.CREDIT_CARD_NUMBER, "Credit Card Number");;
         while(!CreditCard.isLegalCreditCardNumber(creditCardNumber)) {
             System.out.println(InquiryMessages.CREDIT_CARD_NUMBER_RETRY);
             creditCardNumber = inquire(InquiryMessages.CREDIT_CARD_NUMBER, "Credit Card Number");

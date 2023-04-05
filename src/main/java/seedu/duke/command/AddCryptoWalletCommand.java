@@ -66,8 +66,8 @@ public class AddCryptoWalletCommand extends AddSecretCommand {
                 "name       = " + name + "\n" +
                 "Folder     = " + folderName + "\n" +
                 "Username   = " + username + "\n" +
-                "Private Key= " + privateKey + "\n" +
-                "Seed Phrase= " + seedPhrase);
+                "Private Key= " + HIDDEN_FIELD + "\n" +
+                "Seed Phrase= " + HIDDEN_FIELD);
     }
 
     /**

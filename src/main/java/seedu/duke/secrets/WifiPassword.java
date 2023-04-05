@@ -6,6 +6,7 @@ import seedu.duke.Backend;
  * Class to represent a Wi-Fi password and its associated information.
  */
 public class WifiPassword extends Secret{
+    public static final String TYPE = "WifiPassword";
     private String username;
     private String password;
 
@@ -37,6 +38,10 @@ public class WifiPassword extends Secret{
         super(name, folderName);
         this.password = password;
         this.username = username;
+    }
+
+    public String getType() {
+        return TYPE;
     }
 
     /**

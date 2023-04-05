@@ -4,6 +4,7 @@ import seedu.duke.exceptions.secrets.SecretNotFoundException;
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretMaster;
 
+import java.util.HashSet;
 import java.util.Scanner;
 
 /**
@@ -17,8 +18,11 @@ public class ViewCommand extends Command {
      *
      * @param input the user input to extract the password name
      */
-    public ViewCommand(String input) {
+    public ViewCommand(String input, HashSet<String> usedNames) throws SecretNotFoundException {
         this.passwordName = extractName(input);
+        if (!usedNames.contains(passwordName)) {
+            throw new SecretNotFoundException();
+        }
     }
 
     /**
@@ -28,17 +32,7 @@ public class ViewCommand extends Command {
      * @return the password name
      */
     public String extractName(String input) {
-        return input.substring(input.indexOf("p/") + 2).trim();
-    }
-
-    /**
-     * Prompts the user to enter the secret password to reveal the password.
-     *
-     * @return the user input of the secret password
-     */
-    public String inquirePassword(Scanner in) {
-        System.out.println("Enter secret password to reveal \"" + this.passwordName + "\":");
-        return in.nextLine();
+        return super.extractName(input, "view");
     }
 
     /**
@@ -54,7 +48,7 @@ public class ViewCommand extends Command {
             System.out.println(passwordSecret.getRevealStr());
         } catch (SecretNotFoundException e) {
             System.out.println("There are no passwords that matches that name!\n" +
-                    "Make sure you follow this format: \"view p/PASSWORD_NAME\"");
+                    "Make sure you follow this format: \"view PASSWORD_NAME\"");
         }
     }
 

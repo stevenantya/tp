@@ -10,7 +10,10 @@ public class ErrorMessages {
     public static final String FOLDER_EXISTS = "Folder Exists: This should not happen, please contact administrator " +
             "if you see this";
     public static final String INSUFFICIENT_PARAMS = "Insufficient Parameters: Add the required parameters for this " +
-            "command!";
+            "command!\nPlease use the 'menu' command if you are uncertain";
     public static final String INVALID_FIELD = "The input field {o/Field} does not exist! Try one that exists " +
             "from our menu.";
+
+    public static final String SECRET_NOT_FOUND = "The input Secret is not found";
+    public static final String FOLDER_NOT_FOUND = "The input Folder is not found";
 }

@@ -11,6 +11,7 @@ import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
  * "MM/YY".
  */
 public class CreditCard extends Secret {
+    public static final String TYPE = "CreditCard";
     private static final String EXPIRY_DATE_FMT = "[0-1][0-9]/[0-3][0-9]";
     private static final String CREDIT_CARD_NUMBER_FMT = "\\d{16}";
 
@@ -73,6 +74,9 @@ public class CreditCard extends Secret {
             throw new InvalidExpiryDateException();
         }
         this.expiryDate = expiryDate;
+    }
+    public String getType() {
+        return TYPE;
     }
 
     public static boolean isLegalExpiryDate(String expiryDate) {

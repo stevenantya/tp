@@ -7,6 +7,7 @@ import seedu.duke.Backend;
  * password, and URL.
  */
 public class BasicPassword extends Secret{
+    public static final String TYPE = "BasicPassword";
     private String username;
     private String password;
     private String url;
@@ -42,6 +43,10 @@ public class BasicPassword extends Secret{
         this.password = password;
         this.username = username;
         this.url = url;
+    }
+
+    public String getType() {
+        return TYPE;
     }
 
     /**
@@ -91,6 +96,7 @@ public class BasicPassword extends Secret{
                         "Password: %s",
                 getName(), url, username, password);
     }
+
 
     /**
      * Returns the username associated with the password.
