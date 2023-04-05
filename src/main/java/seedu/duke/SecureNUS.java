@@ -75,7 +75,6 @@ public class SecureNUS {
             if (c == null) {
                 continue;
             }
-            Ui.printLine(); //middle line
             try {
                 isExit = executeCommand(c);
             } catch (ExceptionMain e) {
@@ -83,7 +82,6 @@ public class SecureNUS {
                 return;
             }
             
-            Ui.printLine(); //end line
         }
         Ui.close();
         Backend.updateStorage(this.secureNUSData.listSecrets());
@@ -98,7 +96,6 @@ public class SecureNUS {
     public Command parseCommand() {
         String input = Ui.readCommand();
         Command command = null;
-        Ui.printLine(); //top most line
         try {
             command = Parser.parse(input, secureNUSData.getSecretNames(), secureNUSData.getFolders());
         } catch(InvalidCommandException e) {

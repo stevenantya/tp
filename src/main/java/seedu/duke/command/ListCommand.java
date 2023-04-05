@@ -11,6 +11,7 @@ import seedu.duke.secrets.CryptoWallet;
 import seedu.duke.secrets.NUSNet;
 import seedu.duke.secrets.StudentID;
 import seedu.duke.secrets.WifiPassword;
+import seedu.duke.ui.Ui;
 
 
 import java.util.ArrayList;
@@ -145,9 +146,10 @@ public class ListCommand extends Command {
                 secrets = secureNUSData.listSecrets(folderName);
             }
             if (secrets.isEmpty()) {
-                System.out.println("There are no secrets in this folder.");
+                Ui.inform("There are no secrets in this folder.");
                 return;
             }
+            Ui.printLine();
             System.out.println("List of secrets:");
             int counter = 1;
             for (Secret secret : secrets) {
@@ -155,8 +157,9 @@ public class ListCommand extends Command {
                 System.out.println(counter + ". " + secretTypeInfo);
                 counter += 1;
             }
+            Ui.printLine();
         } catch (NonExistentFolderException e) {
-            System.out.println("Folder " + folderName + " does not exist.");
+            Ui.printError("Folder " + folderName + " does not exist.");
         }
     }
 

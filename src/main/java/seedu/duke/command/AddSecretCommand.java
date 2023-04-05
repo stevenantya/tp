@@ -7,6 +7,7 @@ import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretMaster;
+import seedu.duke.ui.Ui;
 
 import java.util.HashSet;
 
@@ -68,8 +69,8 @@ public abstract class AddSecretCommand extends Command {
         } catch (FolderExistsException | IllegalSecretNameException | IllegalFolderNameException e) {
             throw new ExceptionMain(e.getMessage());
         }
-        System.out.println("I have added a new Secret:\n");
-        System.out.println("name     = " + name + "\n" +
+        Ui.inform("I have added a new Secret:\n" +
+                "name     = " + name + "\n" +
                 "folder   = " + folderName + "\n");
     }
 

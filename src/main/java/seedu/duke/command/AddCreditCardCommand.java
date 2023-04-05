@@ -71,8 +71,7 @@ public class AddCreditCardCommand extends AddSecretCommand {
         } catch (IllegalFolderNameException e) {
             Ui.printError(ErrorMessages.ILLEGAL_FOLDER_NAME);
         }
-        System.out.println("I have added a new Credit Card:\n");
-        System.out.println(
+        Ui.inform("I have added a new Credit Card:\n" +
                 "Name           = " + name + "\n" +
                 "Folder         = " + folderName + "\n" +
                 "Full Name      = " + fullName + "\n" +

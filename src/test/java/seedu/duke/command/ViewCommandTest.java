@@ -28,12 +28,16 @@ class ViewCommandTest {
     private static final String TEST_USERNAME = "testUsername";
     private static final String TEST_PASSWORD = "testPassword";
     private static final String TEST_URL = "testURL.com";
-    private static final String TEST_REVEAL_STR = String.format("Name: %s\n" +
-                    "Url: %s\n" +
-                    "Username: %s\n" +
-                    "Password: %s",
+    private static final String TEST_REVEAL_STR = String.format(
+            "_____________________________________________________\n" +
+            "Name: %s\n" +
+            "Url: %s\n" +
+            "Username: %s\n" +
+            "Password: %s\n" +
+            "_____________________________________________________",
             TEST_NAME, TEST_URL, TEST_USERNAME, TEST_PASSWORD);
-    private static final String TEST_NAME_NOT_FOUND = "There are no passwords that matches that name!\n" +
+    private static final String TEST_NAME_NOT_FOUND = "Oops! Error encountered: There are no passwords that matches " +
+            "that name!\n" +
             "Make sure you follow this format: \"view PASSWORD_NAME\"";
     private final SecretMaster mockSecureNUSData = new SecretMaster();
     private final Secret mockBasicPassword;

@@ -3,9 +3,9 @@ package seedu.duke.command;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretMaster;
+import seedu.duke.ui.Ui;
 
 import java.util.HashSet;
-import java.util.Scanner;
 
 /**
  * Represents a class to give a command to view a specific secret.
@@ -45,9 +45,9 @@ public class ViewCommand extends Command {
         Secret passwordSecret;
         try {
             passwordSecret = secureNUSData.getByName(this.passwordName);
-            System.out.println(passwordSecret.getRevealStr());
+            Ui.inform(passwordSecret.getRevealStr());
         } catch (SecretNotFoundException e) {
-            System.out.println("There are no passwords that matches that name!\n" +
+            Ui.printError("There are no passwords that matches that name!\n" +
                     "Make sure you follow this format: \"view PASSWORD_NAME\"");
         }
     }

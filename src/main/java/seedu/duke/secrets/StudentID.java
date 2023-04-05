@@ -5,7 +5,7 @@ package seedu.duke.secrets;
  * It inherits from the Secret class.
  */
 public class StudentID extends Secret {
-    public static String TYPE = "StudentID";
+    public static final String TYPE = "StudentID";
     private static final String ACCEPTED_ID_REGEX = "A[0-9]{7}[A-Z]";
     private String studentID;
 

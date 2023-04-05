@@ -36,9 +36,11 @@ public class Parser {
      * @param command       user input command string
      * @return Command object corresponding to the user input
      */
-    public static Command parse(String command, HashSet<String> usedNames, HashSet<String> folders) throws InvalidCommandException,
+    public static Command parse(String command, HashSet<String> usedNames, HashSet<String> folders) throws
+            InvalidCommandException,
             InsufficientParamsException, IllegalFolderNameException, IllegalSecretNameException,
-            OperationCancelException, RepeatedIdException, InvalidFieldException, SecretNotFoundException, FolderNotFoundException {
+            OperationCancelException, RepeatedIdException, InvalidFieldException, SecretNotFoundException,
+            FolderNotFoundException {
         if (command.startsWith("new")) {
             return parseAdd(command, usedNames);
         } else if (command.startsWith("delete")) {
@@ -50,7 +52,7 @@ public class Parser {
         } else if (command.startsWith("view")) {
             return new ViewCommand(command, usedNames);
         } else if (command.startsWith("edit")) {
-            return new EditCommand(command);
+            return new EditCommand(command, usedNames);
         } else if (command.startsWith("menu")) {
             return new MenuCommand();
         } else if (command.startsWith("exit")) {

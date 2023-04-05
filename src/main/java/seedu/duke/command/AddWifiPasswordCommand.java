@@ -9,6 +9,7 @@ import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.messages.InquiryMessages;
 import seedu.duke.secrets.WifiPassword;
 import seedu.duke.storage.SecretMaster;
+import seedu.duke.ui.Ui;
 
 import java.util.HashSet;
 
@@ -58,8 +59,7 @@ public class AddWifiPasswordCommand extends AddSecretCommand {
         } catch (IllegalFolderNameException e) {
             throw new ExceptionMain(e.getMessage());
         }
-        System.out.println("I have added a new Wifi Password:\n");
-        System.out.println(
+        Ui.inform("I have added a new Wifi Password:\n" +
                 "name       = " + name + "\n" +
                 "Folder     = " + folderName + "\n" +
                 "Username   = " + username + "\n" +
