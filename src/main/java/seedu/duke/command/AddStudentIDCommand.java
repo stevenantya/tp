@@ -29,12 +29,18 @@ public class AddStudentIDCommand extends Command {
             this.name = studentId;
         }
     }
+    public AddStudentIDCommand(StudentID studentID) {
+        this.name = studentID.getName();
+        this.folderName = studentID.getFolderName();
+        this.studentId = studentID.getStudentID();
+    }
 
     /**
      * Executes the AddStudentIDCommand to add a new Student ID to the SecureNUS system.
      *
      * @param secureNUSData
      */
+
     @Override
     public void execute(SecretMaster secureNUSData) {
         StudentID studentIdData = new StudentID(name,folderName,studentId);

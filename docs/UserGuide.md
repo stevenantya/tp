@@ -1,48 +1,63 @@
 # **User Guide for SecureNUS**
 
-## **<span style="text-decoration:underline;">Introduction</span>**
+## Introduction
 SecureNUS is a desktop Command Line Interface (CLI) application that allows users to manage and store their passwords 
-securely.
+securely. It operates on a command-line interface that allows for a simple and efficient management of passwords for 
+fast typists.\
+SecureNUS aims to provide a helping hand to all the students studying in National University of Singapore who faces
+difficulty handling many passwords from different sites.
+<br>
 
-SecureNUS operates on a command-line interface that allows for a simple and efficient management of passwords for fast 
-typists. 
+- [Quick Start](#quick-start)
+- [Feature List](#feature-list)
+- [Feature Details](#feature-details)
+- [FAQ's](#faqs)
+- [Command Summary](#command-summary)
+<br>
 
-- [Quick Start](#span-styletext-decorationunderlinequick-startspan)
-- [Feature List](#span-styletext-decorationunderlinefeature-listspan)
-- [Feature Details](#span-styletext-decorationunderlinefeature-detailsspan)
-- [FAQ's](#span-styletext-decorationunderlinefaqsspan)
-- [Command Summary](#span-styletext-decorationunderlinecommand-summaryspan)
-## **<span style="text-decoration:underline;">Quick Start</span>**
+## Quick Start
 1. Ensure you have Java `11` or above installed on your computer.
-2. Download the latest `tp.jar` from [here](https://github.com/AY2223S2-CS2113-T15-2/tp/releases).
-3. Copy the `tp.jar` file to the folder for SecureNUS.
-4. Open a command terminal, `cd` into the folder you put your `tp.jar` file in, and use the `java -jar tp.jar` command
-to run the application.
+2. Download the latest `CS2113_TP.jar` from [here](https://github.com/AY2223S2-CS2113-T15-2/tp/releases).
+   <img src="./UGImages/QuickStart/RetrievingJARFile.png" width="100%" />
+
+3. Move the `CS2113_TP.jar` file to a desired folder.
+4. Open a command terminal, `cd "<path of file>"` into the folder to where you put your `CS2113_TP.jar` file in, 
+and use the `java -jar CS2113_TP.jar` command to start SecureNUS. 
+<img src="./UGImages/QuickStart/JavaAppStart.png" width="100%" />
+If above steps are correctly followed, you will see
+the following on startup.
+    ````text
+     Welcome to secureNUS v1.0
+     Current Features
+     Adding a password      : new [NAME] /f [FOLDER_NAME]
+     Adding a NUSNet ID     : new o/NUSNet [NAME] /f [FOLDER_NAME]
+     Adding a Student ID    : new o/StudentID [NAME] /f [FOLDER_NAME]
+    ````
 5. Type the command in the command box and press Enter to execute it.<br> e.g. typing `menu` and pressing Enter key 
 will open the menu window.
- 
-## **<span style="text-decoration:underline;">Feature List</span>**
-1. [Add `new` password](#add-a-new-password--new)
+
+6. To exit SecureNUS, type `exit` command.
+
+## Feature List
+1. [Add new password](#add-a-new-password)
    - Type of Passwords
      1. Basic Password
      2. Credit Card
      3. Crypto Wallet
-     4. NUSNet
-     5. StudentID - Starting with A
-     6. Wifi Password
-2. [`delete` a password](#deleting-a-password--delete) 
-3. [`list` all passwords](#general-format--list-ffoldername)
-4. [`view`password](#viewing-password-in-command-line--view) 
-5. [`search` for password](#general-format--search-nnamelike--f-ffolderlike)
-6. [`save` the passwords into a .txt file](#general-format--save) 
-7. [`load` all passwords from a .txt file](#general-format--load--a-append-ffilepath)
-8. [`edit` 
-the old passwords and
-update them](#general-format--edit-ppasswordname--f-nfnewfoldername--d-ndnew description--n-npnewpasswordname)
-9. [`menu` of all the commands for a quick reference](#menu--menu)
-10. [`exit` for users to close SecureNUS](#exiting-the-program--exit)
+     4. NUSNet (Starting with 'e')
+     5. StudentID (Starting with 'A')
+     6. WiFi Password
+2. [Delete a password](#delete-a-password) 
+3. [List passwords](#list-all-passwords)
+4. [View password](#viewing-password-in-command-line) 
+5. [Search for a specific password](#general-format--search-nnamelike--f-ffolderlike)
+6. [Save the passwords](#general-format--save) 
+7. [Load all passwords](#general-format--load--a-append-ffilepath)
+8. [Edit current passwords](#general-format--edit-ppasswordname--f-nfnewfoldername--d-ndnew description--n-npnewpasswordname)
+9. [Menu for commands](#menu--menu)
+10. [Exit ](#exiting-the-program--exit)
 
-## **<span style="text-decoration:underline;">Feature Details</span>**
+## Feature Details
 
 #### Note about the command format:
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.
@@ -51,108 +66,81 @@ update them](#general-format--edit-ppasswordname--f-nfnewfoldername--d-ndnew des
 * Extraneous parameters for commands that do not take in parameters (such as `menu`, and `exit`) will be ignored. <br>
 e.g. if the command specifies `menu 234`, it will be interpreted as `menu`.
 
+<br>
 
-### [Add a new password: `new`](#span-styletext-decorationunderlinefeature-listspan)
+### Add a new password
 - Adds a new password in SecureNUS based on the type of the password.
-- Opens a list of questions to fill in including username, password, etc.
-- Ctrl-C at any time to cancel the creation.
+- Opens a list of questions to fill required particulars based on the option of the password selected.
+- Ctrl+C at any time to cancel the creation.
 
-###### General Format:  `new [o/ OPTIONS] PASSWORD_NAME [f/ FOLDER_NAME]`
-###### Types of passwords: 
-1. Basic Password `new PASSWORD_NAME`
-2. Credit Card `new o/CreditCard PASSWORD_NAME`
-3. Cryptocurrency Wallet `new o/CryptoWallet PASSWORD_NAME`
-4. NUSNet ID `new o/NUSNet PASSWORD_NAME`
-5. Student ID `new o/StudentID PASSWORD_NAME`
-6. Wifi Password `new o/WifiPassword PASSWORD_NAME`
+###### General Format:  `new [o/OPTIONS] PASSWORD_NAME [f/ FOLDER_NAME]`
+###### Options of passwords: 
+1. Basic Password - `new PASSWORD_NAME [f/ FOLDER_NAME]`
+2. Credit Card - `new [o/CreditCard] PASSWORD_NAME [f/ FOLDER_NAME]`
+3. Crypto Wallet - `new [o/CryptoWallet] PASSWORD_NAME [f/ FOLDER_NAME]`
+4. NUSNet ID - `new [o/NUSNet] PASSWORD_NAME [f/ FOLDER_NAME]`
+5. Student ID - `new [o/StudentID] PASSWORD_NAME [f/ FOLDER_NAME]`
+6. WiFi Password - `new [o/WifiPassword] PASSWORD_NAME [f/ FOLDER_NAME]`
 
 ###### Examples: <br>
-```
-new password_name 
-new password_name /f folder_name 
-new o/CreditCard password123
-new o/CryptoWallet password234 f/ folder_name
-```
+<img src="./UGImages/AddPassword/Example1.png" width="65%" /> <br>
+<img src="./UGImages/AddPassword/Example2.png" width="65%" />
 <br>
 
-### [Deleting a password: `delete`](#span-styletext-decorationunderlinefeature-listspan)
+### Delete a password
 - Deletes a list of passwords. The hash or name of the password can be used.
-###### General Format: `delete p1/PASSWORD_1 [p2/PASSWORD_2] […]`
+###### General Format: `delete PASSWORD_NAME1 PASSWORD_NAME2 […]`
 ###### Examples: <br>
 ```
-delete p1/canvas.nus.edu.sg p2/www.gmail.com
+// Have to update latest image 
 ```
 <br>
 
-### [List all passwords: `list`](#span-styletext-decorationunderlinefeature-listspan)
+### List all passwords
 - List all the passwords in the folder specified.
 - If a folder is added, it will only list out passwords in the folder else it will list out all the passwords stored by
   the user irrespective of folder name.
-###### General Format: `list [f/FOLDER_NAME]`
+- For password security, the password will be masked with asterisks (********) which can be viewed by the `view` command
+###### General Format: `list [FOLDER_NAME]`
 
 ###### Examples: <br>
-**<span style="text-decoration:underline;"></span>**
-```
-list
-list f/School_Websites
-```
-Output: 
-```
-ID: 1 | canvas.nus.edu.sg	| School Module Website	
-ID: 2 | nus.edu.sg		| School Website		
-ID: 3 | outlook.com		| School Email		
-```
+
+<img src="./UGImages/ListPassword/ListwithoutFolder.jpg" width="65%" />
+<img src="./UGImages/ListPassword/ListwithFolder.jpg" width="65%" />
 
 <br>
 
-### [Viewing Password in Command Line: `view`](#span-styletext-decorationunderlinefeature-listspan)
-
-- Since the password is sensitive, it will only be revealed on specific command. Either the password_name or 
-password_hash must be used to reveal it. 
-- For passwords that are “password-required”, a secret password is required to reveal.
+### View Password in Command Line
+- On creating new passwords using `new` command, the password entered by the user is hidden under the asterisks
+  (********) to ensure a higher security.
+- One can use the `view` command to view the original password. 
 
 ###### General Format: `view p/PASSWORD_NAME`
 
 ###### Examples: <br>
-
-```
-View p/canvas.nus.edu.sg
-```
-Output:
-```
-Enter secret password to reveal "canvas.nus.edu.sg":				
-—-----Password:securePassword@NUS123—-----------------------------------
-```
-
+<img src="./UGImages/ViewPassword.png" width="65%" />
 <br>
 
-### [Search Passwords: `search`](#span-styletext-decorationunderlinefeature-listspan)
-- Returns all passwords that have a similar name to “NAME_LIKE” or folder with name like “FOLDER_LIKE”
+### Search Passwords
+- Helps in finding the passwords stored in the list of passwords by searching using partial characters of PASSWORD_NAME
+or FOLDER_NAME.
+- Do note: password names are **Case Sensitive**
 
 ###### General Format: `search n/NAME_LIKE [-f f/FOLDER_LIKE]`
 
 ###### Examples: <br>
-
-```
-search n/canvas
-search n/canvas -f f/School
-```
-
-Output:
-```
-FOUND 1 Match!
-ID: 1 | canvas.nus.edu.sg	| School Module Website	
-```
+<img src="./UGImages/SearchPassword/SearchPasswordWithoutFolder.jpg" width="65%" /> <br>
+<img src="./UGImages/SearchPassword/SearchPasswordWithFolder.jpg" width="65%" /> <br>
 <br>
 
 
-### [Saving Passwords: `save`](#span-styletext-decorationunderlinefeature-listspan)
+### Saving Passwords
 - Saves all the passwords in an output logfile: `./logs/out`
 ###### General Format: `save`
 
 <br>
 
-### [Loading Passwords: `load`](#span-styletext-decorationunderlinefeature-listspan)
+### Loading Passwords
 - Loads all password from a textfile (.txt)
 - Use -a if you want these to be appended. Otherwise, it will erase and overwrite all other passwords. 
 - Default input logfile: `./logs/in`
@@ -163,7 +151,7 @@ load -a f/~/users/cs2113/passwords.txt
 ```
 <br>
 
-### [Editing Password: `edit`](#span-styletext-decorationunderlinefeature-listspan)
+### Editing Password
 - Allows users to edit exisitng password.
 - If no flags added, it will open a prompt to input your new password.
 
@@ -180,25 +168,32 @@ Enter your new password:
 ```
 <br>
 
-### [Menu for reference: `menu`](#span-styletext-decorationunderlinefeature-listspan)
+### Menu for reference
 - Allows users to refer to all the CLI commands by typing one command.
 
 ###### General Format: `menu`
 
-### [Exiting the Program: `exit`](#span-styletext-decorationunderlinefeature-listspan)
+<br>
+
+### Exiting the Program
 - Exits the program. 
 - Shows a message with all possible commands and syntax.
 
 ###### General Format: `exit`
 
-## **<span style="text-decoration:underline;">FAQ's</span>**
+<br>
+
+## FAQ's
 
 **Q**: I forgot to save before exiting. Are all my passwords lost?
 
 **A**: By default, the program will save the last copy of the passwords before exiting in the filepath ./logs/last_exit if allowed to exit gracefully
 
+**Q**: What if I create a password without a folder?
 
-## **<span style="text-decoration:underline;">Command Summary</span>**
+**A**: Do not worry! Your password is still saved in the unnamed folder.
+
+## Command Summary
 
 
 <table>
@@ -254,12 +249,6 @@ Enter your new password:
    <td>Edit
    </td>
    <td><code>edit p/PASSWORD_NAME [-f nf/NEW_FOLDER_NAME] [-d nd/NEW_DESCRIPTION] [-N np/NEW_PASSWORD_NAME]</code>
-   </td>
-  </tr>
-  <tr>
-   <td>Help
-   </td>
-   <td><code>help</code>
    </td>
   </tr>
 </table>

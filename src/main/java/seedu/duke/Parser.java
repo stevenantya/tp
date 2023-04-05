@@ -14,18 +14,18 @@ import seedu.duke.command.ListCommand;
 import seedu.duke.command.MenuCommand;
 import seedu.duke.command.SearchCommand;
 import seedu.duke.command.ViewCommand;
+import seedu.duke.exceptions.InvalidCommandException;
 
 /**
  * Parses user commands and returns the corresponding command object.
  */
 public class Parser {
-
     /**
      * Parses user input and returns the corresponding command object.
      * @param command user input command string
      * @return Command object corresponding to the user input
      */
-    public static Command parse(String command) {
+    public static Command parse(String command) throws InvalidCommandException {
         if (command.startsWith("new o/CreditCard")) {
             return new AddCreditCardCommand(command);
         } else if (command.startsWith("new o/CryptoWallet")) {
@@ -36,6 +36,13 @@ public class Parser {
             return new AddStudentIDCommand(command);
         } else if (command.startsWith("new o/WifiPassword")) {
             return new AddStudentIDCommand(command); // Have to change to AddWifiPasswordCommand
+        } else if (command.startsWith("new o/")) {
+            System.out.println("o/ option is invalid\n" +
+                    "Valid options are: \n" +
+                    "new o/NUSNet\n" +
+                    "new o/Student ID\n" +
+                    "new o/CryptoWallet");
+            throw new InvalidCommandException();
         } else if (command.startsWith("new")) {
             return new AddBasicPasswordCommand(command);
         } else if (command.startsWith("delete")) {
@@ -48,13 +55,13 @@ public class Parser {
             return new ViewCommand(command);
         } else if (command.startsWith("edit")) {
             return new EditCommand(command);
+        } else if (command.startsWith("exit") || command.startsWith("bye")) {
+            return new ExitCommand();
         } else if (command.startsWith("menu")) {
             return new MenuCommand();
-        } else if (command.startsWith("bye")) {
-            return new ExitCommand();
         } else {
             // represents accidental wrong input
-            return new ExitCommand();
+            throw new InvalidCommandException();
         }
     }
 }

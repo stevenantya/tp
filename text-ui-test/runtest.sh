@@ -8,7 +8,13 @@ cd ..
 
 cd text-ui-test
 
-java  -jar $(find ../build/libs/ -mindepth 1 -print -quit) < input.txt > ACTUAL.TXT
+echo yeet
+java -ea -jar $(find ../build/libs/ -mindepth 1 -print -quit) < input.txt > ACTUAL.TXT
+echo yeet2
+
+# Remove trailing whitespaces
+sed -i 's/[[:blank:]]*$//' EXPECTED.TXT
+sed -i 's/[[:blank:]]*$//' ACTUAL.TXT
 
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
 dos2unix EXPECTED-UNIX.TXT ACTUAL.TXT

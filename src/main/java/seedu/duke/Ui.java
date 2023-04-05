@@ -15,7 +15,7 @@ public class Ui {
                 "Current Features\n" +
                 "Adding a password      : new [NAME] /f [FOLDER_NAME]\n" +
                 "Adding a NUSNet ID     : new o/NUSNet [NAME] /f [FOLDER_NAME]\n" +
-                "Adding a Student ID    : new o/StudentID [NAME] /f [FOLDER_NAME] \n");
+                "Adding a Student ID    : new o/StudentID [NAME] /f [FOLDER_NAME]\n");
     }
 
     /**
@@ -46,6 +46,6 @@ public class Ui {
      * @param message Error message to be printed.
      */
     public static void printError(String message) {
-        System.out.println("Oops! Error encountered "+ message);
+        System.out.println("Oops! Error encountered\n"+ message);
     }
 }

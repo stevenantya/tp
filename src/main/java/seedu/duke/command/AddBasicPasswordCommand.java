@@ -41,7 +41,14 @@ public class AddBasicPasswordCommand extends Command{
         this.username = inquireUsername(input);
         this.password = inquirePassword();
     }
-
+    public AddBasicPasswordCommand(BasicPassword basicPassword) {
+        this.name = basicPassword.getName();
+        this.folderName = basicPassword.getFolderName();
+        this.url = basicPassword.getUrl();
+        this.username = basicPassword.getUsername();
+        this.password = basicPassword.getPassword();
+    }
+    
     /**
      * Executes the AddBasicPasswordCommand.
      * Creates a new BasicPassword object with the provided name, folderName, username, password, and url.
@@ -59,7 +66,7 @@ public class AddBasicPasswordCommand extends Command{
         try {
             basicPasswordData = new BasicPassword(name,folderName,username,password,url);
         } catch (InvalidURLException e) {
-            throw new ExceptionMain("Invalid URL!");
+            throw new ExceptionMain("Invalid URL! Please enter a valid url with the domain! e.g. google.com");
         }
 
         try {
@@ -69,7 +76,7 @@ public class AddBasicPasswordCommand extends Command{
         } catch (FolderExistsException | IllegalSecretNameException | IllegalFolderNameException e) {
             throw new RuntimeException(e);
         }
-        String starsPassword = "********";
+        String starsPassword = "*".repeat(8);
         System.out.println("I have added a new basic password:\n");
         System.out.println("name     = " + name + "\n" +
                            "folder   = " + folderName + "\n" +
@@ -148,4 +155,6 @@ public class AddBasicPasswordCommand extends Command{
     public boolean isExit() {
         return false;
     }
+
+
 }

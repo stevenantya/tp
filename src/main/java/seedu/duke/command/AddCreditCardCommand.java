@@ -54,12 +54,11 @@ public class AddCreditCardCommand extends AddSecretCommand {
         }
         try {
             secureNUSData.addSecret(creditCard);
-        } catch (RepeatedIdException e) {
-            throw new RuntimeException(e);
-        } catch (FolderExistsException | IllegalSecretNameException | IllegalFolderNameException e) {
+        } catch (RepeatedIdException | FolderExistsException | IllegalSecretNameException
+                 | IllegalFolderNameException e) {
             throw new RuntimeException(e);
         }
-        String starsPassword = "********";
+
         System.out.println("I have added a new Credit Card:\n");
         System.out.println("Name     = " + name + "\n" +
                 "Folder   = " + folderName + "\n" +

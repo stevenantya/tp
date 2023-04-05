@@ -1,5 +1,6 @@
 package seedu.duke.secrets;
 
+import seedu.duke.Backend;
 import seedu.duke.exceptions.secrets.InvalidCreditCardNumberException;
 import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
 
@@ -10,12 +11,12 @@ import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
  * "MM/YY".
  */
 public class CreditCard extends Secret {
+    private static final String expiryDateFmt = "[0-1][0-9]/[0-3][0-9]";
+    private static final String creditCardNumberFmt = "\\d{16}";
     private String fullName;
     private String creditCardNumber;
     private int cvcNumber;
     private String expiryDate;
-    private final String expiryDateFmt = "[0-1][0-9]/[0-3][0-9]";
-    private final String creditCardNumberFmt = "\\d{16}";
 
     /**
      * Constructor for a CreditCard object.
@@ -157,5 +158,13 @@ public class CreditCard extends Secret {
                 "CVC Number: %d\n" +
                 "Expiry Date: %s", creditCardNumber, cvcNumber,
                 expiryDate);
+    }
+
+    @Override
+    public String toStringForDatabase() {
+        String formattedString =  "CreditCard," + super.toStringForDatabase() +
+                "," + this.fullName + "," + Backend.encode(this.creditCardNumber) + "," +
+                Backend.encode("" + this.cvcNumber) + "," + this.expiryDate;
+        return formattedString;
     }
 }
