@@ -38,7 +38,6 @@ public class SearchCommand extends Command{
             IllegalFolderNameException,
             IllegalSecretNameException, FolderNotFoundException {
         assert name != null;
-        assert folderName != null;
         assert folders != null;
         if (folderName != null && !SecretMaster.isLegalFolderName(folderName)) {
             throw new IllegalFolderNameException();

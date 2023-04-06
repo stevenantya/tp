@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 
 import seedu.duke.exceptions.RepeatedIdException;
 import seedu.duke.exceptions.secrets.FolderNotFoundException;
@@ -65,7 +66,7 @@ class SearchCommandTest {
         SecretMaster mockSecureNUSData = new SecretMaster();
         mockSecureNUSData.addSecret(mockBasicPassword1);
         SearchCommand searchCommandNameOnly = new SearchCommand("search Facebook", mockSecureNUSData.getFolders());
-        assertEquals(searchCommandNameOnly.extractName("search Facebook", "search"), "Facebook");
+        Assertions.assertEquals(searchCommandNameOnly.extractName("search Facebook", "search"), "Facebook");
     }
 
     /**
