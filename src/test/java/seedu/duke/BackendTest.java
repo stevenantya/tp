@@ -7,6 +7,7 @@ import seedu.duke.secrets.Secret;
 
 
 import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -23,19 +24,19 @@ public class BackendTest {
         try {
             ArrayList<Secret> secretList = new ArrayList<Secret>();
             String[] basicPasswordArray = {"Password", "password1", "password1",
-                    "unnamed", "DKENCvtfsobnf2", "DKENCqbttxpse2", "gg.com"};
-            String[] NUSNetIDArray = {"nusNetId", "nusnet1", "nusnet1",
-                    "folder1", "12345", "DKENCqbttxpse"};
-            String[] studentIDArray = {"studentID", "usr1", "usr1", "folder1", "1234567"};
+                "unnamed", "DKENCvtfsobnf2", "DKENCqbttxpse2", "gg.com"};
+            String[] nusnetIdArray = {"nusNetId", "nusnet1", "nusnet1",
+                "folder1", "12345", "DKENCqbttxpse"};
+            String[] studentIdArray = {"studentID", "usr1", "usr1", "folder1", "1234567"};
             String[] creditCardArray = {"CreditCard", "usr1", "usr1", "folder1", "fullname",
-                    "DKENCvtfsobnf2", "DKENC858", "03/26",};
+                "DKENCvtfsobnf2", "DKENC858", "03/26",};
             String[] cryptoWalletArray = {"CryptoWallet", "usr1", "usr1", "folder1",
-                    "DKENCvtfsobnf2", "DKENCqbttxpse2", "DKENCqbttxpse2", "idk.com"};
+                "DKENCvtfsobnf2", "DKENCqbttxpse2", "DKENCqbttxpse2", "idk.com"};
             String[] wifiPasswordArray = {"wifiPassword", "usr1", "usr1", "folder1",
-                    "DKENCvtfsobnf2", "DKENCqbttxpse2"};
+                "DKENCvtfsobnf2", "DKENCqbttxpse2"};
             secretList = Backend.readAndUpdate(basicPasswordArray, secretList);
-            secretList = Backend.readAndUpdate(NUSNetIDArray, secretList);
-            secretList = Backend.readAndUpdate(studentIDArray, secretList);
+            secretList = Backend.readAndUpdate(nusnetIdArray, secretList);
+            secretList = Backend.readAndUpdate(studentIdArray, secretList);
             secretList = Backend.readAndUpdate(creditCardArray, secretList);
             secretList = Backend.readAndUpdate(cryptoWalletArray, secretList);
             secretList = Backend.readAndUpdate(wifiPasswordArray, secretList);
@@ -52,7 +53,7 @@ public class BackendTest {
             Assertions.assertEquals(secretList.get(5).toStringForDatabase(),
                     "wifiPassword,usr1,usr1,folder1,DKENCvtfsobnf2,DKENCqbttxpse2");
         } catch (Exception e) {
-
+            LOGGER.log(Level.WARNING, e.getMessage());
         }
 
 

@@ -1,4 +1,3 @@
-Welcome to secureNUS v2.1
      .--------.
     / .------. \
    / /        \ \
@@ -13,13 +12,15 @@ Welcome to secureNUS v2.1
 '.____'.____.'____.'
 '.________________.'
 
-Current Features
+Welcome to secureNUS v2.1
+Try out some of these commands:
 Adding a password      : new NAME [f/FOLDER_NAME]
 Adding a NUSNet ID     : new o/NUSNet NAME [f/FOLDER_NAME]
 Adding a Student ID    : new o/StudentID NAME [f/FOLDER_NAME]
 Adding a Credit Card   : new o/CreditCard NAME [f/FOLDER_NAME]
 Adding a Wifi Password : new o/WifiPassword NAME [f/FOLDER_NAME]
 Adding a Crypto Wallet : new o/Crypto NAME [f/FOLDER_NAME]
+Viewing all commands   : menu
 
 Please enter the URL:
 Please enter your username:
@@ -124,7 +125,6 @@ Password: ********
 
 _____________________________________________________
 You deleted wifi
-Oops! Error encountered: The input Secret is not found
 _____________________________________________________
 List of secrets:
 1. Type of Secret: Basic Password

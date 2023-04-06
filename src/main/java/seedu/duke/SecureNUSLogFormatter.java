@@ -8,7 +8,8 @@ public class SecureNUSLogFormatter extends Formatter{
     public String format(LogRecord record) {
         String logSequence = "\n[Level - " + record.getLevel() + "] \n";
         String logLevelAndDate = "@" + record.getInstant() + "\n";
-        String logClassAndMethod = "Location: " + record.getSourceClassName() + " - " + record.getSourceMethodName() + "\n";
+        String logClassAndMethod = "Location: " + record.getSourceClassName() +
+            " - " + record.getSourceMethodName() + "\n";
         String stackTraceIdentifier = "[For exceptions] StackTrace: \n";
         return logSequence + logLevelAndDate + logClassAndMethod + stackTraceIdentifier + record.getMessage() + "\n";
     }
