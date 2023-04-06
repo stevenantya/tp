@@ -63,7 +63,7 @@ public class Secret {
      * @return if the name contains any illegal characters, {@code false} otherwise.
      */
     public static boolean isIllegalName(String name) {
-        return !name.matches(ILLEGAL_CHARS_PATTERN);
+        return name.equals("") || !name.matches(ILLEGAL_CHARS_PATTERN);
     }
 
     /**

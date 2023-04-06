@@ -81,6 +81,7 @@ public class SecretMaster {
     public static boolean isLegalFolderName(String name) {
         assert name != null;
         return name.matches(ALLOWED_NAMES_REGEX);
+        return !name.equals("") && name.matches(ALLOWED_NAMES_REGEX);
     }
 
     /**
