@@ -256,9 +256,9 @@ public class SecretMaster {
                 ((CreditCard) secret).setCvcNumber(inquiredFields[2]);
                 ((CreditCard) secret).setExpiryDate(inquiredFields[3]);
             } catch (InvalidCreditCardNumberException e) {
-                Ui.printError("Invalid Credit Card Number! Must be 16 digits long");
+                Ui.inform("Invalid Credit Card Number! Must be 16 digits long");
             } catch (InvalidExpiryDateException e) {
-                Ui.printError("Invalid Expiry Date! Must be in the format \"MM/YY\"");
+                Ui.inform("Invalid Expiry Date! Must be in the format \"MM/YY\"");
             }
         } else if (secret instanceof NUSNet) {
             ((NUSNet) secret).setNusNetId(inquiredFields[0]);
