@@ -36,6 +36,15 @@ url      = gg.com
 username = username1
 password = *******
 _____________________________________________________
+Please enter your NUS Net ID:
+Please enter your password:
+_____________________________________________________
+I have added a new NUS Net ID password:
+name       = nusnet1
+folder     = folder1
+NUS Net ID = e0123456
+password   = *******
+_____________________________________________________
 _____________________________________________________
 List of secrets:
 1. Type of Secret: Basic Password
@@ -43,6 +52,12 @@ Name: password1
 Folder: unnamed
 Username: username1
 URL: gg.com
+Password: ********
+
+2. Type of Secret: NUSNet ID
+Name: nusnet1
+Folder: folder1
+NUSNet ID: e0123456
 Password: ********
 
 _____________________________________________________
