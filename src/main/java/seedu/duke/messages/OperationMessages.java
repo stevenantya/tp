@@ -16,14 +16,15 @@ public class OperationMessages {
             "'.____'.____.'____.'\n" +
             "'.________________.'\n\n";
     public static final String INITIALISE =
-            "Welcome to secureNUS v2.1\n" +
             LOGO +
-            "Current Features\n" +
+            "Welcome to secureNUS v2.1\n" +
+            "Try out some of these commands:\n" +
             "Adding a password      : new NAME [f/FOLDER_NAME]\n" +
             "Adding a NUSNet ID     : new o/NUSNet NAME [f/FOLDER_NAME]\n" +
             "Adding a Student ID    : new o/StudentID NAME [f/FOLDER_NAME]\n" +
             "Adding a Credit Card   : new o/CreditCard NAME [f/FOLDER_NAME]\n" +
             "Adding a Wifi Password : new o/WifiPassword NAME [f/FOLDER_NAME]\n" +
-            "Adding a Crypto Wallet : new o/Crypto NAME [f/FOLDER_NAME]\n";
+            "Adding a Crypto Wallet : new o/Crypto NAME [f/FOLDER_NAME]\n" +
+            "Viewing all commands   : menu\n";
     public static final String CANCEL_OPERATION = "Operation Cancelled.";
 }
