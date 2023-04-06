@@ -79,7 +79,7 @@ public class SecretMaster {
      * @return boolean indicating whether the name is legal.
      */
     public static boolean isLegalFolderName(String name) {
-        return name.matches(ALLOWED_NAMES_REGEX);
+        return !name.equals("") && name.matches(ALLOWED_NAMES_REGEX);
     }
 
     /**
