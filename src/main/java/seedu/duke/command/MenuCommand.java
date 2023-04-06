@@ -31,7 +31,8 @@ public class MenuCommand extends Command {
                 "6. Export the secrets in .txt file: save\n" +
                 "7. Edit a secrets: edit PASSWORD_NAME\n" +
                 "8. Menu list to refer for commands: menu\n" +
-                "9. Exit from the password manager (will automatically save this session): exit"
+                "9. Exit from the password manager (will automatically save this session): exit\n" +
+                "10. To cancel the operation at any point: c/"
         );
     }
 

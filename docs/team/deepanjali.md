@@ -15,7 +15,7 @@ Users can easily navigate and operate the app, which is designed to be user-frie
 #### Code Contributed: 
 * List of all the passwords entered by the user. 
   * `list`: if the user wants to list all the passwords in SecureNUS. 
-  * `list [f\FOLDER_NAME]`: if the user wants to list all the passwords of a specific folder. 
+  * `list [f/FOLDER_NAME]`: if the user wants to list all the passwords of a specific folder. 
 * Menu command `menu`: for users to refer to the command list for easy navigation through the application.
 * Performed the respective JUnit Tests for them as well
 * Update the Java Documentation for the entire code.

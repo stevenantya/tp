@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.exceptions.ExceptionMain;
 import seedu.duke.exceptions.OperationCancelException;
+import seedu.duke.exceptions.secrets.EmptySecretException;
 import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.NonExistentFolderException;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
