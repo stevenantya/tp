@@ -1,7 +1,6 @@
 _____________________________________________________
 No Save File Detected
 _____________________________________________________
-Welcome to secureNUS v2.1
      .--------.
     / .------. \
    / /        \ \
@@ -16,13 +15,15 @@ Welcome to secureNUS v2.1
 '.____'.____.'____.'
 '.________________.'
 
-Current Features
+Welcome to secureNUS v2.1
+Try out some of these commands:
 Adding a password      : new NAME [f/FOLDER_NAME]
 Adding a NUSNet ID     : new o/NUSNet NAME [f/FOLDER_NAME]
 Adding a Student ID    : new o/StudentID NAME [f/FOLDER_NAME]
 Adding a Credit Card   : new o/CreditCard NAME [f/FOLDER_NAME]
 Adding a Wifi Password : new o/WifiPassword NAME [f/FOLDER_NAME]
 Adding a Crypto Wallet : new o/Crypto NAME [f/FOLDER_NAME]
+Viewing all commands   : menu
 
 _____________________________________________________
 There are no secrets in this folder.
@@ -47,4 +48,3 @@ Username: username1
 URL: gg.com
 Password: ********
 
-_____________________________________________________
