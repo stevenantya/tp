@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 public class SecureNUS {
-    private static final Logger LOGGER = DukeLogger.LOGGER;
+    private static final Logger LOGGER = SecureNUSLogger.LOGGER;
     private static final String DUKE_LOG_EXECUTECOMMAND_IDENTIFIER = "Duke - executeCommand";
     /**
      * Duke class handles the main entry-point for the application, parsing of user commands and execution of commands.
@@ -38,7 +38,7 @@ public class SecureNUS {
      */
     public SecureNUS() throws FolderExistsException, IllegalFolderNameException {
         secureNUSData = Backend.initialisation();
-        DukeLogger.setUpLogger();
+        SecureNUSLogger.setUpLogger();
     }
     /**
      * Main entry-point for the Duke application.
@@ -52,7 +52,6 @@ public class SecureNUS {
      */
     public static void main(String[] args) throws FolderExistsException, IllegalFolderNameException,
             IllegalSecretNameException, SecretNotFoundException {
-
         SecureNUS secureNUS = new SecureNUS();
         secureNUS.run();
 
@@ -61,12 +60,8 @@ public class SecureNUS {
     /**
      * Starts the main loop of the Duke application.
      * Parses user input commands and executes them until the "exit" command is given.
-     *
-     * @throws IllegalFolderNameException    If the name of a folder is not valid.
-     * @throws IllegalSecretNameException    If the name of a secret is not valid.
-     * @throws SecretNotFoundException       If the specified secret cannot be found.
      */
-    public void run() throws IllegalFolderNameException, IllegalSecretNameException, SecretNotFoundException {
+    public void run() {
         Ui.greetUser();
 
         boolean isExit = false;
@@ -136,9 +131,9 @@ public class SecureNUS {
                 command.execute(secureNUSData);
                 return command.isExit();
             } catch (ExceptionMain e) {
-                Ui.printError(e.getMessage()); //do they want UI to handle it or?
+                Ui.printError(e.getMessage());
                 LOGGER.log(Level.SEVERE, DUKE_LOG_EXECUTECOMMAND_IDENTIFIER, e);
-                DukeLogger.close();
+                SecureNUSLogger.close();
             } catch (NonExistentFolderException e) {
                 Ui.printError("Folder Input does not exist");
             } catch (SecretNotFoundException e) {

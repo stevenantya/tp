@@ -44,6 +44,7 @@ public class AddStudentIDCommand extends AddSecretCommand {
 
     @Override
     public void execute(SecretMaster secureNUSData) throws ExceptionMain {
+        assert secureNUSData != null;
         StudentID studentIdData = new StudentID(name,folderName,studentId);
         try {
             secureNUSData.addSecret(studentIdData);

@@ -108,14 +108,17 @@ public class BasicPassword extends Secret{
     }
 
     public void setUsername(String username) {
+        assert username != null;
         this.username = username;
     }
 
     public void setPassword(String password) {
+        assert password != null;
         this.password = password;
     }
 
     public void setUrl(String url) {
+        assert url != null;
         this.url = url;
     }
 }

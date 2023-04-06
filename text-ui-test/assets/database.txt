@@ -1,1 +1,5 @@
-Password,password1,password1,unnamed,DKENCvtfsobnf2,DKENCqbttxpse2,gg.com
+Password,password1,password1,folder1,DKENCvtfs2,DKENCqbttxpse2,idk.com
+nusNetId,nusnet1,nusnet1,folder1,e0123456,DKENCrxfsuzvj
+studentID,student2,student2,folder1,A0123456R
+CreditCard,credit1,credit1,personal,usr1,DKENC23456789:1234567,DKENC234,03/26
+CryptoWallet,wallet1,wallet1,personal,DKENCvts2,DKENCqsjwbuflfz,DKENCtffeqisbtf,

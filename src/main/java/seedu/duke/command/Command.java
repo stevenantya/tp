@@ -28,6 +28,8 @@ public abstract class Command {
      * @return return the user's response
      */
     public String inquire(String question, String fieldName) throws OperationCancelException {
+        assert question != null;
+        assert fieldName != null;
         String result = query(question);
         while (isEmptyEntry(result)) {
             System.out.println(String.format(InquiryMessages.TEMPLATE_EMPTY, fieldName));
@@ -42,6 +44,8 @@ public abstract class Command {
      * @return the name of the secret
      */
     public String extractName(String input, String keyword) {
+        assert input != null;
+        assert input.length() >= 5;
         String extractedName = input.split(keyword + " ")[1];
         extractedName = extractedName.split(" f/")[0];
         return extractedName;
@@ -54,6 +58,7 @@ public abstract class Command {
      * @return the folder name of the secret
      */
     public String extractFolderName(String input) {
+        assert input != null;
         String extractedFolderName = "unnamed";
         if (input.split(" f/").length > 1) {
             extractedFolderName = input.split(" f/")[1];
@@ -63,6 +68,7 @@ public abstract class Command {
     }
 
     public String query(String question) throws OperationCancelException {
+        assert question != null;
         System.out.println(question);
         String line = Ui.readLine();
         if (line.equals(CANCEL_COMMAND)) {

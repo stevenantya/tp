@@ -51,7 +51,7 @@ public class AddCreditCardCommand extends AddSecretCommand {
      */
     @Override
     public void execute(SecretMaster secureNUSData) {
-
+        assert secureNUSData != null;
         CreditCard creditCard = null;
         try {
             creditCard = new CreditCard(name,folderName,fullName, creditCardNumber, cvcNumber, expiryDate);
@@ -59,6 +59,7 @@ public class AddCreditCardCommand extends AddSecretCommand {
             Ui.printError(ErrorMessages.INVALID_EXPIRY_DATE);
             return;
         }
+        assert creditCard != null;
         try {
             secureNUSData.addSecret(creditCard);
         } catch (RepeatedIdException e) {

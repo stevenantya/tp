@@ -21,9 +21,9 @@ class SecureNUSTest {
             // Assertions.assertTrue(secureNUS.executeCommand(Parser.parse("bye", secureNUSData)));
             // Assertions.assertTrue(secureNUS.executeCommand(Parser.parse("hellooooo", secureNUSData)));
         } catch (Exception e) {
-            DukeLogger.setUpLogger();
-            DukeLogger.LOGGER.log(Level.WARNING, SecureNUSTest.DUKETEST_LOG_EXECUTECOMMANDEXITTRUE_IDENTIFIER, e);
-            DukeLogger.close();
+            SecureNUSLogger.setUpLogger();
+            SecureNUSLogger.LOGGER.log(Level.WARNING, SecureNUSTest.DUKETEST_LOG_EXECUTECOMMANDEXITTRUE_IDENTIFIER, e);
+            SecureNUSLogger.close();
         }
     }
 

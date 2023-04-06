@@ -30,6 +30,7 @@ public class ListCommand extends Command {
      * @param input the input string containing the folder name, if specified.
      */
     public ListCommand(String input) {
+        assert input != null;
         this.folderName = extractFolderName(input);
     }
 
@@ -75,6 +76,7 @@ public class ListCommand extends Command {
      */
     @SuppressWarnings("checkstyle:LocalVariableName")
     public String getSecretTypeInfo(Secret secret) {
+        assert secret != null;
         if (secret instanceof BasicPassword) {
             BasicPassword basicPassword = (BasicPassword) secret;
             return "Type of Secret: Basic Password" + "\n" +

@@ -47,6 +47,7 @@ public class AddWifiPasswordCommand extends AddSecretCommand {
 
     @Override
     public void execute(SecretMaster secureNUSData) throws ExceptionMain {
+        assert secureNUSData != null;
         WifiPassword wifiPassword = new WifiPassword(name, folderName, username, password);
         try {
             secureNUSData.addSecret(wifiPassword);

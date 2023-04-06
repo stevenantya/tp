@@ -50,6 +50,7 @@ public class AddCryptoWalletCommand extends AddSecretCommand {
 
     @Override
     public void execute(SecretMaster secureNUSData) throws ExceptionMain {
+        assert secureNUSData != null;
         CryptoWallet cryptoWallet = new CryptoWallet(name, folderName, username, privateKey, seedPhrase);
         try {
             secureNUSData.addSecret(cryptoWallet);

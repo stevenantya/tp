@@ -45,6 +45,7 @@ public class ViewCommand extends Command {
         Secret passwordSecret;
         try {
             passwordSecret = secureNUSData.getByName(this.passwordName);
+            assert passwordSecret != null;
             Ui.inform(passwordSecret.getRevealStr());
         } catch (SecretNotFoundException e) {
             Ui.printError("There are no passwords that matches that name!\n" +

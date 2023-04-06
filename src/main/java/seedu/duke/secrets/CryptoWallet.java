@@ -140,6 +140,7 @@ public class CryptoWallet extends Secret {
      * @param url A String representing the new url to be added.
      */
     public void addUrl(String url) {
+        assert this.urls != null;
         urls.add(url);
     }
 
