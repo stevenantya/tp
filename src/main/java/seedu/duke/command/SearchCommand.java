@@ -15,7 +15,7 @@ import java.util.HashSet;
  * Represents a class to give a command to search for a secret by name in the SecretMaster.
  * Inherits from the Command class.
  */
-public class SearchCommand extends Command{
+public class SearchCommand extends Command {
     private final String name;
     private final String folderName;
 
@@ -25,8 +25,8 @@ public class SearchCommand extends Command{
      * @param input The input String containing the name and optionally the folder name to search for.
      */
     public SearchCommand(String input,
-             HashSet<String> folders) throws IllegalFolderNameException, IllegalSecretNameException,
-             FolderNotFoundException {
+                         HashSet<String> folders) throws IllegalFolderNameException, IllegalSecretNameException,
+            FolderNotFoundException {
         name = extractName(input, "search");
         folderName = extractFolderName(input);
 
@@ -34,7 +34,7 @@ public class SearchCommand extends Command{
     }
 
     public void checkNameAndFolderName(String name, String folderName,
-            HashSet<String> folders) throws
+                                       HashSet<String> folders) throws
             IllegalFolderNameException,
             IllegalSecretNameException, FolderNotFoundException {
         assert name != null;
@@ -85,21 +85,42 @@ public class SearchCommand extends Command{
         }
         assert secrets != null;
         int count = 0;
+        String tableHeader = String.format("|%1$5s|%2$25s|%3$19s|\n",
+                centerString(5, "NO."),
+                centerString(25, "NAME"),
+                centerString(19, "FOLDER"));
         StringBuilder output = new StringBuilder();
+        Ui.printLine();
         for (Secret secret : secrets) {
             if (secret.getName().contains(this.name)) { // case-sensitive search
                 ++count;
-                output.append(count).append("\t|\t").append(secret.getName()).append("\t|\t")
-                        .append(secret.getFolderName()).append("\t|\t").append(secret.getType()).append("\t|\n");
+                String name = secret.getName();
+                String folder = secret.getFolderName();
+                if (name.length() > 25) { // trim if exceeds table width
+                    name = name.substring(0, 25);
+                }
+                if (folder.length() > 19) {
+                    folder = folder.substring(0, 19);
+                }
+                output.append(String.format("|%1$5s|%2$25s|%3$19s|\n",
+                        centerString(5, String.valueOf(count)),
+                        centerString(25, name),
+                        centerString(19, folder)));
             }
         }
         if (count == 0) {
             Ui.inform("No secrets found with the name provided.");
         } else {
-            System.out.println("Found " + count + " matches!");
-            System.out.print(output);
+            Ui.inform("Found " + count + " matches!\n" + tableHeader +
+                    output.substring(0, output.length() - 1)); // substring is for removing last newline char
         }
     }
+
+    public String centerString(int width, String s) {
+        return String.format("%-" + width + "s",
+                String.format("%" + (s.length() + (width - s.length()) / 2) + "s", s));
+    }
+
 
     /**
      * Returns a boolean indicating if this Command is an exit Command.
