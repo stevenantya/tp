@@ -1,66 +1,59 @@
 package seedu.duke.command;
 
-import seedu.duke.Ui;
+import seedu.duke.exceptions.ExceptionMain;
 import seedu.duke.exceptions.RepeatedIdException;
 import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretMaster;
+import seedu.duke.ui.Ui;
+
+import java.util.HashSet;
 
 /**
  * Represents the Class to give a command to add a secret.
  */
-public class AddSecretCommand extends Command {
-    private String name;
-    private String folderName;
+public abstract class AddSecretCommand extends Command {
+
+    protected String name;
+    protected String folderName;
+
+    public AddSecretCommand() {}
 
     /**
      * Constructor for AddSecretCommand class.
      *
      * @param input the input command string
      */
-    public AddSecretCommand(String input) {
-        name = extractName(input);
+    public AddSecretCommand(String input, HashSet<String> usedNames, String keyword) throws IllegalSecretNameException,
+            IllegalFolderNameException, RepeatedIdException {
+        name = extractName(input, keyword);
         folderName = extractFolderName(input);
+        checkNameAndFolderName(name, folderName, usedNames);
     }
 
-    /**
-     * Extracts the name of the secret from the input command.
-     * 
-     * @param input the input command string
-     * @return the name of the secret
-     */
-    public String extractName(String input) {
-        String extractedName = input.split("new ")[1];
-        extractedName = extractedName.split(" /f")[0];
-        return extractedName;
+
+    public AddSecretCommand(Secret secret) {
+        name = secret.getName();
+        folderName = secret.getFolderName();
     }
 
-    /**
-     * Extracts the folder name of the secret from the input command.
-     *
-     * @param input the input command string
-     * @return the folder name of the secret
-     */
-    public String extractFolderName(String input) {
-        String extractedFolderName = "unfiled";
-        if (input.split("/f ").length > 1) {
-            extractedFolderName = input.split("/f ")[1];
+    public void checkNameAndFolderName(String name, String folderName, HashSet<String> usedNames) throws
+            IllegalFolderNameException,
+            IllegalSecretNameException, RepeatedIdException {
+        assert name != null;
+        assert folderName != null;
+        assert usedNames != null;
+        if (!SecretMaster.isLegalFolderName(folderName)) {
+            throw new IllegalFolderNameException();
         }
-        return extractedFolderName;
-    }
-
-    /**
-     * Prompts the user for input and returns the user's response.
-     * 
-     * @param question the question to ask the user
-     * @return return the user's response
-     */
-    public String inquire(String question) {
-        System.out.println(question);
-        String result = Ui.readCommand();
-        return result;
+        if (Secret.isIllegalName(name)) {
+            throw new IllegalSecretNameException();
+        }
+        if (usedNames.contains(name)) {
+            throw new RepeatedIdException();
+        }
     }
 
     /**
@@ -70,18 +63,18 @@ public class AddSecretCommand extends Command {
      * @param secureNUSData secureNUSData the secret master object
      */
     @Override
-    public void execute(SecretMaster secureNUSData) {
+    public void execute(SecretMaster secureNUSData) throws ExceptionMain {
+        assert secureNUSData != null;
         Secret secret = new Secret(name,folderName);
         try {
             secureNUSData.addSecret(secret);
         } catch (RepeatedIdException e) {
-            throw new RuntimeException(e);
+            throw new ExceptionMain(e.getMessage());
         } catch (FolderExistsException | IllegalSecretNameException | IllegalFolderNameException e) {
-            throw new RuntimeException(e);
+            throw new ExceptionMain(e.getMessage());
         }
-        String starsPassword = "********";
-        System.out.println("I have added a new Secret:\n");
-        System.out.println("name     = " + name + "\n" +
+        Ui.inform("I have added a new Secret:\n" +
+                "name     = " + name + "\n" +
                 "folder   = " + folderName + "\n");
     }
 

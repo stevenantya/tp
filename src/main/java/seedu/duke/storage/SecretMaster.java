@@ -1,12 +1,22 @@
 package seedu.duke.storage;
 
+import seedu.duke.ui.Ui;
+import seedu.duke.exceptions.secrets.InvalidCreditCardNumberException;
+import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
 import seedu.duke.exceptions.secrets.FolderExistsException;
-import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.exceptions.secrets.IllegalFolderNameException;
+import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.exceptions.secrets.NonExistentFolderException;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
+
 import seedu.duke.exceptions.RepeatedIdException;
+import seedu.duke.secrets.BasicPassword;
+import seedu.duke.secrets.CreditCard;
+import seedu.duke.secrets.CryptoWallet;
+import seedu.duke.secrets.NUSNet;
 import seedu.duke.secrets.Secret;
+import seedu.duke.secrets.StudentID;
+import seedu.duke.secrets.WifiPassword;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -15,19 +25,19 @@ import java.util.HashSet;
  * Master class that manages the storage and retrieval of secrets and folders.
  */
 public class SecretMaster {
+    public static final String ALLOWED_NAMES_REGEX = "^[a-zA-Z0-9_]*$"; // only alphanumeric allowed
     // use for quick finding
-    private static final String DEFAULT_FOLDER = "unnamed";
-    private static final String ALLOWED_NAMES_REGEX = "^[a-zA-Z0-9_]*$"; // only alphanumeric allowed
+    public static final String DEFAULT_FOLDER = "unnamed";
 
     /**
      * Object that manages searching for secrets.
      */
-    private SecretSearcher secretSearcher; // Hash Table
+    private SecretSearcher secretSearcher;
 
     /**
      * Object that manages enumerating secrets or listing secrets in the order it was added in.
      */
-    private SecretEnumerator secretEnumerator; // Array view
+    private SecretEnumerator secretEnumerator;
 
     /**
      * HashSet that stores the names of folders and ensure folders and passwords are distinct.
@@ -68,7 +78,8 @@ public class SecretMaster {
      * @param name String name to check.
      * @return boolean indicating whether the name is legal.
      */
-    public boolean isLegalName(String name) {
+    public static boolean isLegalFolderName(String name) {
+        assert name != null;
         return name.matches(ALLOWED_NAMES_REGEX);
     }
 
@@ -78,6 +89,7 @@ public class SecretMaster {
      * @return HashSet of folder names.
      */
     public HashSet<String> getFolders() {
+        assert this.folders != null;
         return folders;
     }
 
@@ -87,6 +99,7 @@ public class SecretMaster {
      * @return SecretSearcher object.
      */
     public SecretSearcher getSecretSearcher() {
+        assert this.secretSearcher != null;
         return secretSearcher;
     }
 
@@ -96,6 +109,7 @@ public class SecretMaster {
      *  @return SecretEnumerator object.
      */
     public SecretEnumerator getSecretEnumerator() {
+        assert this.secretEnumerator != null;
         return secretEnumerator;
     }
 
@@ -105,6 +119,7 @@ public class SecretMaster {
      * @return HashSet of secret names.
      */
     public HashSet<String> getSecretNames() {
+        assert this.secretNames != null;
         return secretNames;
     }
 
@@ -116,8 +131,11 @@ public class SecretMaster {
      * @throws IllegalFolderNameException if the folder name is not a legal name.
      */
     public void createFolder(String folderName) throws FolderExistsException, IllegalFolderNameException {
-
-        if (!isLegalName(folderName)) {
+        assert this.folders != null;
+        assert this.secretEnumerator != null;
+        assert this.secretSearcher != null;
+        assert folderName.length() > 0;
+        if (!isLegalFolderName(folderName)) {
             throw new IllegalFolderNameException();
         }
 
@@ -135,6 +153,8 @@ public class SecretMaster {
      * @return Secret object at the given index.
      */
     public Secret getByIndex(int index) {
+        assert index >= 0;
+        assert this.secretEnumerator != null;
         return secretEnumerator.get(index);
     }
 
@@ -146,6 +166,9 @@ public class SecretMaster {
      * @return Secret object at the given index within the given folder.
      */
     public Secret getByIndex(int index, String folder) {
+        assert index >= 0;
+        assert folder.length() > 0;
+        assert this.secretEnumerator != null;
         return secretEnumerator.get(index, folder);
     }
 
@@ -155,6 +178,7 @@ public class SecretMaster {
      * @return ArrayList of all Secrets.
      */
     public ArrayList<Secret> listSecrets() {
+        assert this.secretEnumerator != null;
         return secretEnumerator.getList();
     }
 
@@ -166,6 +190,9 @@ public class SecretMaster {
      * @throws NonExistentFolderException if the folder does not exist.
      */
     public ArrayList<Secret> listSecrets(String folderName) throws NonExistentFolderException {
+        assert folderName != null;
+        assert folderName.length() >= 0;
+        assert this.secretEnumerator != null;
         if (!folders.contains(folderName)) {
             throw new NonExistentFolderException();
         }
@@ -180,6 +207,10 @@ public class SecretMaster {
      * @throws SecretNotFoundException if the Secret does not exist.
      */
     public Secret getByName(String secretName) throws SecretNotFoundException {
+        assert secretName != null;
+        assert secretName.length() > 0;
+        assert this.secretNames != null;
+        assert this.secretSearcher != null;
         if (!secretNames.contains(secretName)) {
             throw new SecretNotFoundException();
         }
@@ -197,14 +228,17 @@ public class SecretMaster {
      */
     public void addSecret(Secret secret) throws FolderExistsException, RepeatedIdException,
             IllegalSecretNameException, IllegalFolderNameException {
-        if (!isLegalName(secret.getName())) {
+        assert secret != null;
+        assert this.secretNames != null;
+        assert this.secretEnumerator != null;
+        assert this.secretSearcher != null;
+        if (!isLegalFolderName(secret.getName())) {
             throw new IllegalSecretNameException();
         }
         if (secretNames.contains(secret.getUid())) {
             throw new RepeatedIdException();
         }
         String folderName = secret.getFolderName();
-        // Creating a new folder
 
         if (folderName != null) {
             createFolder(folderName);
@@ -218,17 +252,63 @@ public class SecretMaster {
      * Updates a Secret's name and folder as well as its name in secretNames, and
      * itself in secretSearcher and secretEnumerator.
      *
-     * @param secret Secret object to be edited.
-     * @param newName updated name of the Secret object.
-     * @param newFolderName updated folder of the Secret object.
+     * @param secret         Secret object to be edited.
+     * @param newName        updated name of the Secret object.
+     * @param newFolderName  updated folder of the Secret object.
+     * @param inquiredFields
      * @throws FolderExistsException if the folder specified in the Secret already exists and cannot be created.
      */
-    public void editSecret(Secret secret, String newName, String newFolderName) throws FolderExistsException {
+    public void editSecret(Secret secret, String newName, String newFolderName,
+                           String[] inquiredFields) throws FolderExistsException {
+
+        assert secret != null;
+        assert newName != null;
+        assert newFolderName != null;
+        assert inquiredFields != null; //must it be more than 0?
+        assert newName.length() > 0;
+        assert this.secretNames != null;
+        assert this.secretEnumerator != null;
+        assert this.secretSearcher != null;
+
         secretNames.remove(secret.getName());
         secretSearcher.delete(secret);
         secretEnumerator.delete(secret);
-        secret.setName(newName);
-        secret.setFolderName(newFolderName);
+
+        if (newName != null) {
+            secret.setName(newName);
+        }
+        if (newFolderName != null) {
+            secret.setFolderName(newFolderName);
+        }
+        if (secret instanceof BasicPassword) {
+            ((BasicPassword) secret).setUsername(inquiredFields[0]);
+            ((BasicPassword) secret).setPassword(inquiredFields[1]);
+            ((BasicPassword) secret).setUrl(inquiredFields[2]);
+        } else if (secret instanceof CreditCard) {
+            try {
+                ((CreditCard) secret).setFullName(inquiredFields[0]);
+                ((CreditCard) secret).setCreditCardNumber(inquiredFields[1]);
+                ((CreditCard) secret).setCvcNumber(inquiredFields[2]);
+                ((CreditCard) secret).setExpiryDate(inquiredFields[3]);
+            } catch (InvalidCreditCardNumberException e) {
+                Ui.inform("Invalid Credit Card Number! Must be 16 digits long");
+            } catch (InvalidExpiryDateException e) {
+                Ui.inform("Invalid Expiry Date! Must be in the format \"MM/YY\"");
+            }
+        } else if (secret instanceof NUSNet) {
+            ((NUSNet) secret).setNusNetId(inquiredFields[0]);
+            ((NUSNet) secret).setPassword(inquiredFields[1]);
+        } else if (secret instanceof StudentID) {
+            ((StudentID) secret).setStudentID(inquiredFields[0]);
+        } else if (secret instanceof WifiPassword) {
+            ((WifiPassword) secret).setUsername(inquiredFields[0]);
+            ((WifiPassword) secret).setPassword(inquiredFields[1]);
+        } else if (secret instanceof CryptoWallet) {
+            ((CryptoWallet) secret).setUsername(inquiredFields[0]);
+            ((CryptoWallet) secret).setPrivateKey(inquiredFields[1]);
+            ((CryptoWallet) secret).setSeedPhrase(inquiredFields[2]);
+        }
+
         secretNames.add(secret.getName());
         secretSearcher.add(secret);
         secretEnumerator.add(secret);
@@ -241,44 +321,16 @@ public class SecretMaster {
      * @throws SecretNotFoundException if the Secret does not exist.
      */
     public void removeSecret(Secret secret) throws SecretNotFoundException {
+        assert secret != null;
+        assert this.secretNames != null;
+        assert this.secretEnumerator != null;
+        assert this.secretSearcher != null;
+
         if (!secretNames.contains(secret.getUid())) {
             throw new SecretNotFoundException();
         }
-        String folderName = secret.getFolderName();
         secretNames.remove(secret.getName());
         secretEnumerator.delete(secret);
         secretSearcher.delete(secret);
-    }
-
-
-    /**
-     * Retrieves an ArrayList of all Secret names.
-     *
-     * @return ArrayList of all Secret names.
-     */
-    public ArrayList<String> listSecretNames() {
-        ArrayList<String> secretNamesList = new ArrayList<String>();
-        for (Secret secret : secretEnumerator.getList()) {
-            secretNamesList.add(secret.getName());
-        }
-        return secretNamesList;
-    }
-
-    /**
-     * Retrieves an ArrayList of all Secret names within the given folder.
-     *
-     * @param folderName String name of the folder to retrieve Secret names from.
-     * @return ArrayList of all Secret names within the given folder.
-     * @throws NonExistentFolderException if the folder does not exist.
-     */
-    public ArrayList <String> listSecretNames(String folderName) throws NonExistentFolderException {
-        if (!folders.contains(folderName)) {
-            throw new NonExistentFolderException();
-        }
-        ArrayList<String> secretNamesList = new ArrayList<String>();
-        for (Secret secret : secretEnumerator.getList(folderName)) {
-            secretNamesList.add(secret.getName());
-        }
-        return secretNamesList;
     }
 }

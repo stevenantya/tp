@@ -3,8 +3,9 @@ package seedu.duke.command;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretMaster;
+import seedu.duke.ui.Ui;
 
-import java.util.Scanner;
+import java.util.HashSet;
 
 /**
  * Represents a class to give a command to view a specific secret.
@@ -17,8 +18,11 @@ public class ViewCommand extends Command {
      *
      * @param input the user input to extract the password name
      */
-    public ViewCommand(String input) {
+    public ViewCommand(String input, HashSet<String> usedNames){
         this.passwordName = extractName(input);
+        if (!usedNames.contains(passwordName)) {
+            Ui.inform("No such secret found.");
+        }
     }
 
     /**
@@ -28,18 +32,7 @@ public class ViewCommand extends Command {
      * @return the password name
      */
     public String extractName(String input) {
-        return input.substring(input.indexOf("p/") + 2).trim();
-    }
-
-    /**
-     * Prompts the user to enter the secret password to reveal the password.
-     *
-     * @return the user input of the secret password
-     */
-    public String inquirePassword() {
-        System.out.println("Enter secret password to reveal \"" + this.passwordName + "\":");
-        Scanner in = new Scanner(System.in);
-        return in.nextLine();
+        return super.extractName(input, "view");
     }
 
     /**
@@ -52,10 +45,11 @@ public class ViewCommand extends Command {
         Secret passwordSecret;
         try {
             passwordSecret = secureNUSData.getByName(this.passwordName);
-            System.out.println(passwordSecret.getRevealStr());
+            assert passwordSecret != null;
+            Ui.inform(passwordSecret.getRevealStr());
         } catch (SecretNotFoundException e) {
-            System.out.println("There are no passwords that matches that name!\n" +
-                    "Make sure you follow this format: \"view p/PASSWORD_NAME\"");
+            Ui.inform("There are no passwords that matches that name!\n" +
+                    "Make sure you follow this format: \"view PASSWORD_NAME\"");
         }
     }
 

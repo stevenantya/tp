@@ -36,12 +36,12 @@ class SecretMasterTest {
     @Test
     void isLegalName() throws IllegalFolderNameException, FolderExistsException {
         SecretMaster secretMaster = new SecretMaster();
-        assertEquals(true, secretMaster.isLegalName("gyujnuygvjkm"));
-        assertEquals(true, secretMaster.isLegalName("hfjewqsdierjdfhnreqwewqfvsvd"));
-        assertEquals(true, secretMaster.isLegalName("fvdwhjejsdkjfk879809"));
-        assertEquals(false, secretMaster.isLegalName("jhgfhdwv "));
-        assertEquals(false, secretMaster.isLegalName("jkfewrjfv90r93f47   "));
-        assertEquals(false, secretMaster.isLegalName("jkfewrjfv90r93f47^&IO(*&^"));
+        assertEquals(true, secretMaster.isLegalFolderName("gyujnuygvjkm"));
+        assertEquals(true, secretMaster.isLegalFolderName("hfjewqsdierjdfhnreqwewqfvsvd"));
+        assertEquals(true, secretMaster.isLegalFolderName("fvdwhjejsdkjfk879809"));
+        assertEquals(false, secretMaster.isLegalFolderName("jhgfhdwv "));
+        assertEquals(false, secretMaster.isLegalFolderName("jkfewrjfv90r93f47   "));
+        assertEquals(false, secretMaster.isLegalFolderName("jkfewrjfv90r93f47^&IO(*&^"));
     }
 
     /**
@@ -98,7 +98,7 @@ class SecretMasterTest {
         SecretMaster secretMaster = new SecretMaster();
         secretMaster.addSecret(new BasicPassword("basic1", "username1", "Password1",
                 "http.com"));
-        secretMaster.addSecret(new CreditCard("credit1", "HJ HJ UI", "1234567890123456", 123,
+        secretMaster.addSecret(new CreditCard("credit1", "HJ HJ UI", "1234567890123456", "123",
                 "12/23"));
         secretMaster.addSecret(new CryptoWallet("crypto1", "hjhbj", "fdertyuiytyui876ytfgyuit5rt",
                 "hb jnjkm kjijh ijhui hjhb iujh uhbgv gfcd"));
@@ -128,5 +128,79 @@ class SecretMasterTest {
                 "http.com"));
         secretMaster.addSecret(new BasicPassword("BasicPassword4", "Folder9_", "username1", "Password1",
                 "http.com"));
+    }
+
+    @Test
+    public void editBasicPassword() throws FolderExistsException, IllegalFolderNameException, RepeatedIdException,
+            IllegalSecretNameException, InvalidURLException {
+        SecretMaster secretMaster = new SecretMaster();
+        BasicPassword secret = new BasicPassword("secret1", "folder1", "username1", "password1", "https://example.com");
+        secretMaster.addSecret(secret);
+
+        String newName = "secret2";
+        String newFolderName = "folder2";
+        String[] inquiredFields = {"newusername", "newpassword", "https://example.com"};
+        secretMaster.editSecret(secret, newName, newFolderName, inquiredFields);
+
+        assertEquals(newName, secret.getName());
+        assertEquals(newFolderName, secret.getFolderName());
+        assertEquals(inquiredFields[0], secret.getUsername());
+        assertEquals(inquiredFields[1], secret.getPassword());
+        assertEquals(inquiredFields[2], ((BasicPassword) secret).getUrl());
+    }
+
+    @Test
+    public void editCreditCard() throws FolderExistsException, InvalidExpiryDateException,
+            IllegalFolderNameException, RepeatedIdException, IllegalSecretNameException {
+        SecretMaster secretMaster = new SecretMaster();
+        CreditCard secret = new CreditCard("secret1", "folder1", "John Doe",
+                "1234567890123456", "123", "12/23");
+        secretMaster.addSecret(secret);
+
+        String newName = "secret2";
+        String newFolderName = "folder2";
+        String[] inquiredFields = {"Jane Doe", "1234567890123456", "456", "12/24"};
+        secretMaster.editSecret(secret, newName, newFolderName, inquiredFields);
+
+        assertEquals(newName, secret.getName());
+        assertEquals(newFolderName, secret.getFolderName());
+        assertEquals(inquiredFields[0], ((CreditCard) secret).getFullName());
+        assertEquals(inquiredFields[1], ((CreditCard) secret).getCreditCardNumber());
+        assertEquals(inquiredFields[2], ((CreditCard) secret).getCvcNumber());
+        assertEquals(inquiredFields[3], ((CreditCard) secret).getExpiryDate());
+    }
+
+    @Test
+    public void editNUSNet() throws FolderExistsException, IllegalFolderNameException,
+            RepeatedIdException, IllegalSecretNameException {
+        SecretMaster secretMaster = new SecretMaster();
+        NUSNet secret = new NUSNet("secret1", "folder1", "e0123456", "password1");
+        secretMaster.addSecret(secret);
+
+        String newName = "secret2";
+        String newFolderName = "folder2";
+        String[] inquiredFields = {"e0012345", "password2"};
+        secretMaster.editSecret(secret, newName, newFolderName, inquiredFields);
+
+        assertEquals(newName, secret.getName());
+        assertEquals(newFolderName, secret.getFolderName());
+        assertEquals(inquiredFields[0], ((NUSNet) secret).getNusNetId());
+        assertEquals(inquiredFields[1], ((NUSNet) secret).getPassword());
+    }
+
+    @Test
+    public void editStudentID() throws FolderExistsException, IllegalFolderNameException,
+            RepeatedIdException, IllegalSecretNameException {
+        SecretMaster secretMaster = new SecretMaster();
+        StudentID secret = new StudentID("secret1", "folder1", "e0123456");
+        secretMaster.addSecret(secret);
+
+        String newName = "secret2";
+        String newFolderName = "folder2";
+        String[] inquiredFields = {"e0012345"};
+        secretMaster.editSecret(secret, newName, newFolderName, inquiredFields);
+
+        assertEquals(newName, secret.getName());
+        assertEquals(newFolderName, secret.getFolderName());
     }
 }

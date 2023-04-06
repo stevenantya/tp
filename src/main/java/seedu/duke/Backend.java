@@ -1,17 +1,17 @@
 package seedu.duke;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.nio.file.Paths;
-import java.util.Hashtable;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
 import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
-import seedu.duke.exceptions.secrets.InvalidURLException;
 import seedu.duke.secrets.BasicPassword;
 import seedu.duke.secrets.CreditCard;
 import seedu.duke.secrets.CryptoWallet;
@@ -22,17 +22,14 @@ import seedu.duke.storage.SecretEnumerator;
 import seedu.duke.storage.SecretMaster;
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretSearcher;
+import seedu.duke.ui.Ui;
 
 /**
  * Class which represents the backend of the SecureNUS application.
  * Handles file input/output and secret creation and manipulation.
  */
 public class Backend {
-    private static final Logger LOGGER = DukeLogger.LOGGER;
-    private static final String BACKEND_LOG_INITIALISATION_IDENTIFIER
-        = "Backend - Initialisation : ";
-    private static final String BACKEND_LOG_UPDATESTORAGE_IDENTIFIER
-            = "Backend - updateStorage : ";
+    private static final Logger LOGGER = SecureNUSLogger.LOGGER;
     private static final int DECRYPTION_STARTING_INDEX = 5;
     private static final String DATABASE_FOLDER = "assets";
     private static final String DATABASE_FILE = "database.txt";
@@ -43,7 +40,7 @@ public class Backend {
     private static final String PASSWORD_IDENTIFIER = "Password";
     private static final String CREDIT_CARD_IDENTIFIER = "CreditCard";
     private static final String CRYPTOWALLET_IDENTIFIER = "CryptoWallet";
-    private static final String NUSNETID_IDENTIFIER = "nusNetID";
+    private static final String NUSNETID_IDENTIFIER = "nusNetId";
     private static final String STUDENTID_IDENTIFIER = "studentID";
     private static final String WIFI_PASSWORD_IDENTIFIER = "wifiPassword";
 
@@ -56,77 +53,95 @@ public class Backend {
     public static SecretMaster initialisation() {
         ArrayList<Secret> secretList = new ArrayList<Secret>();
 
-        //create folder if it does not exist
+        File database = Backend.createAssetFolderAndDatabaseFile();
+        String databasePath = Backend.getDatabasePath();
+        try {
+            if (!database.createNewFile()) {
+                database.createNewFile();
+            }
+
+            //read history if database file exists
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(databasePath));
+                String input = reader.readLine();
+                while (input != null) {
+                    String[] inputArray = input.split(Backend.DELIMITER);
+                    secretList = Backend.readAndUpdate(inputArray, secretList);
+                    input = reader.readLine();
+                }
+                reader.close();
+            } catch (Exception e) {
+                Ui.inform("Data from previous session cannot be loaded. " +
+                    "New database will be initiated");
+                LOGGER.log(Level.SEVERE, SecureNUSLogger.formatStackTrace(e.getStackTrace()));
+                secretList = new ArrayList<Secret>();
+            }
+        } catch (IOException e) {
+            Ui.inform("Database cannot be initialised! User data will not be saved");
+            LOGGER.log(Level.SEVERE, SecureNUSLogger.formatStackTrace(e.getStackTrace()));
+            secretList = new ArrayList<Secret>();
+            assert false; //should the session be terminated?
+        }
+
+
+        //for secretEnumerator
+        Hashtable<String, ArrayList<Secret>> foldersHashTable =
+                Backend.createFolderHashtable(secretList);
+        SecretEnumerator secretEnumerator = new SecretEnumerator(secretList,
+                foldersHashTable);
+        //for secretSearcher
+        Hashtable<String, Secret> nameHashtable = Backend.
+                createNameHashtable(secretList);
+        Hashtable<String, Hashtable<String, Secret>> hashtableFolders =
+                Backend.createHashtableFolders(foldersHashTable);
+        SecretSearcher secretSearcher = new SecretSearcher(nameHashtable, hashtableFolders);
+        return new SecretMaster(secretSearcher, secretEnumerator);
+    }
+
+    public static File createAssetFolderAndDatabaseFile() {
+        //locate assets folder / try to create assets folder if it does not exist
         String pathOfCurrentDirectory = System.getProperty(Backend.USER_DIRECTORY_IDENTIFIER);
         String assetsPath = Paths.get(pathOfCurrentDirectory, Backend.DATABASE_FOLDER).toString();
         File assets = new File(assetsPath);
         if (!assets.exists()) {
             assets.mkdir();
         }
-        //create file if it does not exist
+
+        //locate database file / try to create database file if it does not exist
         String databasePath = Paths.get(assetsPath, Backend.DATABASE_FILE).toString();
         File database = new File(databasePath);
-        try {
-            if (!database.createNewFile()) {
-                database.createNewFile();
-            }
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, BACKEND_LOG_INITIALISATION_IDENTIFIER, e);
-        }
+        return database;
+    }
 
-        try {
-            Scanner reader = new Scanner(database);
-            while (reader.hasNextLine()) {
-                String[] inputArray = reader.nextLine().split(Backend.DELIMITER);
-                secretList = Backend.readAndUpdate(inputArray, secretList);
-            }
-            reader.close();
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, BACKEND_LOG_INITIALISATION_IDENTIFIER, e);
-        } catch (InvalidURLException e) {
-            throw new RuntimeException(e);
-        } catch (InvalidExpiryDateException e) {
-            throw new RuntimeException(e);
-        }
-
-        //for secretEnumerator
-        Hashtable<String, ArrayList<Secret>> foldersHashTable =
-            Backend.createFolderHashtable(secretList);
-        SecretEnumerator secretEnumerator = new SecretEnumerator(secretList,
-            foldersHashTable);
-        //for secretSearcher
-        Hashtable<String, Secret> nameHashtable = Backend.
-            createNameHashtable(secretList);
-        Hashtable<String, Hashtable<String, Secret>> hashtableFolders =
-            Backend.createHashtableFolders(foldersHashTable);
-        SecretSearcher secretSearcher = new SecretSearcher(nameHashtable, hashtableFolders);
-        return new SecretMaster(secretSearcher, secretEnumerator);
+    public static String getDatabasePath() {
+        String pathOfCurrentDirectory = System.getProperty(Backend.USER_DIRECTORY_IDENTIFIER);
+        String databasePath = Paths.get(pathOfCurrentDirectory, Backend.DATABASE_FOLDER,
+                Backend.DATABASE_FILE).toString();
+        return databasePath;
     }
 
     /**
      * Returns ArrayList of Secret with the new Secret added.
      *
-     * @param input String to create a Secret.
+     * @param input    String to create a Secret.
      * @param database Current ArrayList of Secret.
      * @return ArrayList of Secret
      */
     public static ArrayList<Secret> readAndUpdate(String[] input, ArrayList<Secret> database)
-            throws InvalidURLException, InvalidExpiryDateException {
-        //create different password based on constructor
-        //studentID
+            throws InvalidExpiryDateException {
         if (input[0].equals(Backend.PASSWORD_IDENTIFIER)) {
             Secret secret = new BasicPassword(input[2], input[3], Backend.decode(input[4]),
                     Backend.decode(input[5]), Backend.parseEmptyField(input[6]));
             database.add(secret);
         } else if (input[0].equals(Backend.CREDIT_CARD_IDENTIFIER)) {
             Secret secret = new CreditCard(input[2], input[3], input[4],
-                    Backend.decode(input[5]), Integer.parseInt(Backend.decode(input[6])),
-                        input[7]);
+                    Backend.decode(input[5]), Backend.decode(input[6]),
+                    input[7]);
             database.add(secret);
         } else if (input[0].equals(Backend.CRYPTOWALLET_IDENTIFIER)) {
             Secret secret = new CryptoWallet(input[2], input[3], Backend.decode(input[4]),
                     Backend.decode(input[5]), Backend.decode(input[6]),
-                        Backend.createUrlArrayList(input));
+                    Backend.createUrlArrayList(input));
             database.add(secret);
         } else if (input[0].equals(Backend.NUSNETID_IDENTIFIER)) {
             Secret secret = new NUSNet(input[2], input[3], input[4],
@@ -140,7 +155,6 @@ public class Backend {
                     Backend.decode(input[5]));
             database.add(secret);
         }
-        //Password
         return database;
     }
 
@@ -152,7 +166,7 @@ public class Backend {
      */
     public static Hashtable<String, ArrayList<Secret>> createFolderHashtable(ArrayList<Secret> secretList) {
         Hashtable<String, ArrayList<Secret>> folderHashtable = new
-            Hashtable<String, ArrayList<Secret>>();
+                Hashtable<String, ArrayList<Secret>>();
         for (Secret secret : secretList) {
             String folderName = secret.getFolderName();
             ArrayList<Secret> secretsInFolder = new ArrayList<Secret>();
@@ -188,7 +202,7 @@ public class Backend {
     public static Hashtable<String, Hashtable<String, Secret>> createHashtableFolders(
             Hashtable<String, ArrayList<Secret>> folderHashtable) {
         Hashtable<String, Hashtable<String, Secret>> hashtableFolders =
-            new Hashtable<String, Hashtable<String, Secret>>();
+                new Hashtable<String, Hashtable<String, Secret>>();
         for (String folder : folderHashtable.keySet()) {
             hashtableFolders.put(folder, Backend.createNameHashtable(folderHashtable.get(folder)));
         }
@@ -244,6 +258,21 @@ public class Backend {
         return field.equals(Backend.EMPTY_FIELD_IDENTIFIER) ? "" : field;
     }
 
+    public static boolean checkData(String data) {
+        String testData = "";
+        String secretName = "";
+        ArrayList<Secret> secretList = new ArrayList<Secret>();
+        String[] inputArray = data.split(Backend.DELIMITER);
+        try {
+            secretList = Backend.readAndUpdate(inputArray, secretList);
+            secretName = secretList.get(0).getName();
+            testData = secretList.get(0).toStringForDatabase();
+        } catch (InvalidExpiryDateException e) {
+            Ui.inform("Invalid data in " + secretName + "this data will not be saved");
+        }
+        return testData.equals(data);
+    }
+
     /**
      * Saves changes made by the user during the session
      * in a .txt document.
@@ -251,20 +280,24 @@ public class Backend {
      * @param input the list of secrets provided by user.
      */
     public static void updateStorage(ArrayList<Secret> input) {
-        String currDir = System.getProperty(Backend.USER_DIRECTORY_IDENTIFIER);
-        String databasePath = Paths.get(currDir,
-                Backend.DATABASE_FOLDER, Backend.DATABASE_FILE).toString();
-        File database = new File(databasePath);
 
+        File database = Backend.createAssetFolderAndDatabaseFile();
         try {
             FileWriter myWriter = new FileWriter(database);
             for (int i = 0; i < input.size(); i++) {
                 Secret secret = input.get(i);
-                myWriter.write(secret.toStringForDatabase() + "\n");
+                boolean dataValidity = Backend.checkData(secret.toStringForDatabase());
+                assert  dataValidity = true : "Issues with data conversion";
+                //verify data validity
+                if (Backend.checkData(secret.toStringForDatabase())) {
+                    myWriter.write(secret.toStringForDatabase() + "\n");
+                }
             }
             myWriter.close();
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, BACKEND_LOG_UPDATESTORAGE_IDENTIFIER, e);
+            Ui.inform("Database is not initialised! All user data will not be saved");
+            LOGGER.log(Level.SEVERE, SecureNUSLogger.formatStackTrace(e.getStackTrace()));
         }
     }
+
 }

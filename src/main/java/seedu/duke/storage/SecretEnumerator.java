@@ -46,6 +46,8 @@ public class SecretEnumerator {
      * @throws FolderExistsException if the folder already exists in the Hashtable.
      */
     public void createFolder(String folderName) throws FolderExistsException {
+        assert this.folders != null;
+        assert folderName.length() > 0;
         if (folders.containsKey(folderName)) {
             throw new FolderExistsException();
         }
@@ -61,6 +63,8 @@ public class SecretEnumerator {
      * @throws FolderNotEmptyException if the folder is not empty.
      */
     public void deleteFolder(String folderName) throws FolderNotFoundException, FolderNotEmptyException {
+        assert this.folders != null;
+        assert folderName.length() > 0;
         if (!folders.containsKey(folderName)) {
             throw new FolderNotFoundException();
         }
@@ -78,6 +82,8 @@ public class SecretEnumerator {
      * @throws ArrayIndexOutOfBoundsException if the index is greater than or equal to the size of the storage list
      */
     public Secret get(int index) {
+        assert this.storage != null;
+        assert index >= 0;
         if (index >= storage.size()) {
             throw new ArrayIndexOutOfBoundsException();
         }
@@ -93,7 +99,11 @@ public class SecretEnumerator {
      * @throws ArrayIndexOutOfBoundsException if the specified index is out of bounds of the specified folder
      */
     public Secret get(int index, String folderName) {
-        // assumes folder already exists
+        assert this.folders != null;
+        assert folderName.length() > 0;
+        assert index >= 0;
+        assert this.folders.get(folderName) != null;
+
         ArrayList<Secret> tempStorage = folders.get(folderName);
 
         if (index >= tempStorage.size()) {
@@ -108,6 +118,7 @@ public class SecretEnumerator {
      * @return an ArrayList of all secrets stored in the application.
      */
     public ArrayList<Secret> getList() {
+        assert this.storage != null;
         return storage;
     }
 
@@ -119,6 +130,8 @@ public class SecretEnumerator {
      * @return an ArrayList of secrets stored in the specified folder.
      */
     public ArrayList<Secret> getList(String folderName) {
+        assert this.folders != null;
+        assert folderName.length() > 0;
         return folders.get(folderName);
     }
 
@@ -130,6 +143,9 @@ public class SecretEnumerator {
      * @throws FolderExistsException if the folder name already exists.
      */
     public void add(Secret secret) throws FolderExistsException {
+        assert this.storage != null;
+        assert this.folders != null;
+        assert secret != null;
         storage.add(secret);
         // creates a folder if it doesn't already exist
         if (!folders.containsKey(secret.getFolderName())) {
@@ -145,6 +161,9 @@ public class SecretEnumerator {
      * @param secret the secret to be deleted
      */
     public void delete(Secret secret) {
+        assert this.storage != null;
+        assert this.folders != null;
+        assert secret != null;
         storage.remove(secret);
         folders.get(secret.getFolderName()).remove(secret);
         // delete folder if it is empty
@@ -159,6 +178,7 @@ public class SecretEnumerator {
      * @return the size of the container
      */
     public int size() {
+        assert this.storage != null;
         return this.storage.size();
     }
 
@@ -167,7 +187,8 @@ public class SecretEnumerator {
      *
      * @return a HashSet containing all folder names
      */
-    public HashSet getFolders() {
+    public HashSet<String> getFolders() {
+        assert this.folders != null;
         HashSet<String> folderHashset = new HashSet();
         for (String name : this.folders.keySet()) {
             folderHashset.add(name);
