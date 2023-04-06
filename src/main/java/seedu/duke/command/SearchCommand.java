@@ -95,7 +95,7 @@ public class SearchCommand extends Command{
             }
         }
         if (count == 0) {
-            Ui.printError("No secret found with the string provided.");
+            Ui.inform("No secrets found with the name provided.");
         } else {
             System.out.println("Found " + count + " matches!");
             System.out.print(output);

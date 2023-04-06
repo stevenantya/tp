@@ -1,7 +1,6 @@
 package seedu.duke.command;
 
 import seedu.duke.exceptions.OperationCancelException;
-import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.messages.InquiryMessages;
 import seedu.duke.exceptions.secrets.FolderExistsException;
@@ -37,7 +36,7 @@ public class EditCommand extends Command {
      * @param input the input string that specifies which secret to edit and the new values of the fields to be updated.
      */
     public EditCommand(String input, HashSet<String> usedNames) throws IllegalSecretNameException,
-            IllegalFolderNameException, SecretNotFoundException {
+            SecretNotFoundException {
         assert input != null;
         this.name = extractName(input);
         if (Secret.isIllegalName(name)) {
@@ -93,17 +92,16 @@ public class EditCommand extends Command {
     // FOR QUICKER INQUIRY
     public String inquireCreditCardNumber() throws OperationCancelException {
         String creditCardNumber = inquire(InquiryMessages.CREDIT_CARD_NUMBER_EDIT, "Credit Card Number");
-        while(!CreditCard.isLegalCreditCardNumber(creditCardNumber)) {
+        while (!CreditCard.isLegalCreditCardNumber(creditCardNumber)) {
             System.out.println(InquiryMessages.CREDIT_CARD_NUMBER_RETRY);
             creditCardNumber = inquire(InquiryMessages.CREDIT_CARD_NUMBER_EDIT, "Credit Card Number");
         }
         return creditCardNumber;
     }
 
-
     public String inquireCvcNumber() throws OperationCancelException {
         String number = inquire(InquiryMessages.CVC_NUMBER_EDIT, "CVC Number");
-        while(!CreditCard.isLegalCvcNumber(number)) {
+        while (!CreditCard.isLegalCvcNumber(number)) {
             System.out.println(InquiryMessages.CVC_NUMBER_RETRY);
             number = inquire(InquiryMessages.CVC_NUMBER_EDIT, "CVC Number");
         }
@@ -112,7 +110,7 @@ public class EditCommand extends Command {
 
     public String inquireExpiryDate() throws OperationCancelException {
         String number = inquire(InquiryMessages.EXPIRY_DATE_EDIT, "Expiry Date");
-        while(!CreditCard.isLegalExpiryDate(number)) {
+        while (!CreditCard.isLegalExpiryDate(number)) {
             System.out.println(InquiryMessages.EXPIRY_DATE_RETRY);
             number = inquire(InquiryMessages.EXPIRY_DATE_EDIT, "Expiry Date");
         }
@@ -141,16 +139,26 @@ public class EditCommand extends Command {
      * @param secureNUSData the SecretMaster object containing the list of secrets.
      */
     @Override
-    public void execute(SecretMaster secureNUSData) throws SecretNotFoundException, OperationCancelException, 
+    public void execute(SecretMaster secureNUSData) throws SecretNotFoundException, OperationCancelException,
             FolderExistsException {
-        Secret passwordSecret;
-        passwordSecret = secureNUSData.getByName(name);
-        assert passwordSecret != null;
-        String[] inquiredFields = inquireFields(passwordSecret);
+        Secret secret;
+        secret = secureNUSData.getByName(name);
+        String name = secret.getName();
+        String folderName = secret.getFolderName();
+        String[] inquiredFields = inquireFields(secret);
+        assert secret != null;
+        assert name != null;
+        assert folderName != null;
         assert inquiredFields != null;
-        secureNUSData.editSecret(passwordSecret, passwordSecret.getName(), passwordSecret.getFolderName(),
-                inquiredFields);
-        Ui.inform("Secret has been edited! Check it out using the 'list' function");
+        secureNUSData.editSecret(secret, name, folderName, inquiredFields);
+        if (folderName.equals("unnamed")) {
+            Ui.inform("Secret named: \"" + name +"\" has been edited!\n" +
+                    "Check it out using the 'search' or 'list' function!");
+        } else {
+            Ui.inform("Secret named: \"" + name +"\" of folder: \"" + folderName + "\"has been edited!\n" +
+                    "Check it out using the 'search' or 'list' function!");
+        }
+
     }
 
     /**
