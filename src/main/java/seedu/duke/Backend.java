@@ -67,6 +67,11 @@ public class Backend {
                 while (input != null) {
                     String[] inputArray = input.split(Backend.DELIMITER);
                     secretList = Backend.readAndUpdate(inputArray, secretList);
+                    String data = secretList.get(secretList.size() - 1).toStringForDatabase();
+                    boolean isCorrupted = !Backend.hash(data).equals(inputArray[inputArray.length - 1]);
+                    if (isCorrupted) {
+                        throw new IOException();
+                    }
                     input = reader.readLine();
                 }
                 reader.close();
@@ -80,7 +85,6 @@ public class Backend {
             Ui.inform("Database cannot be initialised! User data will not be saved");
             LOGGER.log(Level.SEVERE, SecureNUSLogger.formatStackTrace(e.getStackTrace()));
             secretList = new ArrayList<Secret>();
-            assert false; //should the session be terminated?
         }
 
 
@@ -129,31 +133,36 @@ public class Backend {
      */
     public static ArrayList<Secret> readAndUpdate(String[] input, ArrayList<Secret> database)
             throws InvalidExpiryDateException {
-        if (input[0].equals(Backend.PASSWORD_IDENTIFIER)) {
-            Secret secret = new BasicPassword(input[2], input[3], Backend.decode(input[4]),
-                    Backend.decode(input[5]), Backend.parseEmptyField(input[6]));
-            database.add(secret);
-        } else if (input[0].equals(Backend.CREDIT_CARD_IDENTIFIER)) {
-            Secret secret = new CreditCard(input[2], input[3], input[4],
-                    Backend.decode(input[5]), Backend.decode(input[6]),
-                    input[7]);
-            database.add(secret);
-        } else if (input[0].equals(Backend.CRYPTOWALLET_IDENTIFIER)) {
-            Secret secret = new CryptoWallet(input[2], input[3], Backend.decode(input[4]),
-                    Backend.decode(input[5]), Backend.decode(input[6]),
-                    Backend.createUrlArrayList(input));
-            database.add(secret);
-        } else if (input[0].equals(Backend.NUSNETID_IDENTIFIER)) {
-            Secret secret = new NUSNet(input[2], input[3], input[4],
-                    Backend.decode(input[5]));
-            database.add(secret);
-        } else if (input[0].equals(Backend.STUDENTID_IDENTIFIER)) {
-            Secret secret = new StudentID(input[2], input[3], input[4]);
-            database.add(secret);
-        } else if (input[0].equals(Backend.WIFI_PASSWORD_IDENTIFIER)) {
-            Secret secret = new WifiPassword(input[2], input[3], Backend.decode(input[4]),
-                    Backend.decode(input[5]));
-            database.add(secret);
+        try {
+            if (input[0].equals(Backend.PASSWORD_IDENTIFIER)) {
+                Secret secret = new BasicPassword(input[2], input[3], Backend.decode(input[4]),
+                        Backend.decode(input[5]), Backend.parseEmptyField(input[6]));
+                database.add(secret);
+            } else if (input[0].equals(Backend.CREDIT_CARD_IDENTIFIER)) {
+                Secret secret = new CreditCard(input[2], input[3], input[4],
+                        Backend.decode(input[5]), Backend.decode(input[6]),
+                        input[7]);
+                database.add(secret);
+            } else if (input[0].equals(Backend.CRYPTOWALLET_IDENTIFIER)) {
+                Secret secret = new CryptoWallet(input[2], input[3], Backend.decode(input[4]),
+                        Backend.decode(input[5]), Backend.decode(input[6]),
+                        Backend.createUrlArrayList(input));
+                database.add(secret);
+            } else if (input[0].equals(Backend.NUSNETID_IDENTIFIER)) {
+                Secret secret = new NUSNet(input[2], input[3], input[4],
+                        Backend.decode(input[5]));
+                database.add(secret);
+            } else if (input[0].equals(Backend.STUDENTID_IDENTIFIER)) {
+                Secret secret = new StudentID(input[2], input[3], input[4]);
+                database.add(secret);
+            } else if (input[0].equals(Backend.WIFI_PASSWORD_IDENTIFIER)) {
+                Secret secret = new WifiPassword(input[2], input[3], Backend.decode(input[4]),
+                        Backend.decode(input[5]));
+                database.add(secret);
+            }
+        } catch (Exception e) {
+            Ui.inform("Database is corrupted, a new Database will be initiated");
+            //LOGGER.log(Level.WARNING, e.getMessage() + Arrays.toString(input));
         }
         return database;
     }
@@ -211,7 +220,7 @@ public class Backend {
 
     public static ArrayList<String> createUrlArrayList(String[] input) {
         ArrayList<String> urlArrayList = new ArrayList<String>();
-        for (int i = 7; i < input.length; i++) {
+        for (int i = 7; i < input.length - 1; i++) {
             urlArrayList.add(input[i]);
         }
         return urlArrayList;
@@ -273,6 +282,14 @@ public class Backend {
         return testData.equals(data);
     }
 
+    public static String hash(String data) {
+        int hashcode = 0;
+        for (int i = 0; i < data.length(); i++) {
+            hashcode = (int) (data.charAt(i));
+        }
+        return "" + hashcode;
+    }
+
     /**
      * Saves changes made by the user during the session
      * in a .txt document.
@@ -286,12 +303,9 @@ public class Backend {
             FileWriter myWriter = new FileWriter(database);
             for (int i = 0; i < input.size(); i++) {
                 Secret secret = input.get(i);
-                boolean dataValidity = Backend.checkData(secret.toStringForDatabase());
-                assert  dataValidity = true : "Issues with data conversion";
-                //verify data validity
-                if (Backend.checkData(secret.toStringForDatabase())) {
-                    myWriter.write(secret.toStringForDatabase() + "\n");
-                }
+
+                myWriter.write(secret.toStringForDatabase() + "," +
+                    Backend.hash(secret.toStringForDatabase())+ "\n");
             }
             myWriter.close();
         } catch (IOException e) {
