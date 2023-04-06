@@ -65,6 +65,7 @@ public class AddBasicPasswordCommand extends AddSecretCommand {
      */
     @Override
     public void execute(SecretMaster secureNUSData) throws ExceptionMain {
+        assert secureNUSData != null;
         BasicPassword basicPasswordData = new BasicPassword(name,folderName,username,password,url);
 
         try {

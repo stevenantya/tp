@@ -34,6 +34,7 @@ public class DeleteCommand extends Command {
      * @return the name of the secret to be deleted
      */
     public String[] extractName(String input) {
+        assert input != null;
         String extractedName = input.split("delete ")[1].strip();
         String[] extractedNames = extractedName.split("p/");
         for (int ix = 1; ix < extractedNames.length; ix += 1) {
@@ -50,6 +51,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(SecretMaster secureNUSData) throws SecretNotFoundException {
+        assert secureNUSData != null;
         for (int index = 1; index < secretNames.length; index += 1) {
             secretName = secretNames[index];
             Secret deleteData = null;

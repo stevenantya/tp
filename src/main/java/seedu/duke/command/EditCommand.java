@@ -37,6 +37,7 @@ public class EditCommand extends Command {
      */
     public EditCommand(String input, HashSet<String> usedNames) throws IllegalSecretNameException,
             SecretNotFoundException {
+        assert input != null;
         this.name = extractName(input);
         if (Secret.isIllegalName(name)) {
             throw new IllegalSecretNameException();
@@ -55,6 +56,7 @@ public class EditCommand extends Command {
      * @return The new fields
      */
     public String[] inquireFields(Secret secret) throws OperationCancelException {
+        assert secret != null;
         String[] inquiredFields = null;
         if (secret instanceof BasicPassword) {
             inquiredFields = new String[3];
@@ -144,6 +146,10 @@ public class EditCommand extends Command {
         String name = secret.getName();
         String folderName = secret.getFolderName();
         String[] inquiredFields = inquireFields(secret);
+        assert secret != null;
+        assert name != null;
+        assert folderName != null;
+        assert inquiredFields != null;
         secureNUSData.editSecret(secret, name, folderName, inquiredFields);
         if (folderName.equals("unnamed")) {
             Ui.inform("Secret named: \"" + name +"\" has been edited!\n" +
@@ -152,6 +158,7 @@ public class EditCommand extends Command {
             Ui.inform("Secret named: \"" + name +"\" of folder: \"" + folderName + "\"has been edited!\n" +
                     "Check it out using the 'search' or 'list' function!");
         }
+
     }
 
     /**

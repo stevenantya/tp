@@ -37,6 +37,8 @@ public class SearchCommand extends Command{
             HashSet<String> folders) throws
             IllegalFolderNameException,
             IllegalSecretNameException, FolderNotFoundException {
+        assert name != null;
+        assert folders != null;
         if (folderName != null && !SecretMaster.isLegalFolderName(folderName)) {
             throw new IllegalFolderNameException();
         }
@@ -72,6 +74,7 @@ public class SearchCommand extends Command{
      */
     @Override
     public void execute(SecretMaster secureNUSData) throws NonExistentFolderException {
+        assert secureNUSData != null;
         ArrayList<Secret> secrets;
         if (this.folderName != null) {
             // search a specific folder
@@ -80,6 +83,7 @@ public class SearchCommand extends Command{
             // search all passwords
             secrets = secureNUSData.listSecrets();
         }
+        assert secrets != null;
         int count = 0;
         StringBuilder output = new StringBuilder();
         for (Secret secret : secrets) {

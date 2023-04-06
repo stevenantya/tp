@@ -54,6 +54,8 @@ public class SecretSearcher {
      *         search index.
      */
     public Secret get(String secretId) {
+        assert secretId != null;
+        assert this.storage != null;
         return storage.get(secretId);
     }
 
@@ -64,6 +66,8 @@ public class SecretSearcher {
      * @throws FolderExistsException if a folder with the given name already exists in the search index.
      */
     public void createFolder(String folderName) throws FolderExistsException {
+        assert folderName != null;
+        assert this.folders != null;
         if (folders.containsKey(folderName)) {
             throw new FolderExistsException();
         }
@@ -79,6 +83,8 @@ public class SecretSearcher {
      * @throws FolderNotEmptyException if the folder to be deleted is not empty.
      */
     public void deleteFolder(String folderName) throws FolderNotFoundException, FolderNotEmptyException {
+        assert folderName != null;
+        assert this.folders != null;
         if (!folders.containsKey(folderName)) {
             throw new FolderNotFoundException();
         }
@@ -95,6 +101,10 @@ public class SecretSearcher {
      * @throws FolderExistsException if the folder specified by the Secret object does not exist in the search index.
      */
     public void add(Secret secret) throws FolderExistsException {
+        assert secret != null;
+        assert this.folders != null;
+        assert this.storage != null;
+
         storage.put(secret.getUid(), secret);
         if (!folders.containsKey(secret.getFolderName())) {
             createFolder(secret.getFolderName());
@@ -108,6 +118,10 @@ public class SecretSearcher {
      * @param secret the Secret object to delete
      */
     public void delete(Secret secret) {
+        assert secret != null;
+        assert this.folders != null;
+        assert this.storage != null;
+
         storage.remove(secret.getUid());
         folders.get(secret.getFolderName()).remove(secret.getUid());
         // delete folder if it is empty
@@ -122,6 +136,8 @@ public class SecretSearcher {
      * @return a HashSet of strings containing all the secret names in the storage
      */
     public HashSet<String> getNames() {
+        assert this.storage != null;
+
         HashSet<String> nameHashset = new HashSet();
         for (String name : this.storage.keySet()) {
             nameHashset.add(name);

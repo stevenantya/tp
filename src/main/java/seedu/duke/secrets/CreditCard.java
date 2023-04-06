@@ -80,14 +80,17 @@ public class CreditCard extends Secret {
     }
 
     public static boolean isLegalExpiryDate(String expiryDate) {
+        assert expiryDate != null;
         return expiryDate.matches(EXPIRY_DATE_FMT);
     }
 
     public static boolean isLegalCreditCardNumber(String creditCardNumber) {
+        assert creditCardNumber != null;
         return creditCardNumber.matches(CREDIT_CARD_NUMBER_FMT);
     }
 
     public static boolean isLegalCvcNumber(String number) {
+        assert number != null;
         return number.matches(CVC_NUMBER_FMT);
     }
 
@@ -106,6 +109,7 @@ public class CreditCard extends Secret {
      * @param expiryDate Expiry date of the credit card in the format "MM/YY".
      */
     public void setExpiryDate(String expiryDate) throws InvalidExpiryDateException {
+        assert expiryDate != null;
         if (!expiryDate.matches(EXPIRY_DATE_FMT)) {
             throw new InvalidExpiryDateException();
         }
@@ -127,6 +131,7 @@ public class CreditCard extends Secret {
      * @param fullName the full name to be set
      */
     public void setFullName(String fullName) {
+        assert fullName != null;
         this.fullName = fullName;
     }
 
@@ -145,6 +150,7 @@ public class CreditCard extends Secret {
      * @param creditCardNumber A String representing the credit card number to be set.
      */
     public void setCreditCardNumber(String creditCardNumber) {
+        assert creditCardNumber != null;
         this.creditCardNumber = creditCardNumber;
     }
 
@@ -163,6 +169,7 @@ public class CreditCard extends Secret {
      * @param cvcNumber the new CVC number
      */
     public void setCvcNumber(String cvcNumber) throws InvalidCreditCardNumberException {
+        assert cvcNumber != null;
         if (!creditCardNumber.matches(CREDIT_CARD_NUMBER_FMT)) {
             throw new InvalidCreditCardNumberException();
         }

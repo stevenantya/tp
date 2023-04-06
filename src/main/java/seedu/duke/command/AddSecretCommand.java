@@ -42,6 +42,9 @@ public abstract class AddSecretCommand extends Command {
     public void checkNameAndFolderName(String name, String folderName, HashSet<String> usedNames) throws
             IllegalFolderNameException,
             IllegalSecretNameException, RepeatedIdException {
+        assert name != null;
+        assert folderName != null;
+        assert usedNames != null;
         if (!SecretMaster.isLegalFolderName(folderName)) {
             throw new IllegalFolderNameException();
         }
@@ -61,6 +64,7 @@ public abstract class AddSecretCommand extends Command {
      */
     @Override
     public void execute(SecretMaster secureNUSData) throws ExceptionMain {
+        assert secureNUSData != null;
         Secret secret = new Secret(name,folderName);
         try {
             secureNUSData.addSecret(secret);

@@ -79,6 +79,7 @@ public class SecretMaster {
      * @return boolean indicating whether the name is legal.
      */
     public static boolean isLegalFolderName(String name) {
+        assert name != null;
         return !name.equals("") && name.matches(ALLOWED_NAMES_REGEX);
     }
 
@@ -88,6 +89,7 @@ public class SecretMaster {
      * @return HashSet of folder names.
      */
     public HashSet<String> getFolders() {
+        assert this.folders != null;
         return folders;
     }
 
@@ -97,6 +99,7 @@ public class SecretMaster {
      * @return SecretSearcher object.
      */
     public SecretSearcher getSecretSearcher() {
+        assert this.secretSearcher != null;
         return secretSearcher;
     }
 
@@ -106,6 +109,7 @@ public class SecretMaster {
      *  @return SecretEnumerator object.
      */
     public SecretEnumerator getSecretEnumerator() {
+        assert this.secretEnumerator != null;
         return secretEnumerator;
     }
 
@@ -115,6 +119,7 @@ public class SecretMaster {
      * @return HashSet of secret names.
      */
     public HashSet<String> getSecretNames() {
+        assert this.secretNames != null;
         return secretNames;
     }
 
@@ -126,7 +131,10 @@ public class SecretMaster {
      * @throws IllegalFolderNameException if the folder name is not a legal name.
      */
     public void createFolder(String folderName) throws FolderExistsException, IllegalFolderNameException {
-
+        assert this.folders != null;
+        assert this.secretEnumerator != null;
+        assert this.secretSearcher != null;
+        assert folderName.length() > 0;
         if (!isLegalFolderName(folderName)) {
             throw new IllegalFolderNameException();
         }
@@ -145,6 +153,8 @@ public class SecretMaster {
      * @return Secret object at the given index.
      */
     public Secret getByIndex(int index) {
+        assert index >= 0;
+        assert this.secretEnumerator != null;
         return secretEnumerator.get(index);
     }
 
@@ -156,6 +166,9 @@ public class SecretMaster {
      * @return Secret object at the given index within the given folder.
      */
     public Secret getByIndex(int index, String folder) {
+        assert index >= 0;
+        assert folder.length() > 0;
+        assert this.secretEnumerator != null;
         return secretEnumerator.get(index, folder);
     }
 
@@ -165,6 +178,7 @@ public class SecretMaster {
      * @return ArrayList of all Secrets.
      */
     public ArrayList<Secret> listSecrets() {
+        assert this.secretEnumerator != null;
         return secretEnumerator.getList();
     }
 
@@ -176,6 +190,9 @@ public class SecretMaster {
      * @throws NonExistentFolderException if the folder does not exist.
      */
     public ArrayList<Secret> listSecrets(String folderName) throws NonExistentFolderException {
+        assert folderName != null;
+        assert folderName.length() >= 0;
+        assert this.secretEnumerator != null;
         if (!folders.contains(folderName)) {
             throw new NonExistentFolderException();
         }
@@ -190,6 +207,10 @@ public class SecretMaster {
      * @throws SecretNotFoundException if the Secret does not exist.
      */
     public Secret getByName(String secretName) throws SecretNotFoundException {
+        assert secretName != null;
+        assert secretName.length() > 0;
+        assert this.secretNames != null;
+        assert this.secretSearcher != null;
         if (!secretNames.contains(secretName)) {
             throw new SecretNotFoundException();
         }
@@ -207,6 +228,10 @@ public class SecretMaster {
      */
     public void addSecret(Secret secret) throws FolderExistsException, RepeatedIdException,
             IllegalSecretNameException, IllegalFolderNameException {
+        assert secret != null;
+        assert this.secretNames != null;
+        assert this.secretEnumerator != null;
+        assert this.secretSearcher != null;
         if (!isLegalFolderName(secret.getName())) {
             throw new IllegalSecretNameException();
         }
@@ -235,6 +260,16 @@ public class SecretMaster {
      */
     public void editSecret(Secret secret, String newName, String newFolderName,
                            String[] inquiredFields) throws FolderExistsException {
+
+        assert secret != null;
+        assert newName != null;
+        assert newFolderName != null;
+        assert inquiredFields != null; //must it be more than 0?
+        assert newName.length() > 0;
+        assert this.secretNames != null;
+        assert this.secretEnumerator != null;
+        assert this.secretSearcher != null;
+
         secretNames.remove(secret.getName());
         secretSearcher.delete(secret);
         secretEnumerator.delete(secret);
@@ -286,6 +321,11 @@ public class SecretMaster {
      * @throws SecretNotFoundException if the Secret does not exist.
      */
     public void removeSecret(Secret secret) throws SecretNotFoundException {
+        assert secret != null;
+        assert this.secretNames != null;
+        assert this.secretEnumerator != null;
+        assert this.secretSearcher != null;
+
         if (!secretNames.contains(secret.getUid())) {
             throw new SecretNotFoundException();
         }

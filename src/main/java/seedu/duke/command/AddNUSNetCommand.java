@@ -51,6 +51,7 @@ public class AddNUSNetCommand extends AddSecretCommand {
      */
     @Override
     public void execute(SecretMaster secureNUSData) throws ExceptionMain {
+        assert secureNUSData != null;
         NUSNet nusNetIdData = new NUSNet(name,folderName,nusNetId,password);
         try {
             secureNUSData.addSecret(nusNetIdData);

@@ -13,6 +13,7 @@ import seedu.duke.command.ExitCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.MenuCommand;
 import seedu.duke.command.SearchCommand;
+import seedu.duke.command.SaveCommand;
 import seedu.duke.command.ViewCommand;
 import seedu.duke.exceptions.InsufficientParamsException;
 import seedu.duke.exceptions.InvalidCommandException;
@@ -55,7 +56,9 @@ public class Parser {
             return new EditCommand(command, usedNames);
         } else if (command.startsWith("menu")) {
             return new MenuCommand();
-        } else if (command.startsWith("exit")) {
+        } else if (command.startsWith("save")) {
+            return new SaveCommand();
+        }else if (command.startsWith("exit")) {
             return new ExitCommand();
         } else {
             // represents accidental wrong input
