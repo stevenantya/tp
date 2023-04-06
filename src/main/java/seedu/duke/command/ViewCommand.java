@@ -18,10 +18,10 @@ public class ViewCommand extends Command {
      *
      * @param input the user input to extract the password name
      */
-    public ViewCommand(String input, HashSet<String> usedNames) throws SecretNotFoundException {
+    public ViewCommand(String input, HashSet<String> usedNames){
         this.passwordName = extractName(input);
         if (!usedNames.contains(passwordName)) {
-            throw new SecretNotFoundException();
+            Ui.inform("No such secret found.");
         }
     }
 
@@ -47,7 +47,7 @@ public class ViewCommand extends Command {
             passwordSecret = secureNUSData.getByName(this.passwordName);
             Ui.inform(passwordSecret.getRevealStr());
         } catch (SecretNotFoundException e) {
-            Ui.printError("There are no passwords that matches that name!\n" +
+            Ui.inform("There are no passwords that matches that name!\n" +
                     "Make sure you follow this format: \"view PASSWORD_NAME\"");
         }
     }
