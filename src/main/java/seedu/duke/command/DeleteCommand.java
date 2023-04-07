@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
-import seedu.duke.Ui;
+import seedu.duke.exceptions.InsufficientParamsException;
+import seedu.duke.ui.Ui;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretMaster;
@@ -12,16 +13,18 @@ import seedu.duke.storage.SecretMaster;
 public class DeleteCommand extends Command {
 
     private String secretName;
-    private String folderName;
+    private String[] secretNames;
 
     /**
      * Class constructor that extracts the name of the secret and its folder from the input string.
      *
      * @param input the input string from the user
      */
-    public DeleteCommand(String input) {
-        this.secretName = extractName(input);
-        this.folderName = extractFolderName(input);
+    public DeleteCommand(String input) throws InsufficientParamsException {
+        this.secretNames = extractName(input);
+        if (secretNames.length == 0) {
+            throw new InsufficientParamsException();
+        }
     }
 
     /**
@@ -30,24 +33,11 @@ public class DeleteCommand extends Command {
      * @param input the input string from the user
      * @return the name of the secret to be deleted
      */
-    public String extractName(String input) {
-        String extractedName = input.split("delete ")[1];
-        extractedName = extractedName.split(" /f")[0];
-        return extractedName;
-    }
-
-    /**
-     * Extracts the name of the folder in which the secret to be deleted is located from the input string.
-     *
-     * @param input the input string from the user
-     * @return the name of the folder in which the secret to be deleted is located
-     */
-    public String extractFolderName(String input) {
-        String extractedFolderName = "unnamed";
-        if (input.split("/f ").length > 1) {
-            extractedFolderName = input.split("/f ")[1];
-        }
-        return extractedFolderName;
+    public String[] extractName(String input) {
+        assert input != null;
+        String extractedName = input.split("delete ")[1].strip();
+        String[] extractedNames = extractedName.split(" ");
+        return extractedNames;
     }
 
     /**
@@ -58,24 +48,30 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(SecretMaster secureNUSData) throws SecretNotFoundException {
-        Secret deleteData = null;
-        boolean isValid = false;
-        try {
-            deleteData = secureNUSData.getByName(secretName);
-            isValid = true;
-        } catch (SecretNotFoundException e) {
-            Ui.printError("Data not found!");
-            isValid = false;
-        }
-        if (isValid && (deleteData != null)) {
-            System.out.println("You deleted " + secretName + " in folder: " + folderName);
-            try {
-                secureNUSData.removeSecret(deleteData);
-            } catch (SecretNotFoundException e) {
-                Ui.printError("Data not found!");
+        assert secureNUSData != null;
+        for (int index = 0; index < secretNames.length; index += 1) {
+            secretName = secretNames[index];
+            if (Secret.isIllegalName(secretName)) {
+                Ui.inform("Invalid Secret Name: " + secretName + ". Skipping this input");
+                continue;
             }
-        } else {
-            System.out.println("Please enter a valid secret name!");
+            Secret deleteData = null;
+            boolean isValid = false;
+            try {
+                deleteData = secureNUSData.getByName(secretName);
+                isValid = true;
+            } catch (SecretNotFoundException e) {
+                Ui.inform("Secret Not Found: " + secretName + ". Skipping this input");
+                isValid = false;
+            }
+            if (isValid && (deleteData != null)) {
+                try {
+                    secureNUSData.removeSecret(deleteData);
+                    System.out.println("Successfully deleted: " + secretName);
+                } catch (SecretNotFoundException e) {
+                    Ui.printError("Secret Not Found: " + secretName);
+                }
+            }
         }
     }
 

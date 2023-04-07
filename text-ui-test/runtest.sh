@@ -8,9 +8,7 @@ cd ..
 
 cd text-ui-test
 
-echo yeet
 java -ea -jar $(find ../build/libs/ -mindepth 1 -print -quit) < input.txt > ACTUAL.TXT
-echo yeet2
 
 # Remove trailing whitespaces
 sed -i 's/[[:blank:]]*$//' EXPECTED.TXT
@@ -22,8 +20,12 @@ diff EXPECTED-UNIX.TXT ACTUAL.TXT
 if [ $? -eq 0 ]
 then
     echo "Test passed!"
+    rm assets/database.txt
     exit 0
 else
     echo "Test failed!"
+    rm assets/database.txt
     exit 1
 fi
+
+

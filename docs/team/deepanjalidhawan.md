@@ -4,11 +4,18 @@
 **SecureNUS**, a Command Line Interface (CLI) based password manager for students in National University of
 Singapore (NUS) to store and refer to their passwords in a jiffy.
 
+The application offers various functionalities such as creating, removing, displaying, finding, storing, and 
+retrieving passwords, as well as modifying password information.
+
+Additionally, the app provides a menu function that displays summaries and syntax for commands.
+
+Users can easily navigate and operate the app, which is designed to be user-friendly and effective. 
+
 ### Summary of Contributions
 #### Code Contributed: 
 * List of all the passwords entered by the user. 
   * `list`: if the user wants to list all the passwords in SecureNUS. 
-  * `list [f\FOLDER_NAME]`: if the user wants to list all the passwords of a specific folder. 
+  * `list [f/FOLDER_NAME]`: if the user wants to list all the passwords of a specific folder. 
 * Menu command `menu`: for users to refer to the command list for easy navigation through the application.
 * Performed the respective JUnit Tests for them as well
 * Update the Java Documentation for the entire code.
@@ -26,7 +33,8 @@ to store).
 
 #### Contributions to the UG:
 * Created the entire layout of the UG. 
-* Updated all the features and their relevant screenshots
+* Updated all the features and their relevant screenshots.
+* Did the quality testing and finalization of the entire UG.
 
 #### Contributions to the DG:
 **To be updated**
@@ -40,14 +48,18 @@ to store).
 * Reviewed code sections and gave subsequent feedbacks to the team.
 
 #### Review/mentoring contributions: 
-* Helped in finding potential bugs in the code
+* Helped in finding potential bugs in the code.
+[List of issues](https://github.com/AY2223S2-CS2113-T15-2/tp/issues?q=is%3Aissue+is%3Aclosed+author%3ADeepanjaliDhawan)
 * Suggested improvements in the code to the team. 
-* Worked in tandem with the team to solve major issues which in some cases led to program crashes.
+* Worked in tandem with the team to solve major application bugs and issues.
 * Helped in reiterating timelines and submission requirements to the team for timely and quality submissions. 
 
 #### Contributions beyond the project team:
-* Reported bugs in other projects (mention team names) during the PE Dry Run and PE
-* Gave suggestions and feedbacks to other teams about the DG and Code Quality 
-* Contributed in giving inputs to other team after reviewing their draft User guide
+* Reported bugs in other projects (mention team names) during the PE Dry Run and PE.\
+[View the PE-D contribution here](https://github.com/DeepanjaliDhawan/ped/issues)
+* Gave suggestions and feedbacks to other teams about the DG and Code Quality.
+[View the DG contribution here](https://github.com/nus-cs2113-AY2223S2/tp/pull/20/files)
+* Contributed in giving inputs to other teams after reviewing their draft User guide
+
 
 

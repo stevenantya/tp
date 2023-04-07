@@ -36,12 +36,12 @@ class SecretMasterTest {
     @Test
     void isLegalName() throws IllegalFolderNameException, FolderExistsException {
         SecretMaster secretMaster = new SecretMaster();
-        assertEquals(true, secretMaster.isLegalName("gyujnuygvjkm"));
-        assertEquals(true, secretMaster.isLegalName("hfjewqsdierjdfhnreqwewqfvsvd"));
-        assertEquals(true, secretMaster.isLegalName("fvdwhjejsdkjfk879809"));
-        assertEquals(false, secretMaster.isLegalName("jhgfhdwv "));
-        assertEquals(false, secretMaster.isLegalName("jkfewrjfv90r93f47   "));
-        assertEquals(false, secretMaster.isLegalName("jkfewrjfv90r93f47^&IO(*&^"));
+        assertEquals(true, secretMaster.isLegalFolderName("gyujnuygvjkm"));
+        assertEquals(true, secretMaster.isLegalFolderName("hfjewqsdierjdfhnreqwewqfvsvd"));
+        assertEquals(true, secretMaster.isLegalFolderName("fvdwhjejsdkjfk879809"));
+        assertEquals(false, secretMaster.isLegalFolderName("jhgfhdwv "));
+        assertEquals(false, secretMaster.isLegalFolderName("jkfewrjfv90r93f47   "));
+        assertEquals(false, secretMaster.isLegalFolderName("jkfewrjfv90r93f47^&IO(*&^"));
     }
 
     /**
@@ -98,7 +98,8 @@ class SecretMasterTest {
         SecretMaster secretMaster = new SecretMaster();
         secretMaster.addSecret(new BasicPassword("basic1", "username1", "Password1",
                 "http.com"));
-        secretMaster.addSecret(new CreditCard("credit1", "HJ HJ UI", "1234567890123456", 123,
+        secretMaster.addSecret(new CreditCard("credit1", "HJ HJ UI",
+                "1234 5678 9012 3456", "123",
                 "12/23"));
         secretMaster.addSecret(new CryptoWallet("crypto1", "hjhbj", "fdertyuiytyui876ytfgyuit5rt",
                 "hb jnjkm kjijh ijhui hjhb iujh uhbgv gfcd"));
@@ -153,19 +154,20 @@ class SecretMasterTest {
     public void editCreditCard() throws FolderExistsException, InvalidExpiryDateException,
             IllegalFolderNameException, RepeatedIdException, IllegalSecretNameException {
         SecretMaster secretMaster = new SecretMaster();
-        CreditCard secret = new CreditCard("secret1", "folder1", "John Doe", "1234567890123456", 123, "12/23");
+        CreditCard secret = new CreditCard("secret1", "folder1", "John Doe",
+                "1234567890123456", "123", "12/23");
         secretMaster.addSecret(secret);
 
         String newName = "secret2";
         String newFolderName = "folder2";
-        String[] inquiredFields = {"Jane Doe", "1234567890123456", "456", "12/24"};
+        String[] inquiredFields = {"Jane Doe", "1234 5678 9012 3456", "456", "12/24"};
         secretMaster.editSecret(secret, newName, newFolderName, inquiredFields);
 
         assertEquals(newName, secret.getName());
         assertEquals(newFolderName, secret.getFolderName());
         assertEquals(inquiredFields[0], ((CreditCard) secret).getFullName());
         assertEquals(inquiredFields[1], ((CreditCard) secret).getCreditCardNumber());
-        assertEquals(Integer.parseInt(inquiredFields[2]), ((CreditCard) secret).getCvcNumber());
+        assertEquals(inquiredFields[2], ((CreditCard) secret).getCvcNumber());
         assertEquals(inquiredFields[3], ((CreditCard) secret).getExpiryDate());
     }
 

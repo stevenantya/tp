@@ -7,8 +7,12 @@ import seedu.duke.Backend;
  * Inherits from the Secret class.
  */
 public class NUSNet extends Secret{
+
+    public static final String TYPE = "NUSNet";
+    private static final String ALLOWED_ID_REGEX = "(e|E)\\d{7}";
     private String nusNetId;
     private String password;
+
 
     /**
      * Constructor for creating a NUSNet secret with a folder name.
@@ -37,6 +41,13 @@ public class NUSNet extends Secret{
         this.password = password;
     }
 
+    public String getType() {
+        return TYPE;
+    }
+
+    public static boolean isLegalId(String nusNetId) {
+        return nusNetId.matches(ALLOWED_ID_REGEX);
+    }
     /**
      * Returns the password of the NUSNet account
      *

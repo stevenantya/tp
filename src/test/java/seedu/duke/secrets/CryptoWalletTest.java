@@ -81,11 +81,14 @@ class CryptoWalletTest {
         CryptoWallet cryptoWallet =
                 new CryptoWallet("cryptoWallet1", "folder1", "hoseang",
                         "234567uygfde45tghjioiuytre3", "hbhh jh jhy tgjm ktr de sed fe sf");
-        assertEquals("Seed Phrase: hbhh jh jhy tgjm ktr de sed fe sf", cryptoWallet.getRevealStr());
-        Secret secret2 = new Secret("name");
+        assertEquals("Name: cryptoWallet1\n" +
+                "Seed Phrase: hbhh jh jhy tgjm ktr de sed fe sf\n" +
+                "Private Key: 234567uygfde45tghjioiuytre3", cryptoWallet.getRevealStr());
         CryptoWallet cryptoWallet2 =
                 new CryptoWallet("cryptoWallet1", "hoseang",
                         "234567uygfde45tghjioiuytre3", "hbhh jh jhy tgjm ktr de sed fe sf");
-        assertEquals("Seed Phrase: hbhh jh jhy tgjm ktr de sed fe sf", cryptoWallet2.getRevealStr());
+        assertEquals("Name: cryptoWallet1\n" +
+                "Seed Phrase: hbhh jh jhy tgjm ktr de sed fe sf\n" +
+                "Private Key: 234567uygfde45tghjioiuytre3", cryptoWallet2.getRevealStr());
     }
 }

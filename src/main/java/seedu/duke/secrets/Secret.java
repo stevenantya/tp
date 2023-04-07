@@ -1,5 +1,4 @@
 package seedu.duke.secrets;
-import java.util.regex.Pattern;
 
 /**
  * Represents the basic "Password-like" class, which is intended to be the parent class of all future password classes.
@@ -7,16 +6,16 @@ import java.util.regex.Pattern;
  */
 public class Secret {
 
+    public static final String TYPE = "Secret";
     /**
      * A regex pattern for matching illegal characters in password names.
      */
-    private static final Pattern ILLEGAL_CHARS_PATTERN =
-            Pattern.compile("^.*[~!@#$%^&*()_+=\\-`{}<>()\\[\\]|\"\\_].*$");
+    private static final String ILLEGAL_CHARS_PATTERN = "^[a-zA-Z0-9_]*$";
 
     /**
      * The folder name of the password. By default, it is set to "unnamed".
      */
-    protected String folderName = "unnamed";
+    private String folderName = "unnamed";
 
     /**
      * The unique identifier of the password.
@@ -27,6 +26,7 @@ public class Secret {
      * The name of the password.
      */
     private String name = "";
+
 
     /**
      * Constructs a new password with the given name.
@@ -52,6 +52,10 @@ public class Secret {
         this.folderName = folderName;
     }
 
+    public String getType() {
+        return TYPE;
+    }
+
     /**
      * Checks if the given name contains any illegal characters.
      *
@@ -59,7 +63,7 @@ public class Secret {
      * @return if the name contains any illegal characters, {@code false} otherwise.
      */
     public static boolean isIllegalName(String name) {
-        return ILLEGAL_CHARS_PATTERN.matcher(name).matches();
+        return name.equals("") || !name.matches(ILLEGAL_CHARS_PATTERN);
     }
 
     /**
@@ -72,16 +76,6 @@ public class Secret {
     }
 
     /**
-     * Sets the name of the password.
-     *
-     * @param name The new name of the password.
-     */
-    public void setName(String name) {
-        this.name = name;
-        this.uid = name; // since they are linked now
-    }
-
-    /**
      * Returns the name of the password.
      *
      * @return The name of the password.
@@ -90,16 +84,17 @@ public class Secret {
         return name;
     }
 
-
     /**
      * Edits the name of the password to the given new name and updates the unique identifier accordingly.
      *
      * @param newName The new name of the password.
      */
-    public void editName(String newName) {
+    public void setName(String newName) {
         uid = newName;
         name = newName;
     }
+
+
 
     /**
      * Returns the folder name of the password.

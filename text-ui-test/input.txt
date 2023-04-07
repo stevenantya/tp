@@ -1,1 +1,33 @@
+new password1 f/folder1
+idk.com
+user1
+password1
+new o/NUSNet nusnet1 f/folder1
+e0123456
+qwertyui
+new o/StudentID student2 f/folder1
+A0123456R
+new o/CreditCard credit1 f/personal
+usr1
+1234567890123456
+1234 5678 9012 3456
+123
+03/26
+new o/Crypto wallet1 f/personal
+usr1
+privatekey
+seedphrase
+new o/WifiPassword wifi f/personal
+home1
+password2
+list
+delete p/wifi
+list
+view password1
+edit password1
+usr2
+password1
+idk.com
+search nusnet1
+menu
 exit
