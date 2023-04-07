@@ -171,11 +171,15 @@ Enter the new username:
 Enter the new password:
 Enter the new URL:
 _____________________________________________________
-Secret named: "password1" of folder: "folder1"has been edited!
+Secret named: "password1" of folder: "folder1" has been edited.
 Check it out using the 'search' or 'list' function!
 _____________________________________________________
+_____________________________________________________
+_____________________________________________________
 Found 1 matches!
-1	|	nusnet1	|	folder1	|	NUSNet	|
+| NO. |          NAME           |      FOLDER       |
+|  1  |         nusnet1         |      folder1      |
+_____________________________________________________
 _____________________________________________________
 SecureNUS Command Menu:
 1. Add a general password: new [PASSWORD_NAME] [f/FOLDER_NAME]
@@ -188,7 +192,7 @@ SecureNUS Command Menu:
 3. List all the secrets: list [f/FOLDER_NAME]
 4. View secrets: view PASSWORD_NAME
 5. Search for secrets: search n/NAME_LIKE [f/FOLDER]
-6. Export the secrets in .txt file: save
+6. Export the secrets in "database.txt" file: save
 7. Edit a secrets: edit PASSWORD_NAME
 8. Menu list to refer for commands: menu
 9. Exit from the password manager (will automatically save this session): exit
