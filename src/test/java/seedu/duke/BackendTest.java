@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.duke.secrets.Secret;
 
-
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,7 +30,7 @@ public class BackendTest {
             String[] creditCardArray = {"CreditCard", "usr1", "usr1", "folder1", "fullname",
                 "DKENCvtfsobnf2", "DKENC858", "03/26",};
             String[] cryptoWalletArray = {"CryptoWallet", "usr1", "usr1", "folder1",
-                "DKENCvtfsobnf2", "DKENCqbttxpse2", "DKENCqbttxpse2", "idk.com"};
+                "DKENCvtfsobnf2", "DKENCqbttxpse2", "DKENCqbttxpse2", "idk.com", "129"};
             String[] wifiPasswordArray = {"wifiPassword", "usr1", "usr1", "folder1",
                 "DKENCvtfsobnf2", "DKENCqbttxpse2"};
             secretList = Backend.readAndUpdate(basicPasswordArray, secretList);
@@ -86,6 +85,19 @@ public class BackendTest {
         Assertions.assertNotEquals(Backend.parseEmptyField("Empty"), "");
     }
 
-
+    @Test
+    public void hashHashedDataTrue() {
+        String[] basicPasswordArray = {"Password", "password1", "password1",
+            "folder1", "DKENCvts2", "DKENCqbtt2", "idk.com", "109"};
+        ArrayList<Secret> secretList = new ArrayList<Secret>();
+        try {
+            secretList = Backend.readAndUpdate(basicPasswordArray, secretList);
+            String data = secretList.get(secretList.size() - 1).toStringForDatabase();
+            boolean isCorrupted = !Backend.hash(data).equals(basicPasswordArray[basicPasswordArray.length - 1]);
+            Assertions.assertFalse(isCorrupted);
+        } catch (Exception e) {
+            LOGGER.log(Level.WARNING, e.getMessage());
+        }
+    }
 
 }

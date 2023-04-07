@@ -28,7 +28,7 @@ public class MenuCommand extends Command {
                 "3. List all the secrets: list [f/FOLDER_NAME]\n" +
                 "4. View secrets: view PASSWORD_NAME\n" +
                 "5. Search for secrets: search n/NAME_LIKE [f/FOLDER]\n" +
-                "6. Export the secrets in .txt file: save\n" +
+                "6. Export the secrets in \"database.txt\" file: save\n" +
                 "7. Edit a secrets: edit PASSWORD_NAME\n" +
                 "8. Menu list to refer for commands: menu\n" +
                 "9. Exit from the password manager (will automatically save this session): exit\n" +
