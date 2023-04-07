@@ -64,6 +64,9 @@ public class SecureNUS {
     public void run() {
         Ui.greetUser();
 
+        if (Backend.isCorrupted) {
+            Ui.printCorruptedDataMessage();
+        }
         boolean isExit = false;
         while (!isExit) {
             Command c = parseCommand();

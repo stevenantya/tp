@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.Backend;
 import seedu.duke.exceptions.ExceptionMain;
 import seedu.duke.exceptions.OperationCancelException;
 import seedu.duke.exceptions.RepeatedIdException;
@@ -69,6 +70,7 @@ public class AddCryptoWalletCommand extends AddSecretCommand {
                 "Username   = " + username + "\n" +
                 "Private Key= " + HIDDEN_FIELD + "\n" +
                 "Seed Phrase= " + HIDDEN_FIELD);
+        Backend.updateStorage(secureNUSData.listSecrets());
     }
 
     /**

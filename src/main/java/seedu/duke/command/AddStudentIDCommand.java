@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.Backend;
 import seedu.duke.exceptions.ExceptionMain;
 import seedu.duke.exceptions.OperationCancelException;
 import seedu.duke.exceptions.secrets.FolderExistsException;
@@ -61,6 +62,7 @@ public class AddStudentIDCommand extends AddSecretCommand {
                 "name       = " + name + "\n" +
                 "Folder     = " + folderName + "\n" +
                 "Student ID = " + HIDDEN_FIELD);
+        Backend.updateStorage(secureNUSData.listSecrets());
     }
 
 

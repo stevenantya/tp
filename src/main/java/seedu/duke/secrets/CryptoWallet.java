@@ -163,7 +163,9 @@ public class CryptoWallet extends Secret {
                 Backend.encode("" + this.seedPhrase) + ",";
         String formattedURLs = "";
         for (String url : this.urls) {
-            formattedURLs += url + ",";
+            if (url.length() != 0) {
+                formattedURLs += url + ",";
+            }
         }
         return formattedString + formattedURLs;
     }
