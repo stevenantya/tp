@@ -129,7 +129,12 @@ class SearchCommandTest {
         SearchCommand command = new SearchCommand("search Facebook f/Socials", mockSecureNUSData.getFolders());
         command.execute(mockSecureNUSData);
 
-        assertEquals("Found 1 matches!\n1\t|\tFacebook\t|\tSocials\t|\tBasicPassword\t|\n",
+        assertEquals("_____________________________________________________\n" +
+                        "_____________________________________________________\n" +
+                        "Found 1 matches!\n" +
+                        "| NO. |          NAME           |      FOLDER       |\n" +
+                        "|  1  |        Facebook         |      Socials      |\n" +
+                        "_____________________________________________________\n",
                 output.toString().replace("\r",""));
     }
 }

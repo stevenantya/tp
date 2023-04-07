@@ -155,7 +155,7 @@ public class EditCommand extends Command {
             Ui.inform("Secret named: \"" + name +"\" has been edited!\n" +
                     "Check it out using the 'search' or 'list' function!");
         } else {
-            Ui.inform("Secret named: \"" + name +"\" of folder: \"" + folderName + "\"has been edited!\n" +
+            Ui.inform("Secret named: \"" + name +"\" of folder: \"" + folderName + "\" has been edited.\n" +
                     "Check it out using the 'search' or 'list' function!");
         }
 
