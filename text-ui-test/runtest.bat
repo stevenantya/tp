@@ -17,5 +17,3 @@ java -ea -jar %jarloc% < text-ui-test\input.txt > text-ui-test\ACTUAL.TXT
 cd ..\..\text-ui-test
 
 FC ACTUAL.TXT EXPECTED.TXT >NUL && ECHO Test passed! || Echo Test failed!
-
-del assets/database.txt
