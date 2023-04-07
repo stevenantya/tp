@@ -19,6 +19,16 @@ public class Ui {
         System.out.println(OperationMessages.INITIALISE);
     }
 
+    public static void printCorruptedDataMessage() {
+        System.out.println("    ____________");
+        System.out.println("    | ALERT !! |");
+        System.out.println("    ------------");
+        System.out.println("Data stored is corrupted.");
+        System.out.println("1. Enter 'save' to discard all previous data");
+        System.out.println("2. Press Ctrl + C to exit the application and " +
+            "edit user data in database.txt");
+    }
+
     /**
      * Prints a horizontal line to separate UI elements.
      */

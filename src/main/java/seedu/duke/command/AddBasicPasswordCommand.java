@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.Backend;
 import seedu.duke.exceptions.ExceptionMain;
 import seedu.duke.exceptions.OperationCancelException;
 import seedu.duke.exceptions.UnknownException;
@@ -85,6 +86,7 @@ public class AddBasicPasswordCommand extends AddSecretCommand {
                "url      = " + url + "\n" +
                "username = " + username + "\n" +
                "password = " + HIDDEN_FIELD);
+        Backend.updateStorage(secureNUSData.listSecrets());
     }
 
     /**

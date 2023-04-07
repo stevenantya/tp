@@ -33,6 +33,9 @@ url      = idk.com
 username = user1
 password = *******
 _____________________________________________________
+_____________________________________________________
+User data is successfully updated
+_____________________________________________________
 Please enter your NUS Net ID:
 Please enter your password:
 _____________________________________________________
@@ -42,12 +45,18 @@ folder     = folder1
 NUS Net ID = e0123456
 password   = *******
 _____________________________________________________
+_____________________________________________________
+User data is successfully updated
+_____________________________________________________
 Please enter your Student ID:
 _____________________________________________________
 I have added a new Student ID:
 name       = student2
 Folder     = folder1
 Student ID = *******
+_____________________________________________________
+_____________________________________________________
+User data is successfully updated
 _____________________________________________________
 Please enter your Full Name:
 Please enter your Credit Card Number:
@@ -62,6 +71,9 @@ Credit Card No = *******
 CVC No         = *******
 Expiry Date    = 03/26
 _____________________________________________________
+_____________________________________________________
+User data is successfully updated
+_____________________________________________________
 Please enter your username:
 Please enter your Private Key:
 Please enter your Seed Phrase:
@@ -73,6 +85,9 @@ Username   = usr1
 Private Key= *******
 Seed Phrase= *******
 _____________________________________________________
+_____________________________________________________
+User data is successfully updated
+_____________________________________________________
 Please enter your username:
 Please enter your password:
 _____________________________________________________
@@ -81,6 +96,9 @@ name       = wifi
 Folder     = personal
 Username   = home1
 Password   = password2
+_____________________________________________________
+_____________________________________________________
+User data is successfully updated
 _____________________________________________________
 _____________________________________________________
 List of secrets:
@@ -125,6 +143,9 @@ Password: ********
 
 _____________________________________________________
 You deleted wifi
+_____________________________________________________
+User data is successfully updated
+_____________________________________________________
 _____________________________________________________
 List of secrets:
 1. Type of Secret: Basic Password
@@ -175,6 +196,9 @@ Secret named: "password1" of folder: "folder1" has been edited.
 Check it out using the 'search' or 'list' function!
 _____________________________________________________
 _____________________________________________________
+User data is successfully updated
+_____________________________________________________
+_____________________________________________________
 _____________________________________________________
 Found 1 matches!
 | NO. |          NAME           |      FOLDER       |
@@ -197,4 +221,7 @@ SecureNUS Command Menu:
 8. Menu list to refer for commands: menu
 9. Exit from the password manager (will automatically save this session): exit
 10. To cancel the operation at any point: c/
+_____________________________________________________
+_____________________________________________________
+User data is successfully updated
 _____________________________________________________

@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.Backend;
 import seedu.duke.exceptions.ExceptionMain;
 import seedu.duke.exceptions.OperationCancelException;
 import seedu.duke.exceptions.RepeatedIdException;
@@ -65,6 +66,7 @@ public class AddWifiPasswordCommand extends AddSecretCommand {
                 "Folder     = " + folderName + "\n" +
                 "Username   = " + username + "\n" +
                 "Password   = " + password);
+        Backend.updateStorage(secureNUSData.listSecrets());
     }
 
     /**
