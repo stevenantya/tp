@@ -16,6 +16,10 @@ public class ErrorMessages {
     public static final String INVALID_FIELD = "The input field {o/Field} does not exist! Try one that exists " +
             "from our menu.";
 
-    public static final String SECRET_NOT_FOUND = "The input Secret is not found";
-    public static final String FOLDER_NOT_FOUND = "The input Folder is not found";
+    public static final String SECRET_NOT_FOUND = "The input Secret does not exist";
+    public static final String FOLDER_NOT_FOUND = "The input Folder does not exist";
+    public static final String NULL_SECRET = "No Secret provided. Make sure to include the name of the secret you " +
+            "want to do this operation on";
+    public static final String NULL_FOLDER = "Folder provided is Null input. Make sure to include the name of the " +
+            "folder you want to do this operation on";
 }

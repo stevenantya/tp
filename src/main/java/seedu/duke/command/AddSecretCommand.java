@@ -76,6 +76,8 @@ public abstract class AddSecretCommand extends Command {
         Ui.inform("I have added a new Secret:\n" +
                 "name     = " + name + "\n" +
                 "folder   = " + folderName + "\n");
+
+
     }
 
     /**

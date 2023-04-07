@@ -22,7 +22,7 @@ Adding a Wifi Password : new o/WifiPassword NAME [f/FOLDER_NAME]
 Adding a Crypto Wallet : new o/Crypto NAME [f/FOLDER_NAME]
 Viewing all commands   : menu
 
-Please enter the URL:
+Enter Command:Please enter the URL:
 Please enter your username:
 Please enter your password:
 _____________________________________________________
@@ -33,7 +33,7 @@ url      = idk.com
 username = user1
 password = *******
 _____________________________________________________
-Please enter your NUS Net ID:
+Enter Command:Please enter your NUS Net ID:
 Please enter your password:
 _____________________________________________________
 I have added a new NUS Net ID password:
@@ -42,15 +42,17 @@ folder     = folder1
 NUS Net ID = e0123456
 password   = *******
 _____________________________________________________
-Please enter your Student ID:
+Enter Command:Please enter your Student ID:
 _____________________________________________________
 I have added a new Student ID:
 name       = student2
 Folder     = folder1
 Student ID = *******
 _____________________________________________________
-Please enter your Full Name:
-Please enter your Credit Card Number:
+Enter Command:Please enter your Full Name:
+Please enter your Credit Card Number: (e.g. 1234 5678 9012 3456)
+Entry failed! Credit Card Number must be of the correct format (e.g. 1234 5678 9098 7612)
+Please enter your Credit Card Number: (e.g. 1234 5678 9012 3456)
 Please enter your CVC Number:
 Please enter your Expiry Date:(MM/YY)
 _____________________________________________________
@@ -60,9 +62,9 @@ Folder         = personal
 Full Name      = usr1
 Credit Card No = *******
 CVC No         = *******
-Expiry Date    = 03/26
+Expiry Date    = *******
 _____________________________________________________
-Please enter your username:
+Enter Command:Please enter your username:
 Please enter your Private Key:
 Please enter your Seed Phrase:
 _____________________________________________________
@@ -73,16 +75,16 @@ Username   = usr1
 Private Key= *******
 Seed Phrase= *******
 _____________________________________________________
-Please enter your username:
+Enter Command:Please enter your username:
 Please enter your password:
 _____________________________________________________
 I have added a new Wifi Password:
 name       = wifi
 Folder     = personal
 Username   = home1
-Password   = password2
+Password   = *******
 _____________________________________________________
-_____________________________________________________
+Enter Command:_____________________________________________________
 List of secrets:
 1. Type of Secret: Basic Password
 Name: password1
@@ -100,7 +102,7 @@ Password: ********
 3. Type of Secret: Student ID
 Name: student2
 Folder: folder1
-Student ID: A0123456R
+Student ID: ********
 
 4. Type of Secret: Credit Card
 Name: credit1
@@ -124,8 +126,10 @@ Username: home1
 Password: ********
 
 _____________________________________________________
-You deleted wifi
+Enter Command:_____________________________________________________
+Invalid Secret Name: p/wifi. Skipping this input
 _____________________________________________________
+Enter Command:_____________________________________________________
 List of secrets:
 1. Type of Secret: Basic Password
 Name: password1
@@ -143,7 +147,7 @@ Password: ********
 3. Type of Secret: Student ID
 Name: student2
 Folder: folder1
-Student ID: A0123456R
+Student ID: ********
 
 4. Type of Secret: Credit Card
 Name: credit1
@@ -160,35 +164,41 @@ Username: usr1
 Private Key: ********
 Seed Phrase: ********
 
+6. Type of Secret: Wifi Password
+Name: wifi
+Folder: personal
+Username: home1
+Password: ********
+
 _____________________________________________________
-_____________________________________________________
+Enter Command:_____________________________________________________
 Name: password1
 Url: idk.com
 Username: user1
 Password: password1
 _____________________________________________________
-Enter the new username:
+Enter Command:Enter the new username:
 Enter the new password:
 Enter the new URL:
 _____________________________________________________
 Secret named: "password1" of folder: "folder1" has been edited.
 Check it out using the 'search' or 'list' function!
 _____________________________________________________
-_____________________________________________________
+Enter Command:_____________________________________________________
 _____________________________________________________
 Found 1 matches!
 | NO. |          NAME           |      FOLDER       |
 |  1  |         nusnet1         |      folder1      |
 _____________________________________________________
-_____________________________________________________
+Enter Command:_____________________________________________________
 SecureNUS Command Menu:
 1. Add a general password: new [PASSWORD_NAME] [f/FOLDER_NAME]
 	Add Credit Card details: new o/CreditCard [NAME] [f/FOLDER_NAME]
 	Add details for a Crypto Wallet: new o/Crypto [NAME] [f/FOLDER_NAME]
-	Add a NUSNet ID and Password: new o/NUSNet [NAME] [f/FOLDER_NAME]
-	Add a NUS StudentID details (starting with A and ends with capital Alphabet): new o/StudentID [NAME] [f/FOLDER_NAME]
+	Add NUSNet ID and Password (e*******): new o/NUSNet [NAME] [f/FOLDER_NAME]
+	Add NUS StudentID (A*******E): new o/StudentID [NAME] [f/FOLDER_NAME]
 	Add a password for Wifi: new o/WifiPassword [NAME] [f/FOLDER_NAME]
-2. Delete the unwanted secrets: delete
+2. Delete the unwanted secrets: delete PASSWORD_NAME
 3. List all the secrets: list [f/FOLDER_NAME]
 4. View secrets: view PASSWORD_NAME
 5. Search for secrets: search n/NAME_LIKE [f/FOLDER]
@@ -196,5 +206,14 @@ SecureNUS Command Menu:
 7. Edit a secrets: edit PASSWORD_NAME
 8. Menu list to refer for commands: menu
 9. Exit from the password manager (will automatically save this session): exit
-10. To cancel the operation at any point: c/
+10. To cancel the current operation (e.g. mid adding/ editing password): c/
+_____________________________________________________
+Enter Command:_____________________________________________________
+Saving secrets to storage, please do not close application...
+_____________________________________________________
+_____________________________________________________
+Save complete. All secrets saved into assets/database.txt. If exporting to another device, save this file into the root directory's assets/database.txt before you start me again!
+_____________________________________________________
+_____________________________________________________
+Thank you for using me. I hope you enjoyed the time!
 _____________________________________________________

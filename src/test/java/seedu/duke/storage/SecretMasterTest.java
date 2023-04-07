@@ -98,7 +98,8 @@ class SecretMasterTest {
         SecretMaster secretMaster = new SecretMaster();
         secretMaster.addSecret(new BasicPassword("basic1", "username1", "Password1",
                 "http.com"));
-        secretMaster.addSecret(new CreditCard("credit1", "HJ HJ UI", "1234567890123456", "123",
+        secretMaster.addSecret(new CreditCard("credit1", "HJ HJ UI",
+                "1234 5678 9012 3456", "123",
                 "12/23"));
         secretMaster.addSecret(new CryptoWallet("crypto1", "hjhbj", "fdertyuiytyui876ytfgyuit5rt",
                 "hb jnjkm kjijh ijhui hjhb iujh uhbgv gfcd"));
@@ -159,7 +160,7 @@ class SecretMasterTest {
 
         String newName = "secret2";
         String newFolderName = "folder2";
-        String[] inquiredFields = {"Jane Doe", "1234567890123456", "456", "12/24"};
+        String[] inquiredFields = {"Jane Doe", "1234 5678 9012 3456", "456", "12/24"};
         secretMaster.editSecret(secret, newName, newFolderName, inquiredFields);
 
         assertEquals(newName, secret.getName());

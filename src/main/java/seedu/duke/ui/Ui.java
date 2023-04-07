@@ -48,15 +48,24 @@ public class Ui {
     public static String readLine() {
         while (in.hasNextLine()) {
             String line = in.nextLine();
+
             return line;
         }
         return "";
+    }
+
+    public static String removeBackSlashes(String input) {
+        return input.replaceAll("\\", "\\\\");
     }
 
     public static String removeExtraWhiteSpaces(String line) {
         // remove duplicate whitespaces
         line = line.replaceAll(DUPLICATE_WHITESPACE_FMT, " ");
         return line.trim(); // remove leading and trailing whitespaces
+    }
+
+    public static void informUserToStartCommand() {
+        System.out.print("Enter Command:");
     }
 
     // TODO can this be removed with logging?

@@ -14,6 +14,9 @@ import seedu.duke.secrets.NUSNet;
 import seedu.duke.secrets.StudentID;
 import seedu.duke.secrets.WifiPassword;
 import seedu.duke.storage.SecretMaster;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.HashSet;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 class EditCommandTest{
     private static final String SECRET_NAME = "password";
     private static final String EDIT_COMMAND_INPUT = "edit password";
-    private static final String CREDIT_CARD_NUMBER = "1234567812345678";
+    private static final String CREDIT_CARD_NUMBER = "1234 5678 1234 5678";
     private static final String CVC_NUMBER = "123";
     private static final String EXPIRY_DATE = "12/22";
     private static final String NUSNET_ID = "e0123456";
@@ -43,6 +46,12 @@ class EditCommandTest{
     private SecretMaster secretMaster;
     private HashSet<String> usedNames;
     private EditCommand editCommand;
+
+    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    @BeforeEach
+    public void setStream() {
+        System.setOut(new PrintStream(outputStreamCaptor));
+    }
 
     @BeforeEach
     void setUp() {
@@ -83,7 +92,7 @@ class EditCommandTest{
             InvalidCreditCardNumberException, IllegalFolderNameException,
             RepeatedIdException, IllegalSecretNameException {
         secretMaster.addSecret(new CreditCard(SECRET_NAME, FULL_NAME, CREDIT_CARD_NUMBER, CVC_NUMBER, EXPIRY_DATE));
-        String[] newFields = new String[]{"NEW_FULLNAME", "1111222233334444", "999", "12/24"};
+        String[] newFields = new String[]{"NEW_FULLNAME", "1111 2222 3333 4444", "999", "12/24"};
         CreditCard secret = (CreditCard) secretMaster.getByName(SECRET_NAME);
         secretMaster.editSecret(secret, secret.getName(), secret.getFolderName(), newFields);
         String[] actualFields = {secret.getFullName(), secret.getCreditCardNumber(),

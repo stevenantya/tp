@@ -53,6 +53,7 @@ public class BackendTest {
                     "wifiPassword,usr1,usr1,folder1,DKENCvtfsobnf2,DKENCqbttxpse2");
         } catch (Exception e) {
             LOGGER.log(Level.WARNING, e.getMessage());
+            throw new RuntimeException(e);
         }
 
 

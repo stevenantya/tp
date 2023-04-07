@@ -1,5 +1,7 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.secrets.IllegalSecretNameException;
+import seedu.duke.exceptions.secrets.NullSecretException;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretMaster;
@@ -18,8 +20,10 @@ public class ViewCommand extends Command {
      *
      * @param input the user input to extract the password name
      */
-    public ViewCommand(String input, HashSet<String> usedNames){
+    public ViewCommand(String input, HashSet<String> usedNames) throws NullSecretException,
+            IllegalSecretNameException {
         this.passwordName = extractName(input);
+        nameCheck(passwordName);
         if (!usedNames.contains(passwordName)) {
             Ui.inform("No such secret found.");
         }

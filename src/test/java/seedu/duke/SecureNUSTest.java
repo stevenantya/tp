@@ -24,6 +24,7 @@ class SecureNUSTest {
             SecureNUSLogger.setUpLogger();
             SecureNUSLogger.LOGGER.log(Level.WARNING, SecureNUSTest.DUKETEST_LOG_EXECUTECOMMANDEXITTRUE_IDENTIFIER, e);
             SecureNUSLogger.close();
+            throw new RuntimeException(e);
         }
     }
 
