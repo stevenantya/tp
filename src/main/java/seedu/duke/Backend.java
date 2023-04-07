@@ -78,12 +78,12 @@ public class Backend {
             } catch (Exception e) {
                 Ui.inform("Data from previous session cannot be loaded. " +
                     "New database will be initiated");
-                LOGGER.log(Level.SEVERE, SecureNUSLogger.formatStackTrace(e.getStackTrace()));
+                //LOGGER.log(Level.SEVERE, SecureNUSLogger.formatStackTrace(e.getStackTrace()));
                 secretList = new ArrayList<Secret>();
             }
         } catch (IOException e) {
             Ui.inform("Database cannot be initialised! User data will not be saved");
-            LOGGER.log(Level.SEVERE, SecureNUSLogger.formatStackTrace(e.getStackTrace()));
+            //LOGGER.log(Level.SEVERE, SecureNUSLogger.formatStackTrace(e.getStackTrace()));
             secretList = new ArrayList<Secret>();
         }
 
@@ -161,7 +161,7 @@ public class Backend {
                 database.add(secret);
             }
         } catch (Exception e) {
-            Ui.inform("Database is corrupted, a new Database will be initiated");
+            Ui.inform("Database is corrupted");
             //LOGGER.log(Level.WARNING, e.getMessage() + Arrays.toString(input));
         }
         return database;
