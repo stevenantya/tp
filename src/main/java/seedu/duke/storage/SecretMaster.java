@@ -1,5 +1,6 @@
 package seedu.duke.storage;
 
+import seedu.duke.exceptions.secrets.InvalidCvcNumberException;
 import seedu.duke.ui.Ui;
 import seedu.duke.exceptions.secrets.InvalidCreditCardNumberException;
 import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
@@ -291,9 +292,11 @@ public class SecretMaster {
                 ((CreditCard) secret).setCvcNumber(inquiredFields[2]);
                 ((CreditCard) secret).setExpiryDate(inquiredFields[3]);
             } catch (InvalidCreditCardNumberException e) {
-                Ui.inform("Invalid Credit Card Number! Must be 16 digits long");
+                Ui.printError("Invalid Credit Card Number! Must be 16 digits long");
             } catch (InvalidExpiryDateException e) {
-                Ui.inform("Invalid Expiry Date! Must be in the format \"MM/YY\"");
+                Ui.printError("Invalid Expiry Date! Must be in the format \"MM/YY\"");
+            } catch (InvalidCvcNumberException e) {
+                Ui.printError("Invalid CVC Number! Must be in the correct format (e.g. 123):");
             }
         } else if (secret instanceof NUSNet) {
             ((NUSNet) secret).setNusNetId(inquiredFields[0]);
@@ -329,8 +332,18 @@ public class SecretMaster {
         if (!secretNames.contains(secret.getUid())) {
             throw new SecretNotFoundException();
         }
+
         secretNames.remove(secret.getName());
         secretEnumerator.delete(secret);
         secretSearcher.delete(secret);
+        String folderName = secret.getFolderName();
+
+        if (!folderContainsSecrets(folderName)) {
+            folders.remove(folderName);
+        }
+    }
+
+    public boolean folderContainsSecrets(String folderName) {
+        return secretEnumerator.folderExists(folderName);
     }
 }

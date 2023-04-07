@@ -26,5 +26,12 @@ public class OperationMessages {
             "Adding a Wifi Password : new o/WifiPassword NAME [f/FOLDER_NAME]\n" +
             "Adding a Crypto Wallet : new o/Crypto NAME [f/FOLDER_NAME]\n" +
             "Viewing all commands   : menu\n";
+
+    public static final String SAVING = "Saving secrets to storage, please do not close application...";
+    public static final String SAVE_COMPLETE = "Save complete. All secrets saved into assets/database.txt. If " +
+            "exporting to another device, save this file into the root directory's assets/database.txt before you " +
+            "start me again!";
+
+    public static final String CLOSE = "Thank you for using me. I hope you enjoyed the time!";
     public static final String CANCEL_OPERATION = "Operation Cancelled.";
 }

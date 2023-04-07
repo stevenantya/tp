@@ -78,7 +78,7 @@ public class AddCreditCardCommand extends AddSecretCommand {
                 "Full Name      = " + fullName + "\n" +
                 "Credit Card No = " + HIDDEN_FIELD + "\n" +
                 "CVC No         = " + HIDDEN_FIELD + "\n" +
-                "Expiry Date    = " + expiryDate);
+                "Expiry Date    = " + HIDDEN_FIELD);
     }
 
     public String inquireCreditCardNumber() throws OperationCancelException {

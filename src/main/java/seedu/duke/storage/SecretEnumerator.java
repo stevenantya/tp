@@ -195,4 +195,8 @@ public class SecretEnumerator {
         }
         return folderHashset;
     }
+
+    public boolean folderExists(String folderName) {
+        return folders.containsKey(folderName);
+    }
 }

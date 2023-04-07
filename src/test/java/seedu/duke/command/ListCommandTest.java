@@ -1,6 +1,8 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.NullFolderException;
 import seedu.duke.exceptions.secrets.FolderExistsException;
+import seedu.duke.exceptions.secrets.FolderNotFoundException;
 import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.exceptions.secrets.InvalidCreditCardNumberException;
@@ -19,6 +21,8 @@ import seedu.duke.storage.SecretMaster;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 /**
@@ -30,8 +34,10 @@ public class ListCommandTest {
      * Tests the isExit method when there is no folder name.
      */
     @Test
-    void isExit_noFolder() {
-        ListCommand listCommand = new ListCommand("list");
+    void isExit_noFolder() throws FolderNotFoundException, IllegalFolderNameException, NullFolderException {
+        HashSet<String> folders = new HashSet<>();
+        folders.add("unnamed");
+        ListCommand listCommand = new ListCommand("list", folders);
         assertFalse(listCommand.isExit());
     }
 
@@ -39,8 +45,10 @@ public class ListCommandTest {
      * Tests the isExit method when there is a folder name.
      */
     @Test
-    void isExit_withFolder() {
-        ListCommand listCommand = new ListCommand("list f/Folder123!");
+    void isExit_withFolder() throws FolderNotFoundException, IllegalFolderNameException, NullFolderException {
+        HashSet<String> folders = new HashSet<>();
+        folders.add("Folder123");
+        ListCommand listCommand = new ListCommand("list f/Folder123!", folders);
         assertFalse(listCommand.isExit());
     }
 
@@ -48,8 +56,10 @@ public class ListCommandTest {
      * Tests the extractFolderName method when there is no folder name.
      */
     @Test
-    void getList_noFolder() {
-        ListCommand listCommand = new ListCommand("list");
+    void getList_noFolder() throws FolderNotFoundException, IllegalFolderNameException, NullFolderException {
+        HashSet<String> folders = new HashSet<>();
+        folders.add("unnamed");
+        ListCommand listCommand = new ListCommand("list", folders);
         assertEquals(listCommand.extractFolderName("list"), "unnamed");
     }
 
@@ -57,8 +67,10 @@ public class ListCommandTest {
      * Tests the extractFolderName method when there is a folder name.
      */
     @Test
-    void getList_withFolder() {
-        ListCommand listCommand = new ListCommand("list f/Folder123!");
+    void getList_withFolder() throws FolderNotFoundException, IllegalFolderNameException, NullFolderException {
+        HashSet<String> folders = new HashSet<>();
+        folders.add("Folder123");
+        ListCommand listCommand = new ListCommand("list f/Folder123!", folders);
         assertEquals(listCommand.extractFolderName("list f/Folder123!"), "Folder123!");
     }
 
@@ -66,8 +78,10 @@ public class ListCommandTest {
      * Tests the maskStringPassword method.
      */
     @Test
-    void testMaskStringPassword() {
-        ListCommand listCommand = new ListCommand("test");
+    void testMaskStringPassword() throws FolderNotFoundException, IllegalFolderNameException, NullFolderException {
+        HashSet<String> folders = new HashSet<>();
+        folders.add("unnamed");
+        ListCommand listCommand = new ListCommand("test", folders);
         String maskedPassword = listCommand.maskStringPassword("password");
         assertEquals("********", maskedPassword);
     }
@@ -76,8 +90,10 @@ public class ListCommandTest {
      * Tests the maskIntPasswordAsString method.
      */
     @Test
-    void testMaskIntPasswordAsString() {
-        ListCommand listCommand = new ListCommand("test");
+    void testMaskIntPasswordAsString() throws FolderNotFoundException, IllegalFolderNameException, NullFolderException {
+        HashSet<String> folders = new HashSet<>();
+        folders.add("unnamed");
+        ListCommand listCommand = new ListCommand("test", folders);
         String masked1234 = listCommand.maskIntPasswordAsString(1234);
         String masked5678 = listCommand.maskIntPasswordAsString(5678);
 
@@ -105,13 +121,18 @@ public class ListCommandTest {
                     "StudentID1"));
             secretMaster.addSecret(new WifiPassword("WifiPassword1", "Username1",
                     "Password1"));
-
-            ListCommand listCommand = new ListCommand("list");
+            HashSet<String> folders = new HashSet<>();
+            folders.add("unnamed");
+            ListCommand listCommand = new ListCommand("list", folders);
             listCommand.execute(secretMaster);
 
         } catch (FolderExistsException | IllegalFolderNameException | IllegalSecretNameException | RepeatedIdException |
                  InvalidCreditCardNumberException | InvalidExpiryDateException e) {
             e.printStackTrace();
+        } catch (FolderNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (NullFolderException e) {
+            throw new RuntimeException(e);
         }
     }
 }

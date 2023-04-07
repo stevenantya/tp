@@ -64,7 +64,7 @@ public class AddWifiPasswordCommand extends AddSecretCommand {
                 "name       = " + name + "\n" +
                 "Folder     = " + folderName + "\n" +
                 "Username   = " + username + "\n" +
-                "Password   = " + password);
+                "Password   = " + HIDDEN_FIELD);
     }
 
     /**

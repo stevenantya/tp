@@ -85,6 +85,7 @@ public class AddBasicPasswordCommand extends AddSecretCommand {
                "url      = " + url + "\n" +
                "username = " + username + "\n" +
                "password = " + HIDDEN_FIELD);
+
     }
 
     /**

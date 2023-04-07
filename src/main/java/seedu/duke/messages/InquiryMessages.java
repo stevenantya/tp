@@ -16,11 +16,12 @@ public class InquiryMessages {
     /**
      * The inquiry message for the credit card number.
      */
-    public static final String CREDIT_CARD_NUMBER = "Please enter your Credit Card Number:";
-    public static final String CREDIT_CARD_NUMBER_EDIT = "Enter your new Credit Card Number:";
+    public static final String CREDIT_CARD_NUMBER = "Please enter your Credit Card Number: (e.g. 1234 5678 9012 3456)";
+    public static final String CREDIT_CARD_NUMBER_EDIT = "Enter your new Credit Card Number: " +
+            "(e.g. 1234 5678 9012 3456)";
     public static final String CREDIT_CARD_NUMBER_RETRY = "Entry failed! Credit Card Number must be of the correct " +
             "format " +
-            "(e.g. 1234567890987612)";
+            "(e.g. 1234 5678 9098 7612)";
 
     /**
      * The inquiry message for the CVC number.

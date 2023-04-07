@@ -36,10 +36,7 @@ public class DeleteCommand extends Command {
     public String[] extractName(String input) {
         assert input != null;
         String extractedName = input.split("delete ")[1].strip();
-        String[] extractedNames = extractedName.split("p/");
-        for (int ix = 1; ix < extractedNames.length; ix += 1) {
-            extractedNames[ix] = extractedNames[ix].strip();
-        }
+        String[] extractedNames = extractedName.split(" ");
         return extractedNames;
     }
 
@@ -52,26 +49,28 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(SecretMaster secureNUSData) throws SecretNotFoundException {
         assert secureNUSData != null;
-        for (int index = 1; index < secretNames.length; index += 1) {
+        for (int index = 0; index < secretNames.length; index += 1) {
             secretName = secretNames[index];
+            if (Secret.isIllegalName(secretName)) {
+                Ui.inform("Invalid Secret Name: " + secretName + ". Skipping this input");
+                continue;
+            }
             Secret deleteData = null;
             boolean isValid = false;
             try {
                 deleteData = secureNUSData.getByName(secretName);
                 isValid = true;
             } catch (SecretNotFoundException e) {
-                Ui.printError("Secret Not Found: " + secretName);
+                Ui.inform("Secret Not Found: " + secretName + ". Skipping this input");
                 isValid = false;
             }
             if (isValid && (deleteData != null)) {
-                System.out.println("You deleted " + secretName);
                 try {
                     secureNUSData.removeSecret(deleteData);
+                    System.out.println("Successfully deleted: " + secretName);
                 } catch (SecretNotFoundException e) {
                     Ui.printError("Secret Not Found: " + secretName);
                 }
-            } else {
-                System.out.println("Please enter a valid secret name!");
             }
         }
     }
