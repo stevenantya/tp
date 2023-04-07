@@ -1,4 +1,5 @@
 package seedu.duke.command;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.ExceptionMain;
 
@@ -14,6 +15,9 @@ import seedu.duke.secrets.NUSNet;
 import seedu.duke.secrets.StudentID;
 import seedu.duke.storage.SecretMaster;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -21,6 +25,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * @author : Steven A. O. Waskito
  **/
 public class DeleteCommandTest {
+    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    @BeforeEach
+    public void setStream() {
+        System.setOut(new PrintStream(outputStreamCaptor));
+    }
     //Missing Wi-Fi password
     @Test
     public void studentIDTestFolder() throws SecretNotFoundException, ExceptionMain, InvalidURLException,
@@ -44,11 +53,17 @@ public class DeleteCommandTest {
         assertEquals("basicPassword1", sm.getByName("basicPassword1").getName());
 
 
-        Command deleteStudentID = new DeleteCommand("delete p/ StudentID2Name p/NUSNetName2  p/basicPassword1");
+        Command deleteStudentID = new DeleteCommand("delete StudentID2Name NUSNetName2 basicPassword1");
         deleteStudentID.execute(sm);
         assertThrows(SecretNotFoundException.class, () -> {
                 sm.getByName("StudentID2Name");
+            }
+        );
+        assertThrows(SecretNotFoundException.class, () -> {
                 sm.getByName("NUSNetName2");
+            }
+        );
+        assertThrows(SecretNotFoundException.class, () -> {
                 sm.getByName("basicPassword1");
             }
         );

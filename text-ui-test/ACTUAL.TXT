@@ -22,21 +22,7 @@ Adding a Wifi Password : new o/WifiPassword NAME [f/FOLDER_NAME]
 Adding a Crypto Wallet : new o/Crypto NAME [f/FOLDER_NAME]
 Viewing all commands   : menu
 
-_____________________________________________________
-There are no secrets in this folder.
-_____________________________________________________
-Please enter the URL:
-Please enter your username:
-Please enter your password:
-_____________________________________________________
-I have added a new basic password:
-name     = password1
-folder   = unnamed
-url      = gg.com
-username = username1
-password = *******
-_____________________________________________________
-_____________________________________________________
+Enter Command:_____________________________________________________
 List of secrets:
 1. Type of Secret: Basic Password
 Name: password1
@@ -45,4 +31,35 @@ Username: username1
 URL: gg.com
 Password: ********
 
+_____________________________________________________
+Enter Command:_____________________________________________________
+RepeatedId: This name has been used before. Use a different name
+_____________________________________________________
+Enter Command:_____________________________________________________
+Invalid Command: Type 'menu' command to see the list of usable commands
+_____________________________________________________
+Enter Command:_____________________________________________________
+Invalid Command: Type 'menu' command to see the list of usable commands
+_____________________________________________________
+Enter Command:_____________________________________________________
+Invalid Command: Type 'menu' command to see the list of usable commands
+_____________________________________________________
+Enter Command:_____________________________________________________
+List of secrets:
+1. Type of Secret: Basic Password
+Name: password1
+Folder: unnamed
+Username: username1
+URL: gg.com
+Password: ********
+
+_____________________________________________________
+Enter Command:_____________________________________________________
+Saving secrets to storage, please do not close application...
+_____________________________________________________
+_____________________________________________________
+Save complete. All secrets saved into assets/database.txt. If exporting to another device, save this file into the root directory's assets/database.txt before you start me again!
+_____________________________________________________
+_____________________________________________________
+Thank you for using me. I hope you enjoyed the time!
 _____________________________________________________

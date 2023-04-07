@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import org.junit.jupiter.api.BeforeEach;
 import seedu.duke.exceptions.NullFolderException;
 import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.FolderNotFoundException;
@@ -21,6 +22,8 @@ import seedu.duke.storage.SecretMaster;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,6 +33,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  */
 public class ListCommandTest {
 
+    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    @BeforeEach
+    public void setStream() {
+        System.setOut(new PrintStream(outputStreamCaptor));
+    }
     /**
      * Tests the isExit method when there is no folder name.
      */
@@ -48,7 +56,7 @@ public class ListCommandTest {
     void isExit_withFolder() throws FolderNotFoundException, IllegalFolderNameException, NullFolderException {
         HashSet<String> folders = new HashSet<>();
         folders.add("Folder123");
-        ListCommand listCommand = new ListCommand("list f/Folder123!", folders);
+        ListCommand listCommand = new ListCommand("list f/Folder123", folders);
         assertFalse(listCommand.isExit());
     }
 
@@ -60,7 +68,7 @@ public class ListCommandTest {
         HashSet<String> folders = new HashSet<>();
         folders.add("unnamed");
         ListCommand listCommand = new ListCommand("list", folders);
-        assertEquals(listCommand.extractFolderName("list"), "unnamed");
+        assertEquals(listCommand.extractFolderName("list"), null);
     }
 
     /**
@@ -70,8 +78,8 @@ public class ListCommandTest {
     void getList_withFolder() throws FolderNotFoundException, IllegalFolderNameException, NullFolderException {
         HashSet<String> folders = new HashSet<>();
         folders.add("Folder123");
-        ListCommand listCommand = new ListCommand("list f/Folder123!", folders);
-        assertEquals(listCommand.extractFolderName("list f/Folder123!"), "Folder123!");
+        ListCommand listCommand = new ListCommand("list f/Folder123", folders);
+        assertEquals(listCommand.extractFolderName("list f/Folder123"), "Folder123");
     }
 
     /**
@@ -81,7 +89,7 @@ public class ListCommandTest {
     void testMaskStringPassword() throws FolderNotFoundException, IllegalFolderNameException, NullFolderException {
         HashSet<String> folders = new HashSet<>();
         folders.add("unnamed");
-        ListCommand listCommand = new ListCommand("test", folders);
+        ListCommand listCommand = new ListCommand("list", folders);
         String maskedPassword = listCommand.maskStringPassword("password");
         assertEquals("********", maskedPassword);
     }
@@ -93,7 +101,7 @@ public class ListCommandTest {
     void testMaskIntPasswordAsString() throws FolderNotFoundException, IllegalFolderNameException, NullFolderException {
         HashSet<String> folders = new HashSet<>();
         folders.add("unnamed");
-        ListCommand listCommand = new ListCommand("test", folders);
+        ListCommand listCommand = new ListCommand("list", folders);
         String masked1234 = listCommand.maskIntPasswordAsString(1234);
         String masked5678 = listCommand.maskIntPasswordAsString(5678);
 
@@ -112,7 +120,7 @@ public class ListCommandTest {
             secretMaster.addSecret(new BasicPassword("BasicPassword1", "Username1",
                     "Password1", "Url1.com"));
             secretMaster.addSecret(new CreditCard("CreditCard1", "John Doe",
-                    "1234567812345678", "123", "12/25"));
+                    "1234 5678 1234 5678", "123", "12/25"));
             secretMaster.addSecret(new CryptoWallet("CryptoWallet1", "Folder1",
                     "DeepsD", "PrivateKey1", "SeedPhrase1"));
             secretMaster.addSecret(new NUSNet("NUSNet1", "NUSNetId1",
@@ -129,6 +137,7 @@ public class ListCommandTest {
         } catch (FolderExistsException | IllegalFolderNameException | IllegalSecretNameException | RepeatedIdException |
                  InvalidCreditCardNumberException | InvalidExpiryDateException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         } catch (FolderNotFoundException e) {
             throw new RuntimeException(e);
         } catch (NullFolderException e) {

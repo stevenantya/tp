@@ -4,6 +4,7 @@ import seedu.duke.exceptions.NullFolderException;
 import seedu.duke.exceptions.secrets.FolderNotFoundException;
 import seedu.duke.exceptions.secrets.NonExistentFolderException;
 import seedu.duke.exceptions.secrets.NullSecretException;
+import seedu.duke.messages.OperationMessages;
 import seedu.duke.ui.Parser;
 import seedu.duke.ui.Ui;
 import seedu.duke.command.Command;
@@ -80,8 +81,11 @@ public class SecureNUS {
             }
             
         }
-        Ui.close();
+        Ui.inform(OperationMessages.SAVING);
         Backend.updateStorage(this.secureNUSData.listSecrets());
+        Ui.inform(OperationMessages.SAVE_COMPLETE);
+        Ui.inform(OperationMessages.CLOSE);
+        Ui.close();
     }
 
 

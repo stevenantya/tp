@@ -1,8 +1,6 @@
 package seedu.duke.command;
 
-import seedu.duke.messages.OperationMessages;
 import seedu.duke.storage.SecretMaster;
-import seedu.duke.ui.Ui;
 
 /**
  * Represents a class to give a command to exit the password manager
@@ -22,7 +20,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(SecretMaster secureNUSData) {
-        Ui.inform(OperationMessages.CLOSE);
     }
 
     /**

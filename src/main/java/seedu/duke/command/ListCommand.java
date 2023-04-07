@@ -37,8 +37,10 @@ public class ListCommand extends Command {
             IllegalFolderNameException, NullFolderException {
         assert input != null;
         if (input.equals("list")) {
+            // if you want to display all secrets in all folders
             folderName = null;
         } else {
+            // specifically for given secret, hence it cannot be null anymore
             this.folderName = extractFolderName(input);
             if (folderName == null) {
                 throw new FolderNotFoundException();
@@ -157,8 +159,12 @@ public class ListCommand extends Command {
                 secrets = secureNUSData.listSecrets(folderName);
             }
             if (secrets.isEmpty()) {
-                // should not reach here since these checks are done above
-                Ui.inform("There are no secrets in this folder: " + folderName);
+                if (folderName == null) {
+                    Ui.inform("You have no secrets stored yet.");
+                } else {
+                    // should not reach here since these checks are done above
+                    Ui.inform("There are no secrets in this folder: " + folderName);
+                }
                 return;
             }
             Ui.printLine();
