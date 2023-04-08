@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.Backend;
 import seedu.duke.exceptions.ExceptionMain;
 import seedu.duke.exceptions.RepeatedIdException;
 import seedu.duke.exceptions.secrets.FolderExistsException;
@@ -76,6 +77,7 @@ public abstract class AddSecretCommand extends Command {
         Ui.inform("I have added a new Secret:\n" +
                 "name     = " + name + "\n" +
                 "folder   = " + folderName + "\n");
+
 
 
     }

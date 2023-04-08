@@ -71,6 +71,7 @@ public class AddWifiPasswordCommand extends AddSecretCommand {
         Ui.inform(OperationMessages.SAVING);
         Backend.updateStorage(secureNUSData.listSecrets());
         Ui.inform(OperationMessages.SAVE_COMPLETE);
+
     }
 
     /**
