@@ -11,6 +11,10 @@ import java.util.Hashtable;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
+import seedu.duke.exceptions.RepeatedIdException;
+import seedu.duke.exceptions.secrets.FolderExistsException;
+import seedu.duke.exceptions.secrets.IllegalFolderNameException;
+import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
 import seedu.duke.secrets.BasicPassword;
 import seedu.duke.secrets.CreditCard;
@@ -29,7 +33,7 @@ import seedu.duke.ui.Ui;
  * Handles file input/output and secret creation and manipulation.
  */
 public class Backend {
-    public static boolean isCorrupted = true;
+    public static boolean isCorrupted = false;
     public static boolean isDatabaseEmpty = true;
     private static final Logger LOGGER = SecureNUSLogger.LOGGER;
     private static final int DECRYPTION_STARTING_INDEX = 5;
@@ -53,7 +57,7 @@ public class Backend {
      * @return SecretMaster
      */
     public static SecretMaster initialisation() {
-        ArrayList<Secret> secretList = new ArrayList<Secret>();
+        SecretMaster secretMaster = Backend.initialiseSecretMaster();
 
         File database = Backend.createAssetFolderAndDatabaseFile();
         String databasePath = Backend.getDatabasePath();
@@ -61,15 +65,15 @@ public class Backend {
             if (!database.createNewFile()) {
                 database.createNewFile();
             }
-
             //read history if database file exists
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(databasePath));
                 String input = reader.readLine();
-                while (input != null) {
+                while (input != null && input.length() > 0) {
                     String[] inputArray = input.split(Backend.DELIMITER);
-                    secretList = Backend.readAndUpdate(inputArray, secretList);
-                    String data = secretList.get(secretList.size() - 1).toStringForDatabase();
+                    secretMaster = Backend.readAndUpdate(inputArray, secretMaster);
+                    String data = secretMaster.getByIndex(
+                            secretMaster.getSecretEnumerator().size() - 1).toStringForDatabase();
                     boolean isCorrupted = !Backend.hash(data).equals(inputArray[inputArray.length - 1]);
                     if (isCorrupted) {
                         throw new IOException();
@@ -78,30 +82,19 @@ public class Backend {
                 }
                 reader.close();
             } catch (Exception e) {
-                Ui.inform("Data from previous session cannot be loaded. " +
-                    "New database will be initiated");
-                //LOGGER.log(Level.SEVERE, SecureNUSLogger.formatStackTrace(e.getStackTrace()));
-                secretList = new ArrayList<Secret>();
+                Backend.isCorrupted = true;
+                secretMaster = Backend.initialiseSecretMaster();
             }
         } catch (IOException e) {
             Ui.inform("Database cannot be initialised! User data will not be saved");
             //LOGGER.log(Level.SEVERE, SecureNUSLogger.formatStackTrace(e.getStackTrace()));
-            secretList = new ArrayList<Secret>();
+            secretMaster = Backend.initialiseSecretMaster();
         }
 
-
-        //for secretEnumerator
-        Hashtable<String, ArrayList<Secret>> foldersHashTable =
-                Backend.createFolderHashtable(secretList);
-        SecretEnumerator secretEnumerator = new SecretEnumerator(secretList,
-                foldersHashTable);
-        //for secretSearcher
-        Hashtable<String, Secret> nameHashtable = Backend.
-                createNameHashtable(secretList);
-        Hashtable<String, Hashtable<String, Secret>> hashtableFolders =
-                Backend.createHashtableFolders(foldersHashTable);
-        SecretSearcher secretSearcher = new SecretSearcher(nameHashtable, hashtableFolders);
-        return new SecretMaster(secretSearcher, secretEnumerator);
+        if (secretMaster.listSecrets().size() != 0) {
+            isDatabaseEmpty = false;
+        }
+        return secretMaster;
     }
 
     public static File createAssetFolderAndDatabaseFile() {
@@ -126,47 +119,77 @@ public class Backend {
         return databasePath;
     }
 
+    public static SecretMaster initialiseSecretMaster() {
+        ArrayList<Secret> secretList = new ArrayList<Secret>();
+
+        //for secretEnumerator
+        Hashtable<String, ArrayList<Secret>> foldersHashTable =
+                Backend.createFolderHashtable(secretList);
+        SecretEnumerator secretEnumerator = new SecretEnumerator(secretList,
+                foldersHashTable);
+
+        //for secretSearcher
+        Hashtable<String, Secret> nameHashtable = Backend.
+                createNameHashtable(secretList);
+        Hashtable<String, Hashtable<String, Secret>> hashtableFolders =
+                Backend.createHashtableFolders(foldersHashTable);
+        SecretSearcher secretSearcher = new SecretSearcher(nameHashtable, hashtableFolders);
+        return new SecretMaster(secretSearcher, secretEnumerator);
+    }
+
     /**
      * Returns ArrayList of Secret with the new Secret added.
      *
      * @param input    String to create a Secret.
-     * @param database Current ArrayList of Secret.
-     * @return ArrayList of Secret
+     * @param secretMaster Current secretMaster
+     * @return SecretMaster
      */
-    public static ArrayList<Secret> readAndUpdate(String[] input, ArrayList<Secret> database)
-            throws InvalidExpiryDateException {
-        try {
-            if (input[0].equals(Backend.PASSWORD_IDENTIFIER)) {
-                Secret secret = new BasicPassword(input[2], input[3], Backend.decode(input[4]),
-                        Backend.decode(input[5]), Backend.parseEmptyField(input[6]));
-                database.add(secret);
-            } else if (input[0].equals(Backend.CREDIT_CARD_IDENTIFIER)) {
-                Secret secret = new CreditCard(input[2], input[3], input[4],
-                        Backend.decode(input[5]), Backend.decode(input[6]),
-                        input[7]);
-                database.add(secret);
-            } else if (input[0].equals(Backend.CRYPTOWALLET_IDENTIFIER)) {
-                Secret secret = new CryptoWallet(input[2], input[3], Backend.decode(input[4]),
-                        Backend.decode(input[5]), Backend.decode(input[6]),
-                        Backend.createUrlArrayList(input));
-                database.add(secret);
-            } else if (input[0].equals(Backend.NUSNETID_IDENTIFIER)) {
+    public static SecretMaster readAndUpdate(String[] input, SecretMaster secretMaster) throws
+            FolderExistsException, RepeatedIdException, IllegalSecretNameException,
+            IllegalFolderNameException, InvalidExpiryDateException, IOException {
+
+        if (Secret.isIllegalName(input[2]) || !SecretMaster.isLegalFolderName(input[3])) { //1st filter - name & folder
+            throw new IOException();
+        }
+        if (input[0].equals(Backend.PASSWORD_IDENTIFIER)) { //no 2nd filter
+            Secret secret = new BasicPassword(input[2], input[3], Backend.decode(input[4]),
+                    Backend.decode(input[5]), Backend.decode(input[6]));
+            secretMaster.addSecret(secret);
+        } else if (input[0].equals(Backend.CREDIT_CARD_IDENTIFIER)) {
+            if (CreditCard.isLegalCreditCardNumber(Backend.decode(input[5])) && CreditCard.isLegalCvcNumber(
+                    Backend.decode(input[6])) && CreditCard.isLegalExpiryDate(input[7])) { //2nd filter
+                Secret secret = new CreditCard(input[2], input[3], Backend.decode(input[4]),
+                        Backend.decode(input[5]), Backend.decode(input[6]), input[7]);
+                secretMaster.addSecret(secret);
+            }
+        } else if (input[0].equals(Backend.CRYPTOWALLET_IDENTIFIER)) {
+            Secret secret = new CryptoWallet(input[2], input[3], Backend.decode(input[4]),
+                    Backend.decode(input[5]), Backend.decode(input[6]),
+                    Backend.createUrlArrayList(input));
+            secretMaster.addSecret(secret);
+        } else if (input[0].equals(Backend.NUSNETID_IDENTIFIER)) {
+            if (NUSNet.isLegalId(input[4])) { //2nd filter
                 Secret secret = new NUSNet(input[2], input[3], input[4],
                         Backend.decode(input[5]));
-                database.add(secret);
-            } else if (input[0].equals(Backend.STUDENTID_IDENTIFIER)) {
-                Secret secret = new StudentID(input[2], input[3], input[4]);
-                database.add(secret);
-            } else if (input[0].equals(Backend.WIFI_PASSWORD_IDENTIFIER)) {
-                Secret secret = new WifiPassword(input[2], input[3], Backend.decode(input[4]),
-                        Backend.decode(input[5]));
-                database.add(secret);
+                secretMaster.addSecret(secret);
+            } else {
+                throw new IOException();
             }
-        } catch (Exception e) {
-            Ui.inform("Database is corrupted");
-            //LOGGER.log(Level.WARNING, e.getMessage() + Arrays.toString(input));
+        } else if (input[0].equals(Backend.STUDENTID_IDENTIFIER)) {
+            if (StudentID.isLegalId(input[4])) { //2nd filter
+                Secret secret = new StudentID(input[2], input[3], input[4]);
+                secretMaster.addSecret(secret);
+            } else {
+                throw new IOException();
+            }
+        } else if (input[0].equals(Backend.WIFI_PASSWORD_IDENTIFIER)) {
+            Secret secret = new WifiPassword(input[2], input[3], Backend.decode(input[4]),
+                    Backend.decode(input[5]));
+            secretMaster.addSecret(secret);
+        } else {
+            throw new IOException();
         }
-        return database;
+        return secretMaster;
     }
 
     /**
@@ -238,7 +261,16 @@ public class Backend {
         String encodedField = "";
         for (int i = 0; i < field.length(); i++) {
             int asciiValue = (int) (field.charAt(i) + 1);
-            encodedField += (char) asciiValue;
+            if (field.charAt(i) == '+') {
+                encodedField += "PLUS";
+            } else if (field.charAt(i) == ',') {
+                encodedField += "COMMA";
+            } else {
+                encodedField += (char) asciiValue;
+            }
+        }
+        if (field.equals("")) {
+            encodedField += "empty";
         }
         return Backend.ENCRYPTION_IDENTIFIER + encodedField;
     }
@@ -252,9 +284,23 @@ public class Backend {
     public static String decode(String field) {
         String modifiedField = field.substring(Backend.DECRYPTION_STARTING_INDEX);
         String actualField = "";
-        for (int i = 0; i < modifiedField.length(); i++) {
+        int i = 0;
+        while (i < modifiedField.length() ) {
             int asciiValue = (int) (modifiedField.charAt(i) - 1);
-            actualField += (char) asciiValue;
+            Character character = modifiedField.charAt(i);
+            if (character.equals('P')
+                    && (i + 4 <= modifiedField.length()) &&
+                    modifiedField.substring(i, i+4).equals("PLUS")) {
+                actualField += '+';
+                i = i + 4;
+            } else if (character.equals('C') && i + 5 <= modifiedField.length() &&
+                    modifiedField.substring(i, i+5).equals("COMMA")) {
+                actualField += ',';
+                i = i + 5;
+            } else {
+                actualField += (char) asciiValue;
+                i = i + 1;
+            }
         }
         return actualField;
     }
@@ -269,25 +315,10 @@ public class Backend {
         return field.equals(Backend.EMPTY_FIELD_IDENTIFIER) ? "" : field;
     }
 
-    public static boolean checkData(String data) {
-        String testData = "";
-        String secretName = "";
-        ArrayList<Secret> secretList = new ArrayList<Secret>();
-        String[] inputArray = data.split(Backend.DELIMITER);
-        try {
-            secretList = Backend.readAndUpdate(inputArray, secretList);
-            secretName = secretList.get(0).getName();
-            testData = secretList.get(0).toStringForDatabase();
-        } catch (InvalidExpiryDateException e) {
-            Ui.inform("Invalid data in " + secretName + "this data will not be saved");
-        }
-        return testData.equals(data);
-    }
-
     public static String hash(String data) {
         int hashcode = 0;
         for (int i = 0; i < data.length(); i++) {
-            hashcode = (int) (data.charAt(i));
+            hashcode += (int) (data.charAt(i));
         }
         return "" + hashcode;
     }
@@ -307,7 +338,7 @@ public class Backend {
                 Secret secret = input.get(i);
 
                 myWriter.write(secret.toStringForDatabase() + "," +
-                    Backend.hash(secret.toStringForDatabase())+ "\n");
+                        Backend.hash(secret.toStringForDatabase())+ "\n");
             }
             myWriter.close();
         } catch (IOException e) {

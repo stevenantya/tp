@@ -22,12 +22,9 @@ Adding a Wifi Password : new o/WifiPassword SECRET_NAME [f/FOLDER_NAME]
 Adding a Crypto Wallet : new o/Crypto SECRET_NAME [f/FOLDER_NAME]
 Viewing all commands   : menu
 
-    ____________
-    | ALERT !! |
-    ------------
-Data stored is corrupted.
-1. Enter 'save' to discard all previous data
-2. Press Ctrl + C to exit the application and edit user data in database.txt
+-----------------------------
+| A new session has started |
+-----------------------------
 
 Enter Command:Please enter the URL:
 Please enter your username:
