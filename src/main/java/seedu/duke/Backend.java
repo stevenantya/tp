@@ -342,7 +342,6 @@ public class Backend {
                         Backend.hash(secret.toStringForDatabase())+ "\n");
             }
             myWriter.close();
-            Ui.inform("User data is successfully updated");
         } catch (IOException e) {
             Ui.inform("Database is not initialised! All user data will not be saved");
             LOGGER.log(Level.SEVERE, SecureNUSLogger.formatStackTrace(e.getStackTrace()));

@@ -1,9 +1,8 @@
 package seedu.duke.secrets;
 
 import seedu.duke.Backend;
-import seedu.duke.exceptions.secrets.InvalidCVCNumberException;
-import seedu.duke.exceptions.secrets.InvalidCreditCardNumberException;
 import seedu.duke.exceptions.secrets.InvalidCvcNumberException;
+import seedu.duke.exceptions.secrets.InvalidCreditCardNumberException;
 import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
 
 /**
@@ -80,7 +79,7 @@ public class CreditCard extends Secret {
 
     public static CreditCard addCreditCard(String name, String folderName, String
             fullName, String creditCardNumber, String cvcNumber, String expiryDate) throws
-            InvalidExpiryDateException, InvalidCreditCardNumberException, InvalidCVCNumberException {
+            InvalidExpiryDateException, InvalidCreditCardNumberException, InvalidCvcNumberException {
 
         if (!creditCardNumber.matches(CREDIT_CARD_NUMBER_FMT)) {
             throw new InvalidCreditCardNumberException();
@@ -89,7 +88,7 @@ public class CreditCard extends Secret {
             throw new InvalidExpiryDateException();
         }
         if (!isLegalCvcNumber(cvcNumber)) {
-            throw new InvalidCVCNumberException();
+            throw new InvalidCvcNumberException();
         }
         return new CreditCard(name, folderName, fullName, creditCardNumber,
                 cvcNumber, expiryDate);
