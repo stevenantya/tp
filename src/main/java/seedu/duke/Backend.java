@@ -29,6 +29,8 @@ import seedu.duke.ui.Ui;
  * Handles file input/output and secret creation and manipulation.
  */
 public class Backend {
+    public static boolean isCorrupted = true;
+    public static boolean isDatabaseEmpty = true;
     private static final Logger LOGGER = SecureNUSLogger.LOGGER;
     private static final int DECRYPTION_STARTING_INDEX = 5;
     private static final String DATABASE_FOLDER = "assets";
