@@ -1,6 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.Backend;
 import seedu.duke.exceptions.InsufficientParamsException;
 import seedu.duke.ui.Ui;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
