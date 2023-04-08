@@ -38,4 +38,76 @@ save
 menu
 new password2
 c/
+new password~ f/folder1
+new password1 f/121-01
+new idk f.scw
+new idk f/unknown
+`~!@#$%^&*()-=_+[]\{}|;':",./<>?
+`~!@#$%^&*()-=_+[]\{}|;':",./<>?
+`~!@#$%^&*()-=_+[]\{}|;':",./<>?
+new o/CreditCard
+new o/CreditCard 1212[]
+new o/CreditCard 1212 f.sdpocwv
+new o/CreditCard 1212 f/sdpocwv
+`~!@#$%^&*()-=_+[]\{}|;':",./<>?
+1234567890123456
+1345 1287 1298 143
+1345 1287 1298 143-
+c/
+new o/creditcard card1 f/personal
+new o/Creditcard card1 f/personal
+new o/CreditCard card1 f/personal
+usr1$%^&*()_+
+1234 5678 9012 3456
+1435
+okq
+12o
+123/
+12"
+03/23
+new crypto
+/c
+c/
+new o/crypto wallet1
+new o/Cyrpto wallet1
+new o/Crypto wallet1
+c/
+new o/Crypt0 wallet1 f/personal
+new o/Crypto wallet1 f/personal
+new o/NUSNEtID
+new o/NUSnet
+a0000000
+e|||||||
+e0000000
+cxqjpdoj	pD
+new O/StudentID
+new o/StudentID student f/folda
+e1234567890
+A1234567U
+new o/WifiPassword nus
+new o/WifiPassword nus1 f/personal
+delete folda
+delete studentt
+menu delete student
+delete 1 2 3
+delete nus strange password
+delete wallet1,strange,password
+delete wallet1, strange, password
+list menu
+list f/folda
+list /f folda
+super save
+edit wallet1
+delete
+menu
+c/
+delete c/
+c/ delete
+new o/Crypto CreditCard
+us1
+private
+seed
+exit c/
+c/ exit
 exit
+

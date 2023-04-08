@@ -223,7 +223,7 @@ public class CreditCard extends Secret {
     @Override
     public String toStringForDatabase() {
         String formattedString =  "CreditCard," + super.toStringForDatabase() +
-                "," + this.fullName + "," + Backend.encode(this.creditCardNumber) + "," +
+                "," + Backend.encode(this.fullName) + "," + Backend.encode(this.creditCardNumber) + "," +
                 Backend.encode("" + this.cvcNumber) + "," + this.expiryDate;
         return formattedString;
     }

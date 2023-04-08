@@ -164,9 +164,13 @@ public class Backend {
                 secretMaster.addSecret(secret);
             }
         } else if (input[0].equals(Backend.CRYPTOWALLET_IDENTIFIER)) {
-            Secret secret = new CryptoWallet(input[2], input[3], Backend.decode(input[4]),
-                    Backend.decode(input[5]), Backend.decode(input[6]),
-                    Backend.createUrlArrayList(input));
+            Secret secret = new CryptoWallet(
+                    input[2],
+                    input[3],
+                    Backend.decode(input[4]),
+                    Backend.decode(input[5]),
+                    Backend.decode(input[6]),
+                    new ArrayList<String>());
             secretMaster.addSecret(secret);
         } else if (input[0].equals(Backend.NUSNETID_IDENTIFIER)) {
             if (NUSNet.isLegalId(input[4])) { //2nd filter
@@ -242,14 +246,6 @@ public class Backend {
             hashtableFolders.put(folder, Backend.createNameHashtable(folderHashtable.get(folder)));
         }
         return hashtableFolders;
-    }
-
-    public static ArrayList<String> createUrlArrayList(String[] input) {
-        ArrayList<String> urlArrayList = new ArrayList<String>();
-        for (int i = 7; i < input.length - 1; i++) {
-            urlArrayList.add(input[i]);
-        }
-        return urlArrayList;
     }
 
     /**
