@@ -16,15 +16,15 @@ import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
-import seedu.duke.secrets.BasicPassword;
-import seedu.duke.secrets.CreditCard;
-import seedu.duke.secrets.CryptoWallet;
-import seedu.duke.secrets.NUSNet;
+import seedu.duke.secrets.Secret;
 import seedu.duke.secrets.StudentID;
+import seedu.duke.secrets.NUSNet;
+import seedu.duke.secrets.CryptoWallet;
 import seedu.duke.secrets.WifiPassword;
+import seedu.duke.secrets.CreditCard;
+import seedu.duke.secrets.BasicPassword;
 import seedu.duke.storage.SecretEnumerator;
 import seedu.duke.storage.SecretMaster;
-import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretSearcher;
 import seedu.duke.ui.Ui;
 
@@ -49,6 +49,7 @@ public class Backend {
     private static final String NUSNETID_IDENTIFIER = "nusNetId";
     private static final String STUDENTID_IDENTIFIER = "studentID";
     private static final String WIFI_PASSWORD_IDENTIFIER = "wifiPassword";
+
 
     /**
      * Returns data from previous session as a SecretMaster Object.
@@ -341,6 +342,7 @@ public class Backend {
                         Backend.hash(secret.toStringForDatabase())+ "\n");
             }
             myWriter.close();
+            Ui.inform("User data is successfully updated");
         } catch (IOException e) {
             Ui.inform("Database is not initialised! All user data will not be saved");
             LOGGER.log(Level.SEVERE, SecureNUSLogger.formatStackTrace(e.getStackTrace()));

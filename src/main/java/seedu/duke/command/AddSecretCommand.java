@@ -78,6 +78,7 @@ public abstract class AddSecretCommand extends Command {
                 "folder   = " + folderName + "\n");
 
 
+
     }
 
     /**

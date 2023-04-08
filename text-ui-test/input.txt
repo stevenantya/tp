@@ -1,11 +1,11 @@
-new password1 f/folder1
+new password1 f/personal
 idk.com
-user1
-password1
-new o/NUSNet nusnet1 f/folder1
+usr1
+pass1
+new o/NUSNet nusnet1 f/school
 e0123456
-qwertyui
-new o/StudentID student2 f/folder1
+pass2
+new o/StudentID student1 f/school
 A0123456R
 new o/CreditCard credit1 f/personal
 usr1
@@ -17,17 +17,25 @@ new o/Crypto wallet1 f/personal
 usr1
 privatekey
 seedphrase
-new o/WifiPassword wifi f/personal
+new o/WifiPassword wifi1 f/personal
 home1
-password2
+pass3
 list
-delete p/wifi
-list
+list f/personal
+delete wifi1
+list f/personal
 view password1
 edit password1
-usr2
-password1
-idk.com
-search nusnet1
+usr1
+newpass
+newurl
+view password1
+delete password1 wallet1
+search student
+search t f/folder1
+search t f/personal
+save
 menu
+new password2
+c/
 exit

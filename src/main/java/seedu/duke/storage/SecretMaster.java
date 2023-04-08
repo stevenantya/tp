@@ -1,6 +1,8 @@
 package seedu.duke.storage;
 
+import seedu.duke.Backend;
 import seedu.duke.exceptions.secrets.InvalidCvcNumberException;
+import seedu.duke.messages.OperationMessages;
 import seedu.duke.ui.Ui;
 import seedu.duke.exceptions.secrets.InvalidCreditCardNumberException;
 import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
@@ -315,6 +317,10 @@ public class SecretMaster {
         secretNames.add(secret.getName());
         secretSearcher.add(secret);
         secretEnumerator.add(secret);
+
+        Ui.inform(OperationMessages.SAVING);
+        Backend.updateStorage(this.listSecrets());
+        Ui.inform(OperationMessages.SAVE_COMPLETE);
     }
 
     /**
@@ -341,6 +347,10 @@ public class SecretMaster {
         if (!folderContainsSecrets(folderName)) {
             folders.remove(folderName);
         }
+
+        Ui.inform(OperationMessages.SAVING);
+        Backend.updateStorage(this.listSecrets());
+        Ui.inform(OperationMessages.SAVE_COMPLETE);
     }
 
     public boolean folderContainsSecrets(String folderName) {

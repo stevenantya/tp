@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.Backend;
 import seedu.duke.exceptions.ExceptionMain;
 import seedu.duke.exceptions.OperationCancelException;
 import seedu.duke.exceptions.RepeatedIdException;
@@ -7,6 +8,7 @@ import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.messages.InquiryMessages;
+import seedu.duke.messages.OperationMessages;
 import seedu.duke.secrets.CryptoWallet;
 import seedu.duke.storage.SecretMaster;
 import seedu.duke.ui.Ui;
@@ -69,6 +71,10 @@ public class AddCryptoWalletCommand extends AddSecretCommand {
                 "Username   = " + username + "\n" +
                 "Private Key= " + HIDDEN_FIELD + "\n" +
                 "Seed Phrase= " + HIDDEN_FIELD);
+
+        Ui.inform(OperationMessages.SAVING);
+        Backend.updateStorage(secureNUSData.listSecrets());
+        Ui.inform(OperationMessages.SAVE_COMPLETE);
     }
 
     /**

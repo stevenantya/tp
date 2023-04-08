@@ -75,6 +75,7 @@ public class SecureNUS {
             Ui.printNewSessionMessage();
         }
 
+
         boolean isExit = false;
         while (!isExit) {
             Command c = parseCommand();
