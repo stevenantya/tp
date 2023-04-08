@@ -14,12 +14,12 @@
 
 Welcome to secureNUS v2.1
 Try out some of these commands:
-Adding a password      : new NAME [f/FOLDER_NAME]
-Adding a NUSNet ID     : new o/NUSNet NAME [f/FOLDER_NAME]
-Adding a Student ID    : new o/StudentID NAME [f/FOLDER_NAME]
-Adding a Credit Card   : new o/CreditCard NAME [f/FOLDER_NAME]
-Adding a Wifi Password : new o/WifiPassword NAME [f/FOLDER_NAME]
-Adding a Crypto Wallet : new o/Crypto NAME [f/FOLDER_NAME]
+Adding a password      : new SECRET_NAME [f/FOLDER_NAME]
+Adding a NUSNet ID     : new o/NUSNet SECRET_NAME [f/FOLDER_NAME]
+Adding a Student ID    : new o/StudentID SECRET_NAME [f/FOLDER_NAME]
+Adding a Credit Card   : new o/CreditCard SECRET_NAME [f/FOLDER_NAME]
+Adding a Wifi Password : new o/WifiPassword SECRET_NAME [f/FOLDER_NAME]
+Adding a Crypto Wallet : new o/Crypto SECRET_NAME [f/FOLDER_NAME]
 Viewing all commands   : menu
 
 Enter Command:Please enter the URL:
@@ -192,20 +192,20 @@ Found 1 matches!
 _____________________________________________________
 Enter Command:_____________________________________________________
 SecureNUS Command Menu:
-1. Add a general password: new [PASSWORD_NAME] [f/FOLDER_NAME]
-	Add Credit Card details: new o/CreditCard [NAME] [f/FOLDER_NAME]
-	Add details for a Crypto Wallet: new o/Crypto [NAME] [f/FOLDER_NAME]
-	Add NUSNet ID and Password (e*******): new o/NUSNet [NAME] [f/FOLDER_NAME]
-	Add NUS StudentID (A*******E): new o/StudentID [NAME] [f/FOLDER_NAME]
-	Add a password for Wifi: new o/WifiPassword [NAME] [f/FOLDER_NAME]
-2. Delete the unwanted secrets: delete PASSWORD_NAME
+1. Add a general password: new SECRET_NAME [f/FOLDER_NAME]
+	Add Credit Card details: new o/CreditCard SECRET_NAME [f/FOLDER_NAME]
+	Add details for a Crypto Wallet: new o/Crypto SECRET_NAME [f/FOLDER_NAME]
+	Add NUSNet ID and Password (e*******): new o/NUSNet SECRET_NAME [f/FOLDER_NAME]
+	Add NUS StudentID (A*******E): new o/StudentID SECRET_NAME [f/FOLDER_NAME]
+	Add a password for Wifi: new o/WifiPassword SECRET_NAME [f/FOLDER_NAME]
+2. Delete the unwanted secrets: delete SECRET_NAME_1 [SECRET_NAME_2] [SECRET...]
 3. List all the secrets: list [f/FOLDER_NAME]
-4. View secrets: view PASSWORD_NAME
-5. Search for secrets: search n/NAME_LIKE [f/FOLDER]
-6. Export the secrets in "database.txt" file: save
-7. Edit a secrets: edit PASSWORD_NAME
+4. View secrets: view SECRET_NAME
+5. Search for secrets: search SECRET_NAME_LIKE [f/FOLDER]
+6. Export the secrets to assets/database.txt file: save
+7. Edit a secrets: edit SECRET_NAME
 8. Menu list to refer for commands: menu
-9. Exit from the password manager (will automatically save this session): exit
+9. Exit from SecureNUS (will automatically save this session): exit
 10. To cancel the current operation (e.g. mid adding/ editing password): c/
 _____________________________________________________
 Enter Command:_____________________________________________________
