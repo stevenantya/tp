@@ -19,12 +19,12 @@ public class OperationMessages {
             LOGO +
             "Welcome to secureNUS v2.1\n" +
             "Try out some of these commands:\n" +
-            "Adding a password      : new NAME [f/FOLDER_NAME]\n" +
-            "Adding a NUSNet ID     : new o/NUSNet NAME [f/FOLDER_NAME]\n" +
-            "Adding a Student ID    : new o/StudentID NAME [f/FOLDER_NAME]\n" +
-            "Adding a Credit Card   : new o/CreditCard NAME [f/FOLDER_NAME]\n" +
-            "Adding a Wifi Password : new o/WifiPassword NAME [f/FOLDER_NAME]\n" +
-            "Adding a Crypto Wallet : new o/Crypto NAME [f/FOLDER_NAME]\n" +
+            "Adding a password      : new SECRET_NAME [f/FOLDER_NAME]\n" +
+            "Adding a NUSNet ID     : new o/NUSNet SECRET_NAME [f/FOLDER_NAME]\n" +
+            "Adding a Student ID    : new o/StudentID SECRET_NAME [f/FOLDER_NAME]\n" +
+            "Adding a Credit Card   : new o/CreditCard SECRET_NAME [f/FOLDER_NAME]\n" +
+            "Adding a Wifi Password : new o/WifiPassword SECRET_NAME [f/FOLDER_NAME]\n" +
+            "Adding a Crypto Wallet : new o/Crypto SECRET_NAME [f/FOLDER_NAME]\n" +
             "Viewing all commands   : menu\n";
 
     public static final String SAVING = "Saving secrets to storage, please do not close application...";
