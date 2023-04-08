@@ -1,6 +1,10 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.NullFolderException;
+import seedu.duke.exceptions.secrets.FolderNotFoundException;
+import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.NonExistentFolderException;
+
 import seedu.duke.secrets.Secret;
 import seedu.duke.storage.SecretMaster;
 
@@ -10,9 +14,11 @@ import seedu.duke.secrets.CryptoWallet;
 import seedu.duke.secrets.NUSNet;
 import seedu.duke.secrets.StudentID;
 import seedu.duke.secrets.WifiPassword;
+import seedu.duke.ui.Ui;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * The ListCommand class represents the command to list all secrets in a specific folder or all secrets if no folder
@@ -20,29 +26,57 @@ import java.util.ArrayList;
  */
 public class ListCommand extends Command {
 
-    private final String folderName;
+    private String folderName;
 
     /**
      * Constructs a new ListCommand object with the given input.
      *
      * @param input the input string containing the folder name, if specified.
      */
-    public ListCommand(String input) {
-        this.folderName = extractFolderName(input);
+    public ListCommand(String input, HashSet<String> folders) throws FolderNotFoundException,
+            IllegalFolderNameException, NullFolderException {
+        assert input != null;
+        if (input.equals("list")) {
+            // if you want to display all secrets in all folders
+            folderName = null;
+        } else {
+            // specifically for given secret, hence it cannot be null anymore
+            this.folderName = extractFolderName(input);
+            if (folderName == null) {
+                throw new FolderNotFoundException();
+            }
+            folderCheckWithExistence(folderName, folders);
+        }
+    }
+
+    public String extractFolderName(String input) {
+        assert input != null;
+        String extractedFolderName = null;
+        if (input.split(" f/").length > 1) {
+            extractedFolderName = input.split(" f/")[1];
+            extractedFolderName = extractedFolderName.split(" ")[0];
+        }
+        return extractedFolderName;
     }
 
     /**
-     * Extracts the folder name from the input string.
+     * Masks a string password by replacing its characters with asterisks.
      *
-     * @param input the input string containing the folder name, if specified.
-     * @return the folder name.
+     * @param password the string password to be masked.
+     * @return the masked password string.
      */
-    public String extractFolderName(String input) {
-        String extractedFolderName = "unnamed";
-        if (input.split(" ").length > 1) {
-            extractedFolderName = input.split(" ")[1];
-        }
-        return extractedFolderName;
+    String maskStringPassword(String password) {
+        return "********";
+    }
+
+    /**
+     * Masks an integer password by converting it to a string of asterisks with the same length as the integer password.
+     *
+     * @param password the integer password to be masked.
+     * @return the masked password string.
+     */
+    public String maskIntPasswordAsString(int password) {
+        return String.format("%0" + String.valueOf(password).length() + "d", 0).replaceAll("0", "*");
     }
 
     /**
@@ -52,16 +86,16 @@ public class ListCommand extends Command {
      * @return return the type and details of the secret.
      */
     @SuppressWarnings("checkstyle:LocalVariableName")
-    private String getSecretTypeInfo(Secret secret) {
+    public String getSecretTypeInfo(Secret secret) {
+        assert secret != null;
         if (secret instanceof BasicPassword) {
             BasicPassword basicPassword = (BasicPassword) secret;
-            return
-                    "Type of Secret: Basic Password" + "\n" +
-                            "Name: " + basicPassword.getName() + "\n" +
-                            "Folder: " + basicPassword.getFolderName() + "\n" +
-                            "Username: " + basicPassword.getUsername() + "\n" +
-                            "URL: " + basicPassword.getUrl() + "\n" +
-                            "Password: " + basicPassword.getPassword() + "\n";
+            return "Type of Secret: Basic Password" + "\n" +
+                   "Name: " + basicPassword.getName() + "\n" +
+                   "Folder: " + basicPassword.getFolderName() + "\n" +
+                   "Username: " + basicPassword.getUsername() + "\n" +
+                   "URL: " + basicPassword.getUrl() + "\n" +
+                   "Password: " + maskStringPassword(basicPassword.getPassword()) + "\n";
 
         } else if (secret instanceof CreditCard) {
             CreditCard creditCard = (CreditCard) secret;
@@ -69,9 +103,9 @@ public class ListCommand extends Command {
                     "Name: " + creditCard.getName() + "\n" +
                     "Folder: " + creditCard.getFolderName() + "\n" +
                     "Full Name: " + creditCard.getFullName() + "\n" +
-                    "Credit Card Number: " + creditCard.getCreditCardNumber() + "\n" +
-                    "CVC Number: " + creditCard.getCvcNumber() + "\n" +
-                    "Expiry Date: " + creditCard.getExpiryDate()+ "\n";
+                    "Credit Card Number: " + maskStringPassword(creditCard.getCreditCardNumber()) + "\n" +
+                    "CVC Number: " + maskStringPassword(creditCard.getCvcNumber()) + "\n" +
+                    "Expiry Date: " + maskStringPassword(creditCard.getExpiryDate())+ "\n";
 
         } else if (secret instanceof CryptoWallet) {
             CryptoWallet cryptoWallet = (CryptoWallet) secret;
@@ -79,8 +113,8 @@ public class ListCommand extends Command {
                     "Name: " + cryptoWallet.getName() + "\n" +
                     "Folder: " + cryptoWallet.getFolderName() + "\n" +
                     "Username: " + cryptoWallet.getUsername() + "\n" +
-                    "Private Key: " + cryptoWallet.getPrivateKey() + "\n" +
-                    "Seed Phrase: " + cryptoWallet.getSeedPhrase()+ "\n";
+                    "Private Key: " + maskStringPassword(cryptoWallet.getPrivateKey()) + "\n" +
+                    "Seed Phrase: " + maskStringPassword(cryptoWallet.getSeedPhrase())+ "\n";
 
         } else if (secret instanceof NUSNet) {
             NUSNet nusNet = (NUSNet) secret;
@@ -88,15 +122,14 @@ public class ListCommand extends Command {
                     "Name: " + nusNet.getName() + "\n" +
                     "Folder: " + nusNet.getFolderName() + "\n" +
                     "NUSNet ID: " + nusNet.getNusNetId() + "\n" +
-                    "Password: " + nusNet.getPassword() + "\n";
-
-
+                    "Password: " + maskStringPassword(nusNet.getPassword()) + "\n";
+                    
         } else if (secret instanceof StudentID) {
             StudentID studentID = (StudentID) secret;
             return "Type of Secret: Student ID" + "\n" +
                     "Name: " + studentID.getName() + "\n" +
                     "Folder: " + studentID.getFolderName() + "\n" +
-                    "Student ID: " + studentID.getStudentID()+ "\n";
+                    "Student ID: " + maskStringPassword(studentID.getStudentID())+ "\n";
 
         } else if (secret instanceof WifiPassword) {
             WifiPassword wifiPassword = (WifiPassword) secret;
@@ -104,7 +137,7 @@ public class ListCommand extends Command {
                     "Name: " + wifiPassword.getName() + "\n" +
                     "Folder: " + wifiPassword.getFolderName() + "\n" +
                     "Username: " + wifiPassword.getUsername() + "\n" +
-                    "Password: " + wifiPassword.getPassword()+ "\n";
+                    "Password: " + maskStringPassword(wifiPassword.getPassword())+ "\n";
 
         } else {
             return "Secret";
@@ -120,15 +153,21 @@ public class ListCommand extends Command {
     public void execute(SecretMaster secureNUSData) {
         ArrayList<Secret> secrets;
         try {
-            if (folderName.equals("unnamed")) {
+            if (folderName == null) {
                 secrets = secureNUSData.listSecrets();
             } else {
                 secrets = secureNUSData.listSecrets(folderName);
             }
             if (secrets.isEmpty()) {
-                System.out.println("There are no secrets in this folder.");
+                if (folderName == null) {
+                    Ui.inform("You have no secrets stored yet.");
+                } else {
+                    // should not reach here since these checks are done above
+                    Ui.inform("There are no secrets in this folder: " + folderName);
+                }
                 return;
             }
+            Ui.printLine();
             System.out.println("List of secrets:");
             int counter = 1;
             for (Secret secret : secrets) {
@@ -136,8 +175,9 @@ public class ListCommand extends Command {
                 System.out.println(counter + ". " + secretTypeInfo);
                 counter += 1;
             }
+            Ui.printLine();
         } catch (NonExistentFolderException e) {
-            System.out.println("Folder " + folderName + " does not exist.");
+            Ui.printError("Folder " + folderName + " does not exist.");
         }
     }
 

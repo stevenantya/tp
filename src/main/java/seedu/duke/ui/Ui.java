@@ -1,4 +1,6 @@
-package seedu.duke;
+package seedu.duke.ui;
+
+import seedu.duke.messages.OperationMessages;
 
 import java.util.Scanner;
 
@@ -14,11 +16,7 @@ public class Ui {
      * Greets the user upon start up of the application.
      */
     public static void greetUser() {
-        System.out.println("Welcome to secureNUS v1.0\n" +
-                "Current Features\n" +
-                "Adding a password      : new [NAME] /f [FOLDER_NAME]\n" +
-                "Adding a NUSNet ID     : new o/NUSNet [NAME] /f [FOLDER_NAME]\n" +
-                "Adding a Student ID    : new o/StudentID [NAME] /f [FOLDER_NAME] \n");
+        System.out.println(OperationMessages.INITIALISE);
     }
 
     /**
@@ -50,15 +48,24 @@ public class Ui {
     public static String readLine() {
         while (in.hasNextLine()) {
             String line = in.nextLine();
+
             return line;
         }
         return "";
+    }
+
+    public static String removeBackSlashes(String input) {
+        return input.replaceAll("\\", "\\\\");
     }
 
     public static String removeExtraWhiteSpaces(String line) {
         // remove duplicate whitespaces
         line = line.replaceAll(DUPLICATE_WHITESPACE_FMT, " ");
         return line.trim(); // remove leading and trailing whitespaces
+    }
+
+    public static void informUserToStartCommand() {
+        System.out.print("Enter Command:");
     }
 
     // TODO can this be removed with logging?
@@ -68,12 +75,11 @@ public class Ui {
      * @param message Error message to be printed.
      */
     public static void printError(String message) {
-        System.out.println("Oops! Error encountered "+ message);
+        System.out.println("Oops! Error encountered: "+ message);
     }
-
-
-
-
+    public static void informOperationCancel () {
+        System.out.println(OperationMessages.CANCEL_OPERATION);
+    }
 
     public static void close() {
         in.close();

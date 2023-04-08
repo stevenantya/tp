@@ -1,13 +1,13 @@
 package seedu.duke.secrets;
 
 import seedu.duke.Backend;
-import seedu.duke.exceptions.secrets.InvalidURLException;
 
 /**
  * BasicPassword class represents a basic password entry that contains a username,
  * password, and URL.
  */
 public class BasicPassword extends Secret{
+    public static final String TYPE = "BasicPassword";
     private String username;
     private String password;
     private String url;
@@ -19,18 +19,13 @@ public class BasicPassword extends Secret{
      * @param username username of the basic password entry
      * @param password password of the basic password entry
      * @param url URL of the basic password entry
-     * @throws InvalidURLException if the provided URL is not a valid URL
      */
     public BasicPassword(String name, String username,
-                         String password, String url) throws InvalidURLException {
+                         String password, String url) {
         super(name);
         this.password = password;
         this.username = username;
-        if (url.contains(".") && (url.indexOf(".") == url.lastIndexOf("."))) {
-            this.url = url;
-        } else {
-            throw new InvalidURLException();
-        }
+        this.url = url;
     }
 
     /**
@@ -41,18 +36,17 @@ public class BasicPassword extends Secret{
      * @param username username of the basic password entry
      * @param password password of the basic password entry
      * @param url URL of the basic password entry
-     * @throws InvalidURLException if the provided URL is not a valid URL
      */
     public BasicPassword(String name, String folderName, String username,
-                            String password, String url) throws InvalidURLException {
+                            String password, String url)  {
         super(name, folderName);
         this.password = password;
         this.username = username;
-        if (url.contains(".") && (url.indexOf(".") == url.lastIndexOf("."))) {
-            this.url = url;
-        } else {
-            throw new InvalidURLException();
-        }
+        this.url = url;
+    }
+
+    public String getType() {
+        return TYPE;
     }
 
     /**
@@ -103,6 +97,7 @@ public class BasicPassword extends Secret{
                 getName(), url, username, password);
     }
 
+
     /**
      * Returns the username associated with the password.
      *
@@ -113,18 +108,17 @@ public class BasicPassword extends Secret{
     }
 
     public void setUsername(String username) {
+        assert username != null;
         this.username = username;
     }
 
     public void setPassword(String password) {
+        assert password != null;
         this.password = password;
     }
 
-    public void setUrl(String url) throws InvalidURLException {
-        if (url.contains(".") && (url.indexOf(".") == url.lastIndexOf("."))) {
-            this.url = url;
-        } else {
-            throw new InvalidURLException();
-        }
+    public void setUrl(String url) {
+        assert url != null;
+        this.url = url;
     }
 }
