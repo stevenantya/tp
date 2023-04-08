@@ -45,6 +45,17 @@ public class Ui {
         return "";
     }
 
+    /**
+     * Overloaded readCommand() for unit testing purpose
+     */
+    public static String readCommand(Scanner scanner) {
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            return removeExtraWhiteSpaces(line);
+        }
+        return "";
+    }
+
     public static String readLine() {
         while (in.hasNextLine()) {
             String line = in.nextLine();
@@ -54,8 +65,16 @@ public class Ui {
         return "";
     }
 
-    public static String removeBackSlashes(String input) {
-        return input.replaceAll("\\", "\\\\");
+    /**
+     * Overloaded readLine() for unit testing purpose
+     */
+    public static String readLine(Scanner scanner) {
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+
+            return line;
+        }
+        return "";
     }
 
     public static String removeExtraWhiteSpaces(String line) {

@@ -21,11 +21,11 @@ public class ViewCommand extends Command {
      * @param input the user input to extract the password name
      */
     public ViewCommand(String input, HashSet<String> usedNames) throws NullSecretException,
-            IllegalSecretNameException {
+            IllegalSecretNameException, SecretNotFoundException {
         this.passwordName = extractName(input);
         nameCheck(passwordName);
         if (!usedNames.contains(passwordName)) {
-            Ui.inform("No such secret found.");
+            throw new SecretNotFoundException();
         }
     }
 

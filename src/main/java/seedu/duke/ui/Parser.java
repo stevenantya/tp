@@ -93,13 +93,13 @@ public class Parser {
         if (command.startsWith("new " + AddCreditCardCommand.KEYWORD + " ")) {
             return new AddCreditCardCommand(command, usedNames);
         } else if (command.startsWith("new " + AddCryptoWalletCommand.KEYWORD + " ")) {
-            return new AddCryptoWalletCommand(command, usedNames); // Have to change to AddCryptoWalletCommand
+            return new AddCryptoWalletCommand(command, usedNames);
         } else if (command.startsWith("new " + AddNUSNetCommand.KEYWORD + " ")) {
             return new AddNUSNetCommand(command, usedNames);
         } else if (command.startsWith("new " + AddStudentIDCommand.KEYWORD + " ")) {
             return new AddStudentIDCommand(command, usedNames);
         } else if (command.startsWith("new " + AddWifiPasswordCommand.KEYWORD + " ")) {
-            return new AddWifiPasswordCommand(command, usedNames); // Have to change to AddWifiPasswordCommand
+            return new AddWifiPasswordCommand(command, usedNames);
         } else if (command.startsWith("new " + AddCreditCardCommand.KEYWORD + " ")) {
             return new AddCreditCardCommand(command, usedNames);
         } else {

@@ -16,6 +16,7 @@ import seedu.duke.storage.SecretMaster;
 import seedu.duke.ui.Ui;
 
 import java.util.HashSet;
+import java.util.Scanner;
 
 /**
  * The abstract class Command serves as a blueprint for all other command classes to inherit from. It contains two
@@ -45,6 +46,21 @@ public abstract class Command {
         }
         return result;
     }
+
+    /**
+     * Overloaded method for unit testing purposes.
+     */
+    public String inquire(String question, String fieldName, Scanner scanner) throws OperationCancelException {
+        assert question != null;
+        assert fieldName != null;
+        String result = query(question, scanner);
+        while (isEmptyEntry(result)) {
+            System.out.println(String.format(InquiryMessages.TEMPLATE_EMPTY, fieldName));
+            result = query(question, scanner);
+        }
+        return result;
+    }
+
     /**
      * Extracts the name of the secret from the input command.
      *
@@ -76,7 +92,7 @@ public abstract class Command {
         if (Secret.isIllegalName(name)) {
             throw new IllegalSecretNameException();
         }
-        if (usedNames.contains(name)) {
+        if (!usedNames.contains(name)) {
             throw new SecretNotFoundException();
         }
     }
@@ -120,6 +136,20 @@ public abstract class Command {
         }
         return line;
     }
+
+    /**
+     * Overloaded method for unit testing purposes.
+     */
+    public String query(String question, Scanner scanner) throws OperationCancelException {
+        assert question != null;
+        System.out.println(question);
+        String line = Ui.readLine(scanner);
+        if (line.equals(CANCEL_COMMAND)) {
+            throw new OperationCancelException();
+        }
+        return line;
+    }
+
 
     public boolean isEmptyEntry(String input) {
         return input.equals("") ||

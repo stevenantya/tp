@@ -48,6 +48,7 @@ public class SecureNUSLogger {
     public static void close() {
         for (Handler handler : LOGGER.getHandlers()) {
             handler.close();
+            LOGGER.removeHandler(handler);
         }
     }
 }

@@ -59,7 +59,7 @@ class ViewCommandTest {
 
     @Test
     void execute_matchingName() throws IllegalFolderNameException, RepeatedIdException, IllegalSecretNameException,
-            FolderExistsException, NullSecretException {
+            FolderExistsException, NullSecretException, SecretNotFoundException {
         mockSecureNUSData.addSecret(mockBasicPassword);
         ViewCommand viewCommand = new ViewCommand("view " + TEST_NAME, mockSecureNUSData.getSecretNames());
         viewCommand.execute(mockSecureNUSData);
@@ -69,7 +69,8 @@ class ViewCommandTest {
     }
 
     @Test
-    public void execute_nonMatchingName() throws NullSecretException, IllegalSecretNameException {
+    public void execute_nonMatchingName() throws NullSecretException, IllegalSecretNameException,
+            SecretNotFoundException {
         HashSet<String> usedNames = new HashSet<String>();
         usedNames.add(TEST_NAME);
         ViewCommand viewCommand = new ViewCommand("view " + TEST_NAME, usedNames);
@@ -79,7 +80,7 @@ class ViewCommandTest {
     }
 
     @Test
-    void isExit() throws NullSecretException, IllegalSecretNameException {
+    void isExit() throws NullSecretException, IllegalSecretNameException, SecretNotFoundException {
         HashSet<String> usedNames = new HashSet<String>();
         usedNames.add(TEST_NAME);
         ViewCommand viewCommand = new ViewCommand("view " + TEST_NAME, usedNames);

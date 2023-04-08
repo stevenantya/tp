@@ -13,6 +13,7 @@ import seedu.duke.secrets.CreditCard;
 import seedu.duke.storage.SecretMaster;
 
 import java.util.HashSet;
+import java.util.Scanner;
 
 /**
  * A class to add a new credit card to the user's secureNUSData.
@@ -41,6 +42,14 @@ public class AddCreditCardCommand extends AddSecretCommand {
         creditCardNumber = inquireCreditCardNumber();
         cvcNumber = inquireCvcNumber();
         expiryDate = inquireExpiryDate();
+    }
+
+    public AddCreditCardCommand(CreditCard creditCard) throws OperationCancelException {
+        super(creditCard);
+        fullName = creditCard.getFullName();
+        creditCardNumber = creditCard.getCreditCardNumber();
+        cvcNumber = creditCard.getCvcNumber();
+        expiryDate = creditCard.getExpiryDate();
     }
 
     /**
@@ -90,11 +99,32 @@ public class AddCreditCardCommand extends AddSecretCommand {
         return creditCardNumber;
     }
 
+    /**
+     * Overloaded method for unit testing purposes.
+     */
+    public String inquireCreditCardNumber(Scanner scanner) throws OperationCancelException {
+        String creditCardNumber = inquire(InquiryMessages.CREDIT_CARD_NUMBER, "Credit Card Number", scanner);;
+        while(!CreditCard.isLegalCreditCardNumber(creditCardNumber)) {
+            System.out.println(InquiryMessages.CREDIT_CARD_NUMBER_RETRY);
+            creditCardNumber = inquire(InquiryMessages.CREDIT_CARD_NUMBER, "Credit Card Number", scanner);
+        }
+        return creditCardNumber;
+    }
+
     public String inquireCvcNumber() throws OperationCancelException {
         String number = inquire(InquiryMessages.CVC_NUMBER, "CVC Number");
         while(!CreditCard.isLegalCvcNumber(number)) {
             System.out.println(InquiryMessages.CVC_NUMBER_RETRY);
             number = inquire(InquiryMessages.CVC_NUMBER, "CVC Number");
+        }
+        return number;
+    }
+
+    public String inquireCvcNumber(Scanner scanner) throws OperationCancelException {
+        String number = inquire(InquiryMessages.CVC_NUMBER, "CVC Number", scanner);
+        while(!CreditCard.isLegalCvcNumber(number)) {
+            System.out.println(InquiryMessages.CVC_NUMBER_RETRY);
+            number = inquire(InquiryMessages.CVC_NUMBER, "CVC Number", scanner);
         }
         return number;
     }
@@ -106,5 +136,19 @@ public class AddCreditCardCommand extends AddSecretCommand {
             number = inquire(InquiryMessages.EXPIRY_DATE, "Expiry Date");
         }
         return number;
+    }
+
+    public String inquireExpiryDate(Scanner scanner) throws OperationCancelException {
+        String number = inquire(InquiryMessages.EXPIRY_DATE, "Expiry Date", scanner);
+        while(!CreditCard.isLegalExpiryDate(number)) {
+            System.out.println(InquiryMessages.EXPIRY_DATE_RETRY);
+            number = inquire(InquiryMessages.EXPIRY_DATE, "Expiry Date", scanner);
+        }
+        return number;
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 }
