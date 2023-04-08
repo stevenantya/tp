@@ -16,8 +16,6 @@ import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
-import seedu.duke.exceptions.secrets.InvalidCreditCardNumberException;
-import seedu.duke.exceptions.secrets.InvalidCVCNumberException;
 import seedu.duke.secrets.Secret;
 import seedu.duke.secrets.StudentID;
 import seedu.duke.secrets.NUSNet;
