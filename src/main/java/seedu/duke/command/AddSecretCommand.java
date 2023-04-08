@@ -1,6 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.Backend;
 import seedu.duke.exceptions.ExceptionMain;
 import seedu.duke.exceptions.RepeatedIdException;
 import seedu.duke.exceptions.secrets.FolderExistsException;
