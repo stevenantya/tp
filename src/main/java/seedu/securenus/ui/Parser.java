@@ -34,10 +34,24 @@ import java.util.HashSet;
  */
 public class Parser {
     /**
-     * Parses user input and returns the corresponding command object.
+     * Parses the user input command and returns the corresponding Command object.
      *
-     * @param command       user input command string
-     * @return Command object corresponding to the user input
+     * @param command the user input command string
+     * @param usedNames a HashSet containing all the used secret names
+     * @param folders a HashSet containing all the folder names
+     *
+     * @return the corresponding Command object
+     * @throws InvalidCommandException if the command is invalid
+     * @throws InsufficientParamsException if there are insufficient parameters for the command
+     * @throws IllegalFolderNameException if the folder name is invalid
+     * @throws IllegalSecretNameException if the secret name is invalid
+     * @throws OperationCancelException if the user cancels an operation
+     * @throws RepeatedIdException if there is a repeated ID for the student ID command
+     * @throws InvalidFieldException if the field to edit is invalid
+     * @throws SecretNotFoundException if the secret is not found
+     * @throws FolderNotFoundException if the folder is not found
+     * @throws NullSecretException if the secret is null
+     * @throws NullFolderException if the folder is null
      */
     public static Command parse(String command, HashSet<String> usedNames, HashSet<String> folders) throws
             InvalidCommandException,
@@ -72,6 +86,19 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the "add" command and returns the corresponding Command object.
+     *
+     * @param command the "add" command to be parsed
+     * @param usedNames a HashSet containing the names of all existing secrets to ensure uniqueness
+     * @return the corresponding Command object
+     * @throws InsufficientParamsException if the user input is insufficient
+     * @throws IllegalFolderNameException if the folder name is illegal
+     * @throws IllegalSecretNameException if the secret name is illegal
+     * @throws OperationCancelException if the operation is cancelled
+     * @throws RepeatedIdException if there is already a secret with the same ID
+     * @throws InvalidFieldException if the field values are invalid
+     */
     public static Command parseAdd(String command, HashSet<String> usedNames) throws InsufficientParamsException,
             IllegalFolderNameException, IllegalSecretNameException, OperationCancelException, RepeatedIdException,
             InvalidFieldException {
@@ -84,6 +111,19 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the "add" command for special secret types and returns the corresponding Command object.
+     *
+     * @param command the "add" command to be parsed
+     * @param usedNames a HashSet containing the names of all existing secrets to ensure uniqueness
+     * @return the corresponding Command object
+     * @throws OperationCancelException if the operation is cancelled
+     * @throws IllegalFolderNameException if the folder name is illegal
+     * @throws IllegalSecretNameException if the secret name is illegal
+     * @throws RepeatedIdException if there is already a secret with the same ID
+     * @throws InvalidFieldException if the field values are invalid
+     * @throws InsufficientParamsException if the user input is insufficient
+     */
     public static Command parseAddSpecial(String command, HashSet<String> usedNames) throws OperationCancelException,
             IllegalFolderNameException, IllegalSecretNameException, RepeatedIdException, InvalidFieldException,
             InsufficientParamsException {
@@ -107,6 +147,17 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if a given command has the correct format, starting with a specific keyword followed by the minimum
+     * required
+     * number of parameters.
+     *
+     * @param command the command to be checked
+     * @param commandInitializer the specific keyword that the command must start with
+     * @param minParams the minimum number of parameters required for the command
+     * @throws InsufficientParamsException if the command has insufficient parameters
+     * @throws InvalidCommandException if the command does not start with the specified keyword
+     */
     public static void checkCommand(String command, String commandInitializer, int minParams) throws
             InsufficientParamsException, InvalidCommandException {
         if (command.equals(commandInitializer)) {

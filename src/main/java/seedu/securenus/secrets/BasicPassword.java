@@ -45,23 +45,27 @@ public class BasicPassword extends Secret{
         this.url = url;
     }
 
+    /**
+     * Returns the type of the object.
+     *
+     * @return the type of the object
+     */
     public String getType() {
         return TYPE;
     }
 
     /**
-     * Returns the password of the basic password entry.
-     *
-     * @return password of the basic password entry
+     * Returns the password for basic password entry.
+     * @return the password for basic password.
      */
     public String getPassword() {
         return password;
     }
 
     /**
-     * Returns the URL of the basic password entry.
+     * Returns the URL for basic password entry.
      *
-     * @return URL of the basic password entry
+     * @return URL for the basic password entry
      */
     public String getUrl() {
         return url;
@@ -104,16 +108,34 @@ public class BasicPassword extends Secret{
         return username;
     }
 
+    /**
+     * Sets the username of the object.
+     *
+     * @param username the username to be set
+     * @throws NullPointerException if the username is null
+     */
     public void setUsername(String username) {
         assert username != null;
         this.username = username;
     }
 
+    /**
+     * Sets the password of the object.
+     *
+     * @param password the password to be set
+     * @throws NullPointerException if the password is null
+     */
     public void setPassword(String password) {
         assert password != null;
         this.password = password;
     }
 
+    /**
+     * Sets the URL of the object.
+     *
+     * @param url the URL to be set
+     * @throws NullPointerException if the URL is null
+     */
     public void setUrl(String url) {
         assert url != null;
         this.url = url;

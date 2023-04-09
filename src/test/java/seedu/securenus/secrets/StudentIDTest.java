@@ -31,6 +31,9 @@ public class StudentIDTest {
         assertEquals("A021313G", studentID.getStudentID());
     }
 
+    /**
+     * Checks if a given string is a valid Student ID.
+     */
     @Test
     public void legalIdsCheck() {
         assertTrue(StudentID.isLegalId("A0241234R"));
@@ -41,5 +44,4 @@ public class StudentIDTest {
         assertFalse(StudentID.isLegalId("a876543uc"));
         assertFalse(StudentID.isLegalId("S8765439S"));
     }
-
 }

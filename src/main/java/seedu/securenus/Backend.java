@@ -98,6 +98,12 @@ public class Backend {
         return secretMaster;
     }
 
+    /**
+     * Creates an asset folder to store the database file if it does not already exist,
+     * and returns the File object for the database file.
+     *
+     * @return The File object for the database file.
+     */
     public static File createAssetFolderAndDatabaseFile() {
         //locate assets folder / try to create assets folder if it does not exist
         String pathOfCurrentDirectory = System.getProperty(Backend.USER_DIRECTORY_IDENTIFIER);
@@ -113,6 +119,11 @@ public class Backend {
         return database;
     }
 
+    /**
+     * Returns the full file path of the database file.
+     *
+     * @return A string representing the full file path of the database file.
+     */
     public static String getDatabasePath() {
         String pathOfCurrentDirectory = System.getProperty(Backend.USER_DIRECTORY_IDENTIFIER);
         String databasePath = Paths.get(pathOfCurrentDirectory, Backend.DATABASE_FOLDER,
@@ -120,6 +131,14 @@ public class Backend {
         return databasePath;
     }
 
+    /**
+     * Initializes a new SecretMaster object with an empty ArrayList of secrets, a SecretEnumerator and a
+     * SecretSearcher.
+     * The SecretEnumerator and SecretSearcher objects are populated with the appropriate data structures, using the
+     * secretList and foldersHashTable objects.
+     *
+     * @return a new SecretMaster object with the populated SecretEnumerator and SecretSearcher objects.
+     */
     public static SecretMaster initialiseSecretMaster() {
         ArrayList<Secret> secretList = new ArrayList<Secret>();
 
@@ -343,5 +362,4 @@ public class Backend {
             LOGGER.log(Level.SEVERE, SecureNUSLogger.formatStackTrace(e.getStackTrace()));
         }
     }
-
 }

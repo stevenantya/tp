@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 /**
- * The EditCommandTest class tests the EditCommand class.
+ * JUnit test class for EditCommand.
  */
 class EditCommandTest{
     private static final String SECRET_NAME = "password";
@@ -48,11 +48,18 @@ class EditCommandTest{
     private EditCommand editCommand;
 
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+
+    /**
+     * Sets up the output stream for testing.
+     */
     @BeforeEach
     public void setStream() {
         System.setOut(new PrintStream(outputStreamCaptor));
     }
 
+    /**
+     * Sets up the necessary objects for testing.
+     */
     @BeforeEach
     void setUp() {
         secretMaster = new SecretMaster();
@@ -60,22 +67,34 @@ class EditCommandTest{
         usedNames.add(SECRET_NAME);
     }
 
+    /**
+     * Tests the constructor with valid input name.
+     */
     @Test
     void constructor_validInputName() {
         assertDoesNotThrow(() -> editCommand = new EditCommand(EDIT_COMMAND_INPUT, usedNames));
         assertEquals(SECRET_NAME, editCommand.extractName(EDIT_COMMAND_INPUT));
     }
 
+    /**
+     * Tests the constructor with illegal input name.
+     */
     @Test
     void constructor_illegalInputName() {
         assertThrows(IllegalSecretNameException.class, () -> new EditCommand("edit /", usedNames));
     }
 
+    /**
+     * Tests the constructor with non-existent secret name.
+     */
     @Test
     void constructor_nonExistentSecretName() {
         assertThrows(SecretNotFoundException.class, () -> new EditCommand("edit nonexistent", usedNames));
     }
 
+    /**
+     * Tests execution of editing a basic password secret.
+     */
     @Test
     void execute_basicPassword() throws SecretNotFoundException, FolderExistsException,
             IllegalFolderNameException, RepeatedIdException, IllegalSecretNameException {
@@ -87,6 +106,9 @@ class EditCommandTest{
         assertArrayEquals(newFields, actualFields);
     }
 
+    /**
+     * Tests execution of editing a credit card secret.
+     */
     @Test
     void execute_creditCard() throws SecretNotFoundException, FolderExistsException, InvalidExpiryDateException,
             InvalidCreditCardNumberException, IllegalFolderNameException,
@@ -100,6 +122,19 @@ class EditCommandTest{
         assertArrayEquals(newFields, actualFields);
     }
 
+    /**
+     * This JUnit test method tests the functionality of the editSecret() method for secrets of type NUSNet.
+     * It adds a new NUSNet secret to the SecretMaster, then creates a new array of field values to replace the
+     * original values.
+     * The method then retrieves the secret from SecretMaster, uses the editSecret() method to update its field values,
+     * and finally, checks if the actual field values match the expected ones.
+     *
+     * @throws SecretNotFoundException if the secret being edited cannot be found in SecretMaster
+     * @throws FolderExistsException if the folder being moved to already exists
+     * @throws IllegalFolderNameException if the new folder name contains invalid characters
+     * @throws RepeatedIdException if the new secret ID is already being used by another secret in SecretMaster
+     * @throws IllegalSecretNameException if the new secret name contains invalid characters
+     */
     @Test
     void execute_nusNet() throws SecretNotFoundException, FolderExistsException,
             IllegalFolderNameException, RepeatedIdException, IllegalSecretNameException {
@@ -111,6 +146,19 @@ class EditCommandTest{
         assertArrayEquals(newFields, actualFields);
     }
 
+    /**
+     * This JUnit test method tests the functionality of the editSecret() method for secrets of type StudentID.
+     * It adds a new StudentID secret to the SecretMaster, then creates a new array of field values to replace the
+     * original values.
+     * The method then retrieves the secret from SecretMaster, uses the editSecret() method to update its field value,
+     * and finally, checks if the actual field value matches the expected one.
+     *
+     * @throws SecretNotFoundException if the secret being edited cannot be found in SecretMaster
+     * @throws FolderExistsException if the folder being moved to already exists
+     * @throws IllegalFolderNameException if the new folder name contains invalid characters
+     * @throws RepeatedIdException if the new secret ID is already being used by another secret in SecretMaster
+     * @throws IllegalSecretNameException if the new secret name contains invalid characters
+     */
     @Test
     void execute_studentID() throws SecretNotFoundException, FolderExistsException,
             IllegalFolderNameException, RepeatedIdException, IllegalSecretNameException {
@@ -122,6 +170,19 @@ class EditCommandTest{
         assertArrayEquals(newFields, actualFields);
     }
 
+    /**
+     * This JUnit test method tests the functionality of the editSecret() method for secrets of type WifiPassword.
+     * It adds a new WifiPassword secret to the SecretMaster, then creates a new array of field values to replace the
+     * original values.
+     * The method then retrieves the secret from SecretMaster, uses the editSecret() method to update its field values,
+     * and finally, checks if the actual field values match the expected ones.
+     *
+     * @throws SecretNotFoundException if the secret being edited cannot be found in SecretMaster
+     * @throws FolderExistsException if the folder being moved to already exists
+     * @throws IllegalFolderNameException if the new folder name contains invalid characters
+     * @throws RepeatedIdException if the new secret ID is already being used by another secret in SecretMaster
+     * @throws IllegalSecretNameException if the new secret name contains invalid characters
+     */
     @Test
     void execute_wifiPassword() throws SecretNotFoundException, FolderExistsException,
             IllegalFolderNameException, RepeatedIdException, IllegalSecretNameException {
@@ -132,6 +193,20 @@ class EditCommandTest{
         String[] actualFields = {secret.getUsername(), secret.getPassword()};
         assertArrayEquals(newFields, actualFields);
     }
+
+    /**
+     * This JUnit test method tests the functionality of the editSecret() method for secrets of type CryptoWallet.
+     * It adds a new CryptoWallet secret to the SecretMaster, then creates a new array of field values to replace the
+     * original values.
+     * The method then retrieves the secret from SecretMaster, uses the editSecret() method to update its field values,
+     * and finally, checks if the actual field values match the expected ones.
+     *
+     * @throws SecretNotFoundException if the secret being edited cannot be found in SecretMaster
+     * @throws FolderExistsException if the folder being moved to already exists
+     * @throws IllegalFolderNameException if the new folder name contains invalid characters
+     * @throws RepeatedIdException if the new secret ID is already being used by another secret in SecretMaster
+     * @throws IllegalSecretNameException if the new secret name contains invalid characters
+     */
 
     @Test
     void execute_cryptoWallet() throws SecretNotFoundException, FolderExistsException,
@@ -146,7 +221,12 @@ class EditCommandTest{
 
 
     /**
-     * Test the isExit method in EditCommand class.
+     * This JUnit test method tests the functionality of the isExit() method in the EditCommand class.
+     * It creates a new EditCommand object with the specified command input and used names,
+     * and then checks if the isExit() method returns false.
+     *
+     * @throws IllegalSecretNameException if the secret name specified in the command input is invalid
+     * @throws SecretNotFoundException if the secret specified in the command input cannot be found in SecretMaster
      */
     @Test
     void isExit() throws IllegalSecretNameException, SecretNotFoundException {

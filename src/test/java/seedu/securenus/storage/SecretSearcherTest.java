@@ -16,6 +16,15 @@ import seedu.securenus.secrets.NUSNet;
  * JUnit Test for the SecretSearcher() Class
  */
 class SecretSearcherTest {
+    /**
+     * Tests the add() method of the SecretSearcher class, specifically to check if all types of secrets can be added
+     * without exceptions being thrown.
+     *
+     * @throws FolderExistsException if the folder already exists in the SecretMaster
+     * @throws InvalidExpiryDateException if the credit card expiry date format is invalid
+     * @throws InvalidCreditCardNumberException if the credit card number is not in the correct format
+     * @throws InvalidURLException if the URL is invalid
+     */
     @Test
     void addAllPasswords() throws FolderExistsException, InvalidExpiryDateException, InvalidCreditCardNumberException,
             InvalidURLException {

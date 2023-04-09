@@ -15,7 +15,8 @@ import seedu.securenus.ui.Ui;
 import java.util.HashSet;
 
 /**
- * Represents the class to give a command to add a new Student ID to the SecureNUS system.
+ * Represents a command to add a WiFi Password to the password manager.
+ * Inherits from the AddSecretCommand class.
  */
 public class AddWifiPasswordCommand extends AddSecretCommand {
     public static final String KEYWORD = "o/WifiPassword";
@@ -23,9 +24,15 @@ public class AddWifiPasswordCommand extends AddSecretCommand {
     private String password;
 
     /**
-     * Constructs an AddStudentIDCommand object with the user input as the command parameter.
+     * Constructs an AddWifiPasswordCommand object and initializes it with the user's input and usedNames.
+     * Prompts the user to input the username and password for the Wifi Password.
      *
-     * @param input The command input entered by the user.
+     * @param input The user's input.
+     * @param usedNames The set of names used in the password manager.
+     * @throws IllegalFolderNameException If the folder name is illegal.
+     * @throws IllegalSecretNameException If the secret name is illegal.
+     * @throws RepeatedIdException If the ID of the secret is repeated.
+     * @throws OperationCancelException If the user cancels the operation.
      */
     public AddWifiPasswordCommand(String input, HashSet<String> usedNames) throws IllegalFolderNameException,
             IllegalSecretNameException, RepeatedIdException, OperationCancelException {
@@ -33,6 +40,11 @@ public class AddWifiPasswordCommand extends AddSecretCommand {
         username = inquire(InquiryMessages.USERNAME, "Username");
         password = inquire(InquiryMessages.PASSWORD, "Password");
     }
+
+    /**
+     * Constructs an AddWifiPasswordCommand object and initializes it with a WifiPassword object.
+     * @param wifiPassword The WifiPassword object.
+     */
     public AddWifiPasswordCommand(WifiPassword wifiPassword) {
         this.name = wifiPassword.getName();
         this.folderName = wifiPassword.getFolderName();
@@ -41,11 +53,11 @@ public class AddWifiPasswordCommand extends AddSecretCommand {
     }
 
     /**
-     * Executes the AddStudentIDCommand to add a new Student ID to the SecureNUS system.
+     * Adds the WiFi Password to the password manager.
      *
-     * @param secureNUSData
+     * @param secureNUSData The password manager.
+     * @throws ExceptionMain If an exception occurs while adding the secret to the password manager.
      */
-
     @Override
     public void execute(SecretMaster secureNUSData) throws ExceptionMain {
         assert secureNUSData != null;

@@ -31,10 +31,12 @@ public class EditCommand extends Command {
     private String name;
 
     /**
-     * Constructs an EditCommand object with the specified input string.
-     * Extracts the name of the secret to edit and the new values of the fields to be updated from the input string.
+     * Represents a command to edit an existing secret.
      *
-     * @param input the input string that specifies which secret to edit and the new values of the fields to be updated.
+     * @param input The input string containing the name of the secret to be edited.
+     * @param usedNames The set of used secret names to check if the specified secret exists.
+     * @throws IllegalSecretNameException If the name of the secret to be edited is illegal.
+     * @throws SecretNotFoundException If the specified secret to be edited does not exist.
      */
     public EditCommand(String input, HashSet<String> usedNames) throws IllegalSecretNameException,
             SecretNotFoundException {
@@ -47,14 +49,24 @@ public class EditCommand extends Command {
         }
     }
 
+    /**
+     * Extracts the name of the secret to be edited from user input.
+     * Overrides the {@code extractName} method in the {@code Command} class.
+     *
+     * @param input user input string
+     * @return name of the secret to be edited
+     */
     public String extractName(String input) {
         return super.extractName(input, "edit");
     }
 
     /**
-     * Asks user for the new fields that will replace the old fields.
+     * Prompts the user to edit the fields of a given secret object and returns an array of the edited fields.
+     * The prompt message and input fields vary depending on the type of the secret object.
      *
-     * @return The new fields
+     * @param secret The secret object to be edited.
+     * @return An array of the edited fields.
+     * @throws OperationCancelException If the user cancels the operation during the prompt.
      */
     public String[] inquireFields(Secret secret) throws OperationCancelException {
         assert secret != null;
@@ -90,7 +102,12 @@ public class EditCommand extends Command {
         return inquiredFields;
     }
 
-    // FOR QUICKER INQUIRY
+    /**
+     * Inquires for the credit card number and verifies it is a valid number.
+     *
+     * @return The valid credit card number entered by the user.
+     * @throws OperationCancelException If user cancels the operation.
+     */
     public String inquireCreditCardNumber() throws OperationCancelException {
         String creditCardNumber = inquire(InquiryMessages.CREDIT_CARD_NUMBER_EDIT, "Credit Card Number");
         while (!CreditCard.isLegalCreditCardNumber(creditCardNumber)) {
@@ -100,6 +117,12 @@ public class EditCommand extends Command {
         return creditCardNumber;
     }
 
+    /**
+     * Inquires for the CVC number and verifies it is a valid number.
+     *
+     * @return The valid CVC number entered by the user.
+     * @throws OperationCancelException If user cancels the operation.
+     */
     public String inquireCvcNumber() throws OperationCancelException {
         String number = inquire(InquiryMessages.CVC_NUMBER_EDIT, "CVC Number");
         while (!CreditCard.isLegalCvcNumber(number)) {
@@ -109,6 +132,12 @@ public class EditCommand extends Command {
         return number;
     }
 
+    /**
+     * Inquires for the expiry date and verifies it is a valid date.
+     *
+     * @return The valid expiry date entered by the user.
+     * @throws OperationCancelException If user cancels the operation.
+     */
     public String inquireExpiryDate() throws OperationCancelException {
         String number = inquire(InquiryMessages.EXPIRY_DATE_EDIT, "Expiry Date");
         while (!CreditCard.isLegalExpiryDate(number)) {
@@ -118,6 +147,12 @@ public class EditCommand extends Command {
         return number;
     }
 
+    /**
+     * Inquires for the NUSNet ID and verifies it is a valid ID.
+     *
+     * @return The valid NUSNet ID entered by the user.
+     * @throws OperationCancelException If user cancels the operation.
+     */
     public String inquireNusNetId() throws OperationCancelException {
         String nusNetId = inquire(InquiryMessages.NUSNET_ID_EDIT, "NUSNet ID");
         while (!NUSNet.isLegalId(nusNetId)) {
@@ -126,6 +161,12 @@ public class EditCommand extends Command {
         return nusNetId;
     }
 
+    /**
+     * Inquires for the student ID and verifies it is a valid ID.
+     *
+     * @return The valid student ID entered by the user.
+     * @throws OperationCancelException If user cancels the operation.
+     */
     public String inquireStudentID() throws OperationCancelException {
         String studentID = inquire(InquiryMessages.STUDENT_ID_EDIT, "Student ID");
         while (!StudentID.isLegalId(studentID)) {
@@ -135,9 +176,14 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Edits the specified secret in the SecretMaster object with the new values of the fields.
+     * Executes the edit command on the provided {@code SecureNUSData} object.
+     * Edits the {@code Secret} object of the given {@code name}.
+     * Requests for fields to edit with {@code inquireFields}.
      *
-     * @param secureNUSData the SecretMaster object containing the list of secrets.
+     * @param secureNUSData the {@code SecureNUSData} object on which to execute the command
+     * @throws SecretNotFoundException if the {@code Secret} object is not found
+     * @throws OperationCancelException if the operation is cancelled
+     * @throws FolderExistsException if the folder already exists
      */
     @Override
     public void execute(SecretMaster secureNUSData) throws SecretNotFoundException, OperationCancelException,

@@ -27,31 +27,15 @@ import java.util.HashSet;
  */
 public class SecretMaster {
     public static final String ALLOWED_NAMES_REGEX = "^[a-zA-Z0-9_]*$"; // only alphanumeric allowed
-    // use for quick finding
     public static final String DEFAULT_FOLDER = "unnamed";
-
-    /**
-     * Object that manages searching for secrets.
-     */
     private SecretSearcher secretSearcher;
-
-    /**
-     * Object that manages enumerating secrets or listing secrets in the order it was added in.
-     */
     private SecretEnumerator secretEnumerator;
-
-    /**
-     * HashSet that stores the names of folders and ensure folders and passwords are distinct.
-     */
     private HashSet<String> folders;
-
-    /**
-     * HashSet that stores the names of secrets.
-     */
     private HashSet<String> secretNames;
 
     /**
-     * Constructor for the SecretMaster class.
+     * Constructs a new SecretMaster object with an empty set of folders and secret names, and
+     * Initializes the SecretSearcher and SecretEnumerator objects.
      */
     public SecretMaster() {
         secretSearcher = new SecretSearcher();
@@ -250,14 +234,14 @@ public class SecretMaster {
     }
 
     /**
-     * Updates a Secret's name and folder as well as its name in secretNames, and
-     * itself in secretSearcher and secretEnumerator.
+     * Edits a secret by changing its name, folder name, and/or inquired fields.
      *
-     * @param secret         Secret object to be edited.
-     * @param newName        updated name of the Secret object.
-     * @param newFolderName  updated folder of the Secret object.
-     * @param inquiredFields
-     * @throws FolderExistsException if the folder specified in the Secret already exists and cannot be created.
+     * @param secret the secret to be edited
+     * @param newName the new name of the secret (null to keep the old name)
+     * @param newFolderName the new folder name of the secret (null to keep the old folder name)
+     * @param inquiredFields an array of strings containing the new values for the inquired field
+     *                       (null to keep the old values)
+     * @throws FolderExistsException if the new folder name already exists
      */
     public void editSecret(Secret secret, String newName, String newFolderName,
                            String[] inquiredFields) throws FolderExistsException {
@@ -344,6 +328,12 @@ public class SecretMaster {
         }
     }
 
+    /**
+     * This method checks if a folder with the specified name contains any secrets.
+     *
+     * @param folderName the name of the folder to be checked
+     * @return true if the folder contains secrets, false otherwise
+     */
     public boolean folderContainsSecrets(String folderName) {
         return secretEnumerator.folderExists(folderName);
     }

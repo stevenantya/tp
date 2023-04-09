@@ -17,9 +17,10 @@ public class DeleteCommand extends Command {
     private String[] secretNames;
 
     /**
-     * Class constructor that extracts the name of the secret and its folder from the input string.
+     * Creates a new instance of DeleteCommand with the given input string.
      *
-     * @param input the input string from the user
+     * @param input the input string containing the names of secrets to be deleted
+     * @throws InsufficientParamsException if no secret names are provided for deletion
      */
     public DeleteCommand(String input) throws InsufficientParamsException {
         this.secretNames = extractName(input);

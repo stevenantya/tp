@@ -60,7 +60,7 @@ public class Secret {
      * Checks if the given name contains any illegal characters.
      *
      * @param name The name to be checked.
-     * @return if the name contains any illegal characters, {@code false} otherwise.
+     * @return if the name contains any illegal characters, false otherwise.
      */
     public static boolean isIllegalName(String name) {
         return name.equals("") || !name.matches(ILLEGAL_CHARS_PATTERN);
@@ -93,8 +93,6 @@ public class Secret {
         uid = newName;
         name = newName;
     }
-
-
 
     /**
      * Returns the folder name of the password.

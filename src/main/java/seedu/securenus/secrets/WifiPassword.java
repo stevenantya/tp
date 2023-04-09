@@ -40,6 +40,11 @@ public class WifiPassword extends Secret{
         this.username = username;
     }
 
+    /**
+     * Returns the type of the secret.
+     *
+     * @return the type of the secret
+     */
     public String getType() {
         return TYPE;
     }
@@ -99,6 +104,11 @@ public class WifiPassword extends Secret{
                 "Password: %s", getName(), username, password);
     }
 
+    /**
+     * Returns a formatted string representation of the Wi-Fi password object for database storage.
+     *
+     * @return a formatted string representation of the Wi-Fi password object for database storage
+     */
     @Override
     public String toStringForDatabase() {
         String formattedString =  "wifiPassword," + super.toStringForDatabase() +
