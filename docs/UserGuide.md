@@ -32,14 +32,14 @@ challenge of managing multiple passwords for various sites and applications.
 3. Open a Command Prompt in your system which contains the JAR File.
                                                                           
 4. Verify if the Java Version you are using is *Java 11* (recommended and tested version) by using `java -version`
-   <img src="./UGImages/QuickStart/CheckJavaVersion.jpg" width="65%" />.                                                                       
+   <img src="./UGImages/QuickStart/CheckJavaVersion.jpg" width="10%" />.                                                                       
 
 5. Using `cd`, navigate to the folder where `[CS2113-T15-2][SecureNUS].jar` is stored in your system. 
 
 6. Launch the application in the terminal after running `java -jar [CS2113-T15-2][SecureNUS].jar` in the terminal. 
 
     If the program is launched correctly, you can see the following.
-   <img src="./UGImages/QuickStart/UI.jpg" width="65%" />
+   <img src="./UGImages/QuickStart/UI.jpg" width="10%" />
 
 7. Type the command when prompted and press enter to execute it. e.g. typing `menu` and pressing menu will give an
 overview of all the user commands.<br>
@@ -225,8 +225,8 @@ for more details on the `save` command.
 
 ###### Examples and Outputs:
 
-<img src="./UGImages/AddPassword/Addbasicpassword.jpg" width="65%" /> <br>
-<img src="./UGImages/AddPassword/Addccpassword.jpg" width="65%" />
+<img src="./UGImages/AddPassword/Addbasicpassword.jpg" width="100%" /> <br>
+<img src="./UGImages/AddPassword/Addccpassword.jpg" width="100%" />
 
 <table>                                                               
     <tr>                                                           
@@ -249,7 +249,7 @@ for more details on the `save` command.
 ##### General Format: `delete SECRET_NAME1 [SECRET _NAME2] […]`
 
 ###### Examples and Outputs:
-<img src="./UGImages/DeletePassword/deletepassword.jpg" width="65%" />
+<img src="./UGImages/DeletePassword/deletepassword.jpg" width="10%" />
 <br>
 
 <table>                                                               
@@ -272,8 +272,8 @@ for more details on the `save` command.
 ###### General Format: `list [f/FOLDER_NAME]`
 
 ###### Examples and Outputs:
-<img src="./UGImages/ListPassword/ListwithoutFolder.jpg" width="65%" /> 
-<img src="./UGImages/ListPassword/ListwithFolder.jpg" width="65%" />
+<img src="./UGImages/ListPassword/ListwithoutFolder.jpg" width="10%" /> 
+<img src="./UGImages/ListPassword/ListwithFolder.jpg" width="10%" />
 <br>
 
 <table>                                                               
@@ -298,7 +298,7 @@ prevent unauthorized access to the application.
 ###### General Format: `view SECRET_NAME`
 
 ###### Examples and Outputs: <br>
-<img src="./UGImages/ViewPassword/viewpassword.jpg" width="65%" />
+<img src="./UGImages/ViewPassword/viewpassword.jpg" width="10%" />
 <br>
 
 <table>                                                               
@@ -321,8 +321,8 @@ locate a specific one quickly.
 ###### General Format: `search SECRET_NAME_LIKE [f/FOLDER_NAME]`
 
 ###### Examples and Outputs: <br>
-<img src="./UGImages/SearchPassword/SearchPasswordWithoutFolder.jpg" width="65%" /> <br>
-<img src="./UGImages/SearchPassword/SearchPasswordWithFolder.jpg" width="65%" /> <br>
+<img src="./UGImages/SearchPassword/SearchPasswordWithoutFolder.jpg" width="100%" /> <br>
+<img src="./UGImages/SearchPassword/SearchPasswordWithFolder.jpg" width="100%" /> <br>
 <br>
 
 <table>                                                               
