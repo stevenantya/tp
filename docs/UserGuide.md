@@ -154,7 +154,7 @@ using `view` command which will be elaborated upon [here](#view-masked-secret).
 users are advised to keep saving their passwords using the `save` command. Users can refer [here](#save-secrets)
 for more details on the `save` command.
 
-Format: `new [o/OPTION] SECRET_NAME [f/FOLDER_NAME]`
+Format: `new [o/OPTION] SECRET_NAME [f/FOLDER_NAME]` <br>
 
 <table>
     <tr>
@@ -223,6 +223,19 @@ Format: `new [o/OPTION] SECRET_NAME [f/FOLDER_NAME]`
     <tr>
 </table>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 Examples and Outputs:
 <img src="./UGImages/AddPassword/Addbasicpassword.jpg" width="100%" /> <br>
 <img src="./UGImages/AddPassword/Addccpassword.jpg" width="100%" />
@@ -233,6 +246,7 @@ Examples and Outputs:
         <td> <a href="#feature-list">Feature List </a> </td>                                                      
     </tr>                                                          
 </table>  
+
 
 ### Delete a Secret
 
