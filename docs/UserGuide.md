@@ -268,7 +268,7 @@ for more details on the `save` command.
 
 General Format: `list [f/FOLDER_NAME]`
 
-Examples and Outputs:
+Examples and Outputs:<br>
 <img src="./UGImages/ListPassword/ListwithoutFolder.jpg" width="65%" />  <br>
 <img src="./UGImages/ListPassword/ListwithFolder.jpg" width="65%" />
 <br>
