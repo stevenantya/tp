@@ -6,14 +6,13 @@ import org.junit.jupiter.api.Test;
 import seedu.securenus.command.Command;
 import seedu.securenus.exceptions.secrets.FolderExistsException;
 import seedu.securenus.exceptions.secrets.IllegalFolderNameException;
-import seedu.securenus.exceptions.secrets.IllegalSecretNameException;
-import seedu.securenus.exceptions.secrets.SecretNotFoundException;
 import seedu.securenus.secrets.BasicPassword;
 import seedu.securenus.secrets.Secret;
 import seedu.securenus.storage.SecretEnumerator;
 import seedu.securenus.storage.SecretMaster;
 import seedu.securenus.storage.SecretSearcher;
 import seedu.securenus.ui.Parser;
+import seedu.securenus.messages.ErrorMessages;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -62,8 +61,7 @@ public class SecureNUSTest {
     }
 
     @Test
-    public void parseCommand_invalidCommand_exceptionThrown() throws IllegalFolderNameException,
-            IllegalSecretNameException, SecretNotFoundException, FolderExistsException {
+    public void parseCommand_invalidCommand_exceptionThrown() {
         String userInput = "invalid command";
         ByteArrayInputStream inputStream = new ByteArrayInputStream(userInput.getBytes());
         System.setIn(inputStream);
@@ -71,9 +69,41 @@ public class SecureNUSTest {
         secureNUS.parseCommand();
 
         String expected = "Enter Command:_____________________________________________________\n" +
-                "Invalid Command: Type 'menu' command to see the list of usable commands\n" +
+                ErrorMessages.INVALID_COMMAND +
                 "_____________________________________________________\n";
         assertEquals(expected.replaceAll("(\\r|\\n)", ""),
                 output.toString().replaceAll("(\\r|\\n)", ""));
     }
+
+    /*
+    @Test
+    public void parseCommand_insufficientParams_exceptionThrown() {
+        String userInput = "delete";
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(userInput.getBytes());
+        System.setIn(inputStream);
+
+        secureNUS.parseCommand();
+
+        String expected = "Enter Command:_____________________________________________________\n" +
+                ErrorMessages.INSUFFICIENT_PARAMS +
+                "_____________________________________________________\n";
+        assertEquals(expected.replaceAll("(\\r|\\n)", ""),
+                output.toString().replaceAll("(\\r|\\n)", ""));
+    }
+
+    @Test
+    public void parseCommand_illegalSecretName_exceptionThrown() {
+        String userInput = "view $";
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(userInput.getBytes());
+        System.setIn(inputStream);
+
+        secureNUS.parseCommand();
+
+        String expected = "Enter Command:_____________________________________________________\n" +
+                ErrorMessages.ILLEGAL_SECRET_NAME +
+                "_____________________________________________________\n";
+        assertEquals(expected.replaceAll("(\\r|\\n)", ""),
+                output.toString().replaceAll("(\\r|\\n)", ""));
+    }
+    */
 }
