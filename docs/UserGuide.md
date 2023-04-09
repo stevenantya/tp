@@ -14,13 +14,14 @@ In summary, SecureNUS offers a reliable and secure secret management solution fo
 challenge of managing multiple passwords for various sites and applications.
 
 ## Table of Contents
+<!-- TOC -->
 - [Introduction](#introduction)
 - [Quick Start](#quick-start)
 - [Feature List](#feature-list)
 - [Feature Details](#feature-details)
 - [Frequently Asked Questions (FAQ's)](#frequently-asked-questions)
 - [Command Summary](#command-summary)
-<br>
+<!-- TOC -->
 
 ## Quick Start
 1. Ensure you have **Java 11** installed on your computer. If not so, you can download from
@@ -100,7 +101,6 @@ e.g. <br>
     eXiT       // Incorrect
     ````
 * If user enters a parameter with a command which does not need parameters, it will be considered as invalid command.
-<br>
 e.g. <br>
     ````
     menu       // Correct
