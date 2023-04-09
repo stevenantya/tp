@@ -21,9 +21,13 @@ public class SearchCommand extends Command {
     private String folderName;
 
     /**
-     * Constructor for the SearchCommand.
+     * Constructor for the search command.
      *
-     * @param input The input String containing the name and optionally the folder name to search for.
+     * @param input the input string entered by the user
+     * @param folders the set of existing folder names
+     * @throws IllegalFolderNameException if the folder name is illegal
+     * @throws IllegalSecretNameException if the secret name is illegal
+     * @throws FolderNotFoundException if the folder is not found
      */
     public SearchCommand(String input,
                          HashSet<String> folders) throws IllegalFolderNameException, IllegalSecretNameException,
@@ -34,6 +38,16 @@ public class SearchCommand extends Command {
         checkNameAndFolderName(name, folderName, folders);
     }
 
+    /**
+     * Checks if the given name and folder name are legal and exist in the set of folders.
+     *
+     * @param name the name of the secret to be checked
+     * @param folderName the name of the folder to be checked
+     * @param folders the set of folder names to check against
+     * @throws IllegalFolderNameException if the folder name is illegal
+     * @throws IllegalSecretNameException if the secret name is illegal
+     * @throws FolderNotFoundException if the folder does not exist in the set of folders
+     */
     public void checkNameAndFolderName(String name, String folderName,
                                        HashSet<String> folders) throws
             IllegalFolderNameException,
@@ -52,10 +66,10 @@ public class SearchCommand extends Command {
     }
 
     /**
-     * Extracts the folder name of the secret from the input command.
+     * Extracts the folder name from the input string if it exists.
      *
-     * @param input the input command string
-     * @return the folder name of the secret
+     * @param input the user input string
+     * @return the extracted folder name or null if it does not exist in the input string
      */
     public String extractFolderName(String input) {
         String extractedFolderName = null;
@@ -67,11 +81,11 @@ public class SearchCommand extends Command {
     }
 
     /**
-     * Searches for secrets in the SecretMaster with names that contain the specified name and optionally, in the
-     * specified folder.
-     * Prints out the search results in a formatted table.
+     * Executes a search for secrets in a specified folder or all folders with a given name.
+     * Outputs a formatted table of the search results.
      *
-     * @param secureNUSData The SecretMaster containing the secrets to search in.
+     * @param secureNUSData the SecretMaster object containing the secrets to be searched
+     * @throws NonExistentFolderException if a specified folder does not exist
      */
     @Override
     public void execute(SecretMaster secureNUSData) throws NonExistentFolderException {
@@ -117,6 +131,13 @@ public class SearchCommand extends Command {
         }
     }
 
+    /**
+     * Centers a string within a specified width.
+     *
+     * @param width the width to center the string within
+     * @param s the string to center
+     * @return the centered string
+     */
     public String centerString(int width, String s) {
         return String.format("%-" + width + "s",
                 String.format("%" + (s.length() + (width - s.length()) / 2) + "s", s));

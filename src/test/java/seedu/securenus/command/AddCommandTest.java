@@ -17,16 +17,28 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * @author : Steven A. O. Waskito
- **/
+ * JUnit test class for AddCommand.
+ */
 public class AddCommandTest {
 
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+
+    /**
+     * Redirects System.out to outputStreamCaptor.
+     */
     @BeforeEach
     public void setStream() {
         System.setOut(new PrintStream(outputStreamCaptor));
     }
 
+    /**
+     * Tests adding a student ID to a folder.
+     * @throws SecretNotFoundException if the secret is not found in the secret list.
+     * @throws ExceptionMain if a general exception is caught.
+     * @throws OperationCancelException if the user decides to cancel the operation.
+     * @throws FolderExistsException if a folder with the same name already exists.
+     * @throws NonExistentFolderException if the folder does not exist in the folder list.
+     */
     @Test
     public void studentIDTestFolder() throws SecretNotFoundException, ExceptionMain,
             OperationCancelException, FolderExistsException, NonExistentFolderException {
@@ -36,6 +48,15 @@ public class AddCommandTest {
         addStudentId.execute(sm);
         assertEquals("StudentID2Name",sm.getByName("StudentID2Name").getName());
     }
+
+    /**
+     * Tests adding a NUSNet account to a folder.
+     * @throws SecretNotFoundException if the secret is not found in the secret list.
+     * @throws ExceptionMain if a general exception is caught.
+     * @throws OperationCancelException if the user decides to cancel the operation.
+     * @throws FolderExistsException if a folder with the same name already exists.
+     * @throws NonExistentFolderException if the folder does not exist in the folder list.
+     */
     @Test
     public void nusNetFolder() throws SecretNotFoundException, ExceptionMain, OperationCancelException,
             FolderExistsException, NonExistentFolderException {
@@ -45,6 +66,16 @@ public class AddCommandTest {
         addNusNet.execute(sm);
         assertEquals("NUSNetName2", sm.getByName("NUSNetName2").getName());
     }
+
+
+    /**
+     * Tests adding a basic password to a folder.
+     * @throws SecretNotFoundException if the secret is not found in the secret list.
+     * @throws ExceptionMain if a general exception is caught.
+     * @throws OperationCancelException if the user decides to cancel the operation.
+     * @throws FolderExistsException if a folder with the same name already exists.
+     * @throws NonExistentFolderException if the folder does not exist in the folder list.
+     */
     @Test
     void basicPasswordFolder() throws
             SecretNotFoundException, ExceptionMain, OperationCancelException, FolderExistsException,

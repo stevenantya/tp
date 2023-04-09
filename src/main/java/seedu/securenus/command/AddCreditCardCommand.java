@@ -30,11 +30,14 @@ public class AddCreditCardCommand extends AddSecretCommand {
     private String expiryDate;
 
     /**
-     * Constructor for AddCreditCardCommand class.
-     * Extracts the necessary information from the input string using the super constructor
-     * and prompts the user for additional information.
+     * Constructs a command for adding a credit card entry to a password manager.
      *
-     * @param input User input command string.
+     * @param input the user input string that triggered this command
+     * @param usedNames a set of names that have already been used in the password manager
+     * @throws IllegalFolderNameException if the name of the folder is illegal
+     * @throws IllegalSecretNameException if the name of the password entry is illegal
+     * @throws RepeatedIdException if the password manager already contains an entry with the same ID
+     * @throws OperationCancelException if the user cancels the operation
      */
     public AddCreditCardCommand(String input, HashSet<String> usedNames) throws IllegalFolderNameException,
             IllegalSecretNameException, RepeatedIdException, OperationCancelException {
@@ -87,6 +90,12 @@ public class AddCreditCardCommand extends AddSecretCommand {
         Ui.inform(OperationMessages.SAVE_COMPLETE);
     }
 
+    /**
+     * Prompts the user to enter their credit card number.
+     *
+     * @return the valid credit card number entered by the user.
+     * @throws OperationCancelException if the user cancels the operation.
+     */
     public String inquireCreditCardNumber() throws OperationCancelException {
         String creditCardNumber = inquire(InquiryMessages.CREDIT_CARD_NUMBER, "Credit Card Number");;
         while(!CreditCard.isLegalCreditCardNumber(creditCardNumber)) {
@@ -96,6 +105,12 @@ public class AddCreditCardCommand extends AddSecretCommand {
         return creditCardNumber;
     }
 
+    /**
+     * Prompts the user to enter their CVC number.
+     *
+     * @return the valid CVC number entered by the user.
+     * @throws OperationCancelException if the user cancels the operation.
+     */
     public String inquireCvcNumber() throws OperationCancelException {
         String number = inquire(InquiryMessages.CVC_NUMBER, "CVC Number");
         while(!CreditCard.isLegalCvcNumber(number)) {
@@ -105,6 +120,12 @@ public class AddCreditCardCommand extends AddSecretCommand {
         return number;
     }
 
+    /**
+     * Prompts the user to enter the expiry date of their credit card.
+     *
+     * @return the valid expiry date entered by the user
+     * @throws OperationCancelException if the user cancels the operation
+     */
     public String inquireExpiryDate() throws OperationCancelException {
         String number = inquire(InquiryMessages.EXPIRY_DATE, "Expiry Date");
         while(!CreditCard.isLegalExpiryDate(number)) {

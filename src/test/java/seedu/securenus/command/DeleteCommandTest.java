@@ -22,15 +22,31 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * @author : Steven A. O. Waskito
- **/
+ * JUnit test class for DeleteCommand.
+ */
 public class DeleteCommandTest {
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+
+    /**
+     * Sets up the output stream before each test.
+     */
     @BeforeEach
     public void setStream() {
         System.setOut(new PrintStream(outputStreamCaptor));
     }
-    //Missing Wi-Fi password
+
+
+    /**
+     * Tests deleting Student ID from the folder.
+     *
+     * @throws SecretNotFoundException   If the secret is not found.
+     * @throws ExceptionMain             If an error occurs while executing the command.
+     * @throws InvalidURLException       If the URL of NUSNet is invalid.
+     * @throws InsufficientParamsException If there are insufficient parameters for the command.
+     * @throws OperationCancelException  If the operation is cancelled.
+     * @throws FolderExistsException     If the folder already exists.
+     * @throws NonExistentFolderException If the folder does not exist.
+     */
     @Test
     public void studentIDTestFolder() throws SecretNotFoundException, ExceptionMain, InvalidURLException,
             InsufficientParamsException, OperationCancelException, FolderExistsException, NonExistentFolderException {

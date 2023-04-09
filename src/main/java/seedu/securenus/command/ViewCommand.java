@@ -16,9 +16,12 @@ public class ViewCommand extends Command {
     private String passwordName;
 
     /**
-     * Constructs a ViewCommand object.
+     * Constructs a ViewCommand object with the given input and set of used secret names.
      *
-     * @param input the user input to extract the password name
+     * @param input the input string containing the password name to be viewed
+     * @param usedNames the set of names of secrets that have already been created
+     * @throws NullSecretException if the password name extracted from the input is null
+     * @throws IllegalSecretNameException if the password name extracted from the input is illegal
      */
     public ViewCommand(String input, HashSet<String> usedNames) throws NullSecretException,
             IllegalSecretNameException {
@@ -30,19 +33,23 @@ public class ViewCommand extends Command {
     }
 
     /**
-     * Extracts the password name from the user input.
+     * Extracts the name from the given input string, with the specified keyword.
      *
-     * @param input the user input containing the password name
-     * @return the password name
+     * @param input the input string to extract the name from
+     * @return the extracted name from the input string
+     * @throws NullPointerException if the input string is null
+     * @throws IllegalArgumentException if the specified keyword is null or empty
      */
     public String extractName(String input) {
         return super.extractName(input, "view");
     }
 
+
     /**
-     * Executes the view command to reveal the password of a specific secret.
+     * Executes the "view" command with the specified secureNUSData object.
      *
-     * @param secureNUSData the SecretMaster object containing the secret to view
+     *  @param secureNUSData the secureNUSData object to execute the command on
+     * @throws NullPointerException if the secureNUSData object is null
      */
     @Override
     public void execute(SecretMaster secureNUSData) {
