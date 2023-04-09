@@ -63,6 +63,7 @@ public class ViewCommand extends Command {
         } catch (SecretNotFoundException e) {
             Ui.inform("There are no passwords that matches that name!\n" +
                     "Make sure you follow this format: \"view PASSWORD_NAME\"");
-            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, secret not found - name: , " + this.passwordName);        }
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, secret not found, " + this.passwordName);
+        }
     }
 }

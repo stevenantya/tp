@@ -50,7 +50,7 @@ public class CreditCard extends Secret {
         }
         this.cvcNumber = cvcNumber;
         if (!expiryDate.matches(EXPIRY_DATE_FMT)) {
-            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, credit card expiry date format is illegal, " + expiryDate);
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error,credit card expiry date format is illegal, " + expiryDate);
             throw new InvalidExpiryDateException();
         }
         this.expiryDate = expiryDate;
@@ -112,7 +112,7 @@ public class CreditCard extends Secret {
     public static boolean isLegalExpiryDate(String expiryDate) {
         assert expiryDate != null;
         if (!expiryDate.matches(EXPIRY_DATE_FMT)) {
-            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, credit card expiry date format is illegal, " + expiryDate);
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error,credit card expiry date format is illegal, " + expiryDate);
             return false;
         }
         String[] monthAndYear = expiryDate.split("/");
