@@ -32,7 +32,7 @@ challenge of managing multiple passwords for various sites and applications.
 3. Open a Command Prompt in your system which contains the JAR File.
                                                                           
 4. Verify if the Java Version you are using is *Java 11* (recommended and tested version) by using `java -version`
-   <img src="./UGImages/QuickStart/CheckJavaVersion.jpg" width="65%" />                                                                       
+   <img src="./UGImages/QuickStart/CheckJavaVersion.jpg" width="65%" />.                                                                       
 
 5. Using `cd`, navigate to the folder where `[CS2113-T15-2][SecureNUS].jar` is stored in your system. 
 
@@ -42,7 +42,7 @@ challenge of managing multiple passwords for various sites and applications.
    <img src="./UGImages/QuickStart/UI.jpg" width="65%" />
 
 7. Type the command when prompted and press enter to execute it. e.g. typing `menu` and pressing menu will give an
-overview of all the user commands.<br><br>
+overview of all the user commands.<br>
 Some example commands:
    * `new sname f/fold`: creates a new general secret with name `sname` in a folder called `fold`.
    * `new o/CreditCard ccname f/ccfold`: creates a secret for storing credit card details with the name `ccname` in 
@@ -60,6 +60,7 @@ Some example commands:
         <td> <a href="#table-of-contents">Table of Contents </a> </td>
     </tr>
 </table>
+
 
 ## Feature List
 1. [Note about Command Formats](#note-about-the-command-format-)
@@ -123,7 +124,7 @@ is stored in an `unnamed` folder.
   `NAME` allows to easily *identify* and *manage* the secrets when performing actions such as 
   deleting, editing, or viewing them. 
   
-    We recommend using a descriptive name that accurately reflects the contents 
+  We recommend using a descriptive name that accurately reflects the contents 
   of the secrets.
 
                                                                  
@@ -135,21 +136,26 @@ is stored in an `unnamed` folder.
 </table>                                                           
 
 ### Add new Secret
+
 ##### Overview
 - SecureNUS provides a simple way to create new secrets in the secret manager with the `new` command.
+
 - Users can select the type of secret they want to store by using the `o/OPTION` extension with the `new` command.
   - If no option is selected, a basic password will be created by default.
+
 - SecureNUS guides users through tailored questions to fill in the required particulars for that password type.
   - These questions ensure that all necessary information is securely stored in one place for that specific type of 
   password.
+
 - Do note, secrets and other sensitive information are masked by asterisks for security purposes. They can be viewed 
-using `view` command which will be elaborated upon [here](#view-masked-secret)
+using `view` command which will be elaborated upon [here](#view-masked-secret).
+
 - Each time a new secret is created, it will be auto-saved in `database.txt` in the `assets` folder. But 
 users are advised to keep saving their passwords using the `save` command. Users can refer [here](#save-secrets)
 for more details on the `save` command.
-<br>
-##### General Format: `new [o/OPTION] SECRET_NAME [f/FOLDER_NAME]`
 
+##### General Format: 
+`new [o/OPTION] SECRET_NAME [f/FOLDER_NAME]`
 <table>
     <tr>
         <td> Basic Password </td>
@@ -217,12 +223,10 @@ for more details on the `save` command.
     <tr>
 </table>
 
-<br>
-
 ###### Examples and Outputs:
+
 <img src="./UGImages/AddPassword/Addbasicpassword.jpg" width="65%" /> <br>
 <img src="./UGImages/AddPassword/Addccpassword.jpg" width="65%" />
-<br>
 
 <table>                                                               
     <tr>                                                           
@@ -232,13 +236,18 @@ for more details on the `save` command.
 </table>  
 
 ### Delete a Secret
+
 ##### Overview
 - Deletes a secret from the existing list of secrets using secret name. 
+
 - Can delete multiple secrets in the same command.
+
 - Each time an existing secret is deleted by the `delete` command, it will be auto-saved in `database.txt` in the 
-`assets` folder. But users are advised to keep saving their passwords using the `save` command. Users can refer 
+`assets` folder. But users are advised to keep saving their passwords using the `save` command. Users can refer
 [here](#save-secrets) for more details on the `save` command.
-###### General Format: `delete SECRET_NAME1 [SECRET _NAME2] […]`
+
+##### General Format: `delete SECRET_NAME1 [SECRET _NAME2] […]`
+
 ###### Examples and Outputs:
 <img src="./UGImages/DeletePassword/deletepassword.jpg" width="65%" />
 <br>
@@ -251,14 +260,19 @@ for more details on the `save` command.
 </table> 
 
 ### List all Secrets
+
 ##### Overview
 - SecureNUS enables users to list secrets stored in a specified folder if the folder name is specified.
+
 - It also enables users to list all the secrets if the folder name is not specified.
+
 - Do note, secrets and other sensitive information are masked by asterisks for security purposes. They can be viewed
-  using `view` command which will be elaborated upon [here](#view-masked-secret)
+  using `view` command which will be elaborated upon [here](#view-masked-secret).
+
 ###### General Format: `list [f/FOLDER_NAME]`
+
 ###### Examples and Outputs:
-<img src="./UGImages/ListPassword/ListwithoutFolder.jpg" width="65%" />
+<img src="./UGImages/ListPassword/ListwithoutFolder.jpg" width="65%" /> 
 <img src="./UGImages/ListPassword/ListwithFolder.jpg" width="65%" />
 <br>
 
@@ -270,6 +284,7 @@ for more details on the `save` command.
 </table> 
 
 ### View Masked Secret
+
 ##### Overview
 - When creating a new secret using the `new` command in SecureNUS or while listing the existing secrets using `list` 
 command, the secret entered by the user is hidden under asterisks (********) for added security.
