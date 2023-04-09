@@ -1,68 +1,87 @@
 @startuml
 'https://plantuml.com/class-diagram
 skinparam groupInheritance 4
-
+hide circle
 allowmixing
-
-file File
-Backend --l> File
-class Backend {
-    {static} - ENCRYPTION_IDENTIFIER
-    {static} - DATABASE_FOLDER
-    {static} - DATABASE_FILE
-    {static} + initialisation(): SecretMaster
-    {static} + readAndUpdate(String[], ArrayList<Secret>): ArrayList<Secret>
-    {static} + createFolderHashtable(ArrayList<Secret>): Hashtable<String, (ArrayList<Secret>))
-    {static} + createNameHashtable(ArrayList<Secret>): Hashtable<String, Secret>
-    {static} + createHashTableFolders(Hashtable<String, ArrayList<Secret>>): Hashtable<String, Hashtable<String, Secret>>
-    {static} + encode(String): String
-    {static} + decode(String): String
-    {static} + parseEmptyField(String): String
-    {static} + updateStorage(ArrayList<Secret>): void
-}
-package storage {
-    Backend --> SecretMaster
-    Backend --> SecretSearcher
-    Backend --> SecretEnumerator
-    class SecretMaster {
+component Backend {
+    package securenus {
+        class Backend {
+            {static}+ isCorrupted: boolean
+            {static}+ isDatabaseEmpty: boolean
+            {static}- Logger: SecureNUSLogger.LOGGER;
+            {static}- DECRYPTION_STARTING_INDEX: int
+            {static}- DELIMITER: String
+            {static}- EMPTY_FIELD_IDENTIFIER: String
+            {static}- USER_DIRECTORY_IDENTIFIER: String
+            {static}- PASSWORD_IDENTIFIER: String
+            {static}- CREDIT_CARD_IDENTIFIER: String
+            {static}- CRYPTOWALLET_IDENTIFIER: String
+            {static}- NUSNETID_IDENTIFIER: String
+            {static}- STUDENTID_IDENTIFIER: String
+            {static}- WIFI_PASSWORD_IDENTIFIER: String
+            {static}- ENCRYPTION_IDENTIFIER
+            {static}- DATABASE_FOLDER
+            {static}- DATABASE_FILE
+            {static}+ initialisation(): SecretMaster
+            {static}+ createAssetFolderAndDatabaseFile(): File
+            {static}+ getDatabasePath(): String
+            {static}+ initialiseSecretMaster(): SecretMaster
+            {static}+ readAndUpdate(String[], SecretMaster): SecretMaster
+            {static}+ createFolderHashtable(ArrayList<Secret>): Hashtable<String, (ArrayList<Secret>))
+            {static}+ createNameHashtable(ArrayList<Secret>): Hashtable<String, Secret>
+            {static}+ createHashTableFolders(Hashtable<String, ArrayList<Secret>>): Hashtable<String, Hashtable<String, Secret>>
+            {static}+ encode(String): String
+            {static}+ decode(String): String
+            {static}+ parseEmptyField(String): String
+            {static}+ updateStorage(ArrayList<Secret>): void
+        }
     }
-    class SecretSearcher {
-    }
-    class SecretEnumerator {
-    }
-}
-package Secret {
-
-    Backend --u> StudentID
-    Backend --u> NUSNet
-    Backend --u> BasicPassword
-    Backend --u> CreditCard
-    Backend --u> CryptoWallet
-    Backend --u> WifiPassword
-
-    class Secret {
-    }
-    class StudentID {
-    }
-    class NUSNet {
-    }
-    class BasicPassword {
-    }
-    class CreditCard {
-    }
-    class CryptoWallet {
-    }
-    class WifiPassword {
-    }
-    class BasicPassword {
-    }
-    StudentID --u|> Secret
-    NUSNet --u|> Secret
-    BasicPassword --u|> Secret
-    CryptoWallet --u|> Secret
-    CreditCard --u|> Secret
-    WifiPassword --u|> Secret
 }
 
+component SecretStorage{
+    package storage {
+        class SecretMaster {
+        }
+        class SecretSearcher {
+        }
+        class SecretEnumerator {
+        }
+    }
+    package secrets {
+
+        Backend.securenus.Backend -[dotted]up-> StudentID
+        Backend.securenus.Backend -[dotted]up-> NUSNet
+        Backend.securenus.Backend -[dotted]up-> BasicPassword
+        Backend.securenus.Backend -[dotted]up-> CreditCard
+        Backend.securenus.Backend -[dotted]up-> CryptoWallet
+        Backend.securenus.Backend -[dotted]up-> WifiPassword
+
+        class Secret {
+        }
+        class StudentID {
+        }
+        class NUSNet {
+        }
+        class BasicPassword {
+        }
+        class CreditCard {
+        }
+        class CryptoWallet {
+        }
+        class WifiPassword {
+        }
+        class BasicPassword {
+        }
+        StudentID --u|> Secret
+        NUSNet --u|> Secret
+        BasicPassword --u|> Secret
+        CryptoWallet --u|> Secret
+        CreditCard --u|> Secret
+        WifiPassword --u|> Secret
+    }
+}
+Backend.securenus.Backend -[dotted]-> SecretMaster
+Backend.securenus.Backend -[dotted]-> SecretSearcher
+Backend.securenus.Backend -[dotted]-> SecretEnumerator
 
 @enduml
