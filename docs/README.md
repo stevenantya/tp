@@ -10,6 +10,11 @@ other sensitive information securely.
 + View password strength and last modified date for each secret
 + Automatic saving and loading of data
 
+## Useful links:
+* [User Guide](UserGuide.md)
+* [Developer Guide](DeveloperGuide.md)
+* [About Us](AboutUs.md)
+
 ## Getting Started
 ### Prerequisites
 + Java Runtime Environment (JRE) version 11 installed on your machine
@@ -69,10 +74,5 @@ other sensitive information securely.
     </tr>
 </table>
 
-## Build With
+## Built With
 Java 11
-
-## Useful links:
-* [User Guide](UserGuide.md)
-* [Developer Guide](DeveloperGuide.md)
-* [About Us](AboutUs.md)

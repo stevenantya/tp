@@ -15,14 +15,12 @@ challenge of managing multiple passwords for various sites and applications.
 <br>
 
 ## Table of Contents
-<!-- TOC -->
 - [Introduction](#introduction)
 - [Quick Start](#quick-start)
 - [Feature List](#feature-list)
 - [Feature Details](#feature-details)
 - [Frequently Asked Questions (FAQ's)](#frequently-asked-questions)
 - [Command Summary](#command-summary)
-<!-- TOC -->
 
 ## Quick Start
 1. Ensure you have **Java 11** installed on your computer. If not so, you can download from
@@ -58,13 +56,13 @@ Some example commands:
 
 <table>
     <tr>
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>
     </tr>
 </table>
 
 
 ## Feature List
-1. [Note about Command Formats](#note-about-the-command-format-)
+1. [Note about Command Formats](#note-about-the-command-format)
 2. [Add new Secret](#add-new-secret)
    - Password Options
      + Basic Password            
@@ -85,13 +83,13 @@ Some example commands:
 
 <table>
     <tr>
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>
     </tr>
 </table>
 
 ## Feature Details
 
-### Note about the command format:
+### Note about the command format
 * Commands in `UPPER_CASE` and without a bracket refers to the essential parameters to be given by the user.
                 
 * Do note the commands are **Case Sensitive**. 
@@ -130,8 +128,8 @@ is stored in an `unnamed` folder.
                                                                  
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>                                                            
-        <td> <a href="#feature-list">Feature List </a> </td>                                                      
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>                                                            
+        <td> <a href="#feature-list">Click here for Feature List </a> </td>                                                      
     </tr>                                                          
 </table>                                                           
 
@@ -157,6 +155,11 @@ for more details on the `save` command.
 ##### Format: `new [o/OPTION] SECRET_NAME [f/FOLDER_NAME]` <br>
 
 <table>
+    <tr>
+        <td> Secret Option</td>
+        <td> Format </td>
+        <td> Details asked</td>
+    </tr>
     <tr>
         <td> Basic Password </td>
         <td> <code> new SECRET_NAME [f/FOLDER_NAME] </code></td>
@@ -228,8 +231,8 @@ for more details on the `save` command.
 
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>                                                            
-        <td> <a href="#feature-list">Feature List </a> </td>                                                      
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>                                                            
+        <td> <a href="#feature-list">Click here for Feature List </a> </td>                                                      
     </tr>                                                          
 </table>  
 
@@ -251,8 +254,8 @@ for more details on the `save` command.
 
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>                                                            
-        <td> <a href="#feature-list">Feature List </a> </td>                                                      
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>                                                            
+        <td> <a href="#feature-list">Click here for Feature List </a> </td>                                                      
     </tr>                                                          
 </table> 
 
@@ -275,8 +278,8 @@ Examples and Outputs:<br>
 
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>                                                            
-        <td> <a href="#feature-list">Feature List </a> </td>                                                      
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>                                                            
+        <td> <a href="#feature-list">Click here for Feature List </a> </td>                                                      
     </tr>                                                          
 </table> 
 
@@ -304,8 +307,8 @@ prevent unauthorized access to the application.
 
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>                                                            
-        <td> <a href="#feature-list">Feature List </a> </td>                                                      
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>                                                            
+        <td> <a href="#feature-list">Click here for Feature List </a> </td>                                                      
     </tr>                                                          
 </table> 
 
@@ -419,8 +422,8 @@ associated secret.
 
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>                                                            
-        <td> <a href="#feature-list">Feature List </a> </td>                                                      
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>                                                            
+        <td> <a href="#feature-list">Click here for Feature List </a> </td>                                                      
     </tr>                                                          
 </table>
 
@@ -442,8 +445,8 @@ Examples and Outputs: <br>
 
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>                                                            
-        <td> <a href="#feature-list">Feature List </a> </td>                                                      
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>                                                            
+        <td> <a href="#feature-list">Click here for Feature List </a> </td>                                                      
     </tr>                                                          
 </table>
 
@@ -463,8 +466,8 @@ the entire command prompt or terminal.
 
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>                                                            
-        <td> <a href="#feature-list">Feature List </a> </td>                                                      
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>                                                            
+        <td> <a href="#feature-list">Click here for Feature List </a> </td>                                                      
     </tr>                                                          
 </table>
 
@@ -489,8 +492,8 @@ they save their data frequently to avoid losing any unsaved changes.
 <br>
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>                                                            
-        <td> <a href="#feature-list">Feature List </a> </td>                                                      
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>                                                            
+        <td> <a href="#feature-list">Click here for Feature List </a> </td>                                                      
     </tr>                                                          
 </table> 
 <br>
@@ -552,12 +555,12 @@ the `database.txt` file.
 Please attach the screenshots of the issues/bugs and the log files (`assets/logFiles.txt`) for us to better understand 
 and trace the origin of the issue.<br>
 Alternatively, you can also contact the 
-[developers](https://github.com/AY2223S2-CS2113-T15-2/tp/blob/master/docs/AboutUs.md) of SecureNUS. 
+[developers](AboutUs.md) of SecureNUS. 
 
 
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>
     </tr>                                                          
 </table>
 
@@ -611,6 +614,6 @@ Alternatively, you can also contact the
 
 <table>
     <tr>
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>
     </tr>
 </table>
