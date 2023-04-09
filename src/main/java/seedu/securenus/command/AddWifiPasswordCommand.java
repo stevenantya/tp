@@ -1,7 +1,6 @@
 package seedu.securenus.command;
 
 import seedu.securenus.Backend;
-import seedu.securenus.messages.OperationMessages;
 import seedu.securenus.exceptions.ExceptionMain;
 import seedu.securenus.exceptions.OperationCancelException;
 import seedu.securenus.exceptions.RepeatedIdException;
@@ -80,18 +79,6 @@ public class AddWifiPasswordCommand extends AddSecretCommand {
                 "Username   = " + username + "\n" +
                 "Password   = " + HIDDEN_FIELD);
 
-        Ui.inform(OperationMessages.SAVING);
         Backend.updateStorage(secureNUSData.listSecrets());
-        Ui.inform(OperationMessages.SAVE_COMPLETE);
-    }
-
-    /**
-     * Returns false, indicating that the program should not exit after executing this command.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

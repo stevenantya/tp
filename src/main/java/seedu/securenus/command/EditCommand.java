@@ -204,8 +204,8 @@ public class EditCommand extends Command {
         } else {
             Ui.inform("Secret named: \"" + name +"\" of folder: \"" + folderName + "\" has been edited.\n" +
                     "Check it out using the 'search' or 'list' function!");
-            Backend.updateStorage(secureNUSData.listSecrets());
         }
+        Backend.updateStorage(secureNUSData.listSecrets());
 
     }
 }
