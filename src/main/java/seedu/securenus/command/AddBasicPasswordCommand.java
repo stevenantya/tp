@@ -12,7 +12,6 @@ import seedu.securenus.secrets.BasicPassword;
 import seedu.securenus.storage.SecretMaster;
 import seedu.securenus.ui.Ui;
 import seedu.securenus.Backend;
-import seedu.securenus.messages.OperationMessages;
 
 import java.util.HashSet;
 
@@ -81,15 +80,12 @@ public class AddBasicPasswordCommand extends AddSecretCommand {
         } catch (IllegalFolderNameException e) {
             throw new ExceptionMain("Unknown Error: Basic Password Command");
         }
+        Backend.updateStorage(secureNUSData.listSecrets());
         Ui.inform("I have added a new basic password:\n" +
                 "name     = " + name + "\n" +
                "folder   = " + folderName + "\n" +
                "url      = " + url + "\n" +
                "username = " + username + "\n" +
                "password = " + HIDDEN_FIELD);
-        Ui.inform(OperationMessages.SAVING);
-        Backend.updateStorage(secureNUSData.listSecrets());
-        Ui.inform(OperationMessages.SAVE_COMPLETE);
-
     }
 }

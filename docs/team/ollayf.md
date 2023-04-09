@@ -34,7 +34,8 @@ or they did not want to save this password anymore
   - Standardised the UI of the entire application
 - Documentation:
   - User Guide
-    - Did the first full draft of UG [(Pull Requests)](https://github.com/AY2223S2-CS2113-T15-2/tp/pull/66)
+    - Did the first full draft of UG [(Pull Requests)](https://github.com/AY2223S2-CS2113-T15-2/tp/pull/66) 
+    - Help with final checks of UG
   - Developers' Guide
     - 
 - Contribution to team based tasks:

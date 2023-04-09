@@ -1,7 +1,6 @@
 package seedu.securenus.command;
 
 import seedu.securenus.Backend;
-import seedu.securenus.messages.OperationMessages;
 import seedu.securenus.exceptions.ExceptionMain;
 import seedu.securenus.exceptions.OperationCancelException;
 import seedu.securenus.exceptions.secrets.FolderExistsException;
@@ -64,9 +63,7 @@ public class AddStudentIDCommand extends AddSecretCommand {
                 "Folder     = " + folderName + "\n" +
                 "Student ID = " + HIDDEN_FIELD);
 
-        Ui.inform(OperationMessages.SAVING);
         Backend.updateStorage(secureNUSData.listSecrets());
-        Ui.inform(OperationMessages.SAVE_COMPLETE);
     }
 
 

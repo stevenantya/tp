@@ -37,13 +37,6 @@ url      = idk.com
 username = usr1
 password = *******
 _____________________________________________________
-_____________________________________________________
-Saving secrets to storage, please do not close application...
-_____________________________________________________
-_____________________________________________________
-Save complete. All secrets saved into assets/database.txt.
-If exporting to another device, save this file into the root directory's assets/database.txt before you start me again!
-_____________________________________________________
 Enter Command:Please enter your NUS Net ID:
 Please enter your password:
 _____________________________________________________
@@ -53,26 +46,12 @@ folder     = school
 NUS Net ID = e0123456
 password   = *******
 _____________________________________________________
-_____________________________________________________
-Saving secrets to storage, please do not close application...
-_____________________________________________________
-_____________________________________________________
-Save complete. All secrets saved into assets/database.txt.
-If exporting to another device, save this file into the root directory's assets/database.txt before you start me again!
-_____________________________________________________
 Enter Command:Please enter your Student ID:
 _____________________________________________________
 I have added a new Student ID:
 name       = student1
 Folder     = school
 Student ID = *******
-_____________________________________________________
-_____________________________________________________
-Saving secrets to storage, please do not close application...
-_____________________________________________________
-_____________________________________________________
-Save complete. All secrets saved into assets/database.txt.
-If exporting to another device, save this file into the root directory's assets/database.txt before you start me again!
 _____________________________________________________
 Enter Command:Please enter your Full Name:
 Please enter your Credit Card Number: (e.g. 1234 5678 9012 3456)
@@ -89,13 +68,6 @@ Credit Card No = *******
 CVC No         = *******
 Expiry Date    = *******
 _____________________________________________________
-_____________________________________________________
-Saving secrets to storage, please do not close application...
-_____________________________________________________
-_____________________________________________________
-Save complete. All secrets saved into assets/database.txt.
-If exporting to another device, save this file into the root directory's assets/database.txt before you start me again!
-_____________________________________________________
 Enter Command:Please enter your username:
 Please enter your Private Key:
 Please enter your Seed Phrase:
@@ -107,13 +79,6 @@ Username   = usr1
 Private Key= *******
 Seed Phrase= *******
 _____________________________________________________
-_____________________________________________________
-Saving secrets to storage, please do not close application...
-_____________________________________________________
-_____________________________________________________
-Save complete. All secrets saved into assets/database.txt.
-If exporting to another device, save this file into the root directory's assets/database.txt before you start me again!
-_____________________________________________________
 Enter Command:Please enter your username:
 Please enter your password:
 _____________________________________________________
@@ -122,13 +87,6 @@ name       = wifi1
 Folder     = personal
 Username   = home1
 Password   = *******
-_____________________________________________________
-_____________________________________________________
-Saving secrets to storage, please do not close application...
-_____________________________________________________
-_____________________________________________________
-Save complete. All secrets saved into assets/database.txt.
-If exporting to another device, save this file into the root directory's assets/database.txt before you start me again!
 _____________________________________________________
 Enter Command:_____________________________________________________
 List of secrets:
@@ -204,13 +162,8 @@ Password: ********
 
 _____________________________________________________
 Enter Command:_____________________________________________________
-Saving secrets to storage, please do not close application...
-_____________________________________________________
-_____________________________________________________
-Save complete. All secrets saved into assets/database.txt.
-If exporting to another device, save this file into the root directory's assets/database.txt before you start me again!
-_____________________________________________________
 Successfully deleted: wifi1
+_____________________________________________________
 Enter Command:_____________________________________________________
 List of secrets:
 1. Type of Secret: Basic Password
@@ -246,13 +199,6 @@ Enter Command:Enter the new username:
 Enter the new password:
 Enter the new URL:
 _____________________________________________________
-Saving secrets to storage, please do not close application...
-_____________________________________________________
-_____________________________________________________
-Save complete. All secrets saved into assets/database.txt.
-If exporting to another device, save this file into the root directory's assets/database.txt before you start me again!
-_____________________________________________________
-_____________________________________________________
 Secret named: "password1" of folder: "personal" has been edited.
 Check it out using the 'search' or 'list' function!
 _____________________________________________________
@@ -263,21 +209,11 @@ Username: usr1
 Password: newpass
 _____________________________________________________
 Enter Command:_____________________________________________________
-Saving secrets to storage, please do not close application...
-_____________________________________________________
-_____________________________________________________
-Save complete. All secrets saved into assets/database.txt.
-If exporting to another device, save this file into the root directory's assets/database.txt before you start me again!
-_____________________________________________________
 Successfully deleted: password1
 _____________________________________________________
-Saving secrets to storage, please do not close application...
-_____________________________________________________
-_____________________________________________________
-Save complete. All secrets saved into assets/database.txt.
-If exporting to another device, save this file into the root directory's assets/database.txt before you start me again!
 _____________________________________________________
 Successfully deleted: wallet1
+_____________________________________________________
 Enter Command:_____________________________________________________
 _____________________________________________________
 Found 1 matches!
@@ -339,13 +275,6 @@ folder   = unknown
 url      = `~!@#$%^&*()-=_+[]\{}|;':",./<>?
 username = `~!@#$%^&*()-=_+[]\{}|;':",./<>?
 password = *******
-_____________________________________________________
-_____________________________________________________
-Saving secrets to storage, please do not close application...
-_____________________________________________________
-_____________________________________________________
-Save complete. All secrets saved into assets/database.txt.
-If exporting to another device, save this file into the root directory's assets/database.txt before you start me again!
 _____________________________________________________
 Enter Command:_____________________________________________________
 Insufficient Parameters: Add the required parameters for this command!
@@ -414,13 +343,6 @@ Username   = new o/NUSNEtID
 Private Key= *******
 Seed Phrase= *******
 _____________________________________________________
-_____________________________________________________
-Saving secrets to storage, please do not close application...
-_____________________________________________________
-_____________________________________________________
-Save complete. All secrets saved into assets/database.txt.
-If exporting to another device, save this file into the root directory's assets/database.txt before you start me again!
-_____________________________________________________
 Enter Command:_____________________________________________________
 Invalid Command: Type 'menu' command to see the list of usable commands
 _____________________________________________________
@@ -441,13 +363,6 @@ name       = student
 Folder     = folda
 Student ID = *******
 _____________________________________________________
-_____________________________________________________
-Saving secrets to storage, please do not close application...
-_____________________________________________________
-_____________________________________________________
-Save complete. All secrets saved into assets/database.txt.
-If exporting to another device, save this file into the root directory's assets/database.txt before you start me again!
-_____________________________________________________
 Enter Command:Please enter your username:
 Please enter your password:
 _____________________________________________________
@@ -456,13 +371,6 @@ name       = nus
 Folder     = unnamed
 Username   = new o/WifiPassword nus1 f/personal
 Password   = *******
-_____________________________________________________
-_____________________________________________________
-Saving secrets to storage, please do not close application...
-_____________________________________________________
-_____________________________________________________
-Save complete. All secrets saved into assets/database.txt.
-If exporting to another device, save this file into the root directory's assets/database.txt before you start me again!
 _____________________________________________________
 Enter Command:_____________________________________________________
 Secret Not Found: studentt. Skipping this input
@@ -480,13 +388,8 @@ _____________________________________________________
 Secret Not Found: 3. Skipping this input
 _____________________________________________________
 Enter Command:_____________________________________________________
-Saving secrets to storage, please do not close application...
-_____________________________________________________
-_____________________________________________________
-Save complete. All secrets saved into assets/database.txt.
-If exporting to another device, save this file into the root directory's assets/database.txt before you start me again!
-_____________________________________________________
 Successfully deleted: nus
+_____________________________________________________
 _____________________________________________________
 Secret Not Found: strange. Skipping this input
 _____________________________________________________
@@ -542,13 +445,6 @@ Folder     = unnamed
 Username   = us1
 Private Key= *******
 Seed Phrase= *******
-_____________________________________________________
-_____________________________________________________
-Saving secrets to storage, please do not close application...
-_____________________________________________________
-_____________________________________________________
-Save complete. All secrets saved into assets/database.txt.
-If exporting to another device, save this file into the root directory's assets/database.txt before you start me again!
 _____________________________________________________
 Enter Command:_____________________________________________________
 Invalid Command: Type 'menu' command to see the list of usable commands
