@@ -137,7 +137,7 @@ is stored in an `unnamed` folder.
 
 ### Add new Secret
 
-Overview:
+##### Overview:
 - SecureNUS provides a simple way to create new secrets in the secret manager with the `new` command.
 
 - Users can select the type of secret they want to store by using the `o/OPTION` extension with the `new` command.
@@ -154,7 +154,7 @@ using `view` command which will be elaborated upon [here](#view-masked-secret).
 users are advised to keep saving their passwords using the `save` command. Users can refer [here](#save-secrets)
 for more details on the `save` command.
 
-Format: `new [o/OPTION] SECRET_NAME [f/FOLDER_NAME]` <br>
+##### Format: `new [o/OPTION] SECRET_NAME [f/FOLDER_NAME]` <br>
 
 <table>
     <tr>
@@ -222,15 +222,7 @@ Format: `new [o/OPTION] SECRET_NAME [f/FOLDER_NAME]` <br>
     </tr>
 </table>
 
-
-
-
-
-
-
-
-
-Examples and Outputs:
+##### Examples and Outputs:
 <img src="./UGImages/AddPassword/Addbasicpassword.jpg" width="100%" /> <br>
 <img src="./UGImages/AddPassword/Addccpassword.jpg" width="100%" />
 
