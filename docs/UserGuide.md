@@ -220,13 +220,7 @@ Format: `new [o/OPTION] SECRET_NAME [f/FOLDER_NAME]` <br>
             </ul>
         </td>
     </tr>
-    <tr>
 </table>
-
-
-
-
-
 
 
 
