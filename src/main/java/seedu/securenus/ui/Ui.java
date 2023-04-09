@@ -20,6 +20,40 @@ public class Ui {
     }
 
     /**
+     * Notifies user if the database is corrupted
+     */
+    public static void printCorruptedDataMessage() {
+        System.out.println("    ____________");
+        System.out.println("    | ALERT !! |");
+        System.out.println("    ------------");
+        System.out.println("Data stored is corrupted. Manual editing from the database.txt is not allowed!");
+        System.out.println("1. Enter 'save' or continue this session to discard all previous data   OR");
+        System.out.println("2. Press Ctrl + C to exit the application and " +
+                "manually revert the data in database.txt back to it's last saved state");
+        System.out.println();
+    }
+
+    /**
+     * Notifies user that information from the previous session has been loaded
+     */
+    public static void printValidDataMessage() {
+        System.out.println("---------------------------------------------------");
+        System.out.println("| User data from previous session has been loaded |");
+        System.out.println("---------------------------------------------------");
+        System.out.println();
+    }
+
+    /**
+     * Notifies user that a new session has been created
+     */
+    public static void printNewSessionMessage() {
+        System.out.println("-----------------------------");
+        System.out.println("| A new session has started |");
+        System.out.println("-----------------------------");
+        System.out.println();
+    }
+
+    /**
      * Prints a horizontal line to separate UI elements.
      */
     public static void printLine() {

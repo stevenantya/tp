@@ -1,5 +1,7 @@
 package seedu.securenus.command;
 
+import seedu.securenus.Backend;
+import seedu.securenus.messages.OperationMessages;
 import seedu.securenus.exceptions.ExceptionMain;
 import seedu.securenus.exceptions.OperationCancelException;
 import seedu.securenus.exceptions.secrets.FolderExistsException;
@@ -65,6 +67,10 @@ public class AddNUSNetCommand extends AddSecretCommand {
                 "folder     = " + folderName + "\n" +
                 "NUS Net ID = " + nusNetId + "\n" +
                 "password   = " + HIDDEN_FIELD);
+
+        Ui.inform(OperationMessages.SAVING);
+        Backend.updateStorage(secureNUSData.listSecrets());
+        Ui.inform(OperationMessages.SAVE_COMPLETE);
     }
 
     /**

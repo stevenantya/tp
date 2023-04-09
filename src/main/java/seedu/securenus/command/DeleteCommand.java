@@ -12,6 +12,7 @@ import seedu.securenus.storage.SecretMaster;
  */
 public class DeleteCommand extends Command {
 
+    private static final String SECRET_DELIMITER = "delete ";
     private String[] secretNames;
 
     /**
@@ -34,7 +35,7 @@ public class DeleteCommand extends Command {
      */
     public String[] extractName(String input) {
         assert input != null;
-        String extractedName = input.split("delete ")[1].strip();
+        String extractedName = input.split(SECRET_DELIMITER)[1].strip();
         String[] extractedNames = extractedName.split(" ");
         return extractedNames;
     }
@@ -68,6 +69,7 @@ public class DeleteCommand extends Command {
                 try {
                     secureNUSData.removeSecret(deleteData);
                     System.out.println("Successfully deleted: " + secretName);
+
                 } catch (SecretNotFoundException e) {
                     Ui.printError("Secret Not Found: " + secretName);
                 }

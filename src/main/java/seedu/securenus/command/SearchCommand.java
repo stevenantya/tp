@@ -16,6 +16,7 @@ import java.util.HashSet;
  * Inherits from the Command class.
  */
 public class SearchCommand extends Command {
+    private static final String FOLDER_DELIMITER = " f/";
     private String name;
     private String folderName;
 
@@ -58,9 +59,9 @@ public class SearchCommand extends Command {
      */
     public String extractFolderName(String input) {
         String extractedFolderName = null;
-        if (input.split(" f/").length > 1) {
-            extractedFolderName = input.split(" f/")[1];
-            extractedFolderName = extractedFolderName.split(" ")[0];
+        if (input.split(FOLDER_DELIMITER).length > 1) {
+            extractedFolderName = input.split(FOLDER_DELIMITER)[1];
+            extractedFolderName = extractedFolderName.split(FOLDER_DELIMITER)[0];
         }
         return extractedFolderName;
     }

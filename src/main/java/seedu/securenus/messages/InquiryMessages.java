@@ -35,7 +35,7 @@ public class InquiryMessages {
      */
     public static final String EXPIRY_DATE = "Please enter your Expiry Date:(MM/YY)";
     public static final String EXPIRY_DATE_EDIT = "Enter the new Expiry Date:(MM/YY)";
-    public static final String EXPIRY_DATE_RETRY = "Entry failed! CVC Number must be of the correct format";
+    public static final String EXPIRY_DATE_RETRY = "Entry failed! Expiry Date must be of the correct format: (MM/YY)";
     public static final String USERNAME = "Please enter your username:";
     public static final String USERNAME_EDIT = "Enter the new username:";
     public static final String PASSWORD = "Please enter your password:";

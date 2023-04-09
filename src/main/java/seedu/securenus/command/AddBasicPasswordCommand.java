@@ -11,6 +11,8 @@ import seedu.securenus.messages.InquiryMessages;
 import seedu.securenus.secrets.BasicPassword;
 import seedu.securenus.storage.SecretMaster;
 import seedu.securenus.ui.Ui;
+import seedu.securenus.Backend;
+import seedu.securenus.messages.OperationMessages;
 
 import java.util.HashSet;
 
@@ -85,6 +87,9 @@ public class AddBasicPasswordCommand extends AddSecretCommand {
                "url      = " + url + "\n" +
                "username = " + username + "\n" +
                "password = " + HIDDEN_FIELD);
+        Ui.inform(OperationMessages.SAVING);
+        Backend.updateStorage(secureNUSData.listSecrets());
+        Ui.inform(OperationMessages.SAVE_COMPLETE);
 
     }
 }

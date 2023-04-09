@@ -160,11 +160,7 @@ public class CryptoWallet extends Secret {
     public String toStringForDatabase() {
         String formattedString =  "CryptoWallet," + super.toStringForDatabase() +
                 "," + Backend.encode(this.username) + "," + Backend.encode(this.privateKey) + "," +
-                Backend.encode("" + this.seedPhrase) + ",";
-        String formattedURLs = "";
-        for (String url : this.urls) {
-            formattedURLs += url + ",";
-        }
-        return formattedString + formattedURLs;
+                Backend.encode("" + this.seedPhrase);
+        return formattedString;
     }
 }

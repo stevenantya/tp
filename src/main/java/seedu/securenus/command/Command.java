@@ -25,6 +25,7 @@ public abstract class Command {
     protected static final String HIDDEN_FIELD = "*******";
     protected static final String CANCEL_COMMAND = "c/";
     private static final String EMPTY_STRING_REGEX = "[ ]*";
+    private static final String FOLDER_DELIMITER = " f/";
     public abstract void execute (SecretMaster secureNUSData) throws SecretNotFoundException, ExceptionMain,
             NonExistentFolderException, OperationCancelException, FolderExistsException;
     public boolean isExit() {
@@ -56,7 +57,7 @@ public abstract class Command {
     public String extractName(String input, String keyword) {
         assert input != null;
         String extractedName = input.split(keyword + " ")[1];
-        extractedName = extractedName.split(" f/")[0];
+        extractedName = extractedName.split(FOLDER_DELIMITER)[0];
         return extractedName;
     }
 
@@ -106,8 +107,8 @@ public abstract class Command {
     public String extractFolderName(String input) {
         assert input != null;
         String extractedFolderName = "unnamed";
-        if (input.split(" f/").length > 1) {
-            extractedFolderName = input.split(" f/")[1];
+        if (input.split(FOLDER_DELIMITER).length > 1) {
+            extractedFolderName = input.split(FOLDER_DELIMITER)[1];
             extractedFolderName = extractedFolderName.split(" ")[0];
         }
         return extractedFolderName;

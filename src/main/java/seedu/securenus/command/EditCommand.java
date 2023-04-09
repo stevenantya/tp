@@ -1,5 +1,6 @@
 package seedu.securenus.command;
 
+import seedu.securenus.Backend;
 import seedu.securenus.exceptions.OperationCancelException;
 import seedu.securenus.exceptions.secrets.IllegalSecretNameException;
 import seedu.securenus.messages.InquiryMessages;
@@ -157,6 +158,7 @@ public class EditCommand extends Command {
         } else {
             Ui.inform("Secret named: \"" + name +"\" of folder: \"" + folderName + "\" has been edited.\n" +
                     "Check it out using the 'search' or 'list' function!");
+            Backend.updateStorage(secureNUSData.listSecrets());
         }
 
     }

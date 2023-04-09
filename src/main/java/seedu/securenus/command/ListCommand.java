@@ -26,6 +26,7 @@ import java.util.HashSet;
  */
 public class ListCommand extends Command {
 
+    private static final String FOLDER_DELIMITER = " f/";
     private String folderName;
 
     /**
@@ -52,8 +53,8 @@ public class ListCommand extends Command {
     public String extractFolderName(String input) {
         assert input != null;
         String extractedFolderName = null;
-        if (input.split(" f/").length > 1) {
-            extractedFolderName = input.split(" f/")[1];
+        if (input.split(FOLDER_DELIMITER).length > 1) {
+            extractedFolderName = input.split(FOLDER_DELIMITER)[1];
             extractedFolderName = extractedFolderName.split(" ")[0];
         }
         return extractedFolderName;
