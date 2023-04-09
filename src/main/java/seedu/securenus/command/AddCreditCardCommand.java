@@ -1,6 +1,7 @@
 package seedu.securenus.command;
 
 import seedu.securenus.Backend;
+import seedu.securenus.SecureNUSLogger;
 import seedu.securenus.messages.OperationMessages;
 import seedu.securenus.ui.Ui;
 import seedu.securenus.exceptions.OperationCancelException;
@@ -15,6 +16,7 @@ import seedu.securenus.secrets.CreditCard;
 import seedu.securenus.storage.SecretMaster;
 
 import java.util.HashSet;
+import java.util.logging.Level;
 
 /**
  * A class to add a new credit card to the user's secureNUSData.
@@ -61,6 +63,7 @@ public class AddCreditCardCommand extends AddSecretCommand {
         try {
             creditCard = new CreditCard(name,folderName,fullName, creditCardNumber, cvcNumber, expiryDate);
         } catch (InvalidExpiryDateException e) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, invalid expiry date, " + expiryDate);
             Ui.printError(ErrorMessages.INVALID_EXPIRY_DATE);
             return;
         }
@@ -71,7 +74,7 @@ public class AddCreditCardCommand extends AddSecretCommand {
             Ui.printError(ErrorMessages.INVALID_EXPIRY_DATE);
         } catch (FolderExistsException e) {
             Ui.printError(ErrorMessages.FOLDER_EXISTS);
-            throw new RuntimeException(); // remove and use logging instead
+            throw new RuntimeException();
         } catch (IllegalSecretNameException e) {
             Ui.printError(ErrorMessages.ILLEGAL_SECRET_NAME);
         } catch (IllegalFolderNameException e) {

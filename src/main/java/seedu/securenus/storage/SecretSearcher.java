@@ -1,5 +1,6 @@
 package seedu.securenus.storage;
 
+import seedu.securenus.SecureNUSLogger;
 import seedu.securenus.exceptions.secrets.FolderExistsException;
 import seedu.securenus.exceptions.secrets.FolderNotEmptyException;
 import seedu.securenus.exceptions.secrets.FolderNotFoundException;
@@ -7,6 +8,7 @@ import seedu.securenus.secrets.Secret;
 
 import java.util.Hashtable;
 import java.util.HashSet;
+import java.util.logging.Level;
 
 /**
  * A class that stores and retrieves Secret objects by their unique identifier (UID) using a hash table.
@@ -69,6 +71,7 @@ public class SecretSearcher {
         assert folderName != null;
         assert this.folders != null;
         if (folders.containsKey(folderName)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, folder already exists, " + folderName);
             throw new FolderExistsException();
         }
         folders.put(folderName,

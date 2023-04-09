@@ -6,10 +6,12 @@ Examples of such credentials include basic password, credit card details as well
 Information submitted by users are encrypted to safeguard the interests of the user in the event the device is lost
 or hacked.
 
+<br>
+
 ## Summary of Contributions
 ### [X] Code contributed
 [RepoSense link](https://nus-cs2113-ay2223s2.github.io/tp-dashboard/?search=euzhengxi&breakdown=true)
-<br> <br>
+<br>
 ***
 ### [X] Features <br>
 #### 1. Save Command - `$save` <br>
@@ -102,7 +104,7 @@ static methods based on the context of the information.
         return alert;
     }
 ```
-<br> <br>
+<br>
 
 ***
 ### [X] Assertions <br>

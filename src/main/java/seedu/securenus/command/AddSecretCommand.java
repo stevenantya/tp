@@ -1,5 +1,6 @@
 package seedu.securenus.command;
 
+import seedu.securenus.SecureNUSLogger;
 import seedu.securenus.exceptions.ExceptionMain;
 import seedu.securenus.exceptions.RepeatedIdException;
 import seedu.securenus.exceptions.secrets.FolderExistsException;
@@ -10,6 +11,7 @@ import seedu.securenus.storage.SecretMaster;
 import seedu.securenus.ui.Ui;
 
 import java.util.HashSet;
+import java.util.logging.Level;
 
 /**
  * Represents the Class to give a command to add a secret.
@@ -71,6 +73,7 @@ public abstract class AddSecretCommand extends Command {
             throw new IllegalSecretNameException();
         }
         if (usedNames.contains(name)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, repeated secret name, " + name);
             throw new RepeatedIdException();
         }
     }

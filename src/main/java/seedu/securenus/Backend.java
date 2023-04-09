@@ -8,7 +8,6 @@ import java.io.FileWriter;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.logging.Logger;
 import java.util.logging.Level;
 
 import seedu.securenus.exceptions.RepeatedIdException;
@@ -35,7 +34,6 @@ import seedu.securenus.ui.Ui;
 public class Backend {
     public static boolean isCorrupted = false;
     public static boolean isDatabaseEmpty = true;
-    private static final Logger LOGGER = SecureNUSLogger.LOGGER;
     private static final int DECRYPTION_STARTING_INDEX = 5;
     private static final String DATABASE_FOLDER = "assets";
     private static final String DATABASE_FILE = "database.txt";
@@ -77,6 +75,8 @@ public class Backend {
                             secretMaster.getSecretEnumerator().size() - 1).toStringForDatabase();
                     boolean isCorrupted = !Backend.hash(data).equals(inputArray[inputArray.length - 1]);
                     if (isCorrupted) {
+                        SecureNUSLogger.LOGGER.log(Level.WARNING, "command, Backend Initialisation");
+                        SecureNUSLogger.LOGGER.log(Level.WARNING, "error, parameters altered but still valid, " + data);
                         throw new IOException();
                     }
                     input = reader.readLine();
@@ -87,8 +87,9 @@ public class Backend {
                 secretMaster = Backend.initialiseSecretMaster();
             }
         } catch (IOException e) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "command, Backend Initialisation");
+            SecureNUSLogger.LOGGER.log(Level.SEVERE, "fatal, database cannot be created");
             Ui.inform("Database cannot be initialised! User data will not be saved");
-            //LOGGER.log(Level.SEVERE, SecureNUSLogger.formatStackTrace(e.getStackTrace()));
             secretMaster = Backend.initialiseSecretMaster();
         }
 
@@ -169,6 +170,9 @@ public class Backend {
             IllegalFolderNameException, InvalidExpiryDateException, IOException {
 
         if (Secret.isIllegalName(input[2]) || !SecretMaster.isLegalFolderName(input[3])) { //1st filter - name & folder
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "command, Backend Initialisation");
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, secret name/folder altered, " +
+                input[2] + " " + input[3]);
             throw new IOException();
         }
         if (input[0].equals(Backend.PASSWORD_IDENTIFIER)) { //no 2nd filter
@@ -181,6 +185,10 @@ public class Backend {
                 Secret secret = new CreditCard(input[2], input[3], Backend.decode(input[4]),
                         Backend.decode(input[5]), Backend.decode(input[6]), input[7]);
                 secretMaster.addSecret(secret);
+            } else {
+                SecureNUSLogger.LOGGER.log(Level.WARNING, "command, Backend Initialisation");
+                SecureNUSLogger.LOGGER.log(Level.WARNING, "error, credit card number/cvc/expiry date altered, " +
+                        Backend.decode(input[5]) + " " + Backend.decode(input[6]) + Backend.decode(input[7]));
             }
         } else if (input[0].equals(Backend.CRYPTOWALLET_IDENTIFIER)) {
             Secret secret = new CryptoWallet(input[2], input[3], Backend.decode(input[4]), Backend.decode(input[5]),
@@ -188,10 +196,11 @@ public class Backend {
             secretMaster.addSecret(secret);
         } else if (input[0].equals(Backend.NUSNETID_IDENTIFIER)) {
             if (NUSNet.isLegalId(input[4])) { //2nd filter
-                Secret secret = new NUSNet(input[2], input[3], input[4],
-                        Backend.decode(input[5]));
+                Secret secret = new NUSNet(input[2], input[3], input[4], Backend.decode(input[5]));
                 secretMaster.addSecret(secret);
             } else {
+                SecureNUSLogger.LOGGER.log(Level.WARNING, "command, Backend Initialisation");
+                SecureNUSLogger.LOGGER.log(Level.WARNING, "error, NUSNet id altered, " + input[4]);
                 throw new IOException();
             }
         } else if (input[0].equals(Backend.STUDENTID_IDENTIFIER)) {
@@ -199,6 +208,8 @@ public class Backend {
                 Secret secret = new StudentID(input[2], input[3], input[4]);
                 secretMaster.addSecret(secret);
             } else {
+                SecureNUSLogger.LOGGER.log(Level.WARNING, "command, Backend Initialisation");
+                SecureNUSLogger.LOGGER.log(Level.WARNING, "error, Student ID altered, " + input[4]);
                 throw new IOException();
             }
         } else if (input[0].equals(Backend.WIFI_PASSWORD_IDENTIFIER)) {
@@ -206,6 +217,8 @@ public class Backend {
                     Backend.decode(input[5]));
             secretMaster.addSecret(secret);
         } else {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "command, Backend Initialisation");
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, field identifier altered, " + input[0]);
             throw new IOException();
         }
         return secretMaster;
@@ -352,9 +365,10 @@ public class Backend {
                         Backend.hash(secret.toStringForDatabase())+ "\n");
             }
             myWriter.close();
+            SecureNUSLogger.LOGGER.log(Level.INFO, "data successfully written to datbase");
         } catch (IOException e) {
             Ui.inform("Database is not initialised! All user data will not be saved");
-            LOGGER.log(Level.SEVERE, SecureNUSLogger.formatStackTrace(e.getStackTrace()));
+            SecureNUSLogger.LOGGER.log(Level.SEVERE, "fatal, database removed or not initialised");
         }
     }
 }

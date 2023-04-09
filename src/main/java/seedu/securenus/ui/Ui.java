@@ -1,8 +1,10 @@
 package seedu.securenus.ui;
 
+import seedu.securenus.SecureNUSLogger;
 import seedu.securenus.messages.OperationMessages;
 
 import java.util.Scanner;
+import java.util.logging.Level;
 
 /**
  * Ui class to handle all user interface printing.
@@ -79,6 +81,7 @@ public class Ui {
     public static String readCommand() {
         while (in.hasNextLine()) {
             String line = in.nextLine();
+            SecureNUSLogger.LOGGER.log(Level.INFO, "command, " + removeExtraWhiteSpaces(line));
             return removeExtraWhiteSpaces(line);
         }
         return "";
@@ -92,7 +95,7 @@ public class Ui {
     public static String readLine() {
         while (in.hasNextLine()) {
             String line = in.nextLine();
-
+            SecureNUSLogger.LOGGER.log(Level.INFO, "input, " + line);
             return line;
         }
         return "";

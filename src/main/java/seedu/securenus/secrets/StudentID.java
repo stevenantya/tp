@@ -1,5 +1,9 @@
 package seedu.securenus.secrets;
 
+import seedu.securenus.SecureNUSLogger;
+
+import java.util.logging.Level;
+
 /**
  * This class represents a student ID secret.
  * It inherits from the Secret class.
@@ -48,6 +52,9 @@ public class StudentID extends Secret {
      * @return true if the student ID is legal, false otherwise
      */
     public static boolean isLegalId(String studentId) {
+        if (!studentId.matches(ACCEPTED_ID_REGEX)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, Student ID is illegal, " + studentId);
+        }
         return studentId.matches(ACCEPTED_ID_REGEX);
     }
 

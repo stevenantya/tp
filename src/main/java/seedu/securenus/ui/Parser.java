@@ -1,5 +1,6 @@
 package seedu.securenus.ui;
 
+import seedu.securenus.SecureNUSLogger;
 import seedu.securenus.command.AddBasicPasswordCommand;
 import seedu.securenus.command.AddCreditCardCommand;
 import seedu.securenus.command.AddCryptoWalletCommand;
@@ -28,6 +29,7 @@ import seedu.securenus.exceptions.secrets.NullSecretException;
 import seedu.securenus.exceptions.secrets.SecretNotFoundException;
 
 import java.util.HashSet;
+import java.util.logging.Level;
 
 /**
  * Parses user commands and returns the corresponding command object.
@@ -82,6 +84,7 @@ public class Parser {
             return new ExitCommand();
         } else {
             // represents accidental wrong input
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, invalid command, " + command);
             throw new InvalidCommandException();
         }
     }
@@ -107,6 +110,8 @@ public class Parser {
         } else if (command.startsWith("new ") && command.split(" ").length > 1) {
             return new AddBasicPasswordCommand(command, usedNames);
         } else {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, invalid command to add secret "
+                + command);
             throw new InsufficientParamsException();
         }
     }
@@ -128,6 +133,7 @@ public class Parser {
             IllegalFolderNameException, IllegalSecretNameException, RepeatedIdException, InvalidFieldException,
             InsufficientParamsException {
         if (command.split(" ").length < 3) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, insufficient secret fields, " + command);
             throw new InsufficientParamsException();
         }
         if (command.startsWith("new " + AddCreditCardCommand.KEYWORD + " ")) {
@@ -143,6 +149,7 @@ public class Parser {
         } else if (command.startsWith("new " + AddCreditCardCommand.KEYWORD + " ")) {
             return new AddCreditCardCommand(command, usedNames);
         } else {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, attempt to add invalid secret, " + command);
             throw new InvalidFieldException();
         }
     }
