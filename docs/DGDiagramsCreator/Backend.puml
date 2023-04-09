@@ -1,9 +1,11 @@
 @startuml
 !include Style.puml
 title Backend Component Diagram
+file database
 node SecretMaster
-frame Backend {
+component Backend {
     rectangle Backend
 }
-SecretMaster <-[dotted]right-> Backend : sends data for export OR\n collects data for import
+SecretMaster <-[dotted]right-> Backend.Backend : sends data for export OR\n collects data for import
+database <-[dotted]left-> Backend.Backend : encrypts data for export OR\n decrypts data for import
 @enduml

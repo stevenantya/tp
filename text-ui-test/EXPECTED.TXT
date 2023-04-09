@@ -14,13 +14,17 @@
 
 Welcome to secureNUS v2.1
 Try out some of these commands:
-Adding a password      : new NAME [f/FOLDER_NAME]
-Adding a NUSNet ID     : new o/NUSNet NAME [f/FOLDER_NAME]
-Adding a Student ID    : new o/StudentID NAME [f/FOLDER_NAME]
-Adding a Credit Card   : new o/CreditCard NAME [f/FOLDER_NAME]
-Adding a Wifi Password : new o/WifiPassword NAME [f/FOLDER_NAME]
-Adding a Crypto Wallet : new o/Crypto NAME [f/FOLDER_NAME]
+Adding a password      : new SECRET_NAME [f/FOLDER_NAME]
+Adding a NUSNet ID     : new o/NUSNet SECRET_NAME [f/FOLDER_NAME]
+Adding a Student ID    : new o/StudentID SECRET_NAME [f/FOLDER_NAME]
+Adding a Credit Card   : new o/CreditCard SECRET_NAME [f/FOLDER_NAME]
+Adding a Wifi Password : new o/WifiPassword SECRET_NAME [f/FOLDER_NAME]
+Adding a Crypto Wallet : new o/Crypto SECRET_NAME [f/FOLDER_NAME]
 Viewing all commands   : menu
+
+-----------------------------
+| A new session has started |
+-----------------------------
 
 Enter Command:Please enter the URL:
 Please enter your username:
@@ -28,9 +32,9 @@ Please enter your password:
 _____________________________________________________
 I have added a new basic password:
 name     = password1
-folder   = folder1
+folder   = personal
 url      = idk.com
-username = user1
+username = usr1
 password = *******
 _____________________________________________________
 Enter Command:Please enter your NUS Net ID:
@@ -38,15 +42,15 @@ Please enter your password:
 _____________________________________________________
 I have added a new NUS Net ID password:
 name       = nusnet1
-folder     = folder1
+folder     = school
 NUS Net ID = e0123456
 password   = *******
 _____________________________________________________
 Enter Command:Please enter your Student ID:
 _____________________________________________________
 I have added a new Student ID:
-name       = student2
-Folder     = folder1
+name       = student1
+Folder     = school
 Student ID = *******
 _____________________________________________________
 Enter Command:Please enter your Full Name:
@@ -79,7 +83,7 @@ Enter Command:Please enter your username:
 Please enter your password:
 _____________________________________________________
 I have added a new Wifi Password:
-name       = wifi
+name       = wifi1
 Folder     = personal
 Username   = home1
 Password   = *******
@@ -88,20 +92,20 @@ Enter Command:_____________________________________________________
 List of secrets:
 1. Type of Secret: Basic Password
 Name: password1
-Folder: folder1
-Username: user1
+Folder: personal
+Username: usr1
 URL: idk.com
 Password: ********
 
 2. Type of Secret: NUSNet ID
 Name: nusnet1
-Folder: folder1
+Folder: school
 NUSNet ID: e0123456
 Password: ********
 
 3. Type of Secret: Student ID
-Name: student2
-Folder: folder1
+Name: student1
+Folder: school
 Student ID: ********
 
 4. Type of Secret: Credit Card
@@ -120,36 +124,22 @@ Private Key: ********
 Seed Phrase: ********
 
 6. Type of Secret: Wifi Password
-Name: wifi
+Name: wifi1
 Folder: personal
 Username: home1
 Password: ********
 
-_____________________________________________________
-Enter Command:_____________________________________________________
-Invalid Secret Name: p/wifi. Skipping this input
 _____________________________________________________
 Enter Command:_____________________________________________________
 List of secrets:
 1. Type of Secret: Basic Password
 Name: password1
-Folder: folder1
-Username: user1
+Folder: personal
+Username: usr1
 URL: idk.com
 Password: ********
 
-2. Type of Secret: NUSNet ID
-Name: nusnet1
-Folder: folder1
-NUSNet ID: e0123456
-Password: ********
-
-3. Type of Secret: Student ID
-Name: student2
-Folder: folder1
-Student ID: ********
-
-4. Type of Secret: Credit Card
+2. Type of Secret: Credit Card
 Name: credit1
 Folder: personal
 Full Name: usr1
@@ -157,62 +147,317 @@ Credit Card Number: ********
 CVC Number: ********
 Expiry Date: ********
 
-5. Type of Secret: CryptoCurrency Wallet
+3. Type of Secret: CryptoCurrency Wallet
 Name: wallet1
 Folder: personal
 Username: usr1
 Private Key: ********
 Seed Phrase: ********
 
-6. Type of Secret: Wifi Password
-Name: wifi
+4. Type of Secret: Wifi Password
+Name: wifi1
 Folder: personal
 Username: home1
 Password: ********
 
 _____________________________________________________
 Enter Command:_____________________________________________________
+Successfully deleted: wifi1
+_____________________________________________________
+Enter Command:_____________________________________________________
+List of secrets:
+1. Type of Secret: Basic Password
+Name: password1
+Folder: personal
+Username: usr1
+URL: idk.com
+Password: ********
+
+2. Type of Secret: Credit Card
+Name: credit1
+Folder: personal
+Full Name: usr1
+Credit Card Number: ********
+CVC Number: ********
+Expiry Date: ********
+
+3. Type of Secret: CryptoCurrency Wallet
+Name: wallet1
+Folder: personal
+Username: usr1
+Private Key: ********
+Seed Phrase: ********
+
+_____________________________________________________
+Enter Command:_____________________________________________________
 Name: password1
 Url: idk.com
-Username: user1
-Password: password1
+Username: usr1
+Password: pass1
 _____________________________________________________
 Enter Command:Enter the new username:
 Enter the new password:
 Enter the new URL:
 _____________________________________________________
-Secret named: "password1" of folder: "folder1" has been edited.
+Secret named: "password1" of folder: "personal" has been edited.
 Check it out using the 'search' or 'list' function!
+_____________________________________________________
+Enter Command:_____________________________________________________
+Name: password1
+Url: newurl
+Username: usr1
+Password: newpass
+_____________________________________________________
+Enter Command:_____________________________________________________
+Successfully deleted: password1
+_____________________________________________________
+_____________________________________________________
+Successfully deleted: wallet1
 _____________________________________________________
 Enter Command:_____________________________________________________
 _____________________________________________________
 Found 1 matches!
 | NO. |          NAME           |      FOLDER       |
-|  1  |         nusnet1         |      folder1      |
+|  1  |        student1         |      school       |
 _____________________________________________________
 Enter Command:_____________________________________________________
-SecureNUS Command Menu:
-1. Add a general password: new [PASSWORD_NAME] [f/FOLDER_NAME]
-	Add Credit Card details: new o/CreditCard [NAME] [f/FOLDER_NAME]
-	Add details for a Crypto Wallet: new o/Crypto [NAME] [f/FOLDER_NAME]
-	Add NUSNet ID and Password (e*******): new o/NUSNet [NAME] [f/FOLDER_NAME]
-	Add NUS StudentID (A*******E): new o/StudentID [NAME] [f/FOLDER_NAME]
-	Add a password for Wifi: new o/WifiPassword [NAME] [f/FOLDER_NAME]
-2. Delete the unwanted secrets: delete PASSWORD_NAME
-3. List all the secrets: list [f/FOLDER_NAME]
-4. View secrets: view PASSWORD_NAME
-5. Search for secrets: search n/NAME_LIKE [f/FOLDER]
-6. Export the secrets in "database.txt" file: save
-7. Edit a secrets: edit PASSWORD_NAME
-8. Menu list to refer for commands: menu
-9. Exit from the password manager (will automatically save this session): exit
-10. To cancel the current operation (e.g. mid adding/ editing password): c/
+The input Folder does not exist
+_____________________________________________________
+Enter Command:_____________________________________________________
+_____________________________________________________
+Found 1 matches!
+| NO. |          NAME           |      FOLDER       |
+|  1  |         credit1         |     personal      |
 _____________________________________________________
 Enter Command:_____________________________________________________
 Saving secrets to storage, please do not close application...
 _____________________________________________________
 _____________________________________________________
-Save complete. All secrets saved into assets/database.txt. If exporting to another device, save this file into the root directory's assets/database.txt before you start me again!
+Save complete. All secrets saved into assets/database.txt.
+If exporting to another device, save this file into the root directory's assets/database.txt before you start me again!
+_____________________________________________________
+Enter Command:_____________________________________________________
+SecureNUS Command Menu:
+1. Add a general password: new SECRET_NAME [f/FOLDER_NAME]
+	Add Credit Card details: new o/CreditCard SECRET_NAME [f/FOLDER_NAME]
+	Add details for a Crypto Wallet: new o/Crypto SECRET_NAME [f/FOLDER_NAME]
+	Add NUSNet ID and Password (e*******): new o/NUSNet SECRET_NAME [f/FOLDER_NAME]
+	Add NUS StudentID (A*******E): new o/StudentID SECRET_NAME [f/FOLDER_NAME]
+	Add a password for Wifi: new o/WifiPassword SECRET_NAME [f/FOLDER_NAME]
+2. Delete the unwanted secrets: delete SECRET_NAME_1 [SECRET_NAME_2] [SECRET...]
+3. List all the secrets: list [f/FOLDER_NAME]
+4. View secrets: view SECRET_NAME
+5. Search for secrets: search SECRET_NAME_LIKE [f/FOLDER]
+6. Export the secrets to assets/database.txt file: save
+7. Edit a secrets: edit SECRET_NAME
+8. Menu list to refer for commands: menu
+9. Exit from SecureNUS (will automatically save this session): exit
+10. To cancel the current operation (e.g. mid adding/ editing password): c/
+_____________________________________________________
+Enter Command:Please enter the URL:
+Operation Cancelled.
+Enter Command:_____________________________________________________
+Illegal Secret Name: Please use only alphanumeric numbers and '_'
+_____________________________________________________
+Enter Command:_____________________________________________________
+Illegal Folder Name: Please use only alphanumeric numbers and '_'
+_____________________________________________________
+Enter Command:_____________________________________________________
+Illegal Secret Name: Please use only alphanumeric numbers and '_'
+_____________________________________________________
+Enter Command:Please enter the URL:
+Please enter your username:
+Please enter your password:
+_____________________________________________________
+I have added a new basic password:
+name     = idk
+folder   = unknown
+url      = `~!@#$%^&*()-=_+[]\{}|;':",./<>?
+username = `~!@#$%^&*()-=_+[]\{}|;':",./<>?
+password = *******
+_____________________________________________________
+Enter Command:_____________________________________________________
+Insufficient Parameters: Add the required parameters for this command!
+Please use the 'menu' command if you are uncertain
+_____________________________________________________
+Enter Command:_____________________________________________________
+Illegal Secret Name: Please use only alphanumeric numbers and '_'
+_____________________________________________________
+Enter Command:_____________________________________________________
+Illegal Secret Name: Please use only alphanumeric numbers and '_'
+_____________________________________________________
+Enter Command:Please enter your Full Name:
+Please enter your Credit Card Number: (e.g. 1234 5678 9012 3456)
+Entry failed! Credit Card Number must be of the correct format (e.g. 1234 5678 9098 7612)
+Please enter your Credit Card Number: (e.g. 1234 5678 9012 3456)
+Entry failed! Credit Card Number must be of the correct format (e.g. 1234 5678 9098 7612)
+Please enter your Credit Card Number: (e.g. 1234 5678 9012 3456)
+Entry failed! Credit Card Number must be of the correct format (e.g. 1234 5678 9098 7612)
+Please enter your Credit Card Number: (e.g. 1234 5678 9012 3456)
+Operation Cancelled.
+Enter Command:_____________________________________________________
+The input field {o/Field} does not exist! Try one that exists from our menu.
+_____________________________________________________
+Enter Command:_____________________________________________________
+The input field {o/Field} does not exist! Try one that exists from our menu.
+_____________________________________________________
+Enter Command:Please enter your Full Name:
+Please enter your Credit Card Number: (e.g. 1234 5678 9012 3456)
+Please enter your CVC Number:
+Entry failed! CVC Number must be of the correct format (e.g. 123)
+Please enter your CVC Number:
+Entry failed! CVC Number must be of the correct format (e.g. 123)
+Please enter your CVC Number:
+Entry failed! CVC Number must be of the correct format (e.g. 123)
+Please enter your CVC Number:
+Entry failed! CVC Number must be of the correct format (e.g. 123)
+Please enter your CVC Number:
+Entry failed! CVC Number must be of the correct format (e.g. 123)
+Please enter your CVC Number:
+Entry failed! CVC Number must be of the correct format (e.g. 123)
+Please enter your CVC Number:
+Entry failed! CVC Number must be of the correct format (e.g. 123)
+Please enter your CVC Number:
+Entry failed! CVC Number must be of the correct format (e.g. 123)
+Please enter your CVC Number:
+Operation Cancelled.
+Enter Command:_____________________________________________________
+The input field {o/Field} does not exist! Try one that exists from our menu.
+_____________________________________________________
+Enter Command:_____________________________________________________
+The input field {o/Field} does not exist! Try one that exists from our menu.
+_____________________________________________________
+Enter Command:Please enter your username:
+Operation Cancelled.
+Enter Command:_____________________________________________________
+The input field {o/Field} does not exist! Try one that exists from our menu.
+_____________________________________________________
+Enter Command:Please enter your username:
+Please enter your Private Key:
+Please enter your Seed Phrase:
+_____________________________________________________
+I have added a new Student ID:
+name       = wallet1
+Folder     = personal
+Username   = new o/NUSNEtID
+Private Key= *******
+Seed Phrase= *******
+_____________________________________________________
+Enter Command:_____________________________________________________
+Invalid Command: Type 'menu' command to see the list of usable commands
+_____________________________________________________
+Enter Command:_____________________________________________________
+Invalid Command: Type 'menu' command to see the list of usable commands
+_____________________________________________________
+Enter Command:_____________________________________________________
+Invalid Command: Type 'menu' command to see the list of usable commands
+_____________________________________________________
+Enter Command:_____________________________________________________
+Illegal Secret Name: Please use only alphanumeric numbers and '_'
+_____________________________________________________
+Enter Command:Please enter your Student ID:
+Entry failed! Student ID must be of the correct NUS format (e.g. A9876543R)
+_____________________________________________________
+I have added a new Student ID:
+name       = student
+Folder     = folda
+Student ID = *******
+_____________________________________________________
+Enter Command:Please enter your username:
+Please enter your password:
+_____________________________________________________
+I have added a new Wifi Password:
+name       = nus
+Folder     = unnamed
+Username   = new o/WifiPassword nus1 f/personal
+Password   = *******
+_____________________________________________________
+Enter Command:_____________________________________________________
+Secret Not Found: studentt. Skipping this input
+_____________________________________________________
+Enter Command:_____________________________________________________
+Invalid Command: Type 'menu' command to see the list of usable commands
+_____________________________________________________
+Enter Command:_____________________________________________________
+Secret Not Found: 1. Skipping this input
+_____________________________________________________
+_____________________________________________________
+Secret Not Found: 2. Skipping this input
+_____________________________________________________
+_____________________________________________________
+Secret Not Found: 3. Skipping this input
+_____________________________________________________
+Enter Command:_____________________________________________________
+Successfully deleted: nus
+_____________________________________________________
+_____________________________________________________
+Secret Not Found: strange. Skipping this input
+_____________________________________________________
+_____________________________________________________
+Secret Not Found: password. Skipping this input
+_____________________________________________________
+Enter Command:_____________________________________________________
+Invalid Secret Name: wallet1,strange,password. Skipping this input
+_____________________________________________________
+Enter Command:_____________________________________________________
+Invalid Secret Name: wallet1,. Skipping this input
+_____________________________________________________
+_____________________________________________________
+Invalid Secret Name: strange,. Skipping this input
+_____________________________________________________
+_____________________________________________________
+Secret Not Found: password. Skipping this input
+_____________________________________________________
+Enter Command:_____________________________________________________
+The input Folder does not exist
+_____________________________________________________
+Enter Command:_____________________________________________________
+List of secrets:
+1. Type of Secret: Student ID
+Name: student
+Folder: folda
+Student ID: ********
+
+_____________________________________________________
+Enter Command:_____________________________________________________
+The input Folder does not exist
+_____________________________________________________
+Enter Command:_____________________________________________________
+Invalid Command: Type 'menu' command to see the list of usable commands
+_____________________________________________________
+Enter Command:Enter the new username:
+Enter the new Private Key:
+Enter the new Seed Phrase:
+Operation Cancelled.
+Enter Command:_____________________________________________________
+Invalid Secret Name: c/. Skipping this input
+_____________________________________________________
+Enter Command:_____________________________________________________
+Invalid Command: Type 'menu' command to see the list of usable commands
+_____________________________________________________
+Enter Command:Please enter your username:
+Please enter your Private Key:
+Please enter your Seed Phrase:
+_____________________________________________________
+I have added a new Student ID:
+name       = CreditCard
+Folder     = unnamed
+Username   = us1
+Private Key= *******
+Seed Phrase= *******
+_____________________________________________________
+Enter Command:_____________________________________________________
+Invalid Command: Type 'menu' command to see the list of usable commands
+_____________________________________________________
+Enter Command:_____________________________________________________
+Invalid Command: Type 'menu' command to see the list of usable commands
+_____________________________________________________
+Enter Command:_____________________________________________________
+Saving secrets to storage, please do not close application...
+_____________________________________________________
+_____________________________________________________
+Save complete. All secrets saved into assets/database.txt.
+If exporting to another device, save this file into the root directory's assets/database.txt before you start me again!
 _____________________________________________________
 _____________________________________________________
 Thank you for using me. I hope you enjoyed the time!
