@@ -31,10 +31,22 @@ public class StudentID extends Secret {
         super(name, folderName);
         this.studentID = studentID;
     }
+
+    /**
+     * Returns the type of the secret.
+     *
+     * @return the type of the secret
+     */
     public String getType() {
         return TYPE;
     }
 
+    /**
+     * Checks if the given student ID is legal
+     *
+     * @param studentId the student ID to be checked
+     * @return true if the student ID is legal, false otherwise
+     */
     public static boolean isLegalId(String studentId) {
         return studentId.matches(ACCEPTED_ID_REGEX);
     }
@@ -71,6 +83,11 @@ public class StudentID extends Secret {
                 getName(), studentID);
     }
 
+    /**
+     * Sets the student ID of the StudentID object.
+     *
+     * @param studentID the student ID to be set
+     */
     public void setStudentID(String studentID) {
         this.studentID = studentID;
     }

@@ -34,10 +34,15 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 public class ListCommandTest {
 
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+
+    /**
+     * Sets the output stream to the outputStreamCaptor before each test case is run.
+     */
     @BeforeEach
     public void setStream() {
         System.setOut(new PrintStream(outputStreamCaptor));
     }
+
     /**
      * Tests the isExit method when there is no folder name.
      */

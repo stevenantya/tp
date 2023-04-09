@@ -196,6 +196,12 @@ public class SecretEnumerator {
         return folderHashset;
     }
 
+    /**
+     * Checks if a folder with the given name exists.
+     *
+     * @param folderName the name of the folder to check
+     * @return true if the folder exists, false otherwise
+     */
     public boolean folderExists(String folderName) {
         return folders.containsKey(folderName);
     }

@@ -17,6 +17,14 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  * and getting the list and elements from the list.
  */
 class SecretEnumeratorTest {
+
+    /**
+     * Tests empty getters, adding secrets and retrieving them from the SecretEnumerator.
+     * Checks for ArrayIndexOutOfBoundsException for empty enumerator, proper addition of secrets
+     * and retrieval of secrets from the enumerator.
+     *
+     * @throws FolderExistsException if a folder with the same name already exists
+     */
     @Test
     void emptyGetters() throws FolderExistsException {
         ArrayList<Secret> list2 = new ArrayList<>();
@@ -43,6 +51,5 @@ class SecretEnumeratorTest {
         assertEquals(list, enumerator.getList("folder1"));
         list.add(secret3);
         assertEquals(list, enumerator.getList());
-
     }
 }

@@ -11,7 +11,9 @@ import seedu.securenus.ui.Ui;
 public class SaveCommand extends Command {
 
     /**
-     * Executes the save command, which writes all data in the session into the database.
+     * Executes the command to save the list of secrets to the storage.
+     *
+     * @param secureNUSData The instance of SecretMaster class that stores the list of secrets.
      */
     @Override
     public void execute(SecretMaster secureNUSData) {

@@ -19,16 +19,9 @@ import java.io.PrintStream;
 // import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-// import static org.junit.jupiter.api.Assertions.assertFalse;
-// import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
- * This class represents the unit tests for the SearchCommand class.
- * It checks the following functionalities:
- * Extraction of name from input
- * Extraction of folder name from input
- * execute method
- * isExit method
+ * JUnit test class for the SearchCommand class.
  */
 class SearchCommandTest {
     private final Secret mockBasicPassword1;
@@ -51,6 +44,9 @@ class SearchCommandTest {
     }
     private final ByteArrayOutputStream output = new ByteArrayOutputStream();
 
+    /**
+     * Sets up the output stream to capture console output during testing.
+     */
     @BeforeEach
     public void setUpStreams() {
         System.setOut(new PrintStream(output));
@@ -59,6 +55,12 @@ class SearchCommandTest {
     /**
      * Tests the extraction of name from input.
      * The test case checks for extraction of name only.
+     *
+     * @throws IllegalFolderNameException if folder name is illegal
+     * @throws RepeatedIdException if there is a repeated id
+     * @throws IllegalSecretNameException if secret name is illegal
+     * @throws FolderExistsException if folder exists
+     * @throws FolderNotFoundException if folder cannot be found
      */
     @Test
     void extractName_nameOnly() throws IllegalFolderNameException, RepeatedIdException, IllegalSecretNameException,
@@ -72,6 +74,12 @@ class SearchCommandTest {
     /**
      * Tests the extraction of name from input.
      * The test case checks for extraction of name and folder.
+     *
+     * @throws IllegalFolderNameException if folder name is illegal
+     * @throws RepeatedIdException if there is a repeated id
+     * @throws IllegalSecretNameException if secret name is illegal
+     * @throws FolderExistsException if folder exists
+     * @throws FolderNotFoundException if folder cannot be found
      */
     @Test
     void extractName_nameAndFolder() throws IllegalFolderNameException, RepeatedIdException, IllegalSecretNameException,
@@ -83,41 +91,16 @@ class SearchCommandTest {
         assertEquals(searchCommand.extractName("search Face f/Socials", "search"), "Face");
     }
 
-
-    // /**
-    //  * Tests the extraction of folder name from input.
-    //  * The test case checks for extraction of folder name only.
-    //  */
-    // @Test
-    // void extractFolderName_nameOnly() {
-    //     SearchCommand searchCommand = new SearchCommand("search Name123!");
-    //     assertNull(searchCommand.extractFolderName("search Name123!"));
-    // }
-    //
-    // /**
-    //  * Tests the extraction of folder name from input.
-    //  * The test case checks for extraction of name and folder.
-    //  */
-    // @Test
-    // void extractFolderName_nameAndFolder() {
-    //     SearchCommand searchCommand = new SearchCommand("search Name123! -f f/Folder123!");
-    //     assertEquals(searchCommand.extractFolderName("search Name123! -f f/Folder123!"), "Folder123!");
-    // }
-
-    // @Test
-    // public void execute_nameOnly() throws IllegalFolderNameException,
-    //         RepeatedIdException, IllegalSecretNameException, FolderExistsException, NonExistentFolderException {
-    //     SecretMaster mockSecureNUSData = new SecretMaster();
-    //     mockSecureNUSData.addSecret(mockBasicPassword1);
-    //     mockSecureNUSData.addSecret(mockBasicPassword2);
-    //
-    //     SearchCommand command = new SearchCommand("search Facebook");
-    //     command.execute(mockSecureNUSData);
-    //
-    //     assertEquals("Found 1 matches!\nID: 1\t|\tFacebook\t|\n",
-    //             output.toString().replace("\r",""));
-    // }
-
+    /**
+     * Tests the execution of search command with a name and folder.
+     *
+     * @throws IllegalFolderNameException if folder name is illegal
+     * @throws RepeatedIdException if there is a repeated id
+     * @throws IllegalSecretNameException if secret name is illegal
+     * @throws FolderExistsException if folder exists
+     * @throws NonExistentFolderException if folder does not exist
+     * @throws FolderNotFoundException if folder cannot be found
+     */
     @Test
     public void execute_nameAndFolder() throws IllegalFolderNameException,
             RepeatedIdException, IllegalSecretNameException, FolderExistsException, NonExistentFolderException,

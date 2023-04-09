@@ -101,9 +101,11 @@ class SecretMasterTest {
         secretMaster.addSecret(new CreditCard("credit1", "HJ HJ UI",
                 "1234 5678 9012 3456", "123",
                 "12/23"));
-        secretMaster.addSecret(new CryptoWallet("crypto1", "hjhbj", "fdertyuiytyui876ytfgyuit5rt",
+        secretMaster.addSecret(new CryptoWallet("crypto1", "hjhbj",
+                "fdertyuiytyui876ytfgyuit5rt",
                 "hb jnjkm kjijh ijhui hjhb iujh uhbgv gfcd"));
-        secretMaster.addSecret(new NUSNet("nusnet1", "folder1", "e0987654", "oitfghjmjh"));
+        secretMaster.addSecret(new NUSNet("nusnet1", "folder1", "e0987654",
+                "oitfghjmjh"));
         secretMaster.addSecret(new StudentID("hi", "T0987490A"));
         secretMaster.addSecret(new WifiPassword("wifi1", "username1", "password1"));
     }
@@ -125,17 +127,28 @@ class SecretMasterTest {
                 "http.com"));
         secretMaster.addSecret(new BasicPassword("BasicPassword2_", "username1", "Password1",
                 "http.com"));
-        secretMaster.addSecret(new BasicPassword("BasicPassword2", "Folder9", "username1", "Password1",
+        secretMaster.addSecret(new BasicPassword("BasicPassword2", "Folder9", "username1",
+                "Password1",
                 "http.com"));
-        secretMaster.addSecret(new BasicPassword("BasicPassword4", "Folder9_", "username1", "Password1",
+        secretMaster.addSecret(new BasicPassword("BasicPassword4", "Folder9_", "username1",
+                "Password1",
                 "http.com"));
     }
 
+    /**
+     * Tests for editing a BasicPassword object.
+     * @throws FolderExistsException if the folder already exists in the {@code SecretMaster}
+     * @throws IllegalFolderNameException if the folder name is illegal
+     * @throws RepeatedIdException if the secret ID already exists in the {@code SecretMaster}
+     * @throws IllegalSecretNameException if the secret name is illegal
+     * @throws InvalidURLException if the URL is not valid
+     */
     @Test
     public void editBasicPassword() throws FolderExistsException, IllegalFolderNameException, RepeatedIdException,
             IllegalSecretNameException, InvalidURLException {
         SecretMaster secretMaster = new SecretMaster();
-        BasicPassword secret = new BasicPassword("secret1", "folder1", "username1", "password1", "https://example.com");
+        BasicPassword secret = new BasicPassword("secret1", "folder1", "username1",
+                "password1", "https://example.com");
         secretMaster.addSecret(secret);
 
         String newName = "secret2";
@@ -149,6 +162,18 @@ class SecretMasterTest {
         assertEquals(inquiredFields[1], secret.getPassword());
         assertEquals(inquiredFields[2], ((BasicPassword) secret).getUrl());
     }
+
+    /**
+     * Tests the {@code editSecret} method in the {@code SecretMaster} class to ensure that editing a credit card
+     * secret
+     * correctly updates its fields.
+     *
+     * @throws FolderExistsException if there is already a folder with the same name
+     * @throws InvalidExpiryDateException if the expiry date provided is in an invalid format
+     * @throws IllegalFolderNameException if the folder name provided is illegal
+     * @throws RepeatedIdException if there is already a secret with the same name and folder name
+     * @throws IllegalSecretNameException if the secret name provided is illegal
+     */
 
     @Test
     public void editCreditCard() throws FolderExistsException, InvalidExpiryDateException,
@@ -171,6 +196,15 @@ class SecretMasterTest {
         assertEquals(inquiredFields[3], ((CreditCard) secret).getExpiryDate());
     }
 
+    /**
+     * Tests for the {@code editSecret()} method in {@code SecretMaster} class for {@code NUSNet} secrets.
+     * Tests if the method can successfully edit the details of a {@code NUSNet} secret.
+     *
+     * @throws FolderExistsException If the folder already exists in the storage.
+     * @throws IllegalFolderNameException If the folder name contains illegal characters.
+     * @throws RepeatedIdException If there is already a secret with the same name and folder name.
+     * @throws IllegalSecretNameException If the secret name contains illegal characters.
+     */
     @Test
     public void editNUSNet() throws FolderExistsException, IllegalFolderNameException,
             RepeatedIdException, IllegalSecretNameException {
@@ -189,6 +223,14 @@ class SecretMasterTest {
         assertEquals(inquiredFields[1], ((NUSNet) secret).getPassword());
     }
 
+    /**
+     * Tests the {@code editSecret()} method of {@code SecretMaster} class when editing a {@code StudentID} object.
+     *
+     * @throws FolderExistsException if there is a duplicate folder name
+     * @throws IllegalFolderNameException if the folder name is invalid
+     * @throws RepeatedIdException if there is a duplicate ID for a secret
+     * @throws IllegalSecretNameException if the secret name is invalid
+     */
     @Test
     public void editStudentID() throws FolderExistsException, IllegalFolderNameException,
             RepeatedIdException, IllegalSecretNameException {
