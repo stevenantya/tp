@@ -118,7 +118,7 @@ is stored in an `unnamed` folder.
   
 * Commands with [...] shows that parameters of the same type can be added multiple times.
 
-* Please note that the 'NAME' parameter in some commands does not refer to the username.
+* Please note that the `NAME` parameter in some commands does not refer to the username.
 
   `NAME` allows to easily *identify* and *manage* the secrets when performing actions such as 
   deleting, editing, or viewing them. 
@@ -135,7 +135,7 @@ is stored in an `unnamed` folder.
 </table>                                                           
 
 ### Add new Secret
-###### Overview
+##### Overview
 - SecureNUS provides a simple way to create new secrets in the secret manager with the `new` command.
 - Users can select the type of secret they want to store by using the `o/OPTION` extension with the `new` command.
   - If no option is selected, a basic password will be created by default.
@@ -147,7 +147,8 @@ using `view` command which will be elaborated upon [here](#view-masked-secret)
 - Each time a new secret is created, it will be auto-saved in `database.txt` in the `assets` folder. But 
 users are advised to keep saving their passwords using the `save` command. Users can refer [here](#save-secrets)
 for more details on the `save` command.
-###### General Format: `new [o/OPTION] SECRET_NAME [f/FOLDER_NAME]`
+<br>
+##### General Format: `new [o/OPTION] SECRET_NAME [f/FOLDER_NAME]`
 
 <table>
     <tr>
@@ -215,6 +216,8 @@ for more details on the `save` command.
     </tr>
     <tr>
 </table>
+
+<br>
 
 ###### Examples and Outputs:
 <img src="./UGImages/AddPassword/Addbasicpassword.jpg" width="65%" /> <br>
@@ -434,6 +437,7 @@ the entire command prompt or terminal.
     </tr>                                                          
 </table>
 
+
 ### Cancel current operation
 ###### Overview
 - The `c/` command allows users to cancel the current operation in SecureNUS. 
@@ -456,6 +460,7 @@ they save their data frequently to avoid losing any unsaved changes.
         <td> <a href="#feature-list">Feature List </a> </td>                                                      
     </tr>                                                          
 </table> 
+<br>
 
 ## Frequently Asked Questions
 
@@ -463,27 +468,38 @@ they save their data frequently to avoid losing any unsaved changes.
 **A:** SecureNUS stores your secrets in a structured format in the `database.txt` file located in the `assets` folder. 
 The secrets are stored securely to ensure that your sensitive information is protected.
 
+<br>
+
 **Q:** What is the difference between a basic password and other password options?<br>
 **A:** A basic password is a simple password that only requires a password name and password value to be entered. Other 
 password options provide additional fields for specific types of passwords, such as credit cards or NUSNet ID.
 
+<br>
+
 **Q:** What if I create a secret without a folder?<br>
 **A:** Secret will assign itself in an `unnamed` folder.
+
+<br>
 
 **Q:** What should I do if I forget my secret for SecureNUS?<br>
 **A:** You can use the `list` command to view the details of the all the secrets you stored. Do note that the 
 sensitive information is masked to ensure security and can be viewed by using the `view` command.
+
+<br>
 
 **Q:** How can I ensure the security of my secrets in SecureNUS?<br>
 **A:** At SecureNUS, we strive to keep the secrets of the users secure. Keeping this in consideration, we mask 
 sensitive information using asterisks when the user creates a new secret using `new` command or list the secrets using 
 `list` command. 
 
+<br>
+
 **Q:** Can I export my secrets stored in SecureNUS to another device?<br>
 **A:** Yes, you can export your secrets to another device by opening the same JAR file in another machine. 
 Do ensure to save `database.txt` in the root directory's `assets/database.txt`
 As a user, you ou can ensure the security of your secrets in SecureNUS by using strong and unique secrets, 
 keeping your secrets private and secure, and regularly updating your secrets.
+<br>
 
 **Q:** I forgot to save before exiting. Are all my secrets lost?<br>
 **A:** SecureNUS realizes the importance of keeping the passwords safe and secure. So we ensure that the secrets added 
@@ -493,6 +509,7 @@ it is automatically saved in the `database.txt` file in the `assets` folder.
 * On exiting the program using the `exit` command, SecureNUS will save all the unsaved secrets in 
 the `database.txt` file.
 * Users have an option to keep saving their secrets using the `save` command.
+<br>
 
 **Q:** How can I report a bug or issue with SecureNUS? <br>
 **A:** You can report a bug or issue with SecureNUS by raising an issue in the issue tracker of the team's
