@@ -4,15 +4,15 @@ title UI Component Diagram
 actor User
 node SecureNUS
 node SecretStorage
-frame "UI" {
-    node Ui UI_COLOR
-    node Parser
-    rectangle Commands COMMAND_COLOR
+component "UI" {
+    rectangle Ui UI_COLOR
+    rectangle Parser
     Ui -> Parser
-    Parser -[dotted]-> Commands :creates
 }
+rectangle Commands COMMAND_COLOR
+Parser -[dotted]-> Commands :creates
 Commands -[dotted]right-> SecureNUS :executes in
-SecureNUS -[dotted]up-> SecretStorage :makes changes in
-SecureNUS -[dotted]up-> Ui :responds to user after processing
-Ui <-up- User
+SecureNUS <-[dotted]up-> SecretStorage :reads or writes data from
+SecureNUS -[dotted]up-> Ui :responds to user after processing through
+Ui <-up-> User
 @enduml

@@ -33,13 +33,22 @@ or they did not want to save this password anymore
   - QA Tests for all commands to ensure they work as per intended
   - Standardised the UI of the entire application
 - Documentation:
-  - Did the first full draft of UG [(Pull Requests)](https://github.com/AY2223S2-CS2113-T15-2/tp/pull/66)
-  - 
+  - User Guide
+    - Did the first full draft of UG [(Pull Requests)](https://github.com/AY2223S2-CS2113-T15-2/tp/pull/66)
+  - Developers' Guide
+    - 
+- Contribution to team based tasks:
+- Setting up the GitHub team org/repo
+1. Necessary general code enhancements 
+2. Setting up tools e.g., GitHub, Gradle, text-ui-tests
+3. Setting up gitflow and structure for all members
+4. Maintaining the issue tracker
+5. Release management
 - Community:
   - PRs Reviewed: [#187](https://github.com/AY2223S2-CS2113-T15-2/tp/pull/181), [#171](https://github.com/AY2223S2-CS2113-T15-2/tp/pull/171),
-[#54](https://github.com/AY2223S2-CS2113-T15-2/tp/pull/54)
+[#54](https://github.com/AY2223S2-CS2113-T15-2/tp/pull/54) and more...
   - Reported Bugs (other than via telegram): [#92](https://github.com/AY2223S2-CS2113-T15-2/tp/issues/92), 
-[#160](https://github.com/AY2223S2-CS2113-T15-2/tp/issues/160), [#84](https://github.com/AY2223S2-CS2113-T15-2/tp/issues/84)
+[#160](https://github.com/AY2223S2-CS2113-T15-2/tp/issues/160), [#84](https://github.com/AY2223S2-CS2113-T15-2/tp/issues/84) and many more...
   - Created the important development structures for my team including the inheritance structure of Commands and Data 
 structures
 - Tools: 

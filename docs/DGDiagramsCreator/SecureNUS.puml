@@ -1,0 +1,187 @@
+@startuml
+'https://plantuml.com/class-diagram
+hide circle
+component SecureNUS {
+    package securenus {
+        class SecureNUS {
+            {static}- LOGGER: SecureNUSLogger
+            {static}- DUKE_LOG_EXECUTECOMMAND_IDENTIFIER: String
+            - secureNUSData: SecretMaster
+            + SecureNUS(): void
+            {static}+ main(String[] args): void
+            + run(): void
+            + parseCommand(): Command
+            + executeCommand(Command): boolean
+        }
+    }
+    securenus.SecureNUS -[dashed]-> command.Command
+    package command {
+        abstract class Command {
+            {static}# HIDDEN_FIELD: String
+            {static}# CANCEL_COMMAND: String
+            {static}- FOLDER_DELIMITER: String
+            {static}- EMPTY_STRING_REGEX: String
+            {abstract}+ isExit(): boolean
+            {abstract}+ execute(SecretMaster): void
+            + inquire(String, String): String
+            + extractName(String, String): String
+            + nameCheck(String): void
+            + nameCheckWithExistence(String, HashSet<String>): void
+            + extractFolderName(String): String
+            + query(String): String
+            + isEmptyEntry(String): boolean
+            + printCurrentState(SecretMaster): void
+        }
+
+        class AddBasicPasswordCommand {
+            {static}- KEYWORD: String
+            - username: String
+            - password: String
+            - url: String
+            + AddBasicPasswordCommand(String, HashSet<String>): void
+            + AddBasicPasswordCommand(BasicPassword): void
+            + execute(SecretMaster): void
+        }
+
+        class AddCreditCardCommand {
+            {static}- KEYWORD: String
+            - fullName: String
+            - creditCardNumber: String
+            - cvcNumber: String
+            - expiryDate: String
+            + AddCreditCardCommand(String, HashSet<String>): void
+            + execute(SecretMaster): void
+            + inquireCreditCardNumber(): String
+            + inquireCvcNumber(): String
+            + inquireExpiryDate(): String
+        }
+
+        class AddCryptoWalletCommand {
+            {static}- KEYWORD: String
+            - fullName: String
+            - privateKey: String
+            - seedPhrase: String
+            + AddCryptoWalletCommand(String, HashSet<String>): void
+            + execute(SecretMaster): void
+        }
+
+        class AddNUSNetCommand {
+            {static}- KEYWORD: String
+            - nusNetId: String
+            - password: String
+            + AddNUSNetCommand(String, HashSet<String>): void
+            + AddNUSNetCommand(NUSNet): void
+            + inquirenusNetId(): String
+            + execute(SecretMaster): void
+        }
+
+
+        class AddStudentIDCommand {
+            - studentID: String
+            + AddStudentIDCommand(String, HashSet<String>): void
+            + AddStudentIDCommand(StudentID): void
+            + inquireStudentID(): String
+            + execute(SecretMaster): void
+        }
+
+        class AddWifiPasswordCommand {
+            {static}- KEYWORD: String
+            - username: String
+            - password: String
+            + AddWifiPasswordCommand(String, HashSet<String>): void
+            + AddWifiPasswordCommand(NUSNet): void
+            + execute(SecretMaster): void
+        }
+
+        class DeleteCommand {
+            {static}- SECRET_DELIMITER: String
+            - secretNames: String[]
+            + DeleteCommand(String): void
+            + extractName(String): String
+            + execute(SecretMaster): void
+        }
+
+        class EditCommand {
+            - name: String
+            + EditCommand(String, HashSet<String>): void
+            + extractName(String): String
+            + inquireFields(Secret): String[]
+            + inquireCreditCardNumber(): String
+            + inquireCvcNumber(): String
+            + inquireExpiryDate(): String
+            + inquirenusNetId(): String
+            + inquireStudentID(): String
+            + execute(SecretMaster): void
+        }
+
+        class ExitCommand {
+        + ExitCommand(): void
+        + isExit(): boolean
+        + execute(SecretMaster): void
+        }
+        class AddSecretCommand {
+            {static}- KEYWORD: String
+            - name: String
+            - folderName: String
+            + AddSecretCommand(String, HashSet<String>, String): void
+            + AddSecretCommand(Secret): void
+            + checkNameAndFolderName(String, String, HashSet<String>): void
+            + execute(SecretMaster): void
+        }
+
+        class ListCommand {
+            {static}- FOLDER_DELIMITER: String
+            - folderName: String
+            + ListCommand(String, HashSet<String>): void
+            + extractFolderName(String): String
+            + maskStringPassword(String): String
+            + maskIntPasswordAsString(int): String
+            + getSecretTypeInfo(Secret): String
+            + execute(SecretMaster): void
+        }
+
+        class MenuCommand {
+            + displayMenu: void
+            + execute(SecretMaster): void
+        }
+
+        class SearchCommand {
+            {static}- FOLDER_DELIMITER: String
+            - name: String
+            - folderName: String
+            + SearchCommand(String, HashSet<String>): void
+            + checkNameAndFolderName(String, String, HashSet<String>): void
+            + extractFolderName(String): String
+            + execute(SecretMaster): void
+            + centerString(int, String): String
+        }
+
+        class ViewCommand {
+            - passwordName
+            + ViewCommand(String, HashSet<String>): void
+            + extractName(String): String
+            + execute(SecretMaster): void
+        }
+
+        class SaveCommand {
+            + execute(SecretMaster): void
+        }
+    }
+   skinparam groupInheritance 3
+    Command <|-- DeleteCommand
+    Command <|-- EditCommand
+    Command <|-- ExitCommand
+    Command <|-- ListCommand
+    Command <|-- AddSecretCommand
+    Command <|-- MenuCommand
+    Command <|-- SaveCommand
+    Command <|-- SearchCommand
+    Command <|-- ViewCommand
+    AddSecretCommand <|-- AddBasicPasswordCommand
+    AddSecretCommand <|-- AddCreditCardCommand
+    AddSecretCommand <|-- AddCryptoWalletCommand
+    AddSecretCommand <|-- AddNUSNetCommand
+    AddSecretCommand <|-- AddStudentIDCommand
+    AddSecretCommand <|-- AddWifiPasswordCommand
+}
+@enduml
