@@ -8,6 +8,7 @@ import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.messages.InquiryMessages;
+import seedu.duke.messages.OperationMessages;
 import seedu.duke.secrets.WifiPassword;
 import seedu.duke.storage.SecretMaster;
 import seedu.duke.ui.Ui;
@@ -65,8 +66,12 @@ public class AddWifiPasswordCommand extends AddSecretCommand {
                 "name       = " + name + "\n" +
                 "Folder     = " + folderName + "\n" +
                 "Username   = " + username + "\n" +
-                "Password   = " + password);
+                "Password   = " + HIDDEN_FIELD);
+
+        Ui.inform(OperationMessages.SAVING);
         Backend.updateStorage(secureNUSData.listSecrets());
+        Ui.inform(OperationMessages.SAVE_COMPLETE);
+
     }
 
     /**

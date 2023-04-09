@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.Backend;
+import seedu.duke.messages.OperationMessages;
 import seedu.duke.ui.Ui;
 import seedu.duke.exceptions.OperationCancelException;
 import seedu.duke.exceptions.RepeatedIdException;
@@ -79,8 +80,11 @@ public class AddCreditCardCommand extends AddSecretCommand {
                 "Full Name      = " + fullName + "\n" +
                 "Credit Card No = " + HIDDEN_FIELD + "\n" +
                 "CVC No         = " + HIDDEN_FIELD + "\n" +
-                "Expiry Date    = " + expiryDate);
+                "Expiry Date    = " + HIDDEN_FIELD);
+
+        Ui.inform(OperationMessages.SAVING);
         Backend.updateStorage(secureNUSData.listSecrets());
+        Ui.inform(OperationMessages.SAVE_COMPLETE);
     }
 
     public String inquireCreditCardNumber() throws OperationCancelException {

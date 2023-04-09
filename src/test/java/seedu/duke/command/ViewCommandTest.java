@@ -7,6 +7,7 @@ import seedu.duke.exceptions.RepeatedIdException;
 import seedu.duke.exceptions.secrets.FolderExistsException;
 import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
+import seedu.duke.exceptions.secrets.NullSecretException;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
 import seedu.duke.secrets.BasicPassword;
 import seedu.duke.secrets.Secret;
@@ -45,7 +46,7 @@ class ViewCommandTest {
     }
 
     @Test
-    void extractName() throws SecretNotFoundException {
+    void extractName() throws SecretNotFoundException, NullSecretException, IllegalSecretNameException {
         HashSet<String> usedNames = new HashSet<String>();
         usedNames.add(TEST_NAME);
         ViewCommand viewCommand = new ViewCommand("view " + TEST_NAME, usedNames);
@@ -58,7 +59,7 @@ class ViewCommandTest {
 
     @Test
     void execute_matchingName() throws IllegalFolderNameException, RepeatedIdException, IllegalSecretNameException,
-            FolderExistsException, SecretNotFoundException {
+            FolderExistsException, NullSecretException {
         mockSecureNUSData.addSecret(mockBasicPassword);
         ViewCommand viewCommand = new ViewCommand("view " + TEST_NAME, mockSecureNUSData.getSecretNames());
         viewCommand.execute(mockSecureNUSData);
@@ -68,7 +69,7 @@ class ViewCommandTest {
     }
 
     @Test
-    public void execute_nonMatchingName() throws SecretNotFoundException {
+    public void execute_nonMatchingName() throws NullSecretException, IllegalSecretNameException {
         HashSet<String> usedNames = new HashSet<String>();
         usedNames.add(TEST_NAME);
         ViewCommand viewCommand = new ViewCommand("view " + TEST_NAME, usedNames);
@@ -78,7 +79,7 @@ class ViewCommandTest {
     }
 
     @Test
-    void isExit() throws SecretNotFoundException {
+    void isExit() throws NullSecretException, IllegalSecretNameException {
         HashSet<String> usedNames = new HashSet<String>();
         usedNames.add(TEST_NAME);
         ViewCommand viewCommand = new ViewCommand("view " + TEST_NAME, usedNames);

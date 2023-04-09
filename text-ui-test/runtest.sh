@@ -20,8 +20,12 @@ diff EXPECTED-UNIX.TXT ACTUAL.TXT
 if [ $? -eq 0 ]
 then
     echo "Test passed!"
+    rm assets/database.txt
     exit 0
 else
     echo "Test failed!"
+    rm assets/database.txt
     exit 1
 fi
+
+

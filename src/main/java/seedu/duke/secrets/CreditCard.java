@@ -1,7 +1,7 @@
 package seedu.duke.secrets;
 
 import seedu.duke.Backend;
-import seedu.duke.exceptions.secrets.InvalidCVCNumberException;
+import seedu.duke.exceptions.secrets.InvalidCvcNumberException;
 import seedu.duke.exceptions.secrets.InvalidCreditCardNumberException;
 import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
 
@@ -13,8 +13,8 @@ import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
  */
 public class CreditCard extends Secret {
     public static final String TYPE = "CreditCard";
-    private static final String EXPIRY_DATE_FMT = "[0-1][0-9]/[0-3][0-9]";
-    private static final String CREDIT_CARD_NUMBER_FMT = "\\d{16}";
+    private static final String EXPIRY_DATE_FMT = "[0-1][0-9]/[0-9][0-9]";
+    private static final String CREDIT_CARD_NUMBER_FMT = "\\d{4} \\d{4} \\d{4} \\d{4}";
 
     private static final String CVC_NUMBER_FMT = "\\d{3}";
     private String fullName;
@@ -79,7 +79,7 @@ public class CreditCard extends Secret {
 
     public static CreditCard addCreditCard(String name, String folderName, String
             fullName, String creditCardNumber, String cvcNumber, String expiryDate) throws
-            InvalidExpiryDateException, InvalidCreditCardNumberException, InvalidCVCNumberException {
+            InvalidExpiryDateException, InvalidCreditCardNumberException, InvalidCvcNumberException {
 
         if (!creditCardNumber.matches(CREDIT_CARD_NUMBER_FMT)) {
             throw new InvalidCreditCardNumberException();
@@ -88,7 +88,7 @@ public class CreditCard extends Secret {
             throw new InvalidExpiryDateException();
         }
         if (!isLegalCvcNumber(cvcNumber)) {
-            throw new InvalidCVCNumberException();
+            throw new InvalidCvcNumberException();
         }
         return new CreditCard(name, folderName, fullName, creditCardNumber,
                 cvcNumber, expiryDate);
@@ -99,7 +99,13 @@ public class CreditCard extends Secret {
 
     public static boolean isLegalExpiryDate(String expiryDate) {
         assert expiryDate != null;
-        return expiryDate.matches(EXPIRY_DATE_FMT);
+        if (!expiryDate.matches(EXPIRY_DATE_FMT)) {
+            return false;
+        }
+        String[] monthAndYear = expiryDate.split("/");
+        int month = Integer.parseInt(monthAndYear[0]);
+        int year = Integer.parseInt(monthAndYear[1]);
+        return month >= 1 && month <= 12 && year >= 1;
     }
 
     public static boolean isLegalCreditCardNumber(String creditCardNumber) {
@@ -128,7 +134,7 @@ public class CreditCard extends Secret {
      */
     public void setExpiryDate(String expiryDate) throws InvalidExpiryDateException {
         assert expiryDate != null;
-        if (!expiryDate.matches(EXPIRY_DATE_FMT)) {
+        if (!isLegalExpiryDate(expiryDate)) {
             throw new InvalidExpiryDateException();
         }
         this.expiryDate = expiryDate;
@@ -167,8 +173,11 @@ public class CreditCard extends Secret {
      *
      * @param creditCardNumber A String representing the credit card number to be set.
      */
-    public void setCreditCardNumber(String creditCardNumber) {
+    public void setCreditCardNumber(String creditCardNumber) throws InvalidCreditCardNumberException {
         assert creditCardNumber != null;
+        if (!isLegalCreditCardNumber(creditCardNumber)) {
+            throw new InvalidCreditCardNumberException();
+        }
         this.creditCardNumber = creditCardNumber;
     }
 
@@ -186,10 +195,10 @@ public class CreditCard extends Secret {
      *
      * @param cvcNumber the new CVC number
      */
-    public void setCvcNumber(String cvcNumber) throws InvalidCreditCardNumberException {
+    public void setCvcNumber(String cvcNumber) throws InvalidCvcNumberException {
         assert cvcNumber != null;
-        if (!creditCardNumber.matches(CREDIT_CARD_NUMBER_FMT)) {
-            throw new InvalidCreditCardNumberException();
+        if (!isLegalCvcNumber(cvcNumber)) {
+            throw new InvalidCvcNumberException();
         }
         this.cvcNumber = cvcNumber;
     }
@@ -214,7 +223,7 @@ public class CreditCard extends Secret {
     @Override
     public String toStringForDatabase() {
         String formattedString =  "CreditCard," + super.toStringForDatabase() +
-                "," + this.fullName + "," + Backend.encode(this.creditCardNumber) + "," +
+                "," + Backend.encode(this.fullName) + "," + Backend.encode(this.creditCardNumber) + "," +
                 Backend.encode("" + this.cvcNumber) + "," + this.expiryDate;
         return formattedString;
     }

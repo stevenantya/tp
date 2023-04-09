@@ -13,11 +13,9 @@ import java.util.logging.Level;
 
 import seedu.duke.exceptions.RepeatedIdException;
 import seedu.duke.exceptions.secrets.FolderExistsException;
-import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.exceptions.secrets.IllegalFolderNameException;
+import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
-import seedu.duke.exceptions.secrets.InvalidCreditCardNumberException;
-import seedu.duke.exceptions.secrets.InvalidCVCNumberException;
 import seedu.duke.secrets.Secret;
 import seedu.duke.secrets.StudentID;
 import seedu.duke.secrets.NUSNet;
@@ -36,6 +34,7 @@ import seedu.duke.ui.Ui;
  */
 public class Backend {
     public static boolean isCorrupted = false;
+    public static boolean isDatabaseEmpty = true;
     private static final Logger LOGGER = SecureNUSLogger.LOGGER;
     private static final int DECRYPTION_STARTING_INDEX = 5;
     private static final String DATABASE_FOLDER = "assets";
@@ -67,7 +66,6 @@ public class Backend {
             if (!database.createNewFile()) {
                 database.createNewFile();
             }
-
             //read history if database file exists
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(databasePath));
@@ -76,7 +74,7 @@ public class Backend {
                     String[] inputArray = input.split(Backend.DELIMITER);
                     secretMaster = Backend.readAndUpdate(inputArray, secretMaster);
                     String data = secretMaster.getByIndex(
-                        secretMaster.getSecretEnumerator().size() - 1).toStringForDatabase();
+                            secretMaster.getSecretEnumerator().size() - 1).toStringForDatabase();
                     boolean isCorrupted = !Backend.hash(data).equals(inputArray[inputArray.length - 1]);
                     if (isCorrupted) {
                         throw new IOException();
@@ -94,6 +92,9 @@ public class Backend {
             secretMaster = Backend.initialiseSecretMaster();
         }
 
+        if (secretMaster.listSecrets().size() != 0) {
+            isDatabaseEmpty = false;
+        }
         return secretMaster;
     }
 
@@ -146,41 +147,50 @@ public class Backend {
      */
     public static SecretMaster readAndUpdate(String[] input, SecretMaster secretMaster) throws
             FolderExistsException, RepeatedIdException, IllegalSecretNameException,
-            IllegalFolderNameException, InvalidExpiryDateException, InvalidCreditCardNumberException,
-                InvalidCVCNumberException, IOException {
+            IllegalFolderNameException, InvalidExpiryDateException, IOException {
 
-        if (input[0].equals(Backend.PASSWORD_IDENTIFIER)) { //no first filter
+        if (Secret.isIllegalName(input[2]) || !SecretMaster.isLegalFolderName(input[3])) { //1st filter - name & folder
+            throw new IOException();
+        }
+        if (input[0].equals(Backend.PASSWORD_IDENTIFIER)) { //no 2nd filter
             Secret secret = new BasicPassword(input[2], input[3], Backend.decode(input[4]),
-                    Backend.decode(input[5]), Backend.parseEmptyField(input[6]));
-            secretMaster.addSecret(secret); //second filter
+                    Backend.decode(input[5]), Backend.decode(input[6]));
+            secretMaster.addSecret(secret);
         } else if (input[0].equals(Backend.CREDIT_CARD_IDENTIFIER)) {
-            Secret secret = CreditCard.addCreditCard(input[2], input[3], input[4], //first filter
-                    Backend.decode(input[5]), Backend.decode(input[6]), input[7]);
-            secretMaster.addSecret(secret); //second filter
-        } else if (input[0].equals(Backend.CRYPTOWALLET_IDENTIFIER)) { //no first filter
-            Secret secret = new CryptoWallet(input[2], input[3], Backend.decode(input[4]),
-                    Backend.decode(input[5]), Backend.decode(input[6]),
-                    Backend.createUrlArrayList(input));
-            secretMaster.addSecret(secret); //second filter
+            if (CreditCard.isLegalCreditCardNumber(Backend.decode(input[5])) && CreditCard.isLegalCvcNumber(
+                    Backend.decode(input[6])) && CreditCard.isLegalExpiryDate(input[7])) { //2nd filter
+                Secret secret = new CreditCard(input[2], input[3], Backend.decode(input[4]),
+                        Backend.decode(input[5]), Backend.decode(input[6]), input[7]);
+                secretMaster.addSecret(secret);
+            }
+        } else if (input[0].equals(Backend.CRYPTOWALLET_IDENTIFIER)) {
+            Secret secret = new CryptoWallet(
+                    input[2],
+                    input[3],
+                    Backend.decode(input[4]),
+                    Backend.decode(input[5]),
+                    Backend.decode(input[6]),
+                    new ArrayList<String>());
+            secretMaster.addSecret(secret);
         } else if (input[0].equals(Backend.NUSNETID_IDENTIFIER)) {
-            if (NUSNet.isLegalId(input[4])) { //first filter
+            if (NUSNet.isLegalId(input[4])) { //2nd filter
                 Secret secret = new NUSNet(input[2], input[3], input[4],
                         Backend.decode(input[5]));
-                secretMaster.addSecret(secret); //second filter
+                secretMaster.addSecret(secret);
             } else {
                 throw new IOException();
             }
         } else if (input[0].equals(Backend.STUDENTID_IDENTIFIER)) {
-            if (StudentID.isLegalId(input[4])) { //first filter
+            if (StudentID.isLegalId(input[4])) { //2nd filter
                 Secret secret = new StudentID(input[2], input[3], input[4]);
-                secretMaster.addSecret(secret); //second filter;
+                secretMaster.addSecret(secret);
             } else {
                 throw new IOException();
             }
-        } else if (input[0].equals(Backend.WIFI_PASSWORD_IDENTIFIER)) { //no first filter
+        } else if (input[0].equals(Backend.WIFI_PASSWORD_IDENTIFIER)) {
             Secret secret = new WifiPassword(input[2], input[3], Backend.decode(input[4]),
                     Backend.decode(input[5]));
-            secretMaster.addSecret(secret); //second filter;
+            secretMaster.addSecret(secret);
         } else {
             throw new IOException();
         }
@@ -238,14 +248,6 @@ public class Backend {
         return hashtableFolders;
     }
 
-    public static ArrayList<String> createUrlArrayList(String[] input) {
-        ArrayList<String> urlArrayList = new ArrayList<String>();
-        for (int i = 7; i < input.length - 1; i++) {
-            urlArrayList.add(input[i]);
-        }
-        return urlArrayList;
-    }
-
     /**
      * Encodes a given field using a custom encryption method.
      *
@@ -256,7 +258,16 @@ public class Backend {
         String encodedField = "";
         for (int i = 0; i < field.length(); i++) {
             int asciiValue = (int) (field.charAt(i) + 1);
-            encodedField += (char) asciiValue;
+            if (field.charAt(i) == '+') {
+                encodedField += "PLUS";
+            } else if (field.charAt(i) == ',') {
+                encodedField += "COMMA";
+            } else {
+                encodedField += (char) asciiValue;
+            }
+        }
+        if (field.equals("")) {
+            encodedField += "empty";
         }
         return Backend.ENCRYPTION_IDENTIFIER + encodedField;
     }
@@ -270,9 +281,23 @@ public class Backend {
     public static String decode(String field) {
         String modifiedField = field.substring(Backend.DECRYPTION_STARTING_INDEX);
         String actualField = "";
-        for (int i = 0; i < modifiedField.length(); i++) {
+        int i = 0;
+        while (i < modifiedField.length() ) {
             int asciiValue = (int) (modifiedField.charAt(i) - 1);
-            actualField += (char) asciiValue;
+            Character character = modifiedField.charAt(i);
+            if (character.equals('P')
+                    && (i + 4 <= modifiedField.length()) &&
+                    modifiedField.substring(i, i+4).equals("PLUS")) {
+                actualField += '+';
+                i = i + 4;
+            } else if (character.equals('C') && i + 5 <= modifiedField.length() &&
+                    modifiedField.substring(i, i+5).equals("COMMA")) {
+                actualField += ',';
+                i = i + 5;
+            } else {
+                actualField += (char) asciiValue;
+                i = i + 1;
+            }
         }
         return actualField;
     }
@@ -290,7 +315,7 @@ public class Backend {
     public static String hash(String data) {
         int hashcode = 0;
         for (int i = 0; i < data.length(); i++) {
-            hashcode = (int) (data.charAt(i));
+            hashcode += (int) (data.charAt(i));
         }
         return "" + hashcode;
     }
@@ -310,10 +335,9 @@ public class Backend {
                 Secret secret = input.get(i);
 
                 myWriter.write(secret.toStringForDatabase() + "," +
-                    Backend.hash(secret.toStringForDatabase())+ "\n");
+                        Backend.hash(secret.toStringForDatabase())+ "\n");
             }
             myWriter.close();
-            Ui.inform("User data is successfully updated");
         } catch (IOException e) {
             Ui.inform("Database is not initialised! All user data will not be saved");
             LOGGER.log(Level.SEVERE, SecureNUSLogger.formatStackTrace(e.getStackTrace()));

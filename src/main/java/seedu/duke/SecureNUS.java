@@ -1,7 +1,10 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.NullFolderException;
 import seedu.duke.exceptions.secrets.FolderNotFoundException;
 import seedu.duke.exceptions.secrets.NonExistentFolderException;
+import seedu.duke.exceptions.secrets.NullSecretException;
+import seedu.duke.messages.OperationMessages;
 import seedu.duke.ui.Parser;
 import seedu.duke.ui.Ui;
 import seedu.duke.command.Command;
@@ -66,7 +69,13 @@ public class SecureNUS {
 
         if (Backend.isCorrupted) {
             Ui.printCorruptedDataMessage();
+        } else if (!Backend.isDatabaseEmpty) {
+            Ui.printValidDataMessage();
+        } else {
+            Ui.printNewSessionMessage();
         }
+
+
         boolean isExit = false;
         while (!isExit) {
             Command c = parseCommand();
@@ -81,8 +90,11 @@ public class SecureNUS {
             }
             
         }
-        Ui.close();
+        Ui.inform(OperationMessages.SAVING);
         Backend.updateStorage(this.secureNUSData.listSecrets());
+        Ui.inform(OperationMessages.SAVE_COMPLETE);
+        Ui.inform(OperationMessages.CLOSE);
+        Ui.close();
     }
 
 
@@ -92,29 +104,34 @@ public class SecureNUS {
      * @return A Command object that represents the user input command.
      */
     public Command parseCommand() {
+        Ui.informUserToStartCommand();
         String input = Ui.readCommand();
         Command command = null;
         try {
             command = Parser.parse(input, secureNUSData.getSecretNames(), secureNUSData.getFolders());
         } catch(InvalidCommandException e) {
-            Ui.printError(ErrorMessages.INVALID_COMMAND);
+            Ui.inform(ErrorMessages.INVALID_COMMAND);
             return null;
         } catch (InsufficientParamsException e) {
-            Ui.printError(ErrorMessages.INSUFFICIENT_PARAMS);
+            Ui.inform(ErrorMessages.INSUFFICIENT_PARAMS);
         } catch (IllegalSecretNameException e) {
-            Ui.printError(ErrorMessages.ILLEGAL_SECRET_NAME);
+            Ui.inform(ErrorMessages.ILLEGAL_SECRET_NAME);
         } catch (IllegalFolderNameException e) {
-            Ui.printError(ErrorMessages.ILLEGAL_FOLDER_NAME);
+            Ui.inform(ErrorMessages.ILLEGAL_FOLDER_NAME);
         } catch (OperationCancelException e) {
             Ui.informOperationCancel();
         } catch (RepeatedIdException e) {
-            Ui.printError(ErrorMessages.REPEATED_ID);
+            Ui.inform(ErrorMessages.REPEATED_ID);
         } catch (InvalidFieldException e) {
-            Ui.printError(ErrorMessages.INVALID_FIELD);
+            Ui.inform(ErrorMessages.INVALID_FIELD);
         } catch (SecretNotFoundException e) {
-            Ui.printError(ErrorMessages.SECRET_NOT_FOUND);
+            Ui.inform(ErrorMessages.SECRET_NOT_FOUND);
         } catch (FolderNotFoundException e) {
-            Ui.printError(ErrorMessages.FOLDER_NOT_FOUND);
+            Ui.inform(ErrorMessages.FOLDER_NOT_FOUND);
+        } catch (NullSecretException e) {
+            Ui.inform(ErrorMessages.NULL_SECRET);
+        } catch (NullFolderException e) {
+            Ui.inform(ErrorMessages.NULL_FOLDER);
         }
         return command;
     }

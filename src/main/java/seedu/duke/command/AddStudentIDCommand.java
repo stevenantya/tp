@@ -8,6 +8,7 @@ import seedu.duke.exceptions.RepeatedIdException;
 import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
 import seedu.duke.messages.InquiryMessages;
+import seedu.duke.messages.OperationMessages;
 import seedu.duke.secrets.StudentID;
 import seedu.duke.storage.SecretMaster;
 import seedu.duke.ui.Ui;
@@ -62,7 +63,10 @@ public class AddStudentIDCommand extends AddSecretCommand {
                 "name       = " + name + "\n" +
                 "Folder     = " + folderName + "\n" +
                 "Student ID = " + HIDDEN_FIELD);
+
+        Ui.inform(OperationMessages.SAVING);
         Backend.updateStorage(secureNUSData.listSecrets());
+        Ui.inform(OperationMessages.SAVE_COMPLETE);
     }
 
 

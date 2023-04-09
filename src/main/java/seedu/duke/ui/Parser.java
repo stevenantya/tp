@@ -18,11 +18,13 @@ import seedu.duke.command.ViewCommand;
 import seedu.duke.exceptions.InsufficientParamsException;
 import seedu.duke.exceptions.InvalidCommandException;
 import seedu.duke.exceptions.InvalidFieldException;
+import seedu.duke.exceptions.NullFolderException;
 import seedu.duke.exceptions.OperationCancelException;
 import seedu.duke.exceptions.RepeatedIdException;
 import seedu.duke.exceptions.secrets.FolderNotFoundException;
 import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.IllegalSecretNameException;
+import seedu.duke.exceptions.secrets.NullSecretException;
 import seedu.duke.exceptions.secrets.SecretNotFoundException;
 
 import java.util.HashSet;
@@ -41,24 +43,28 @@ public class Parser {
             InvalidCommandException,
             InsufficientParamsException, IllegalFolderNameException, IllegalSecretNameException,
             OperationCancelException, RepeatedIdException, InvalidFieldException, SecretNotFoundException,
-            FolderNotFoundException {
+            FolderNotFoundException, NullSecretException, NullFolderException {
         if (command.startsWith("new")) {
             return parseAdd(command, usedNames);
         } else if (command.startsWith("delete")) {
+            checkCommand(command, "delete", 2);
             return new DeleteCommand(command);
-        } else if (command.startsWith("list")) {
-            return new ListCommand(command);
+        } else if (command.equals("list") || command.startsWith("list ")) {
+            return new ListCommand(command, folders);
         } else if (command.startsWith("search")) {
+            checkCommand(command, "search", 2);
             return new SearchCommand(command, folders);
         } else if (command.startsWith("view")) {
+            checkCommand(command, "view", 2);
             return new ViewCommand(command, usedNames);
         } else if (command.startsWith("edit")) {
+            checkCommand(command, "edit", 2);
             return new EditCommand(command, usedNames);
-        } else if (command.startsWith("menu")) {
+        } else if (command.equals("menu")) {
             return new MenuCommand();
-        } else if (command.startsWith("save")) {
+        } else if (command.equals("save")) {
             return new SaveCommand();
-        }else if (command.startsWith("exit")) {
+        }else if (command.equals("exit")) {
             return new ExitCommand();
         } else {
             // represents accidental wrong input
@@ -84,18 +90,33 @@ public class Parser {
         if (command.split(" ").length < 3) {
             throw new InsufficientParamsException();
         }
-        if (command.startsWith("new " + AddCreditCardCommand.KEYWORD)) {
+        if (command.startsWith("new " + AddCreditCardCommand.KEYWORD + " ")) {
             return new AddCreditCardCommand(command, usedNames);
-        } else if (command.startsWith("new " + AddCryptoWalletCommand.KEYWORD)) {
-            return new AddCryptoWalletCommand(command, usedNames);
-        } else if (command.startsWith("new " + AddNUSNetCommand.KEYWORD)) {
+        } else if (command.startsWith("new " + AddCryptoWalletCommand.KEYWORD + " ")) {
+            return new AddCryptoWalletCommand(command, usedNames); // Have to change to AddCryptoWalletCommand
+        } else if (command.startsWith("new " + AddNUSNetCommand.KEYWORD + " ")) {
             return new AddNUSNetCommand(command, usedNames);
-        } else if (command.startsWith("new " + AddStudentIDCommand.KEYWORD)) {
+        } else if (command.startsWith("new " + AddStudentIDCommand.KEYWORD + " ")) {
             return new AddStudentIDCommand(command, usedNames);
-        } else if (command.startsWith("new " + AddWifiPasswordCommand.KEYWORD)) {
-            return new AddWifiPasswordCommand(command, usedNames);
+        } else if (command.startsWith("new " + AddWifiPasswordCommand.KEYWORD + " ")) {
+            return new AddWifiPasswordCommand(command, usedNames); // Have to change to AddWifiPasswordCommand
+        } else if (command.startsWith("new " + AddCreditCardCommand.KEYWORD + " ")) {
+            return new AddCreditCardCommand(command, usedNames);
         } else {
             throw new InvalidFieldException();
+        }
+    }
+
+    public static void checkCommand(String command, String commandInitializer, int minParams) throws
+            InsufficientParamsException, InvalidCommandException {
+        if (command.equals(commandInitializer)) {
+            throw new InsufficientParamsException();
+        }
+        if (!command.startsWith(commandInitializer + " ")) {
+            throw new InvalidCommandException();
+        }
+        if (command.split(" ").length < minParams) {
+            throw new InsufficientParamsException();
         }
     }
 }

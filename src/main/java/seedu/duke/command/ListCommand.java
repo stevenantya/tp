@@ -1,5 +1,8 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.NullFolderException;
+import seedu.duke.exceptions.secrets.FolderNotFoundException;
+import seedu.duke.exceptions.secrets.IllegalFolderNameException;
 import seedu.duke.exceptions.secrets.NonExistentFolderException;
 
 import seedu.duke.secrets.Secret;
@@ -15,6 +18,7 @@ import seedu.duke.ui.Ui;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * The ListCommand class represents the command to list all secrets in a specific folder or all secrets if no folder
@@ -22,28 +26,35 @@ import java.util.ArrayList;
  */
 public class ListCommand extends Command {
 
-    private final String folderName;
+    private String folderName;
 
     /**
      * Constructs a new ListCommand object with the given input.
      *
      * @param input the input string containing the folder name, if specified.
      */
-    public ListCommand(String input) {
+    public ListCommand(String input, HashSet<String> folders) throws FolderNotFoundException,
+            IllegalFolderNameException, NullFolderException {
         assert input != null;
-        this.folderName = extractFolderName(input);
+        if (input.equals("list")) {
+            // if you want to display all secrets in all folders
+            folderName = null;
+        } else {
+            // specifically for given secret, hence it cannot be null anymore
+            this.folderName = extractFolderName(input);
+            if (folderName == null) {
+                throw new FolderNotFoundException();
+            }
+            folderCheckWithExistence(folderName, folders);
+        }
     }
 
-    /**
-     * Extracts the folder name from the input string.
-     *
-     * @param input the input string containing the folder name, if specified.
-     * @return the folder name.
-     */
     public String extractFolderName(String input) {
-        String extractedFolderName = "unnamed";
-        if (input.split(" ").length > 1) {
-            extractedFolderName = input.split("f/")[1];
+        assert input != null;
+        String extractedFolderName = null;
+        if (input.split(" f/").length > 1) {
+            extractedFolderName = input.split(" f/")[1];
+            extractedFolderName = extractedFolderName.split(" ")[0];
         }
         return extractedFolderName;
     }
@@ -118,7 +129,7 @@ public class ListCommand extends Command {
             return "Type of Secret: Student ID" + "\n" +
                     "Name: " + studentID.getName() + "\n" +
                     "Folder: " + studentID.getFolderName() + "\n" +
-                    "Student ID: " + studentID.getStudentID()+ "\n";
+                    "Student ID: " + maskStringPassword(studentID.getStudentID())+ "\n";
 
         } else if (secret instanceof WifiPassword) {
             WifiPassword wifiPassword = (WifiPassword) secret;
@@ -142,13 +153,18 @@ public class ListCommand extends Command {
     public void execute(SecretMaster secureNUSData) {
         ArrayList<Secret> secrets;
         try {
-            if (folderName.equals("unnamed")) {
+            if (folderName == null) {
                 secrets = secureNUSData.listSecrets();
             } else {
                 secrets = secureNUSData.listSecrets(folderName);
             }
             if (secrets.isEmpty()) {
-                Ui.inform("There are no secrets in this folder.");
+                if (folderName == null) {
+                    Ui.inform("You have no secrets stored yet.");
+                } else {
+                    // should not reach here since these checks are done above
+                    Ui.inform("There are no secrets in this folder: " + folderName);
+                }
                 return;
             }
             Ui.printLine();
