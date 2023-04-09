@@ -68,6 +68,7 @@ public class DeleteCommand extends Command {
                 try {
                     secureNUSData.removeSecret(deleteData);
                     System.out.println("Successfully deleted: " + secretName);
+
                 } catch (SecretNotFoundException e) {
                     Ui.printError("Secret Not Found: " + secretName);
                 }

@@ -1,8 +1,8 @@
 package seedu.duke.secrets;
 
 import seedu.duke.Backend;
-import seedu.duke.exceptions.secrets.InvalidCreditCardNumberException;
 import seedu.duke.exceptions.secrets.InvalidCvcNumberException;
+import seedu.duke.exceptions.secrets.InvalidCreditCardNumberException;
 import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
 
 /**
@@ -75,6 +75,23 @@ public class CreditCard extends Secret {
             throw new InvalidExpiryDateException();
         }
         this.expiryDate = expiryDate;
+    }
+
+    public static CreditCard addCreditCard(String name, String folderName, String
+            fullName, String creditCardNumber, String cvcNumber, String expiryDate) throws
+            InvalidExpiryDateException, InvalidCreditCardNumberException, InvalidCvcNumberException {
+
+        if (!creditCardNumber.matches(CREDIT_CARD_NUMBER_FMT)) {
+            throw new InvalidCreditCardNumberException();
+        }
+        if (!expiryDate.matches(EXPIRY_DATE_FMT)) {
+            throw new InvalidExpiryDateException();
+        }
+        if (!isLegalCvcNumber(cvcNumber)) {
+            throw new InvalidCvcNumberException();
+        }
+        return new CreditCard(name, folderName, fullName, creditCardNumber,
+                cvcNumber, expiryDate);
     }
     public String getType() {
         return TYPE;
@@ -206,7 +223,7 @@ public class CreditCard extends Secret {
     @Override
     public String toStringForDatabase() {
         String formattedString =  "CreditCard," + super.toStringForDatabase() +
-                "," + this.fullName + "," + Backend.encode(this.creditCardNumber) + "," +
+                "," + Backend.encode(this.fullName) + "," + Backend.encode(this.creditCardNumber) + "," +
                 Backend.encode("" + this.cvcNumber) + "," + this.expiryDate;
         return formattedString;
     }

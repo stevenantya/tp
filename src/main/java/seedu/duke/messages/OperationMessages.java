@@ -28,7 +28,7 @@ public class OperationMessages {
             "Viewing all commands   : menu\n";
 
     public static final String SAVING = "Saving secrets to storage, please do not close application...";
-    public static final String SAVE_COMPLETE = "Save complete. All secrets saved into assets/database.txt. If " +
+    public static final String SAVE_COMPLETE = "Save complete. All secrets saved into assets/database.txt.\nIf " +
             "exporting to another device, save this file into the root directory's assets/database.txt before you " +
             "start me again!";
 
