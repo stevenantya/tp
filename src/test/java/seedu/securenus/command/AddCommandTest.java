@@ -1,34 +1,20 @@
-<<<<<<< HEAD:src/test/java/seedu/duke/command/AddCommandTest.java
-package seedu.duke.command;
-
-import org.junit.jupiter.api.Test;
-import seedu.duke.exceptions.ExceptionMain;
-import seedu.duke.exceptions.OperationCancelException;
-import seedu.duke.exceptions.secrets.FolderExistsException;
-import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
-import seedu.duke.exceptions.secrets.NonExistentFolderException;
-import seedu.duke.exceptions.secrets.SecretNotFoundException;
-import seedu.duke.secrets.BasicPassword;
-import seedu.duke.secrets.CreditCard;
-import seedu.duke.secrets.CryptoWallet;
-import seedu.duke.secrets.NUSNet;
-import seedu.duke.secrets.StudentID;
-import seedu.duke.secrets.WifiPassword;
-import seedu.duke.storage.SecretMaster;
-=======
 package seedu.securenus.command;
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
 import seedu.securenus.exceptions.ExceptionMain;
 import seedu.securenus.exceptions.OperationCancelException;
 import seedu.securenus.exceptions.secrets.FolderExistsException;
+import seedu.securenus.exceptions.secrets.InvalidExpiryDateException;
 import seedu.securenus.exceptions.secrets.NonExistentFolderException;
 import seedu.securenus.exceptions.secrets.SecretNotFoundException;
 import seedu.securenus.secrets.BasicPassword;
+import seedu.securenus.secrets.CreditCard;
+import seedu.securenus.secrets.CryptoWallet;
 import seedu.securenus.secrets.NUSNet;
 import seedu.securenus.secrets.StudentID;
+import seedu.securenus.secrets.WifiPassword;
 import seedu.securenus.storage.SecretMaster;
->>>>>>> upstream/master:src/test/java/seedu/securenus/command/AddCommandTest.java
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -36,18 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * JUnit test class for AddCommand.
  */
 public class AddCommandTest {
-
-<<<<<<< HEAD:src/test/java/seedu/duke/command/AddCommandTest.java
-=======
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-
-    /**
-     * Redirects System.out to outputStreamCaptor.
-     */
-    @BeforeEach
-    public void setStream() {
-        System.setOut(new PrintStream(outputStreamCaptor));
-    }
 
     /**
      * Tests adding a student ID to a folder.
@@ -57,7 +31,6 @@ public class AddCommandTest {
      * @throws FolderExistsException if a folder with the same name already exists.
      * @throws NonExistentFolderException if the folder does not exist in the folder list.
      */
->>>>>>> upstream/master:src/test/java/seedu/securenus/command/AddCommandTest.java
     @Test
     public void studentIDTest() throws SecretNotFoundException, ExceptionMain,
             OperationCancelException, FolderExistsException, NonExistentFolderException {

@@ -1,9 +1,9 @@
-package seedu.duke.ui;
+package seedu.securenus.ui;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import seedu.duke.messages.OperationMessages;
+import seedu.securenus.messages.OperationMessages;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

@@ -1,7 +1,7 @@
-package seedu.duke.command;
+package seedu.securenus.command;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.secrets.WifiPassword;
+import seedu.securenus.secrets.WifiPassword;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 

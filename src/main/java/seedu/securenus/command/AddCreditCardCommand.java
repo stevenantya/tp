@@ -112,7 +112,6 @@ public class AddCreditCardCommand extends AddSecretCommand {
     }
 
     /**
-<<<<<<< HEAD:src/main/java/seedu/duke/command/AddCreditCardCommand.java
      * Overloaded method for unit testing purposes.
      */
     public String inquireCreditCardNumber(Scanner scanner) throws OperationCancelException {
@@ -124,13 +123,12 @@ public class AddCreditCardCommand extends AddSecretCommand {
         return creditCardNumber;
     }
 
-=======
+    /*
      * Prompts the user to enter their CVC number.
      *
      * @return the valid CVC number entered by the user.
      * @throws OperationCancelException if the user cancels the operation.
      */
->>>>>>> upstream/master:src/main/java/seedu/securenus/command/AddCreditCardCommand.java
     public String inquireCvcNumber() throws OperationCancelException {
         String number = inquire(InquiryMessages.CVC_NUMBER, "CVC Number");
         while(!CreditCard.isLegalCvcNumber(number)) {
@@ -140,7 +138,6 @@ public class AddCreditCardCommand extends AddSecretCommand {
         return number;
     }
 
-<<<<<<< HEAD:src/main/java/seedu/duke/command/AddCreditCardCommand.java
     public String inquireCvcNumber(Scanner scanner) throws OperationCancelException {
         String number = inquire(InquiryMessages.CVC_NUMBER, "CVC Number", scanner);
         while(!CreditCard.isLegalCvcNumber(number)) {
@@ -150,14 +147,12 @@ public class AddCreditCardCommand extends AddSecretCommand {
         return number;
     }
 
-=======
     /**
      * Prompts the user to enter the expiry date of their credit card.
      *
      * @return the valid expiry date entered by the user
      * @throws OperationCancelException if the user cancels the operation
      */
->>>>>>> upstream/master:src/main/java/seedu/securenus/command/AddCreditCardCommand.java
     public String inquireExpiryDate() throws OperationCancelException {
         String number = inquire(InquiryMessages.EXPIRY_DATE, "Expiry Date");
         while(!CreditCard.isLegalExpiryDate(number)) {

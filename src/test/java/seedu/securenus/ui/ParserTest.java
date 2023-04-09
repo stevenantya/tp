@@ -1,24 +1,24 @@
-package seedu.duke.ui;
+package seedu.securenus.ui;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.duke.command.Command;
-import seedu.duke.command.EditCommand;
-import seedu.duke.command.ExitCommand;
-import seedu.duke.command.ListCommand;
-import seedu.duke.command.MenuCommand;
-import seedu.duke.command.SaveCommand;
-import seedu.duke.command.SearchCommand;
-import seedu.duke.command.ViewCommand;
-import seedu.duke.exceptions.InsufficientParamsException;
-import seedu.duke.exceptions.InvalidCommandException;
-import seedu.duke.exceptions.InvalidFieldException;
-import seedu.duke.exceptions.OperationCancelException;
-import seedu.duke.exceptions.RepeatedIdException;
-import seedu.duke.exceptions.secrets.IllegalFolderNameException;
-import seedu.duke.exceptions.secrets.IllegalSecretNameException;
+import seedu.securenus.command.Command;
+import seedu.securenus.command.EditCommand;
+import seedu.securenus.command.ExitCommand;
+import seedu.securenus.command.ListCommand;
+import seedu.securenus.command.MenuCommand;
+import seedu.securenus.command.SaveCommand;
+import seedu.securenus.command.SearchCommand;
+import seedu.securenus.command.ViewCommand;
+import seedu.securenus.exceptions.InsufficientParamsException;
+import seedu.securenus.exceptions.InvalidCommandException;
+import seedu.securenus.exceptions.InvalidFieldException;
+import seedu.securenus.exceptions.OperationCancelException;
+import seedu.securenus.exceptions.RepeatedIdException;
+import seedu.securenus.exceptions.secrets.IllegalFolderNameException;
+import seedu.securenus.exceptions.secrets.IllegalSecretNameException;
 
 import java.util.HashSet;
 

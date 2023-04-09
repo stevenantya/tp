@@ -1,9 +1,9 @@
-package seedu.duke.command;
+package seedu.securenus.command;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.exceptions.OperationCancelException;
-import seedu.duke.exceptions.secrets.InvalidExpiryDateException;
-import seedu.duke.secrets.CreditCard;
+import seedu.securenus.exceptions.OperationCancelException;
+import seedu.securenus.exceptions.secrets.InvalidExpiryDateException;
+import seedu.securenus.secrets.CreditCard;
 
 import java.io.ByteArrayInputStream;
 import java.util.Scanner;

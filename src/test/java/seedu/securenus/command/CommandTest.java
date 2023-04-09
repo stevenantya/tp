@@ -1,14 +1,14 @@
-package seedu.duke.command;
+package seedu.securenus.command;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.duke.exceptions.secrets.FolderExistsException;
-import seedu.duke.exceptions.secrets.IllegalFolderNameException;
-import seedu.duke.exceptions.secrets.IllegalSecretNameException;
-import seedu.duke.exceptions.secrets.NullSecretException;
-import seedu.duke.exceptions.secrets.SecretNotFoundException;
-import seedu.duke.secrets.BasicPassword;
-import seedu.duke.storage.SecretMaster;
+import seedu.securenus.exceptions.secrets.FolderExistsException;
+import seedu.securenus.exceptions.secrets.IllegalFolderNameException;
+import seedu.securenus.exceptions.secrets.IllegalSecretNameException;
+import seedu.securenus.exceptions.secrets.NullSecretException;
+import seedu.securenus.exceptions.secrets.SecretNotFoundException;
+import seedu.securenus.secrets.BasicPassword;
+import seedu.securenus.storage.SecretMaster;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

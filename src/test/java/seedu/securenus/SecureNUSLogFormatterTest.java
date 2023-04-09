@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.securenus;
 
 import java.time.Instant;
 import java.util.logging.LogRecord;

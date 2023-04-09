@@ -1,7 +1,7 @@
-package seedu.duke.command;
+package seedu.securenus.command;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.secrets.NUSNet;
+import seedu.securenus.secrets.NUSNet;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
