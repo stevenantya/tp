@@ -19,6 +19,7 @@ component SecureNUS {
         abstract class Command {
             {static}# HIDDEN_FIELD: String
             {static}# CANCEL_COMMAND: String
+            {static}- FOLDER_DELIMITER: String
             {static}- EMPTY_STRING_REGEX: String
             {abstract}+ isExit(): boolean
             {abstract}+ execute(SecretMaster): void
@@ -93,6 +94,7 @@ component SecureNUS {
         }
 
         class DeleteCommand {
+            {static}- SECRET_DELIMITER: String
             - secretNames: String[]
             + DeleteCommand(String): void
             + extractName(String): String
@@ -128,6 +130,7 @@ component SecureNUS {
         }
 
         class ListCommand {
+            {static}- FOLDER_DELIMITER: String
             - folderName: String
             + ListCommand(String, HashSet<String>): void
             + extractFolderName(String): String
@@ -143,6 +146,7 @@ component SecureNUS {
         }
 
         class SearchCommand {
+            {static}- FOLDER_DELIMITER: String
             - name: String
             - folderName: String
             + SearchCommand(String, HashSet<String>): void

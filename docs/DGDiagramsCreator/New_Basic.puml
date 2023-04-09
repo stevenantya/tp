@@ -1,0 +1,78 @@
+!include Style.puml
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+actor User #FFFBBB
+User-> "secureNUS:SecureNUS" #FFBBBB:
+"secureNUS:SecureNUS" -> "secureNUS:SecureNUS"#00cccc: run()
+"secureNUS:SecureNUS" -> ":Ui"#F00000: greetUser()
+return
+loop while !isExit
+
+    "secureNUS:SecureNUS" -> "secureNUS:SecureNUS"#FF0AB0: parseCommand()
+    "secureNUS:SecureNUS" -> ":Ui"#F00000: readCommand()
+    User-> ":Ui" #FFBBBB: "new password"
+    return
+    return
+    "secureNUS:SecureNUS" -> ":Parser"#BBFFFF: parse(command, usedNames, folders)
+    ":Parser"-> ":Parser"#FFFAAA:parseAdd(command, usedNames)
+    ":Parser" -> ":AddBasicPassword" **
+    activate ":AddBasicPassword"#BBB
+    ":AddBasicPassword"-> ":AddBasicPassword"#FFFAAA:extractName(input, keyword)
+    return
+    ":AddBasicPassword"-> ":AddBasicPassword"#FFFAAA:extractFolderName(input)
+    return
+    ":AddBasicPassword"-> ":AddBasicPassword"#FFFAAA:inquire(URL, "URL")
+    return
+    ":AddBasicPassword"-> ":AddBasicPassword"#FFFAAA:inquire(USERNAME, "Username")
+    return
+    ":AddBasicPassword"-> ":AddBasicPassword"#FFFAAA:inquire(PASSWORD, "Password")
+    return
+    return
+    return
+    return
+    return command
+    "secureNUS:SecureNUS" -> "secureNUS:SecureNUS"#BBFFFB:executeCommand(c)
+    "secureNUS:SecureNUS" -> ":AddBasicPassword"#FFAAFF:execute(secureNUSData)
+    ":AddBasicPassword" -> ":BasicPassword"**
+    activate ":BasicPassword"
+    return
+    ":AddBasicPassword" -> ":SecretMaster"#FA0012:addSecret(basicPasswordData)
+    ":SecretMaster" -> ":SecretEnumerator"#FF1233:add(secret)
+    return
+    ":SecretMaster" -> ":SecretSearcher"#FF1233:add(secret)
+    return
+    return
+    ":AddBasicPassword" -> ":Ui"#000134: inform("I have added new basic password")
+    return
+    return
+    return isExit = false
+end
+"secureNUS:SecureNUS" -> ":Ui"#000134: inform(SAVING)
+return
+
+"secureNUS:SecureNUS" -> ":Backend"#317821: updateStorage(input)
+
+return
+
+"secureNUS:SecureNUS" -> ":Ui"#000134: inform(SAVE_COMPLETE)
+return
+"secureNUS:SecureNUS" -> ":Ui"#000134: inform(CLOSE)
+return
+"secureNUS:SecureNUS" -> ":Ui"#000134: close()
+return
+return
+return
+
+destroy ":Parser"
+destroy ":Ui"
+destroy ":Backend"
+destroy ":AddBasicPassword"
+destroy ":BasicPassword"
+destroy "secureNUS:SecureNUS"
+destroy ":SecretMaster"
+destroy ":SecretEnumerator"
+destroy ":SecretSearcher"
+
+@enduml
