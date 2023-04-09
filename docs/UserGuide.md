@@ -12,6 +12,7 @@ comfortable typing commands.
 
 In summary, SecureNUS offers a reliable and secure secret management solution for NUS students, addressing the
 challenge of managing multiple passwords for various sites and applications.
+<br>
 
 ## Table of Contents
 <!-- TOC -->
@@ -33,14 +34,14 @@ challenge of managing multiple passwords for various sites and applications.
 3. Open a Command Prompt in your system which contains the JAR File.
                                                                           
 4. Verify if the Java Version you are using is *Java 11* (recommended and tested version) by using `java -version`
-   <img src="./UGImages/QuickStart/CheckJavaVersion.jpg" width="10%" />.                                                                       
+   <img src="./UGImages/QuickStart/CheckJavaVersion.jpg" width="100%" />.                                                                       
 
 5. Using `cd`, navigate to the folder where `[CS2113-T15-2][SecureNUS].jar` is stored in your system. 
 
 6. Launch the application in the terminal after running `java -jar [CS2113-T15-2][SecureNUS].jar` in the terminal. 
 
     If the program is launched correctly, you can see the following.
-   <img src="./UGImages/QuickStart/UI.jpg" width="10%" />
+   <img src="./UGImages/QuickStart/UI.jpg" width="100%" />
 
 7. Type the command when prompted and press enter to execute it. e.g. typing `menu` and pressing menu will give an
 overview of all the user commands.<br>
@@ -54,8 +55,7 @@ Some example commands:
    * `search n/cc f/ccfold`: search for entries in the `ccfold` folder which have `cc` in their name.
    * `edit pname`: edit the secret to another in `pname`.
    * `exit`: exit from the program. 
-                                          
-<br>
+
 <table>
     <tr>
         <td> <a href="#table-of-contents">Table of Contents </a> </td>
@@ -137,7 +137,7 @@ is stored in an `unnamed` folder.
 
 ### Add new Secret
 
-##### Overview
+Overview:
 - SecureNUS provides a simple way to create new secrets in the secret manager with the `new` command.
 
 - Users can select the type of secret they want to store by using the `o/OPTION` extension with the `new` command.
@@ -154,8 +154,8 @@ using `view` command which will be elaborated upon [here](#view-masked-secret).
 users are advised to keep saving their passwords using the `save` command. Users can refer [here](#save-secrets)
 for more details on the `save` command.
 
-##### General Format: 
-`new [o/OPTION] SECRET_NAME [f/FOLDER_NAME]`
+Format: `new [o/OPTION] SECRET_NAME [f/FOLDER_NAME]`
+
 <table>
     <tr>
         <td> Basic Password </td>
@@ -223,8 +223,7 @@ for more details on the `save` command.
     <tr>
 </table>
 
-###### Examples and Outputs:
-
+Examples and Outputs:
 <img src="./UGImages/AddPassword/Addbasicpassword.jpg" width="100%" /> <br>
 <img src="./UGImages/AddPassword/Addccpassword.jpg" width="100%" />
 
@@ -237,7 +236,7 @@ for more details on the `save` command.
 
 ### Delete a Secret
 
-##### Overview
+Overview
 - Deletes a secret from the existing list of secrets using secret name. 
 
 - Can delete multiple secrets in the same command.
@@ -246,11 +245,10 @@ for more details on the `save` command.
 `assets` folder. But users are advised to keep saving their passwords using the `save` command. Users can refer
 [here](#save-secrets) for more details on the `save` command.
 
-##### General Format: `delete SECRET_NAME1 [SECRET _NAME2] […]`
+General Format: `delete SECRET_NAME1 [SECRET_NAME2] […]`
 
-###### Examples and Outputs:
-<img src="./UGImages/DeletePassword/deletepassword.jpg" width="10%" />
-<br>
+Examples and Outputs:
+<img src="./UGImages/DeletePassword/deletepassword.jpg" width="100%" />
 
 <table>                                                               
     <tr>                                                           
@@ -261,7 +259,7 @@ for more details on the `save` command.
 
 ### List all Secrets
 
-##### Overview
+Overview
 - SecureNUS enables users to list secrets stored in a specified folder if the folder name is specified.
 
 - It also enables users to list all the secrets if the folder name is not specified.
@@ -269,11 +267,11 @@ for more details on the `save` command.
 - Do note, secrets and other sensitive information are masked by asterisks for security purposes. They can be viewed
   using `view` command which will be elaborated upon [here](#view-masked-secret).
 
-###### General Format: `list [f/FOLDER_NAME]`
+General Format: `list [f/FOLDER_NAME]`
 
-###### Examples and Outputs:
-<img src="./UGImages/ListPassword/ListwithoutFolder.jpg" width="10%" /> 
-<img src="./UGImages/ListPassword/ListwithFolder.jpg" width="10%" />
+Examples and Outputs:
+<img src="./UGImages/ListPassword/ListwithoutFolder.jpg" width="100%" /> 
+<img src="./UGImages/ListPassword/ListwithFolder.jpg" width="100%" />
 <br>
 
 <table>                                                               
@@ -285,21 +283,25 @@ for more details on the `save` command.
 
 ### View Masked Secret
 
-##### Overview
+Overview
 - When creating a new secret using the `new` command in SecureNUS or while listing the existing secrets using `list` 
 command, the secret entered by the user is hidden under asterisks (********) for added security.
+
 - This is a common practice in password management systems to prevent anyone from viewing the actual secrets.
+
 - Users can view the original secret using the `view` command, which will display the secrets in plain text.
+
 - It is important to exercise caution when using the `view` command, as anyone with access to the SecureNUS application
 can view the secrets in plain text.
+
 - Therefore, it is recommended to use SecureNUS on a secure and private device, and to take necessary precautions to 
 prevent unauthorized access to the application.
 
-###### General Format: `view SECRET_NAME`
+General Format: `view SECRET_NAME`
 
-###### Examples and Outputs: <br>
-<img src="./UGImages/ViewPassword/viewpassword.jpg" width="10%" />
-<br>
+Examples and Outputs: 
+<img src="./UGImages/ViewPassword/viewpassword.jpg" width="100%" />
+
 
 <table>                                                               
     <tr>                                                           
@@ -308,21 +310,24 @@ prevent unauthorized access to the application.
     </tr>                                                          
 </table> 
 
-### Search Secrets
-###### Overview
+### Search Secrets 
+Overview
 - SecureNUS allows users to search for stored secrets by using partial characters of the secret name but not that of 
 the folder name.
+
 - This feature helps users to quickly locate a specific secret in a large list of stored secrets.
+
 - It is important to remember that secret names are case-sensitive, and users must enter the correct case of the secret 
 name when searching.
+
 - This search functionality is a convenient and time-saving feature for users who have many stored secrets and need to
 locate a specific one quickly.
 
-###### General Format: `search SECRET_NAME_LIKE [f/FOLDER_NAME]`
+General Format: `search SECRET_NAME_LIKE [f/FOLDER_NAME]`
 
-###### Examples and Outputs: <br>
+Examples and Outputs: 
 <img src="./UGImages/SearchPassword/SearchPasswordWithoutFolder.jpg" width="100%" /> <br>
-<img src="./UGImages/SearchPassword/SearchPasswordWithFolder.jpg" width="100%" /> <br>
+<img src="./UGImages/SearchPassword/SearchPasswordwithFolder.jpg" width="100%" /> <br>
 <br>
 
 <table>                                                               
@@ -333,21 +338,27 @@ locate a specific one quickly.
 </table>
 
 ### Save Secrets
-###### Overview
+Overview
 - SecureNUS allows to save a secret in the `database.txt` file located in the `assets` folder using the `save` 
 command.
+
 - The secrets will be saved even after exiting the program using the `exit` command. 
+
 - In SecureNUS, if the `database.txt` file is not corrupted, users can view their saved secrets even after 
 reloading the JAR file by running `java -jar [CS2113-T15-2][SecureNUS].jar` in the terminal.
+
 - The `database.txt` file is used to store all secrets in a structured manner for easy retrieval and management.
 - Each time a new secret is created using `new` command, delete a secret using `delete` command and edit a secret using
-the `edit` command, the changes are automatically saved in the `database.txt` file
-- It is recommended that the users keep using the `save` command to store their secrets. <br>
+the `edit` command, the changes are automatically saved in the `database.txt` file.
 
-##### Important Note
+- It is recommended that the users keep using the `save` command to store their secrets. 
+
+Important Note
 - Please refrain from manually editing or tampering the `database.txt` file as it may lead to data corruption. 
+
 - To know if the database.txt is corrupted, exit from the current program run using the `exit` command and rerun the 
 JAR file using `java -jar [CS2113-T15-2][SecureNUS].jar` and observe the following in the UI: 
+
 <table>
     <tr>
         <td> 1. </td>
@@ -378,9 +389,10 @@ JAR file using `java -jar [CS2113-T15-2][SecureNUS].jar` and observe the followi
   current point. That way all the corrupted data in `database.txt` will be overwritten by the new secrets, thus leading 
   to no loss of data. 
   * Can revert the `database.txt` to the original contents before its corruption. 
-###### General Format: `save`
+  
+General Format: `save`
 
-###### Examples and Outputs: 
+Examples and Outputs: 
 <img src="./UGImages/SavePassword/Savecommand.jpg" width="50%"/>
 <br>
 
@@ -392,15 +404,17 @@ JAR file using `java -jar [CS2113-T15-2][SecureNUS].jar` and observe the followi
 </table>
 
 ### Edit Secrets
-###### Overview
+Overview
 - SecureNUS enables users to edit an existing secret using the `edit` command.
+
 - By using the `edit` command, users can make changes to a secret without having to delete it and create a new one.
+
 - It is important to note that secret names are case-sensitive and must be entered correctly in order to edit the 
 associated secret.
 
-###### General Format: `edit SECRET_NAME`
+General Format: `edit SECRET_NAME`
 
-###### Examples and Outputs: <br>
+###### Examples and Outputs: 
 <img src="./UGImages/EditPassword/edit.jpg" width="65%" />
 <br>
 
@@ -412,16 +426,18 @@ associated secret.
 </table>
 
 ### Menu
-###### Overview
+Overview
 - In SecureNUS, the menu command displays a list of available commands that users can access from the 
 command line interface.
+
 - This feature is useful for new users who may be unfamiliar with the available commands and need a quick reference.
+
 - The menu command also provides a convenient way for users to access specific commands 
 without having to remember their syntax or name.
 
-###### General Format: `menu`
+General Format: `menu`
 
-###### Examples and Outputs: 
+Examples and Outputs: 
 <img src="./UGImages/Menu.png" width="65%" />
 <br>
 
@@ -433,15 +449,16 @@ without having to remember their syntax or name.
 </table>
 
 ### Exit
-###### Overview
+Overview
 - In SecureNUS, the exit command is used to terminate the program and exit the command line interface.
+
 - This command is useful for users who are finished using the application and wish to close it without having to close 
 the entire command prompt or terminal.
 - If the `database.txt` file is not corrupted, the `exit` command will save the current list of secrets. 
 
-###### General Format: `exit`
+General Format: `exit`
 
-###### Examples and Outputs: 
+Examples and Outputs: 
 <img src="./UGImages/exitcommand.jpg" width="65%" />
 <br>
 
@@ -454,19 +471,21 @@ the entire command prompt or terminal.
 
 
 ### Cancel current operation
-###### Overview
+Overview
 - The `c/` command allows users to cancel the current operation in SecureNUS. 
 This can be useful in situations where the user has started an operation, but realizes that they need to abort it 
 before it is complete.
+
 - To cancel the current operation, simply type `c/` followed by the Enter key. SecureNUS will immediately terminate the 
 current operation and return the user to the main command prompt.
+
 - Note that cancelling an operation may result in data loss or other unintended consequences, depending on the specific 
 operation being performed. It is recommended that users use the `c/` command only when absolutely necessary and that 
 they save their data frequently to avoid losing any unsaved changes.
 
-###### General Format: `c/`
+General Format: `c/`
 
-###### Examples and Outputs:
+Examples and Outputs:
 <img src="./UGImages/Cancelop.jpg" width="65%" />
 <br>
 <table>                                                               
@@ -524,6 +543,7 @@ it is automatically saved in the `database.txt` file in the `assets` folder.
 * On exiting the program using the `exit` command, SecureNUS will save all the unsaved secrets in 
 the `database.txt` file.
 * Users have an option to keep saving their secrets using the `save` command.
+
 <br>
 
 **Q:** How can I report a bug or issue with SecureNUS? <br>
