@@ -84,12 +84,29 @@ public class Ui {
         return "";
     }
 
+    public static String readCommand(Scanner in) {
+        while (in.hasNextLine()) {
+            String line = in.nextLine();
+            return removeExtraWhiteSpaces(line);
+        }
+        return "";
+    }
+
     /**
      * Reads a line of input from the user through the console.
      *
      * @return a String containing the line of input entered by the user, or an empty String if no input is available
      */
     public static String readLine() {
+        while (in.hasNextLine()) {
+            String line = in.nextLine();
+
+            return line;
+        }
+        return "";
+    }
+
+    public static String readLine(Scanner in) {
         while (in.hasNextLine()) {
             String line = in.nextLine();
 
@@ -106,7 +123,7 @@ public class Ui {
      * @return the input string with all backslashes removed
      */
     public static String removeBackSlashes(String input) {
-        return input.replaceAll("\\", "\\\\");
+        return input.replaceAll("\\\\", "\\\\\\\\");
     }
 
     /**
