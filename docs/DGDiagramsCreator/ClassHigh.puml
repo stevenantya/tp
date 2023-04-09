@@ -1,34 +1,61 @@
 @startuml
 !include Style.puml
 title Class Connectivity Diagram
-actor User
-file "database"
-frame "Application" {
-    frame "UI" {
-        node Ui
-        node Parser
-        node Commands
-        Ui -> Parser
-        Parser -> Commands
+component "Application" {
+    component 'SecureNUS {
+        package "command" {
+            node Commands
+        }
+        package secureNUS {
+            node SecureNUS
+        }
     }
-    frame SecureNUS {
-        node SecureNUS
+
+    component UI {
+        package "ui" {
+            node Ui
+            node Parser
+            Ui -> Parser
+        }
+
     }
-    frame SecretStorage {
-        node SecretMaster
-        node SecretEnumerator
-        node SecretSearcher
+
+    Parser -right-> Commands
+
+    component 'Backend {
+        package secureNUS {
+            node Backend
+        }
     }
-    frame Backend {
-        node Backend
+    component SecretStorage {
+        package SecretStorage {
+            node SecretMaster
+            node SecretEnumerator
+            node SecretSearcher
+        }
     }
-    Commands --> SecureNUS.SecureNUS
-    SecureNUS.SecureNUS --> SecretMaster
+
+    Commands --> SecureNUS
+    SecureNUS --> SecretMaster
     SecretMaster --> SecretSearcher
     SecretMaster --> SecretEnumerator
-    SecretMaster <-> Backend.Backend
+    SecretMaster <-right-> Backend
 
 }
-Ui <-left- User
-Application.Backend.Backend <-left-> database
+component InputCLI {
+    actor User
+}
+component Logger {
+    node secure.SecureNUSLogger
+    node secure.SecureNUSLoggerFormatter
+    SecureNUSLogger --> SecureNUSLoggerFormatter
+}
+component OutputFiles {
+    file logFiles
+    file database
+}
+Application --> SecureNUSLogger
+SecureNUSLoggerFormatter --> logFiles
+User --> Ui
+Backend <-> database
 @enduml
