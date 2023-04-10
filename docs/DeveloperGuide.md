@@ -317,7 +317,7 @@ AddBasicPasswordCommand extends AddSecret abstract class and extends Command cla
 - **SecureNUS#parseCommand()**
 - **SecureNUS#execute(Command)**
 - **AddBasicPassword#addSecret(BasicPassword)**
-- **SecureNUS#updateStorage(ArrayList\<Secret\>)**  
+- **SecureNUS#updateStorage(ArrayList\<Secret>)**  
 
 
 Given below is an example usage scenario and how instantiation of basic password behaves at each step. Some details are omitted for the sake of better viewability in demonstration. Details after the loop are removed as well. The usage scenario is not an object diagram, a sequence diagram, nor a class diagram. It is purely to demonstrate the feature usage.
@@ -368,7 +368,7 @@ The Delete feature will implement the following operations:
 - **SecureNUS#parseCommand()**
 - **SecureNUS#execute(Command)**
 - **DeleteCommand#removeSecret(deleteData)**
-- **SecureNUS#updateStorage(ArrayList\<Secret\>)**  
+- **SecureNUS#updateStorage(ArrayList\<Secret>)**  
 
 Given below is an example usage scenario and how instantiation of basic password behaves at each step. Some details are omitted for the sake of better viewability in demonstration. Details after the loop are removed as well. The usage scenario is not an object diagram, sequence diagram, nor a class diagram. It is purely to demonstrate the feature usage.
 
