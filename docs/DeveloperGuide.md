@@ -189,7 +189,7 @@ scenario where the user creates a new basic password initiated using the command
 [//]: # (@@author stevenantya)
 
 
-<img src="./DGimages/image4.png" width="100%" />
+<img src="./DGDiagramsCreator/Basic_Intro.png" width="100%" />
 
 In the diagram above, the following Components-Classes are:
 * **UI**- Ui, Parser 
@@ -296,6 +296,8 @@ responses/ feedback to the User.
 ## Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
+This developer guide will show an example of 3 implementations, namely,
+Add Basic Password Feature, Delete Password Feature, and List Password Feature
 
 
 ### Add Basic Password
@@ -303,7 +305,7 @@ This section describes some noteworthy details on how certain features are imple
 The `new` function allows the user to add new basic password stored in the password manager. When the user selects the add basic password function, they will be prompted to enter the name, url, 
 username, and password. Once the users enters the prompt, a new password will be created
 
-The basic password, an object that extends the secret object, has a mechanism that is facilitated by SecureNUS’s parse() and execute() command. It is then stored internally in ArrayList<Secret> in SecretStorage, and is saved to harddisk by the Backend class.
+The basic password, an object that extends the secret object, has a mechanism that is facilitated by SecureNUS’s parse() and execute() command. It is then stored internally in ArrayList<Secret> in SecretStorage, and is saved to database.txt by the Backend class.
 
 Basic Password has attributes: name, folder name, username, password and url.
 
@@ -323,25 +325,25 @@ Given below is an example usage scenario and how instantiation of basic password
 <img src="./DGimages/image10.png" width="50%" />
 
 **Step 2.** When the user executes “new basic_password” command to add basic password, the SecureNUS calls parse() method to parse the user’s input
-<img src="./DGimages/image18.png" width="100%" />
+<img src="./DGimages/step2_add.png" width="100%" />
 
 **Step 3.** AddBasicPasswordCommand is then instantiated by the Parser by calling its constructor.
-<img src="./DGimages/image14.png" width="100%" />
+<img src="./DGimages/step3_add.png" width="100%" />
 
 **Step 4.** The parser then would return back to the SecureNUS class, which will then call the execute method in the AddBasicPasswordCommand object. The method will return false in this case because it is not an exit command
 <img src="./DGimages/image5.png" width="100%" />
 
 **Step 5.** In the AddBasicPasswordCommand execute method, it will instantiate a new BasicPassword Secret object.
-<img src="./DGimages/image6.png" width="100%" />
+<img src="./DGimages/updated_step5_add.png" width="100%" />
 
 **Step 6.** The BasicPassword object will then be written to the SecretMaster that stores all of the password locally
-<img src="./DGimages/image9.png" width="100%" />
+<img src="./DGimages/updated_step6_add.png" width="100%" />
 
 **Step 7.** Finally, when saving, the data in the SecretMaster is then written to the harddisk by the Backend.
-<img src="./DGimages/image13.png" width="100%" />
+<img src="./DGimages/Backend_Static.png" width="100%" />
 
 The complete sequence diagram is given below
-<img src="./DGimages/image4.png" width="100%" />
+<img src="./DGDiagramsCreator/Basic_Intro.png" width="100%" />
 <u>Sequence Diagram of Add Basic Password</u>
 
 <table>
@@ -373,10 +375,10 @@ Given below is an example usage scenario and how instantiation of basic password
 <img src="./DGimages/image10.png" width="50%" />
 
 **Step 2.** When the user executes “delete basic_password” command to delete basic password, the SecureNUS calls parse() method to parse the user’s input
-<img src="./DGimages/image18.png" width="100%" />
+<img src="./DGimages/step2_add.png" width="100%" />
 
 **Step 3.** DeleteCommand is then instantiated by the Parser by calling its constructor.
-<img src="./DGimages/image25.png" width="100%" />
+<img src="./DGimages/step3_delete.png" width="100%" />
 
 **Step 4.** The parser then would return back to the SecureNUS, which will then call the execute method in the DeleteCommand object. The method will return false in this case because it is not an exit command
 <img src="./DGimages/image12.png" width="100%" />
@@ -385,7 +387,7 @@ Given below is an example usage scenario and how instantiation of basic password
 <img src="./DGimages/image7.png" width="100%" />
 
 **Step 6.** Finally when saving, the updated data in the SecretMaster is then written to the harddisk by the Backend.
-<img src="./DGimages/image13.png" width="100%" />
+<img src="./DGimages/Backend_Static.png" width="100%" />
 
 The complete sequence diagram is given below.
 <img src="./DGimages/image27.png" width="100%" />
@@ -422,10 +424,10 @@ Given below is an example usage scenario and how instantiation of basic password
 <img src="./DGimages/image10.png" width="50%" />
 
 **Step 2.** When the user executes “list folderName” command to list all passwords in folder folderName, the SecureNUS calls parse() method to parse the user’s input
-<img src="./DGimages/image18.png" width="100%" />
+<img src="./DGimages/step2_add.png" width="100%" />
 
 **Step 3.** ListCommand is then instantiated by the Parser by calling its constructor.
-<img src="./DGimages/image14.png" width="100%" />
+<img src="./DGimages/step3_list.png" width="100%" />
 
 **Step 4.** The parser then would return back to the SecureNUS, which will then call the execute method in the ListCommand object. The method will return false in this case because it is not an exit command
 <img src="./DGimages/image15.png" width="100%" />
