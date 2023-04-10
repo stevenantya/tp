@@ -16,7 +16,6 @@ import seedu.securenus.storage.SecretMaster;
 
 import java.util.HashSet;
 import java.util.logging.Level;
-import java.util.Scanner;
 
 /**
  * A class to add a new credit card to the user's secureNUSData.
@@ -114,18 +113,6 @@ public class AddCreditCardCommand extends AddSecretCommand {
         return creditCardNumber;
     }
 
-    /**
-     * Overloaded method for unit testing purposes.
-     */
-    public String inquireCreditCardNumber(Scanner scanner) throws OperationCancelException {
-        String creditCardNumber = inquire(InquiryMessages.CREDIT_CARD_NUMBER, "Credit Card Number", scanner);;
-        while(!CreditCard.isLegalCreditCardNumber(creditCardNumber)) {
-            System.out.println(InquiryMessages.CREDIT_CARD_NUMBER_RETRY);
-            creditCardNumber = inquire(InquiryMessages.CREDIT_CARD_NUMBER, "Credit Card Number", scanner);
-        }
-        return creditCardNumber;
-    }
-
     /*
      * Prompts the user to enter their CVC number.
      *
@@ -141,15 +128,6 @@ public class AddCreditCardCommand extends AddSecretCommand {
         return number;
     }
 
-    public String inquireCvcNumber(Scanner scanner) throws OperationCancelException {
-        String number = inquire(InquiryMessages.CVC_NUMBER, "CVC Number", scanner);
-        while(!CreditCard.isLegalCvcNumber(number)) {
-            System.out.println(InquiryMessages.CVC_NUMBER_RETRY);
-            number = inquire(InquiryMessages.CVC_NUMBER, "CVC Number", scanner);
-        }
-        return number;
-    }
-
     /**
      * Prompts the user to enter the expiry date of their credit card.
      *
@@ -161,15 +139,6 @@ public class AddCreditCardCommand extends AddSecretCommand {
         while(!CreditCard.isLegalExpiryDate(number)) {
             System.out.println(InquiryMessages.EXPIRY_DATE_RETRY);
             number = inquire(InquiryMessages.EXPIRY_DATE, "Expiry Date");
-        }
-        return number;
-    }
-
-    public String inquireExpiryDate(Scanner scanner) throws OperationCancelException {
-        String number = inquire(InquiryMessages.EXPIRY_DATE, "Expiry Date", scanner);
-        while(!CreditCard.isLegalExpiryDate(number)) {
-            System.out.println(InquiryMessages.EXPIRY_DATE_RETRY);
-            number = inquire(InquiryMessages.EXPIRY_DATE, "Expiry Date", scanner);
         }
         return number;
     }

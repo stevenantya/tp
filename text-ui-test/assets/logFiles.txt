@@ -274,3 +274,828 @@ fields (continued):
 command by user:  exit
 fields: 
 ---------------------------------| Session ended at: 2023-04-09T23:53:20.081841Z |----------------------------------
+
+---------------------------------| Session began at: 2023-04-10T05:26:05.131805Z |-----------------------------------
+
+command by user:  new password1 f/personal
+fields:  idk.com,  usr1,  pass1, 
+
+command by user:  new o/NUSNet nusnet1 f/school
+fields:  e0123456,  pass2, 
+
+command by user:  new o/StudentID student1 f/school
+fields:  A0123456R, 
+
+command by user:  new o/CreditCard credit1 f/personal
+fields:  usr1,  1234567890123456, 
+>>>>Error:  credit card number is illegal | input:  1234567890123456 |  method & class: seedu.securenus.secrets.CreditCard - isLegalCreditCardNumber
+fields (continued):  1234 5678 9012 3456,  123,  03/26, 
+
+command by user:  new o/Crypto wallet1 f/personal
+fields:  usr1,  privatekey,  seedphrase, 
+
+command by user:  new o/WifiPassword wifi1 f/personal
+fields:  home1,  pass3, 
+
+command by user:  list
+fields: 
+
+command by user:  list f/personal
+fields: 
+
+command by user:  delete wifi1
+fields: 
+
+command by user:  list f/personal
+fields: 
+
+command by user:  view password1
+fields: 
+
+command by user:  edit password1
+fields:  usr1,  newpass,  newurl, 
+
+command by user:  view password1
+fields: 
+
+command by user:  delete password1 wallet1
+fields: 
+
+command by user:  search student
+fields: 
+
+command by user:  search t f/folder1
+fields: 
+>>>>Error:  folder name not found | input:  folder1 |  method & class: seedu.securenus.command.SearchCommand - checkNameAndFolderName
+fields (continued): 
+
+command by user:  search t f/personal
+fields: 
+
+command by user:  save
+fields: 
+
+command by user:  menu
+fields: 
+
+command by user:  new password2
+fields:  c/, 
+>>>>user cancelled operation
+
+command by user:  new password~ f/folder1
+fields: 
+>>>>Error:  invalid characters in secret | input:  password~ |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+
+command by user:  new password1 f/121-01
+fields: 
+>>>>Error:  special characters in folder name | input:  121-01 |  method & class: seedu.securenus.storage.SecretMaster - isLegalFolderName
+fields (continued): 
+
+command by user:  new idk f.scw
+fields: 
+>>>>Error:  invalid characters in secret | input:  idk f.scw |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+
+command by user:  new idk f/unknown
+fields:  `~!@#$%^&*()-=_+[]\{}|;':",  `~!@#$%^&*()-=_+[]\{}|;':",  `~!@#$%^&*()-=_+[]\{}|;':", 
+
+command by user:  new o/CreditCard
+fields: 
+>>>>Error:  insufficient secret fields | input:  new o/CreditCard |  method & class: seedu.securenus.ui.Parser - parseAddSpecial
+fields (continued): 
+
+command by user:  new o/CreditCard 1212[]
+fields: 
+>>>>Error:  invalid characters in secret | input:  1212[] |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+
+command by user:  new o/CreditCard 1212 f.sdpocwv
+fields: 
+>>>>Error:  invalid characters in secret | input:  1212 f.sdpocwv |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+
+command by user:  new o/CreditCard 1212 f/sdpocwv
+fields:  `~!@#$%^&*()-=_+[]\{}|;':",  1234567890123456, 
+>>>>Error:  credit card number is illegal | input:  1234567890123456 |  method & class: seedu.securenus.secrets.CreditCard - isLegalCreditCardNumber
+fields (continued):  1345 1287 1298 143, 
+>>>>Error:  credit card number is illegal | input:  1345 1287 1298 143 |  method & class: seedu.securenus.secrets.CreditCard - isLegalCreditCardNumber
+fields (continued):  1345 1287 1298 143-, 
+>>>>Error:  credit card number is illegal | input:  1345 1287 1298 143- |  method & class: seedu.securenus.secrets.CreditCard - isLegalCreditCardNumber
+fields (continued):  c/, 
+>>>>user cancelled operation
+
+command by user:  new o/creditcard card1 f/personal
+fields: 
+>>>>Error:  attempt to add invalid secret | input:  new o/creditcard card1 f/personal |  method & class: seedu.securenus.ui.Parser - parseAddSpecial
+fields (continued): 
+
+command by user:  new o/Creditcard card1 f/personal
+fields: 
+>>>>Error:  attempt to add invalid secret | input:  new o/Creditcard card1 f/personal |  method & class: seedu.securenus.ui.Parser - parseAddSpecial
+fields (continued): 
+
+command by user:  new o/CreditCard card1 f/personal
+fields:  usr1$%^&*()_+,  1234 5678 9012 3456,  1435, 
+>>>>Error:  cvc is illegal | input:  1435 |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  okq, 
+>>>>Error:  cvc is illegal | input:  okq |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  12o, 
+>>>>Error:  cvc is illegal | input:  12o |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  123/, 
+>>>>Error:  cvc is illegal | input:  123/ |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  12", 
+>>>>Error:  cvc is illegal | input:  12" |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  03/23, 
+>>>>Error:  cvc is illegal | input:  03/23 |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  new crypto, 
+>>>>Error:  cvc is illegal | input:  new crypto |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  /c, 
+>>>>Error:  cvc is illegal | input:  /c |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  c/, 
+>>>>user cancelled operation
+
+command by user:  new o/crypto wallet1
+fields: 
+>>>>Error:  attempt to add invalid secret | input:  new o/crypto wallet1 |  method & class: seedu.securenus.ui.Parser - parseAddSpecial
+fields (continued): 
+
+command by user:  new o/Cyrpto wallet1
+fields: 
+>>>>Error:  attempt to add invalid secret | input:  new o/Cyrpto wallet1 |  method & class: seedu.securenus.ui.Parser - parseAddSpecial
+fields (continued): 
+
+command by user:  new o/Crypto wallet1
+fields:  c/, 
+>>>>user cancelled operation
+
+command by user:  new o/Crypt0 wallet1 f/personal
+fields: 
+>>>>Error:  attempt to add invalid secret | input:  new o/Crypt0 wallet1 f/personal |  method & class: seedu.securenus.ui.Parser - parseAddSpecial
+fields (continued): 
+
+command by user:  new o/Crypto wallet1 f/personal
+fields:  new o/NUSNEtID,  new o/NUSnet,  a0000000, 
+
+command by user:  e|||||||
+fields: 
+>>>>Error:  invalid command | input:  e||||||| |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  e0000000
+fields: 
+>>>>Error:  invalid command | input:  e0000000 |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  cxqjpdoj pD
+fields: 
+>>>>Error:  invalid command | input:  cxqjpdoj pD |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  new O/StudentID
+fields: 
+>>>>Error:  invalid characters in secret | input:  O/StudentID |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+
+command by user:  new o/StudentID student f/folda
+fields:  e1234567890, 
+>>>>Error:  Student ID is illegal | input:  e1234567890 |  method & class: seedu.securenus.secrets.StudentID - isLegalId
+fields (continued):  A1234567U, 
+
+command by user:  new o/WifiPassword nus
+fields:  new o/WifiPassword nus1 f/personal,  delete folda, 
+
+command by user:  delete studentt
+fields: 
+>>>>Error:  non existent secret name | input:  studentt |  method & class: seedu.securenus.storage.SecretMaster - getByName
+fields (continued): 
+
+command by user:  menu delete student
+fields: 
+>>>>Error:  invalid command | input:  menu delete student |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  delete 1 2 3
+fields: 
+>>>>Error:  non existent secret name | input:  1 |  method & class: seedu.securenus.storage.SecretMaster - getByName
+fields (continued): 
+>>>>Error:  non existent secret name | input:  2 |  method & class: seedu.securenus.storage.SecretMaster - getByName
+fields (continued): 
+>>>>Error:  non existent secret name | input:  3 |  method & class: seedu.securenus.storage.SecretMaster - getByName
+fields (continued): 
+
+command by user:  delete nus strange password
+fields: 
+>>>>Error:  non existent secret name | input:  strange |  method & class: seedu.securenus.storage.SecretMaster - getByName
+fields (continued): 
+>>>>Error:  non existent secret name | input:  password |  method & class: seedu.securenus.storage.SecretMaster - getByName
+fields (continued): 
+
+command by user:  delete wallet1
+fields: 
+>>>>Error:  invalid characters in secret | input:  wallet1 |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+
+command by user:  delete wallet1
+fields: 
+>>>>Error:  invalid characters in secret | input:  wallet1 |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+>>>>Error:  invalid characters in secret | input:  strange |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+>>>>Error:  non existent secret name | input:  password |  method & class: seedu.securenus.storage.SecretMaster - getByName
+fields (continued): 
+
+command by user:  list menu
+fields: 
+
+command by user:  list f/folda
+fields: 
+
+command by user:  list /f folda
+fields: 
+
+command by user:  super save
+fields: 
+>>>>Error:  invalid command | input:  super save |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  edit wallet1
+fields:  delete,  menu,  c/, 
+>>>>user cancelled operation
+
+command by user:  delete c/
+fields: 
+>>>>Error:  invalid characters in secret | input:  c/ |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+
+command by user:  c/ delete
+fields: 
+>>>>Error:  invalid command | input:  c/ delete |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  new o/Crypto CreditCard
+fields:  us1,  private,  seed, 
+
+command by user:  exit c/
+fields: 
+>>>>Error:  invalid command | input:  exit c/ |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  c/ exit
+fields: 
+>>>>Error:  invalid command | input:  c/ exit |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  exit
+fields: 
+---------------------------------| Session ended at: 2023-04-10T05:26:05.237644Z |----------------------------------
+
+---------------------------------| Session began at: 2023-04-10T05:27:19.651031Z |-----------------------------------
+
+command by user:  new password1 f/personal
+fields:  idk.com,  usr1,  pass1, 
+
+command by user:  new o/NUSNet nusnet1 f/school
+fields:  e0123456,  pass2, 
+
+command by user:  new o/StudentID student1 f/school
+fields:  A0123456R, 
+
+command by user:  new o/CreditCard credit1 f/personal
+fields:  usr1,  1234567890123456, 
+>>>>Error:  credit card number is illegal | input:  1234567890123456 |  method & class: seedu.securenus.secrets.CreditCard - isLegalCreditCardNumber
+fields (continued):  1234 5678 9012 3456,  123,  03/26, 
+
+command by user:  new o/Crypto wallet1 f/personal
+fields:  usr1,  privatekey,  seedphrase, 
+
+command by user:  new o/WifiPassword wifi1 f/personal
+fields:  home1,  pass3, 
+
+command by user:  list
+fields: 
+
+command by user:  list f/personal
+fields: 
+
+command by user:  delete wifi1
+fields: 
+
+command by user:  list f/personal
+fields: 
+
+command by user:  view password1
+fields: 
+
+command by user:  edit password1
+fields:  usr1,  newpass,  newurl, 
+
+command by user:  view password1
+fields: 
+
+command by user:  delete password1 wallet1
+fields: 
+
+command by user:  search student
+fields: 
+
+command by user:  search t f/folder1
+fields: 
+>>>>Error:  folder name not found | input:  folder1 |  method & class: seedu.securenus.command.SearchCommand - checkNameAndFolderName
+fields (continued): 
+
+command by user:  search t f/personal
+fields: 
+
+command by user:  save
+fields: 
+
+command by user:  menu
+fields: 
+
+command by user:  new password2
+fields:  c/, 
+>>>>user cancelled operation
+
+command by user:  new password~ f/folder1
+fields: 
+>>>>Error:  invalid characters in secret | input:  password~ |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+
+command by user:  new password1 f/121-01
+fields: 
+>>>>Error:  special characters in folder name | input:  121-01 |  method & class: seedu.securenus.storage.SecretMaster - isLegalFolderName
+fields (continued): 
+
+command by user:  new idk f.scw
+fields: 
+>>>>Error:  invalid characters in secret | input:  idk f.scw |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+
+command by user:  new idk f/unknown
+fields:  `~!@#$%^&*()-=_+[]\{}|;':",  `~!@#$%^&*()-=_+[]\{}|;':",  `~!@#$%^&*()-=_+[]\{}|;':", 
+
+command by user:  new o/CreditCard
+fields: 
+>>>>Error:  insufficient secret fields | input:  new o/CreditCard |  method & class: seedu.securenus.ui.Parser - parseAddSpecial
+fields (continued): 
+
+command by user:  new o/CreditCard 1212[]
+fields: 
+>>>>Error:  invalid characters in secret | input:  1212[] |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+
+command by user:  new o/CreditCard 1212 f.sdpocwv
+fields: 
+>>>>Error:  invalid characters in secret | input:  1212 f.sdpocwv |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+
+command by user:  new o/CreditCard 1212 f/sdpocwv
+fields:  `~!@#$%^&*()-=_+[]\{}|;':",  1234567890123456, 
+>>>>Error:  credit card number is illegal | input:  1234567890123456 |  method & class: seedu.securenus.secrets.CreditCard - isLegalCreditCardNumber
+fields (continued):  1345 1287 1298 143, 
+>>>>Error:  credit card number is illegal | input:  1345 1287 1298 143 |  method & class: seedu.securenus.secrets.CreditCard - isLegalCreditCardNumber
+fields (continued):  1345 1287 1298 143-, 
+>>>>Error:  credit card number is illegal | input:  1345 1287 1298 143- |  method & class: seedu.securenus.secrets.CreditCard - isLegalCreditCardNumber
+fields (continued):  c/, 
+>>>>user cancelled operation
+
+command by user:  new o/creditcard card1 f/personal
+fields: 
+>>>>Error:  attempt to add invalid secret | input:  new o/creditcard card1 f/personal |  method & class: seedu.securenus.ui.Parser - parseAddSpecial
+fields (continued): 
+
+command by user:  new o/Creditcard card1 f/personal
+fields: 
+>>>>Error:  attempt to add invalid secret | input:  new o/Creditcard card1 f/personal |  method & class: seedu.securenus.ui.Parser - parseAddSpecial
+fields (continued): 
+
+command by user:  new o/CreditCard card1 f/personal
+fields:  usr1$%^&*()_+,  1234 5678 9012 3456,  1435, 
+>>>>Error:  cvc is illegal | input:  1435 |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  okq, 
+>>>>Error:  cvc is illegal | input:  okq |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  12o, 
+>>>>Error:  cvc is illegal | input:  12o |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  123/, 
+>>>>Error:  cvc is illegal | input:  123/ |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  12", 
+>>>>Error:  cvc is illegal | input:  12" |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  03/23, 
+>>>>Error:  cvc is illegal | input:  03/23 |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  new crypto, 
+>>>>Error:  cvc is illegal | input:  new crypto |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  /c, 
+>>>>Error:  cvc is illegal | input:  /c |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  c/, 
+>>>>user cancelled operation
+
+command by user:  new o/crypto wallet1
+fields: 
+>>>>Error:  attempt to add invalid secret | input:  new o/crypto wallet1 |  method & class: seedu.securenus.ui.Parser - parseAddSpecial
+fields (continued): 
+
+command by user:  new o/Cyrpto wallet1
+fields: 
+>>>>Error:  attempt to add invalid secret | input:  new o/Cyrpto wallet1 |  method & class: seedu.securenus.ui.Parser - parseAddSpecial
+fields (continued): 
+
+command by user:  new o/Crypto wallet1
+fields:  c/, 
+>>>>user cancelled operation
+
+command by user:  new o/Crypt0 wallet1 f/personal
+fields: 
+>>>>Error:  attempt to add invalid secret | input:  new o/Crypt0 wallet1 f/personal |  method & class: seedu.securenus.ui.Parser - parseAddSpecial
+fields (continued): 
+
+command by user:  new o/Crypto wallet1 f/personal
+fields:  new o/NUSNEtID,  new o/NUSnet,  a0000000, 
+
+command by user:  e|||||||
+fields: 
+>>>>Error:  invalid command | input:  e||||||| |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  e0000000
+fields: 
+>>>>Error:  invalid command | input:  e0000000 |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  cxqjpdoj pD
+fields: 
+>>>>Error:  invalid command | input:  cxqjpdoj pD |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  new O/StudentID
+fields: 
+>>>>Error:  invalid characters in secret | input:  O/StudentID |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+
+command by user:  new o/StudentID student f/folda
+fields:  e1234567890, 
+>>>>Error:  Student ID is illegal | input:  e1234567890 |  method & class: seedu.securenus.secrets.StudentID - isLegalId
+fields (continued):  A1234567U, 
+
+command by user:  new o/WifiPassword nus
+fields:  new o/WifiPassword nus1 f/personal,  delete folda, 
+
+command by user:  delete studentt
+fields: 
+>>>>Error:  non existent secret name | input:  studentt |  method & class: seedu.securenus.storage.SecretMaster - getByName
+fields (continued): 
+
+command by user:  menu delete student
+fields: 
+>>>>Error:  invalid command | input:  menu delete student |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  delete 1 2 3
+fields: 
+>>>>Error:  non existent secret name | input:  1 |  method & class: seedu.securenus.storage.SecretMaster - getByName
+fields (continued): 
+>>>>Error:  non existent secret name | input:  2 |  method & class: seedu.securenus.storage.SecretMaster - getByName
+fields (continued): 
+>>>>Error:  non existent secret name | input:  3 |  method & class: seedu.securenus.storage.SecretMaster - getByName
+fields (continued): 
+
+command by user:  delete nus strange password
+fields: 
+>>>>Error:  non existent secret name | input:  strange |  method & class: seedu.securenus.storage.SecretMaster - getByName
+fields (continued): 
+>>>>Error:  non existent secret name | input:  password |  method & class: seedu.securenus.storage.SecretMaster - getByName
+fields (continued): 
+
+command by user:  delete wallet1
+fields: 
+>>>>Error:  invalid characters in secret | input:  wallet1 |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+
+command by user:  delete wallet1
+fields: 
+>>>>Error:  invalid characters in secret | input:  wallet1 |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+>>>>Error:  invalid characters in secret | input:  strange |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+>>>>Error:  non existent secret name | input:  password |  method & class: seedu.securenus.storage.SecretMaster - getByName
+fields (continued): 
+
+command by user:  list menu
+fields: 
+
+command by user:  list f/folda
+fields: 
+
+command by user:  list /f folda
+fields: 
+
+command by user:  super save
+fields: 
+>>>>Error:  invalid command | input:  super save |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  edit wallet1
+fields:  delete,  menu,  c/, 
+>>>>user cancelled operation
+
+command by user:  delete c/
+fields: 
+>>>>Error:  invalid characters in secret | input:  c/ |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+
+command by user:  c/ delete
+fields: 
+>>>>Error:  invalid command | input:  c/ delete |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  new o/Crypto CreditCard
+fields:  us1,  private,  seed, 
+
+command by user:  exit c/
+fields: 
+>>>>Error:  invalid command | input:  exit c/ |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  c/ exit
+fields: 
+>>>>Error:  invalid command | input:  c/ exit |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  exit
+fields: 
+---------------------------------| Session ended at: 2023-04-10T05:27:19.758936Z |----------------------------------
+
+---------------------------------| Session began at: 2023-04-10T05:50:56.701546Z |-----------------------------------
+
+command by user:  new password1 f/personal
+fields:  idk.com,  usr1,  pass1, 
+
+command by user:  new o/NUSNet nusnet1 f/school
+fields:  e0123456,  pass2, 
+
+command by user:  new o/StudentID student1 f/school
+fields:  A0123456R, 
+
+command by user:  new o/CreditCard credit1 f/personal
+fields:  usr1,  1234567890123456, 
+>>>>Error:  credit card number is illegal | input:  1234567890123456 |  method & class: seedu.securenus.secrets.CreditCard - isLegalCreditCardNumber
+fields (continued):  1234 5678 9012 3456,  123,  03/26, 
+
+command by user:  new o/Crypto wallet1 f/personal
+fields:  usr1,  privatekey,  seedphrase, 
+
+command by user:  new o/WifiPassword wifi1 f/personal
+fields:  home1,  pass3, 
+
+command by user:  list
+fields: 
+
+command by user:  list f/personal
+fields: 
+
+command by user:  delete wifi1
+fields: 
+
+command by user:  list f/personal
+fields: 
+
+command by user:  view password1
+fields: 
+
+command by user:  edit password1
+fields:  usr1,  newpass,  newurl, 
+
+command by user:  view password1
+fields: 
+
+command by user:  delete password1 wallet1
+fields: 
+
+command by user:  search student
+fields: 
+
+command by user:  search t f/folder1
+fields: 
+>>>>Error:  folder name not found | input:  folder1 |  method & class: seedu.securenus.command.SearchCommand - checkNameAndFolderName
+fields (continued): 
+
+command by user:  search t f/personal
+fields: 
+
+command by user:  save
+fields: 
+
+command by user:  menu
+fields: 
+
+command by user:  new password2
+fields:  c/, 
+>>>>user cancelled operation
+
+command by user:  new password~ f/folder1
+fields: 
+>>>>Error:  invalid characters in secret | input:  password~ |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+
+command by user:  new password1 f/121-01
+fields: 
+>>>>Error:  special characters in folder name | input:  121-01 |  method & class: seedu.securenus.storage.SecretMaster - isLegalFolderName
+fields (continued): 
+
+command by user:  new idk f.scw
+fields: 
+>>>>Error:  invalid characters in secret | input:  idk f.scw |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+
+command by user:  new idk f/unknown
+fields:  `~!@#$%^&*()-=_+[]\{}|;':",  `~!@#$%^&*()-=_+[]\{}|;':",  `~!@#$%^&*()-=_+[]\{}|;':", 
+
+command by user:  new o/CreditCard
+fields: 
+>>>>Error:  insufficient secret fields | input:  new o/CreditCard |  method & class: seedu.securenus.ui.Parser - parseAddSpecial
+fields (continued): 
+
+command by user:  new o/CreditCard 1212[]
+fields: 
+>>>>Error:  invalid characters in secret | input:  1212[] |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+
+command by user:  new o/CreditCard 1212 f.sdpocwv
+fields: 
+>>>>Error:  invalid characters in secret | input:  1212 f.sdpocwv |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+
+command by user:  new o/CreditCard 1212 f/sdpocwv
+fields:  `~!@#$%^&*()-=_+[]\{}|;':",  1234567890123456, 
+>>>>Error:  credit card number is illegal | input:  1234567890123456 |  method & class: seedu.securenus.secrets.CreditCard - isLegalCreditCardNumber
+fields (continued):  1345 1287 1298 143, 
+>>>>Error:  credit card number is illegal | input:  1345 1287 1298 143 |  method & class: seedu.securenus.secrets.CreditCard - isLegalCreditCardNumber
+fields (continued):  1345 1287 1298 143-, 
+>>>>Error:  credit card number is illegal | input:  1345 1287 1298 143- |  method & class: seedu.securenus.secrets.CreditCard - isLegalCreditCardNumber
+fields (continued):  c/, 
+>>>>user cancelled operation
+
+command by user:  new o/creditcard card1 f/personal
+fields: 
+>>>>Error:  attempt to add invalid secret | input:  new o/creditcard card1 f/personal |  method & class: seedu.securenus.ui.Parser - parseAddSpecial
+fields (continued): 
+
+command by user:  new o/Creditcard card1 f/personal
+fields: 
+>>>>Error:  attempt to add invalid secret | input:  new o/Creditcard card1 f/personal |  method & class: seedu.securenus.ui.Parser - parseAddSpecial
+fields (continued): 
+
+command by user:  new o/CreditCard card1 f/personal
+fields:  usr1$%^&*()_+,  1234 5678 9012 3456,  1435, 
+>>>>Error:  cvc is illegal | input:  1435 |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  okq, 
+>>>>Error:  cvc is illegal | input:  okq |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  12o, 
+>>>>Error:  cvc is illegal | input:  12o |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  123/, 
+>>>>Error:  cvc is illegal | input:  123/ |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  12", 
+>>>>Error:  cvc is illegal | input:  12" |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  03/23, 
+>>>>Error:  cvc is illegal | input:  03/23 |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  new crypto, 
+>>>>Error:  cvc is illegal | input:  new crypto |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  /c, 
+>>>>Error:  cvc is illegal | input:  /c |  method & class: seedu.securenus.secrets.CreditCard - isLegalCvcNumber
+fields (continued):  c/, 
+>>>>user cancelled operation
+
+command by user:  new o/crypto wallet1
+fields: 
+>>>>Error:  attempt to add invalid secret | input:  new o/crypto wallet1 |  method & class: seedu.securenus.ui.Parser - parseAddSpecial
+fields (continued): 
+
+command by user:  new o/Cyrpto wallet1
+fields: 
+>>>>Error:  attempt to add invalid secret | input:  new o/Cyrpto wallet1 |  method & class: seedu.securenus.ui.Parser - parseAddSpecial
+fields (continued): 
+
+command by user:  new o/Crypto wallet1
+fields:  c/, 
+>>>>user cancelled operation
+
+command by user:  new o/Crypt0 wallet1 f/personal
+fields: 
+>>>>Error:  attempt to add invalid secret | input:  new o/Crypt0 wallet1 f/personal |  method & class: seedu.securenus.ui.Parser - parseAddSpecial
+fields (continued): 
+
+command by user:  new o/Crypto wallet1 f/personal
+fields:  new o/NUSNEtID,  new o/NUSnet,  a0000000, 
+
+command by user:  e|||||||
+fields: 
+>>>>Error:  invalid command | input:  e||||||| |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  e0000000
+fields: 
+>>>>Error:  invalid command | input:  e0000000 |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  cxqjpdoj pD
+fields: 
+>>>>Error:  invalid command | input:  cxqjpdoj pD |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  new O/StudentID
+fields: 
+>>>>Error:  invalid characters in secret | input:  O/StudentID |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+
+command by user:  new o/StudentID student f/folda
+fields:  e1234567890, 
+>>>>Error:  Student ID is illegal | input:  e1234567890 |  method & class: seedu.securenus.secrets.StudentID - isLegalId
+fields (continued):  A1234567U, 
+
+command by user:  new o/WifiPassword nus
+fields:  new o/WifiPassword nus1 f/personal,  delete folda, 
+
+command by user:  delete studentt
+fields: 
+>>>>Error:  non existent secret name | input:  studentt |  method & class: seedu.securenus.storage.SecretMaster - getByName
+fields (continued): 
+
+command by user:  menu delete student
+fields: 
+>>>>Error:  invalid command | input:  menu delete student |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  delete 1 2 3
+fields: 
+>>>>Error:  non existent secret name | input:  1 |  method & class: seedu.securenus.storage.SecretMaster - getByName
+fields (continued): 
+>>>>Error:  non existent secret name | input:  2 |  method & class: seedu.securenus.storage.SecretMaster - getByName
+fields (continued): 
+>>>>Error:  non existent secret name | input:  3 |  method & class: seedu.securenus.storage.SecretMaster - getByName
+fields (continued): 
+
+command by user:  delete nus strange password
+fields: 
+>>>>Error:  non existent secret name | input:  strange |  method & class: seedu.securenus.storage.SecretMaster - getByName
+fields (continued): 
+>>>>Error:  non existent secret name | input:  password |  method & class: seedu.securenus.storage.SecretMaster - getByName
+fields (continued): 
+
+command by user:  delete wallet1
+fields: 
+>>>>Error:  invalid characters in secret | input:  wallet1 |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+
+command by user:  delete wallet1
+fields: 
+>>>>Error:  invalid characters in secret | input:  wallet1 |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+>>>>Error:  invalid characters in secret | input:  strange |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+>>>>Error:  non existent secret name | input:  password |  method & class: seedu.securenus.storage.SecretMaster - getByName
+fields (continued): 
+
+command by user:  list menu
+fields: 
+
+command by user:  list f/folda
+fields: 
+
+command by user:  list /f folda
+fields: 
+
+command by user:  super save
+fields: 
+>>>>Error:  invalid command | input:  super save |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  edit wallet1
+fields:  delete,  menu,  c/, 
+>>>>user cancelled operation
+
+command by user:  delete c/
+fields: 
+>>>>Error:  invalid characters in secret | input:  c/ |  method & class: seedu.securenus.secrets.Secret - isIllegalName
+fields (continued): 
+
+command by user:  c/ delete
+fields: 
+>>>>Error:  invalid command | input:  c/ delete |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  new o/Crypto CreditCard
+fields:  us1,  private,  seed, 
+
+command by user:  exit c/
+fields: 
+>>>>Error:  invalid command | input:  exit c/ |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  c/ exit
+fields: 
+>>>>Error:  invalid command | input:  c/ exit |  method & class: seedu.securenus.ui.Parser - parse
+fields (continued): 
+
+command by user:  exit
+fields: 
+---------------------------------| Session ended at: 2023-04-10T05:50:56.814202Z |----------------------------------
