@@ -15,14 +15,12 @@ challenge of managing multiple passwords for various sites and applications.
 <br>
 
 ## Table of Contents
-<!-- TOC -->
 - [Introduction](#introduction)
 - [Quick Start](#quick-start)
 - [Feature List](#feature-list)
 - [Feature Details](#feature-details)
 - [Frequently Asked Questions (FAQ's)](#frequently-asked-questions)
 - [Command Summary](#command-summary)
-<!-- TOC -->
 
 ## Quick Start
 1. Ensure you have **Java 11** installed on your computer. If not so, you can download from
@@ -58,13 +56,13 @@ Some example commands:
 
 <table>
     <tr>
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>
     </tr>
 </table>
 
 
 ## Feature List
-1. [Note about Command Formats](#note-about-the-command-format-)
+1. [Note about Command Formats](#note-about-the-command-format)
 2. [Add new Secret](#add-new-secret)
    - Password Options
      + Basic Password            
@@ -85,13 +83,13 @@ Some example commands:
 
 <table>
     <tr>
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>
     </tr>
 </table>
 
 ## Feature Details
 
-### Note about the command format:
+### Note about the command format
 * Commands in `UPPER_CASE` and without a bracket refers to the essential parameters to be given by the user.
                 
 * Do note the commands are **Case Sensitive**. 
@@ -130,8 +128,8 @@ is stored in an `unnamed` folder.
                                                                  
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>                                                            
-        <td> <a href="#feature-list">Feature List </a> </td>                                                      
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>                                                            
+        <td> <a href="#feature-list">Click here for Feature List </a> </td>                                                      
     </tr>                                                          
 </table>                                                           
 
@@ -157,6 +155,11 @@ for more details on the `save` command.
 ##### Format: `new [o/OPTION] SECRET_NAME [f/FOLDER_NAME]` <br>
 
 <table>
+    <tr>
+        <td> Secret Option</td>
+        <td> Format </td>
+        <td> Details asked</td>
+    </tr>
     <tr>
         <td> Basic Password </td>
         <td> <code> new SECRET_NAME [f/FOLDER_NAME] </code></td>
@@ -228,8 +231,8 @@ for more details on the `save` command.
 
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>                                                            
-        <td> <a href="#feature-list">Feature List </a> </td>                                                      
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>                                                            
+        <td> <a href="#feature-list">Click here for Feature List </a> </td>                                                      
     </tr>                                                          
 </table>  
 
@@ -251,8 +254,8 @@ for more details on the `save` command.
 
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>                                                            
-        <td> <a href="#feature-list">Feature List </a> </td>                                                      
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>                                                            
+        <td> <a href="#feature-list">Click here for Feature List </a> </td>                                                      
     </tr>                                                          
 </table> 
 
@@ -275,8 +278,8 @@ Examples and Outputs:<br>
 
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>                                                            
-        <td> <a href="#feature-list">Feature List </a> </td>                                                      
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>                                                            
+        <td> <a href="#feature-list">Click here for Feature List </a> </td>                                                      
     </tr>                                                          
 </table> 
 
@@ -304,8 +307,8 @@ prevent unauthorized access to the application.
 
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>                                                            
-        <td> <a href="#feature-list">Feature List </a> </td>                                                      
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>                                                            
+        <td> <a href="#feature-list">Click here for Feature List </a> </td>                                                      
     </tr>                                                          
 </table> 
 
@@ -331,8 +334,8 @@ locate a specific one quickly.
 
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>                                                            
-        <td> <a href="#feature-list">Feature List </a> </td>                                                      
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>                                                            
+        <td> <a href="#feature-list">Click here for Feature List </a> </td>                                                      
     </tr>                                                          
 </table>
 
@@ -387,7 +390,8 @@ JAR file using `java -jar [CS2113-T15-2][SecureNUS].jar` and observe the followi
   * Recommended: Users can still manually save their secrets using the `save` command to rewrite everything at the 
   current point. That way all the corrupted data in `database.txt` will be overwritten by the new secrets, thus leading 
   to no loss of data. 
-  * Can revert the `database.txt` to the original contents before its corruption. 
+  * If have tampered with the `database.txt` file, please revert the `database.txt` to the original contents before 
+  its corruption by using `Ctrl+Z`. 
   
 ##### General Format: `save`
 
@@ -397,8 +401,8 @@ JAR file using `java -jar [CS2113-T15-2][SecureNUS].jar` and observe the followi
 
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>                                                            
-        <td> <a href="#feature-list">Feature List </a> </td>                                                      
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>                                                            
+        <td> <a href="#feature-list">Click here for Feature List </a> </td>                                                      
     </tr>                                                          
 </table>
 
@@ -419,8 +423,8 @@ associated secret.
 
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>                                                            
-        <td> <a href="#feature-list">Feature List </a> </td>                                                      
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>                                                            
+        <td> <a href="#feature-list">Click here for Feature List </a> </td>                                                      
     </tr>                                                          
 </table>
 
@@ -442,8 +446,8 @@ Examples and Outputs: <br>
 
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>                                                            
-        <td> <a href="#feature-list">Feature List </a> </td>                                                      
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>                                                            
+        <td> <a href="#feature-list">Click here for Feature List </a> </td>                                                      
     </tr>                                                          
 </table>
 
@@ -463,8 +467,8 @@ the entire command prompt or terminal.
 
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>                                                            
-        <td> <a href="#feature-list">Feature List </a> </td>                                                      
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>                                                            
+        <td> <a href="#feature-list">Click here for Feature List </a> </td>                                                      
     </tr>                                                          
 </table>
 
@@ -478,6 +482,9 @@ before it is complete.
 - To cancel the current operation, simply type `c/` followed by the Enter key. SecureNUS will immediately terminate the 
 current operation and return the user to the main command prompt.
 
+- Can also use `Ctrl-C` in the terminal to cancel the current operation but note that the functionality of `Ctrl-C`
+may vary with different terminals and operating systems. 
+
 - Note that cancelling an operation may result in data loss or other unintended consequences, depending on the specific 
 operation being performed. It is recommended that users use the `c/` command only when absolutely necessary and that 
 they save their data frequently to avoid losing any unsaved changes.
@@ -489,8 +496,8 @@ they save their data frequently to avoid losing any unsaved changes.
 <br>
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>                                                            
-        <td> <a href="#feature-list">Feature List </a> </td>                                                      
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>                                                            
+        <td> <a href="#feature-list">Click here for Feature List </a> </td>                                                      
     </tr>                                                          
 </table> 
 <br>
@@ -535,14 +542,25 @@ keeping your secrets private and secure, and regularly updating your secrets.
 
 <br>
 
+**Q:** Will all the key commands native to the command line work eg. `Ctrl-C` for cancel, `Ctrl-V` for paste, `Up
+arrow` to move to previous commands e.t.c.?
+**A:** The functionality for the key operations differ between terminals and operating systems. To avoid any unknown 
+errors and exceptions, users are requested to refrain from using the key shortcuts. One can use the `c/` command to 
+cancel the operation at any moment. 
+
+<br>
+
 **Q:** I forgot to save before exiting. Are all my secrets lost?<br>
 **A:** SecureNUS realizes the importance of keeping the passwords safe and secure. So we ensure that the secrets added 
 are stored conveniently.
 * Each time a new secret is added using `new` command, deleted using `delete` command or edited using `edit` command,
 it is automatically saved in the `database.txt` file in the `assets` folder. 
-* On exiting the program using the `exit` command, SecureNUS will save all the unsaved secrets in 
+* On exiting the program using the `exit` command, SecureNUS will save all the secrets in 
 the `database.txt` file.
 * Users have an option to keep saving their secrets using the `save` command.
+In general, until and unless user does not cancel their operation using the `c/` command, all secrets will be saved in 
+the `database.txt` file in the `asset` folder. But users are requested to keep saving their file using the `save` 
+command. 
 
 <br>
 
@@ -552,12 +570,12 @@ the `database.txt` file.
 Please attach the screenshots of the issues/bugs and the log files (`assets/logFiles.txt`) for us to better understand 
 and trace the origin of the issue.<br>
 Alternatively, you can also contact the 
-[developers](https://github.com/AY2223S2-CS2113-T15-2/tp/blob/master/docs/AboutUs.md) of SecureNUS. 
+[developers](AboutUs.md) of SecureNUS. 
 
 
 <table>                                                               
     <tr>                                                           
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>
     </tr>                                                          
 </table>
 
@@ -611,6 +629,6 @@ Alternatively, you can also contact the
 
 <table>
     <tr>
-        <td> <a href="#table-of-contents">Table of Contents </a> </td>
+        <td> <a href="#table-of-contents">Click here for Table of Contents </a> </td>
     </tr>
 </table>
