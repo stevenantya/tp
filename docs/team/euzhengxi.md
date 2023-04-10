@@ -96,12 +96,6 @@ _____________________________________________________
         Time: 2023-04-09T23:47:28.668632600Z
 
 ```
-- Log Formatting
-  + A custom formatter class is extended from the Formatter abstract class in the logging package. 
-  ```java
-  public class SecureNUSLogFormatter extends Formatter{
-    @Override
-    public String format(LogRecord record) {
         ...
   ```
 Within the abstract method format, all relevant information are rearranged and formatted using

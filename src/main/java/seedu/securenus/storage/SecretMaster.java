@@ -1,6 +1,5 @@
 package seedu.securenus.storage;
 
-
 import seedu.securenus.SecureNUSLogger;
 import seedu.securenus.exceptions.secrets.InvalidCvcNumberException;
 import seedu.securenus.ui.Ui;
