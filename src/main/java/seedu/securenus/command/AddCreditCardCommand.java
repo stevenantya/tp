@@ -1,7 +1,7 @@
 package seedu.securenus.command;
 
 import seedu.securenus.Backend;
-import seedu.securenus.messages.OperationMessages;
+import seedu.securenus.SecureNUSLogger;
 import seedu.securenus.ui.Ui;
 import seedu.securenus.exceptions.OperationCancelException;
 import seedu.securenus.exceptions.RepeatedIdException;
@@ -15,6 +15,7 @@ import seedu.securenus.secrets.CreditCard;
 import seedu.securenus.storage.SecretMaster;
 
 import java.util.HashSet;
+import java.util.logging.Level;
 
 /**
  * A class to add a new credit card to the user's secureNUSData.
@@ -30,11 +31,14 @@ public class AddCreditCardCommand extends AddSecretCommand {
     private String expiryDate;
 
     /**
-     * Constructor for AddCreditCardCommand class.
-     * Extracts the necessary information from the input string using the super constructor
-     * and prompts the user for additional information.
+     * Constructs a command for adding a credit card entry to a password manager.
      *
-     * @param input User input command string.
+     * @param input the user input string that triggered this command
+     * @param usedNames a set of names that have already been used in the password manager
+     * @throws IllegalFolderNameException if the name of the folder is illegal
+     * @throws IllegalSecretNameException if the name of the password entry is illegal
+     * @throws RepeatedIdException if the password manager already contains an entry with the same ID
+     * @throws OperationCancelException if the user cancels the operation
      */
     public AddCreditCardCommand(String input, HashSet<String> usedNames) throws IllegalFolderNameException,
             IllegalSecretNameException, RepeatedIdException, OperationCancelException {
@@ -43,6 +47,14 @@ public class AddCreditCardCommand extends AddSecretCommand {
         creditCardNumber = inquireCreditCardNumber();
         cvcNumber = inquireCvcNumber();
         expiryDate = inquireExpiryDate();
+    }
+
+    public AddCreditCardCommand(CreditCard creditCard) throws OperationCancelException {
+        super(creditCard);
+        fullName = creditCard.getFullName();
+        creditCardNumber = creditCard.getCreditCardNumber();
+        cvcNumber = creditCard.getCvcNumber();
+        expiryDate = creditCard.getExpiryDate();
     }
 
     /**
@@ -58,6 +70,7 @@ public class AddCreditCardCommand extends AddSecretCommand {
         try {
             creditCard = new CreditCard(name,folderName,fullName, creditCardNumber, cvcNumber, expiryDate);
         } catch (InvalidExpiryDateException e) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, invalid expiry date, " + expiryDate);
             Ui.printError(ErrorMessages.INVALID_EXPIRY_DATE);
             return;
         }
@@ -68,7 +81,7 @@ public class AddCreditCardCommand extends AddSecretCommand {
             Ui.printError(ErrorMessages.INVALID_EXPIRY_DATE);
         } catch (FolderExistsException e) {
             Ui.printError(ErrorMessages.FOLDER_EXISTS);
-            throw new RuntimeException(); // remove and use logging instead
+            throw new RuntimeException();
         } catch (IllegalSecretNameException e) {
             Ui.printError(ErrorMessages.ILLEGAL_SECRET_NAME);
         } catch (IllegalFolderNameException e) {
@@ -82,11 +95,15 @@ public class AddCreditCardCommand extends AddSecretCommand {
                 "CVC No         = " + HIDDEN_FIELD + "\n" +
                 "Expiry Date    = " + HIDDEN_FIELD);
 
-        Ui.inform(OperationMessages.SAVING);
         Backend.updateStorage(secureNUSData.listSecrets());
-        Ui.inform(OperationMessages.SAVE_COMPLETE);
     }
 
+    /**
+     * Prompts the user to enter their credit card number.
+     *
+     * @return the valid credit card number entered by the user.
+     * @throws OperationCancelException if the user cancels the operation.
+     */
     public String inquireCreditCardNumber() throws OperationCancelException {
         String creditCardNumber = inquire(InquiryMessages.CREDIT_CARD_NUMBER, "Credit Card Number");;
         while(!CreditCard.isLegalCreditCardNumber(creditCardNumber)) {
@@ -96,6 +113,13 @@ public class AddCreditCardCommand extends AddSecretCommand {
         return creditCardNumber;
     }
 
+
+    /*
+     * Prompts the user to enter their CVC number.
+     *
+     * @return the valid CVC number entered by the user.
+     * @throws OperationCancelException if the user cancels the operation.
+     */
     public String inquireCvcNumber() throws OperationCancelException {
         String number = inquire(InquiryMessages.CVC_NUMBER, "CVC Number");
         while(!CreditCard.isLegalCvcNumber(number)) {
@@ -105,6 +129,12 @@ public class AddCreditCardCommand extends AddSecretCommand {
         return number;
     }
 
+    /**
+     * Prompts the user to enter the expiry date of their credit card.
+     *
+     * @return the valid expiry date entered by the user
+     * @throws OperationCancelException if the user cancels the operation
+     */
     public String inquireExpiryDate() throws OperationCancelException {
         String number = inquire(InquiryMessages.EXPIRY_DATE, "Expiry Date");
         while(!CreditCard.isLegalExpiryDate(number)) {
@@ -112,5 +142,10 @@ public class AddCreditCardCommand extends AddSecretCommand {
             number = inquire(InquiryMessages.EXPIRY_DATE, "Expiry Date");
         }
         return number;
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 }

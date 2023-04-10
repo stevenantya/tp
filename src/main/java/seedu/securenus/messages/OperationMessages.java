@@ -1,5 +1,8 @@
 package seedu.securenus.messages;
 
+/**
+ * Contains operation messages for the application.
+ */
 public class OperationMessages {
     public static final String LOGO =
             "     .--------.\n" +

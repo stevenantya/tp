@@ -1,9 +1,12 @@
 package seedu.securenus.secrets;
 
 import seedu.securenus.Backend;
+import seedu.securenus.SecureNUSLogger;
 import seedu.securenus.exceptions.secrets.InvalidCreditCardNumberException;
 import seedu.securenus.exceptions.secrets.InvalidCvcNumberException;
 import seedu.securenus.exceptions.secrets.InvalidExpiryDateException;
+
+import java.util.logging.Level;
 
 /**
  * Represents a credit card entry in the user's secrets list.
@@ -42,10 +45,12 @@ public class CreditCard extends Secret {
         this.fullName = fullName;
         this.creditCardNumber = creditCardNumber;
         if (!creditCardNumber.matches(CREDIT_CARD_NUMBER_FMT)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, credit card number format is illegal, " + expiryDate);
             throw new InvalidCreditCardNumberException();
         }
         this.cvcNumber = cvcNumber;
         if (!expiryDate.matches(EXPIRY_DATE_FMT)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error,credit card expiry date format is illegal, " + expiryDate);
             throw new InvalidExpiryDateException();
         }
         this.expiryDate = expiryDate;
@@ -92,28 +97,59 @@ public class CreditCard extends Secret {
         return new CreditCard(name, folderName, fullName, creditCardNumber,
                 cvcNumber, expiryDate);
     }
+
     public String getType() {
         return TYPE;
     }
 
+    /**
+     * Checks if the provided expiry date is legal.
+     *
+     * @param expiryDate the expiry date to be checked
+     * @return true if the expiry date is legal, false otherwise
+     * @throws NullPointerException if the expiry date is null
+     */
     public static boolean isLegalExpiryDate(String expiryDate) {
         assert expiryDate != null;
         if (!expiryDate.matches(EXPIRY_DATE_FMT)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error,credit card expiry date format is illegal, " + expiryDate);
             return false;
         }
         String[] monthAndYear = expiryDate.split("/");
         int month = Integer.parseInt(monthAndYear[0]);
         int year = Integer.parseInt(monthAndYear[1]);
+        if (month < 1 || month > 12 || year < 1) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, credit card expiry date is illegal, " + expiryDate);
+        }
         return month >= 1 && month <= 12 && year >= 1;
     }
-
+    /**
+     * Checks if the provided credit card number is legal.
+     *
+     * @param creditCardNumber the credit card number to be checked
+     * @return true if the credit card number is legal, false otherwise
+     * @throws NullPointerException if the credit card number is null
+     */
     public static boolean isLegalCreditCardNumber(String creditCardNumber) {
         assert creditCardNumber != null;
+        if (!creditCardNumber.matches(CREDIT_CARD_NUMBER_FMT)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, credit card number is illegal, " + creditCardNumber);
+        }
         return creditCardNumber.matches(CREDIT_CARD_NUMBER_FMT);
     }
 
+    /**
+     * Checks if the provided CVC number is legal.
+     *
+     * @param number the CVC number to be checked
+     * @return true if the CVC number is legal, false otherwise
+     * @throws NullPointerException if the CVC number is null
+     */
     public static boolean isLegalCvcNumber(String number) {
         assert number != null;
+        if (!number.matches(CVC_NUMBER_FMT)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, cvc is illegal, " + number);
+        }
         return number.matches(CVC_NUMBER_FMT);
     }
 
@@ -127,9 +163,11 @@ public class CreditCard extends Secret {
     }
 
     /**
-     * Sets the expiry date of the credit card.
+     * Sets the expiry date of the object.
      *
-     * @param expiryDate Expiry date of the credit card in the format "MM/YY".
+     * @param expiryDate the expiry date to be set
+     * @throws InvalidExpiryDateException if the expiry date is invalid
+     * @throws NullPointerException if the expiry date is null
      */
     public void setExpiryDate(String expiryDate) throws InvalidExpiryDateException {
         assert expiryDate != null;
@@ -149,9 +187,10 @@ public class CreditCard extends Secret {
     }
 
     /**
-     * Sets the full name associated with the credit card.
+     * Sets the full name of the object.
      *
      * @param fullName the full name to be set
+     * @throws NullPointerException if the full name is null
      */
     public void setFullName(String fullName) {
         assert fullName != null;
@@ -168,9 +207,11 @@ public class CreditCard extends Secret {
     }
 
     /**
-     * Sets the credit card number.
+     * Sets the credit card number of the object.
      *
-     * @param creditCardNumber A String representing the credit card number to be set.
+     * @param creditCardNumber the credit card number to be set
+     * @throws InvalidCreditCardNumberException if the credit card number is invalid
+     * @throws NullPointerException if the credit card number is null
      */
     public void setCreditCardNumber(String creditCardNumber) throws InvalidCreditCardNumberException {
         assert creditCardNumber != null;
@@ -190,9 +231,11 @@ public class CreditCard extends Secret {
     }
 
     /**
-     * Sets the CVC number of the credit card.
+     * Sets the CVC number of the object.
      *
-     * @param cvcNumber the new CVC number
+     * @param cvcNumber the CVC number to be set
+     * @throws InvalidCvcNumberException if the CVC number is invalid
+     * @throws NullPointerException if the CVC number is null
      */
     public void setCvcNumber(String cvcNumber) throws InvalidCvcNumberException {
         assert cvcNumber != null;
@@ -218,6 +261,12 @@ public class CreditCard extends Secret {
                 "Expiry Date: %s", getName(), getFullName(), creditCardNumber, cvcNumber,
                 expiryDate);
     }
+
+    /**
+     * Returns a string representation of the object that can be stored in the database.
+     *
+     * @return a string representation of the object that can be stored in the database
+     */
 
     @Override
     public String toStringForDatabase() {

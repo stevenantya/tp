@@ -30,14 +30,13 @@ information pertaining to the specific password.\
 (e.g. list will include usernames, passwords and particular details based on the type of the password the user wants
 to store).
 * Updated the Parser and UI class to help enhance user experience with the CLI Password Manager.
+* Added the Java Documentation for the entire working code and the JUnit Tests.
 
 #### Contributions to the UG:
 * Created the entire layout of the UG. 
 * Updated all the features and their relevant screenshots.
-* Did the quality testing and finalization of the entire UG.
-
-#### Contributions to the DG:
-**To be updated**
+* Structured the entire UG
+* Did the quality testing and finalization of the UG.
 
 #### Contributions to team-based tasks
 * Worked on the Java Documentation of the entire application.
@@ -49,7 +48,8 @@ to store).
 
 #### Review/mentoring contributions: 
 * Helped in finding potential bugs in the code.
-[List of issues](https://github.com/AY2223S2-CS2113-T15-2/tp/issues?q=is%3Aissue+is%3Aclosed+author%3ADeepanjaliDhawan)
+* Tested the code of the team an gave feedbacks accordingly.
+[Issues](https://github.com/AY2223S2-CS2113-T15-2/tp/issues?q=is%3Aissue+author%3ADeepanjaliDhawan+is%3Aclosed)
 * Suggested improvements in the code to the team. 
 * Worked in tandem with the team to solve major application bugs and issues.
 * Helped in reiterating timelines and submission requirements to the team for timely and quality submissions. 

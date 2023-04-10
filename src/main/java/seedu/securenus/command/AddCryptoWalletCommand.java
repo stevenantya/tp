@@ -1,7 +1,6 @@
 package seedu.securenus.command;
 
 import seedu.securenus.Backend;
-import seedu.securenus.messages.OperationMessages;
 import seedu.securenus.exceptions.ExceptionMain;
 import seedu.securenus.exceptions.OperationCancelException;
 import seedu.securenus.exceptions.RepeatedIdException;
@@ -16,7 +15,9 @@ import seedu.securenus.ui.Ui;
 import java.util.HashSet;
 
 /**
- * Represents the class to give a command to add a new Student ID to the SecureNUS system.
+ * Represents the command to add a new Crypto wallet to the user's SecureNUS data.
+ * Inherits from the AddSecretCommand, which contains the common attributes
+ * and methods needed to add a secret to the user's SecureNUS data.
  */
 public class AddCryptoWalletCommand extends AddSecretCommand {
     public static final String KEYWORD = "o/Crypto";
@@ -25,9 +26,14 @@ public class AddCryptoWalletCommand extends AddSecretCommand {
     private String seedPhrase;
 
     /**
-     * Constructs an AddStudentIDCommand object with the user input as the command parameter.
+     * Constructs a command for adding a cryptocurrency wallet entry to a password manager.
      *
-     * @param input The command input entered by the user.
+     * @param input the user input string that triggered this command
+     * @param usedNames a set of names that have already been used in the password manager
+     * @throws IllegalFolderNameException if the name of the folder is illegal
+     * @throws IllegalSecretNameException if the name of the password entry is illegal
+     * @throws RepeatedIdException if the password manager already contains an entry with the same ID
+     * @throws OperationCancelException if the user cancels the operation
      */
     public AddCryptoWalletCommand(String input, HashSet<String> usedNames) throws IllegalFolderNameException,
             IllegalSecretNameException, RepeatedIdException, OperationCancelException {
@@ -36,6 +42,13 @@ public class AddCryptoWalletCommand extends AddSecretCommand {
         privateKey = inquire(InquiryMessages.PRIVATE_KEY, "Private Key");
         seedPhrase = inquire(InquiryMessages.SEED_PHRASE, "Seed Phrase");
     }
+
+    /**
+     * Constructor for AddCryptoWalletCommand class.
+     * Takes in a CryptoWallet object and extracts the necessary attributes needed to create a new CryptoWallet.
+     *
+     * @param cryptoWallet The CryptoWallet object containing the necessary information to create a new CryptoWallet.
+     */
     public AddCryptoWalletCommand(CryptoWallet cryptoWallet) {
         this.name = cryptoWallet.getName();
         this.folderName = cryptoWallet.getFolderName();
@@ -45,11 +58,11 @@ public class AddCryptoWalletCommand extends AddSecretCommand {
     }
 
     /**
-     * Executes the AddStudentIDCommand to add a new Student ID to the SecureNUS system.
+     * Executes the command to add a cryptocurrency wallet entry to a password manager.
      *
-     * @param secureNUSData
+     * @param secureNUSData the password manager to which the entry should be added
+     * @throws ExceptionMain if there is an issue adding the entry to the password manager
      */
-
     @Override
     public void execute(SecretMaster secureNUSData) throws ExceptionMain {
         assert secureNUSData != null;
@@ -72,8 +85,6 @@ public class AddCryptoWalletCommand extends AddSecretCommand {
                 "Private Key= " + HIDDEN_FIELD + "\n" +
                 "Seed Phrase= " + HIDDEN_FIELD);
 
-        Ui.inform(OperationMessages.SAVING);
         Backend.updateStorage(secureNUSData.listSecrets());
-        Ui.inform(OperationMessages.SAVE_COMPLETE);
     }
 }

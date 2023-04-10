@@ -33,6 +33,9 @@ public class NUSNetTest {
         assertEquals("Lorem Ipsum 12", nusNet.getPassword());
     }
 
+    /**
+     * Checks if a given string is a valid NUSNET ID.
+     */
     @Test
     public void nusNetLegalIds() {
         assertTrue(NUSNet.isLegalId("e1234567"));

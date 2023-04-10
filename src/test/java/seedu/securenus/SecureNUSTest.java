@@ -1,50 +1,77 @@
 package seedu.securenus;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.securenus.command.Command;
+import seedu.securenus.exceptions.secrets.FolderExistsException;
+import seedu.securenus.exceptions.secrets.IllegalFolderNameException;
+import seedu.securenus.secrets.BasicPassword;
+import seedu.securenus.secrets.Secret;
+import seedu.securenus.storage.SecretEnumerator;
+import seedu.securenus.storage.SecretMaster;
+import seedu.securenus.storage.SecretSearcher;
+import seedu.securenus.ui.Parser;
+import seedu.securenus.messages.ErrorMessages;
 
-import java.util.logging.Level;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Hashtable;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * JUnit test class for Duke class.
+ * JUnit test class for SecureNUS.
  */
+public class SecureNUSTest {
+    private final ByteArrayOutputStream output = new ByteArrayOutputStream();
+    private SecureNUS secureNUS;
+    private SecretMaster secureNUSData;
 
-class SecureNUSTest {
-    private static final String DUKETEST_LOG_EXECUTECOMMANDEXITTRUE_IDENTIFIER
-        = "DukeTest - executeCommandExitTrue: ";
-    private static final String DUKETEST_LOG_EXECUTECOMMANDNOTEXITFALSE_IDENTIFIER
-            = "DukeTest - executeCommand: ";
+    @BeforeEach
+    public void setUp() throws FolderExistsException, IllegalFolderNameException {
+        secureNUS = new SecureNUS();
 
-    @Test
-    public void executeCommandExitTrue() {
-        try {
-            SecureNUS secureNUS = new SecureNUS();
-            // Assertions.assertTrue(secureNUS.executeCommand(Parser.parse("bye", secureNUSData)));
-            // Assertions.assertTrue(secureNUS.executeCommand(Parser.parse("hellooooo", secureNUSData)));
-        } catch (Exception e) {
-            SecureNUSLogger.setUpLogger();
-            SecureNUSLogger.LOGGER.log(Level.WARNING, SecureNUSTest.DUKETEST_LOG_EXECUTECOMMANDEXITTRUE_IDENTIFIER, e);
-            SecureNUSLogger.close();
-            throw new RuntimeException(e);
-        }
+        Secret testBasicPassword = new BasicPassword("TestPassword", "testusername", "testpassword", "website.com");
+        ArrayList<Secret> secrets = new ArrayList<>();
+        secrets.add(testBasicPassword);
+        Hashtable<String, ArrayList<Secret>> foldersHashTable = new Hashtable<>();
+        foldersHashTable.put("Passwords", secrets);
+        SecretEnumerator secretEnumerator = new SecretEnumerator(secrets, foldersHashTable);
+        SecretSearcher secretSearcher = new SecretSearcher(new Hashtable<>(),
+                Backend.createHashtableFolders(foldersHashTable));
+        secureNUSData = new SecretMaster(secretSearcher, secretEnumerator);
+
+        System.setOut(new PrintStream(output));
     }
 
-    // @Test
-    // public void executeCommandNotExitFalse() {
-    //     try {
-    //         SecureNUS secureNUS = new SecureNUS();
-    //         Assertions.assertFalse(secureNUS.executeCommand(Parser.parse("new o/NUSNet", secureNUSData)));
-    //         Assertions.assertFalse(secureNUS.executeCommand(Parser.parse("new o/StudentID", secureNUSData)));
-    //         Assertions.assertFalse(secureNUS.executeCommand(Parser.parse("new o/CryptoWallet", secureNUSData)));
-    //         Assertions.assertFalse(secureNUS.executeCommand(Parser.parse("delete", secureNUSData)));
-    //         Assertions.assertFalse(secureNUS.executeCommand(Parser.parse("list", secureNUSData)));
-    //         Assertions.assertFalse(secureNUS.executeCommand(Parser.parse("search", secureNUSData)));
-    //         Assertions.assertFalse(secureNUS.executeCommand(Parser.parse("view", secureNUSData)));
-    //         Assertions.assertFalse(secureNUS.executeCommand(Parser.parse("edit", secureNUSData)));
-    //     } catch (Exception e) {
-    //         DukeLogger.setUpLogger();
-    //         DukeLogger.LOGGER.log(Level.WARNING,
-    //             SecureNUSTest.DUKETEST_LOG_EXECUTECOMMANDNOTEXITFALSE_IDENTIFIER, e);
-    //         DukeLogger.close();
-    //     }
-    // }
+    @AfterAll
+    public static void reset() {
+        System.setIn(System.in);
+    }
+
+    @Test
+    public void executeCommand_exitCommand_successful() throws Exception {
+        String commandString = "exit";
+        Command exitCommand = Parser.parse(commandString, secureNUSData.getSecretNames(), secureNUSData.getFolders());
+        assertTrue(secureNUS.executeCommand(exitCommand));
+    }
+
+    @Test
+    public void parseCommand_invalidCommand_exceptionThrown() {
+        String userInput = "invalid command";
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(userInput.getBytes());
+        System.setIn(inputStream);
+
+        secureNUS.parseCommand();
+
+        String expected = "Enter Command:_____________________________________________________\n" +
+                ErrorMessages.INVALID_COMMAND +
+                "_____________________________________________________\n";
+        assertEquals(expected.replaceAll("(\\r|\\n)", ""),
+                output.toString().replaceAll("(\\r|\\n)", ""));
+    }
 }

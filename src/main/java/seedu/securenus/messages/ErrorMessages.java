@@ -1,5 +1,8 @@
 package seedu.securenus.messages;
 
+/**
+ * Contains error messages for various exceptions and errors.
+ */
 public class ErrorMessages {
     public static final String INVALID_COMMAND = "Invalid Command: Type 'menu' command to" +
             " see the list of usable commands";

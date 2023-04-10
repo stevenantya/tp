@@ -30,9 +30,13 @@ public class ListCommand extends Command {
     private String folderName;
 
     /**
-     * Constructs a new ListCommand object with the given input.
+     * A class representing the "list" command, which lists all secrets in a given folder or all folders.
      *
-     * @param input the input string containing the folder name, if specified.
+     * @param input the input string containing the folder name or "list" keyword
+     * @param folders the set of existing folder names
+     * @throws FolderNotFoundException if the specified folder does not exist
+     * @throws IllegalFolderNameException if the specified folder name is illegal
+     * @throws NullFolderException if the folder name is null
      */
     public ListCommand(String input, HashSet<String> folders) throws FolderNotFoundException,
             IllegalFolderNameException, NullFolderException {
@@ -50,6 +54,13 @@ public class ListCommand extends Command {
         }
     }
 
+    /**
+     * Extracts the folder name from the user input.
+     * If the input does not contain the folder name, returns null.
+     *
+     * @param input the user input
+     * @return the extracted folder name or null if not found
+     */
     public String extractFolderName(String input) {
         assert input != null;
         String extractedFolderName = null;
@@ -145,9 +156,10 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Executes the ListCommand by listing all secrets or secrets in a specific folder.
+     * Executes the 'list' command to display a list of secrets stored in the secret master.
+     * If a folder name is specified, it only displays secrets within that folder.
      *
-     * @param secureNUSData the SecretMaster object to execute the command on
+     * @param secureNUSData the SecretMaster object that stores the secrets.
      */
     @Override
     public void execute(SecretMaster secureNUSData) {

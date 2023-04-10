@@ -1,7 +1,6 @@
 package seedu.securenus.command;
 
 import seedu.securenus.Backend;
-import seedu.securenus.messages.OperationMessages;
 import seedu.securenus.exceptions.ExceptionMain;
 import seedu.securenus.exceptions.OperationCancelException;
 import seedu.securenus.exceptions.secrets.FolderExistsException;
@@ -23,15 +22,27 @@ public class AddStudentIDCommand extends AddSecretCommand {
     private String studentId;
 
     /**
-     * Constructs an AddStudentIDCommand object with the user input as the command parameter.
+     * Constructs a command for adding a new student ID entry to a password manager.
      *
-     * @param input The command input entered by the user.
+     * @param input the user input string that triggered the command
+     * @param usedNames a set of names that have already been used in the password manager
+     * @throws IllegalFolderNameException if the folder name is illegal
+     * @throws IllegalSecretNameException if the name of the secret entry is illegal
+     * @throws RepeatedIdException if the password manager already contains an entry with the same ID
+     * @throws OperationCancelException if the operation is cancelled by the user
      */
     public AddStudentIDCommand(String input, HashSet<String> usedNames) throws IllegalFolderNameException,
             IllegalSecretNameException, RepeatedIdException, OperationCancelException {
         super(input, usedNames, KEYWORD);
         this.studentId = inquireStudentID();
     }
+
+    /**
+     * Constructs a command for adding a new student ID entry to a password manager, using an existing student ID
+     * object.
+     *
+     * @param studentID the existing student ID object to use for constructing the command
+     */
     public AddStudentIDCommand(StudentID studentID) {
         this.name = studentID.getName();
         this.folderName = studentID.getFolderName();
@@ -39,11 +50,11 @@ public class AddStudentIDCommand extends AddSecretCommand {
     }
 
     /**
-     * Executes the AddStudentIDCommand to add a new Student ID to the SecureNUS system.
+     * Executes the command to add a new student ID entry to a password manager.
      *
-     * @param secureNUSData
+     * @param secureNUSData the password manager to add the new student ID entry to
+     * @throws ExceptionMain if an error occurs during the execution of the command
      */
-
     @Override
     public void execute(SecretMaster secureNUSData) throws ExceptionMain {
         assert secureNUSData != null;
@@ -64,16 +75,14 @@ public class AddStudentIDCommand extends AddSecretCommand {
                 "Folder     = " + folderName + "\n" +
                 "Student ID = " + HIDDEN_FIELD);
 
-        Ui.inform(OperationMessages.SAVING);
         Backend.updateStorage(secureNUSData.listSecrets());
-        Ui.inform(OperationMessages.SAVE_COMPLETE);
     }
 
-
     /**
-     * Prompts the user to enter the Student ID.
+     * Prompts the user to enter a valid student ID.
      *
-     * @return The Student ID entered by the user.
+     * @return the student ID entered by the user
+     * @throws OperationCancelException if the user cancels the operation
      */
     public String inquireStudentID() throws OperationCancelException {
         String studentID = inquire(InquiryMessages.STUDENT_ID, "Student ID");
@@ -81,5 +90,15 @@ public class AddStudentIDCommand extends AddSecretCommand {
             studentID = inquire(InquiryMessages.STUDENT_ID_RETRY, "Student ID");
         }
         return studentID;
+    }
+
+    /**
+     * Indicates whether the command is an exit command.
+     *
+     * @return false, as it is not an exit command
+     */
+    @Override
+    public boolean isExit() {
+        return false;
     }
 }

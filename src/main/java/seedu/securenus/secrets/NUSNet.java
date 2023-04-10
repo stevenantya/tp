@@ -1,6 +1,9 @@
 package seedu.securenus.secrets;
 
 import seedu.securenus.Backend;
+import seedu.securenus.SecureNUSLogger;
+
+import java.util.logging.Level;
 
 /**
  * Represents a NUSNet secret that stores the user's NUSNet ID and password.
@@ -46,6 +49,9 @@ public class NUSNet extends Secret{
     }
 
     public static boolean isLegalId(String nusNetId) {
+        if (!nusNetId.matches(ALLOWED_ID_REGEX)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, NUSNet ID is illegal, " + nusNetId);
+        }
         return nusNetId.matches(ALLOWED_ID_REGEX);
     }
     /**

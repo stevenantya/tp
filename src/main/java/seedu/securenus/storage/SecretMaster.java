@@ -1,8 +1,7 @@
 package seedu.securenus.storage;
 
-import seedu.securenus.Backend;
+import seedu.securenus.SecureNUSLogger;
 import seedu.securenus.exceptions.secrets.InvalidCvcNumberException;
-import seedu.securenus.messages.OperationMessages;
 import seedu.securenus.ui.Ui;
 import seedu.securenus.exceptions.secrets.InvalidCreditCardNumberException;
 import seedu.securenus.exceptions.secrets.InvalidExpiryDateException;
@@ -23,37 +22,22 @@ import seedu.securenus.secrets.WifiPassword;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.logging.Level;
 
 /**
  * Master class that manages the storage and retrieval of secrets and folders.
  */
 public class SecretMaster {
     public static final String ALLOWED_NAMES_REGEX = "^[a-zA-Z0-9_]*$"; // only alphanumeric allowed
-    // use for quick finding
     public static final String DEFAULT_FOLDER = "unnamed";
-
-    /**
-     * Object that manages searching for secrets.
-     */
     private SecretSearcher secretSearcher;
-
-    /**
-     * Object that manages enumerating secrets or listing secrets in the order it was added in.
-     */
     private SecretEnumerator secretEnumerator;
-
-    /**
-     * HashSet that stores the names of folders and ensure folders and passwords are distinct.
-     */
     private HashSet<String> folders;
-
-    /**
-     * HashSet that stores the names of secrets.
-     */
     private HashSet<String> secretNames;
 
     /**
-     * Constructor for the SecretMaster class.
+     * Constructs a new SecretMaster object with an empty set of folders and secret names, and
+     * Initializes the SecretSearcher and SecretEnumerator objects.
      */
     public SecretMaster() {
         secretSearcher = new SecretSearcher();
@@ -83,6 +67,11 @@ public class SecretMaster {
      */
     public static boolean isLegalFolderName(String name) {
         assert name != null;
+        if (name.equals("")) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, folder name is empty, " + name);
+        } else if (!name.matches(ALLOWED_NAMES_REGEX)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, special characters in folder name, " + name);
+        }
         return !name.equals("") && name.matches(ALLOWED_NAMES_REGEX);
     }
 
@@ -197,6 +186,7 @@ public class SecretMaster {
         assert folderName.length() >= 0;
         assert this.secretEnumerator != null;
         if (!folders.contains(folderName)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, non existent folder, " + folderName);
             throw new NonExistentFolderException();
         }
         return secretEnumerator.getList(folderName);
@@ -215,6 +205,7 @@ public class SecretMaster {
         assert this.secretNames != null;
         assert this.secretSearcher != null;
         if (!secretNames.contains(secretName)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, non existent secret name, " + secretName);
             throw new SecretNotFoundException();
         }
         return secretSearcher.get(secretName);
@@ -239,6 +230,7 @@ public class SecretMaster {
             throw new IllegalSecretNameException();
         }
         if (secretNames.contains(secret.getUid())) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, repeated ID, " + secret.getUid());
             throw new RepeatedIdException();
         }
         String folderName = secret.getFolderName();
@@ -252,14 +244,14 @@ public class SecretMaster {
     }
 
     /**
-     * Updates a Secret's name and folder as well as its name in secretNames, and
-     * itself in secretSearcher and secretEnumerator.
+     * Edits a secret by changing its name, folder name, and/or inquired fields.
      *
-     * @param secret         Secret object to be edited.
-     * @param newName        updated name of the Secret object.
-     * @param newFolderName  updated folder of the Secret object.
-     * @param inquiredFields
-     * @throws FolderExistsException if the folder specified in the Secret already exists and cannot be created.
+     * @param secret the secret to be edited
+     * @param newName the new name of the secret (null to keep the old name)
+     * @param newFolderName the new folder name of the secret (null to keep the old folder name)
+     * @param inquiredFields an array of strings containing the new values for the inquired field
+     *                       (null to keep the old values)
+     * @throws FolderExistsException if the new folder name already exists
      */
     public void editSecret(Secret secret, String newName, String newFolderName,
                            String[] inquiredFields) throws FolderExistsException {
@@ -294,10 +286,13 @@ public class SecretMaster {
                 ((CreditCard) secret).setCvcNumber(inquiredFields[2]);
                 ((CreditCard) secret).setExpiryDate(inquiredFields[3]);
             } catch (InvalidCreditCardNumberException e) {
+                SecureNUSLogger.LOGGER.log(Level.WARNING, "error, invalid credit card number, " + inquiredFields[1]);
                 Ui.printError("Invalid Credit Card Number! Must be 16 digits long");
             } catch (InvalidExpiryDateException e) {
+                SecureNUSLogger.LOGGER.log(Level.WARNING, "error, invalid expiry date, " + inquiredFields[3]);
                 Ui.printError("Invalid Expiry Date! Must be in the format \"MM/YY\"");
             } catch (InvalidCvcNumberException e) {
+                SecureNUSLogger.LOGGER.log(Level.WARNING, "error, invalid cvc number, " + inquiredFields[2]);
                 Ui.printError("Invalid CVC Number! Must be in the correct format (e.g. 123):");
             }
         } else if (secret instanceof NUSNet) {
@@ -318,9 +313,6 @@ public class SecretMaster {
         secretSearcher.add(secret);
         secretEnumerator.add(secret);
 
-        Ui.inform(OperationMessages.SAVING);
-        Backend.updateStorage(this.listSecrets());
-        Ui.inform(OperationMessages.SAVE_COMPLETE);
     }
 
     /**
@@ -336,6 +328,7 @@ public class SecretMaster {
         assert this.secretSearcher != null;
 
         if (!secretNames.contains(secret.getUid())) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, secret does not exists, " + secret.getUid());
             throw new SecretNotFoundException();
         }
 
@@ -347,12 +340,14 @@ public class SecretMaster {
         if (!folderContainsSecrets(folderName)) {
             folders.remove(folderName);
         }
-
-        Ui.inform(OperationMessages.SAVING);
-        Backend.updateStorage(this.listSecrets());
-        Ui.inform(OperationMessages.SAVE_COMPLETE);
     }
 
+    /**
+     * This method checks if a folder with the specified name contains any secrets.
+     *
+     * @param folderName the name of the folder to be checked
+     * @return true if the folder contains secrets, false otherwise
+     */
     public boolean folderContainsSecrets(String folderName) {
         return secretEnumerator.folderExists(folderName);
     }

@@ -54,6 +54,18 @@ public class CryptoWallet extends Secret {
         this.seedPhrase = seedPhrase;
         this.privateKey = privateKey;
     }
+
+    /**
+     * Constructs a CryptoWallet object with the specified name, folder name, username, private key, seed phrase,
+     * and URLs.
+     *
+     * @param name the name of the CryptoWallet object
+     * @param folderName the name of the folder that the CryptoWallet object belongs to
+     * @param username the username associated with the CryptoWallet object
+     * @param privateKey the private key associated with the CryptoWallet object
+     * @param seedPhrase the seed phrase associated with the CryptoWallet object
+     * @param urls the list of URLs associated with the CryptoWallet object
+     */
     public CryptoWallet(String name, String folderName, String username,
                         String privateKey, String seedPhrase, ArrayList<String> urls) {
         super(name, folderName);
@@ -62,6 +74,12 @@ public class CryptoWallet extends Secret {
         this.seedPhrase = seedPhrase;
         this.privateKey = privateKey;
     }
+
+    /**
+     * Returns the type of the object.
+     *
+     * @return the type of the object
+     */
     public String getType() {
         return TYPE;
     }
@@ -93,6 +111,10 @@ public class CryptoWallet extends Secret {
         return privateKey;
     }
 
+    /**
+     * Sets the private key of the CryptoWallet.
+     * @param privateKey the private key to be set
+     */
     public void setPrivateKey(String privateKey) {
         this.privateKey = privateKey;
     }
@@ -156,6 +178,11 @@ public class CryptoWallet extends Secret {
                 "Private Key: %s", getName(), seedPhrase, privateKey);
     }
 
+    /**
+     * Returns a string representation of the object that can be stored in the database.
+     *
+     * @return a string representation of the object that can be stored in the database
+     */
     @Override
     public String toStringForDatabase() {
         String formattedString =  "CryptoWallet," + super.toStringForDatabase() +

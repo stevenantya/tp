@@ -21,52 +21,54 @@ import seedu.securenus.exceptions.secrets.SecretNotFoundException;
 import seedu.securenus.messages.ErrorMessages;
 import seedu.securenus.storage.SecretMaster;
 
-import java.util.logging.Logger;
 import java.util.logging.Level;
 
+/**
+ * SecureNUS is the main class of the application.
+ * It is responsible for initiating the application, running the application and handling user input.
+ */
 public class SecureNUS {
-    private static final Logger LOGGER = SecureNUSLogger.LOGGER;
-    private static final String DUKE_LOG_EXECUTECOMMAND_IDENTIFIER = "Duke - executeCommand";
-    /**
-     * Duke class handles the main entry-point for the application, parsing of user commands and execution of commands.
-     * Duke class also initializes a SecretMaster object to store and manage the secrets for the application.
-     */
     private SecretMaster secureNUSData;
 
     /**
-     * Duke constructor initializes a SecretMaster object to store and manage the secrets for the application.
+     * Constructor for SecureNUS class. It calls the initialisation method of Backend
+     * to create a new SecretMaster object and assign it to the secureNUSData field.
      *
-     * @throws FolderExistsException         If the database folder already exists.
-     * @throws IllegalFolderNameException    If the name of a folder is not valid.
+     * @throws FolderExistsException If a folder with the same name as the SecureNUS folder already exists
+     * @throws IllegalFolderNameException If the SecureNUS folder name is illegal
      */
     public SecureNUS() throws FolderExistsException, IllegalFolderNameException {
         secureNUSData = Backend.initialisation();
         SecureNUSLogger.setUpLogger();
     }
+
     /**
-     * Main entry-point for the Duke application.
-     * Initializes a Duke object and runs the application.
+     * The main method that starts the application.
      *
-     * @param args An array of command-line arguments for the application.
-     * @throws FolderExistsException         If the database folder already exists.
-     * @throws IllegalFolderNameException    If the name of a folder is not valid.
-     * @throws IllegalSecretNameException    If the name of a secret is not valid.
-     * @throws SecretNotFoundException       If the specified secret cannot be found.
+     * @param args Command line arguments
+     * @throws FolderExistsException If a folder with the same name as the SecureNUS folder already exists
+     * @throws IllegalFolderNameException If the SecureNUS folder name is illegal
+     * @throws IllegalSecretNameException If the Secret name is illegal
+     * @throws SecretNotFoundException If the Secret is not found
      */
     public static void main(String[] args) throws FolderExistsException, IllegalFolderNameException,
             IllegalSecretNameException, SecretNotFoundException {
         SecureNUS secureNUS = new SecureNUS();
-        secureNUS.run();
-
+        try {
+            secureNUS.run();
+        } catch (Exception e) {
+            SecureNUSLogger.LOGGER.log(Level.SEVERE, "fatal, unexpected exception: " + e.getMessage());
+            SecureNUSLogger.close();
+        }
     }
 
     /**
-     * Starts the main loop of the Duke application.
-     * Parses user input commands and executes them until the "exit" command is given.
+     * The main method to run the application.
      */
     public void run() {
         Ui.greetUser();
 
+        SecureNUSLogger.LOGGER.log(Level.INFO, "start,");
         if (Backend.isCorrupted) {
             Ui.printCorruptedDataMessage();
         } else if (!Backend.isDatabaseEmpty) {
@@ -74,8 +76,6 @@ public class SecureNUS {
         } else {
             Ui.printNewSessionMessage();
         }
-
-
         boolean isExit = false;
         while (!isExit) {
             Command c = parseCommand();
@@ -95,13 +95,14 @@ public class SecureNUS {
         Ui.inform(OperationMessages.SAVE_COMPLETE);
         Ui.inform(OperationMessages.CLOSE);
         Ui.close();
+        SecureNUSLogger.LOGGER.log(Level.INFO, "end,");
+
     }
 
-
     /**
-     * Reads user input command and returns a Command object.
+     * Parses the user input into a Command object.
      *
-     * @return A Command object that represents the user input command.
+     * @return The parsed Command object.
      */
     public Command parseCommand() {
         Ui.informUserToStartCommand();
@@ -137,13 +138,11 @@ public class SecureNUS {
     }
 
     /**
-     * Executes the given Command object and returns a boolean indicating whether the application should exit.
+     * Executes a given command on the SecureNUS application.
      *
-     * @param command The Command object to execute.
-     * @return A boolean indicating whether the application should exit.
-     * @throws IllegalFolderNameException    If the name of a folder is not valid.
-     * @throws IllegalSecretNameException    If the name of a secret is not valid.
-     * @throws SecretNotFoundException       If the specified secret cannot be found.
+     * @param command the command to be executed.
+     * @return a boolean indicating whether the command has exited or not.
+     * @throws ExceptionMain if an error occurs while executing the command.
      */
     public boolean executeCommand(Command command) throws ExceptionMain {
         if (command != null) {
@@ -160,8 +159,6 @@ public class SecureNUS {
                 Ui.informOperationCancel();
             } catch (ExceptionMain e) {
                 Ui.printError(e.getMessage());
-                LOGGER.log(Level.SEVERE, DUKE_LOG_EXECUTECOMMAND_IDENTIFIER, e);
-                SecureNUSLogger.close();
             }
         }
         return false;
