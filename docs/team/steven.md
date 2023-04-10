@@ -84,6 +84,6 @@ Class and Sequence Diagram in the <a href="https://ay2223s2-cs2113-t15-2.github.
 - [DG Reviewed](https://github.com/nus-cs2113-AY2223S2/tp/pull/10)
 
 ## Selected key learning points
-1. App foundation gone through many iterations because the previous versions are either incomplete or not structured properly (e.g. abstract class for Command, Secret parent class)
+1. App foundation gone through many iterations because the previous versions are either incomplete or not structured properly (e.g. abstract class for Command, Secret parent class). It is good to create a solid app foundation first.
 2. Working in a team with multiple PRs, enhancements, and issue at the same time needs a good teamwork and communication skills. This is especially relatable to Steven as the others will ask him on how the App Foundation works
 3. One person's halt will have a domino effect on the others. It is advisable to help ones that are struggling.
