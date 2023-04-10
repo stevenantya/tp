@@ -248,6 +248,8 @@ responses/ feedback to the User.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+---
+
 ## Add Basic Password Feature
 
 The `new` function allows the user to add new basic password stored in the password manager. When the user selects the add basic password function, they will be prompted to enter the name, url, 
@@ -268,10 +270,9 @@ AddBasicPasswordCommand extends AddSecret abstract class and extends Command cla
 
 Given below is an example usage scenario and how instantiation of basic password behaves at each step. Some details are omitted for the sake of better viewability in demonstration. Details after the loop are removed as well. The usage scenario is not an object diagram, a sequence diagram, nor a class diagram. It is purely to demonstrate the feature usage.
 
----
 
 **Step 1.** The user launches the application for the first time. The SecureNUS will be initialized. The user will interact directly with SecureNUS Class.
-<img src="./DGimages/image10.png" width="100%" />
+<img src="./DGimages/image10.png" width="50%" />
 
 **Step 2.** When the user executes “new basic_password” command to add basic password, the SecureNUS calls parse() method to parse the user’s input
 <img src="./DGimages/image18.png" width="100%" />
@@ -314,9 +315,9 @@ The Delete feature will implement the following operations:
 
 Given below is an example usage scenario and how instantiation of basic password behaves at each step. Some details are omitted for the sake of better viewability in demonstration. Details after the loop are removed as well. The usage scenario is not an object diagram, sequence diagram, nor a class diagram. It is purely to demonstrate the feature usage.
 
----
+
 **Step 1.** The user launches the application for the first time. The SecureNUS will be initialized. The user will interact directly with SecureNUS Class.
-<img src="./DGimages/image10.png" width="100%" />
+<img src="./DGimages/image10.png" width="50%" />
 
 **Step 2.** When the user executes “delete basic_password” command to delete basic password, the SecureNUS calls parse() method to parse the user’s input
 <img src="./DGimages/image18.png" width="100%" />
@@ -357,10 +358,9 @@ The List feature will implement the following operations:
 
 Given below is an example usage scenario and how instantiation of basic password behaves at each step. Some details are omitted for the sake of better viewability in demonstration. Details after the loop are removed as well. The usage scenario is not an object diagram, sequence diagram, nor a class diagram. It is purely to demonstrate the feature usage.
 
----
 
 **Step 1.** The user launches the application for the first time. The SecureNUS will be initialized. The user will interact directly with SecureNUS Class.
-<img src="./DGimages/image10.png" width="100%" />
+<img src="./DGimages/image10.png" width="50%" />
 
 **Step 2.** When the user executes “list folderName” command to list all passwords in folder folderName, the SecureNUS calls parse() method to parse the user’s input
 <img src="./DGimages/image18.png" width="100%" />
