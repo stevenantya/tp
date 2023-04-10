@@ -3,7 +3,6 @@ package seedu.securenus.storage;
 import seedu.securenus.Backend;
 import seedu.securenus.SecureNUSLogger;
 import seedu.securenus.exceptions.secrets.InvalidCvcNumberException;
-import seedu.securenus.messages.OperationMessages;
 import seedu.securenus.ui.Ui;
 import seedu.securenus.exceptions.secrets.InvalidCreditCardNumberException;
 import seedu.securenus.exceptions.secrets.InvalidExpiryDateException;
@@ -315,9 +314,6 @@ public class SecretMaster {
         secretSearcher.add(secret);
         secretEnumerator.add(secret);
 
-        Ui.inform(OperationMessages.SAVING);
-        Backend.updateStorage(this.listSecrets());
-        Ui.inform(OperationMessages.SAVE_COMPLETE);
     }
 
     /**
@@ -345,10 +341,6 @@ public class SecretMaster {
         if (!folderContainsSecrets(folderName)) {
             folders.remove(folderName);
         }
-
-        Ui.inform(OperationMessages.SAVING);
-        Backend.updateStorage(this.listSecrets());
-        Ui.inform(OperationMessages.SAVE_COMPLETE);
     }
 
     /**
