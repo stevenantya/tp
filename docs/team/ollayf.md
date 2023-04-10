@@ -25,10 +25,12 @@ or they did not want to save this password anymore
 - Project Management: 
   - Managed releases v1.0 and v2.1
   - Tested and made ready for release
+  - Split the work required into different releases
+  - Allocated roles to everyone
 - Enhancement to other features:
   - More structure for Parsing commands,
   - More extensive checks for all commands before allowing the application use them
-  - Data structures for our secrets
+  - Set data structures for our secrets
   - Creating the architecture of the application
   - QA Tests for all commands to ensure they work as per intended
   - Standardised the UI of the entire application
