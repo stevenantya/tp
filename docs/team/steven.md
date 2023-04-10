@@ -29,7 +29,7 @@ and auto-save & auto-load your password!
   <tr>
     <td class="tg-0lax">App foundation</td>
     <td class="tg-0lax">The basic foundation of the app including SecureNUS, Ui (scanning and printing), Parser, 
-        Exception handlings. Alongside with vital classes such as Secret parent class, 
+        and Exception handlings. Alongside with vital classes such as Secret parent class, 
 Command parent abstract class<br><br>This is high in complexity because the app must be 
 designed in a way it is easily scalable, understandable, and efficient.<br>The foundation 
 went through several iterations of upgrade through the development. Major changes was added during v2.0 and v2.1. The 
