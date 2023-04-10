@@ -547,7 +547,7 @@ keeping your secrets private and secure, and regularly updating your secrets.
 <br>
 
 **Q:** Will all the key commands native to the command line work eg. `Ctrl-C` for program termination, `Ctrl-V` for 
-paste, `Up arrow` to move to previous commands e.t.c.?
+paste, `Up arrow` to move to previous commands e.t.c.?<br>
 **A:** The functionality for the key operations differ between terminals and operating systems. To avoid any unknown 
 errors and exceptions, users are requested to refrain from using the key shortcuts especially the `Ctrl+C` shortcut 
 which may lead to termination of the program.
