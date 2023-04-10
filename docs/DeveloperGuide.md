@@ -69,6 +69,11 @@ Tip: Optionally, you can follow the guide [[se-edu/guides] Using Checkstyle](htt
 ---
 
 [//]: # (@@author ollayf)
+
+# Legend
+
+   The class diagram visibility / access modifier is represented by the table below
+   <img src="./DGimages/image23.png" width="100%" />
 # Design & Implementation
 
 
