@@ -363,11 +363,10 @@ Delete Password has attribute: name
 To instantiate a DeleteCommand object, parse command creates a constructor of DeleteCommand that extends Command.
 
 The Delete feature will implement the following operations:
-
-* **SecureNUS#parseCommand()**
-* **SecureNUS#execute(Command)**
-* **DeleteCommand#removeSecret(deleteData)**
-* **SecureNUS#updateStorage(ArrayList<Secret>)**
+- **SecureNUS#parseCommand()**
+- **SecureNUS#execute(Command)**
+- **DeleteCommand#removeSecret(deleteData)**
+- **SecureNUS#updateStorage(ArrayList<Secret>)**
 
 Given below is an example usage scenario and how instantiation of basic password behaves at each step. Some details are omitted for the sake of better viewability in demonstration. Details after the loop are removed as well. The usage scenario is not an object diagram, sequence diagram, nor a class diagram. It is purely to demonstrate the feature usage.
 
@@ -413,10 +412,10 @@ To instantiate a basic password object, parse command creates a constructor of L
 The List feature will implement the following operations:
 
 
-* **SecureNUS#parseCommand()**
-* **SecureNUS#execute(Command)**
-* **ListCommand#listSecrets(folderName)**
-* **ListCommand#getSecretTypeInfo(secret)**
+- **SecureNUS#parseCommand()**
+- **SecureNUS#execute(Command)**
+- **ListCommand#listSecrets(folderName)**
+- **ListCommand#getSecretTypeInfo(secret)**
 
 Given below is an example usage scenario and how instantiation of basic password behaves at each step. Some details are omitted for the sake of better viewability in demonstration. Details after the loop are removed as well. The usage scenario is not an object diagram, sequence diagram, nor a class diagram. It is purely to demonstrate the feature usage.
 
