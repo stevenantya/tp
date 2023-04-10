@@ -21,7 +21,7 @@ other sensitive information securely.
 + Navigate to the directory where the JAR file is located.
 + Run the following command: `java -jar [CS2113-T15-2][SecureNUS].jar`
 
-### Usage
+## Usage
 <table>
     <tr>
         <td>Action </td>

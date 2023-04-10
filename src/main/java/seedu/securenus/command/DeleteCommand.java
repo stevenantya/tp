@@ -1,5 +1,6 @@
 package seedu.securenus.command;
 
+import seedu.securenus.Backend;
 import seedu.securenus.exceptions.InsufficientParamsException;
 import seedu.securenus.ui.Ui;
 import seedu.securenus.exceptions.secrets.SecretNotFoundException;
@@ -69,12 +70,13 @@ public class DeleteCommand extends Command {
             if (isValid && (deleteData != null)) {
                 try {
                     secureNUSData.removeSecret(deleteData);
-                    System.out.println("Successfully deleted: " + secretName);
+                    Ui.inform("Successfully deleted: " + secretName);
 
                 } catch (SecretNotFoundException e) {
                     Ui.printError("Secret Not Found: " + secretName);
                 }
             }
         }
+        Backend.updateStorage(secureNUSData.listSecrets());
     }
 }

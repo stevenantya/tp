@@ -47,11 +47,7 @@ loop while !isExit
     return
     ":AddBasicPassword" -> "<<class>>\nUi"#000134: inform("I have added new basic password...")
     return
-    ":AddBasicPassword" -> "<<class>>\nUi"#000134: inform(OperationMessages.SAVING)
-    return
     ":AddBasicPassword" -> "<<class>>\nBackend"#317821: updateStorage(input)
-    return
-    ":AddBasicPassword" -> "<<class>>\nUi"#000134: inform(OperationMessages.SAVE_COMPLETE)
     return
     return isExit = false
     destroy ":AddBasicPassword"

@@ -77,31 +77,38 @@ _____________________________________________________
 <br>
 
 #### 3. Logging Capabilities - Logging of appropriate user data to assist in debugging 
-- Logging Architecture
+- Logging Architecture <br>
+  All user input is logged
+```java
+
+---------------------------------| Session began at: 2023-04-09T23:28:12.788915800Z |-------------------------------------------------------------------| Session began at: 2023-04-09T23:29:18.053986200Z |-----------------------------------
+
+        command by user:  new pass10
+        fields:  idk.com,  c/,
+        >>>>user cancelled operation
+
+        command by user:  exit
+        fields:
+        ------------
+        | ALERT !!!|
+        ------------
+        Program Crashed:  unexpected exception: null
+        Time: 2023-04-09T23:47:28.668632600Z
+
+```
 - Log Formatting
   + A custom formatter class is extended from the Formatter abstract class in the logging package. 
   ```java
   public class SecureNUSLogFormatter extends Formatter{
     @Override
     public String format(LogRecord record) {
-        ...    
-    }
-  }
+        ...
   ```
 Within the abstract method format, all relevant information are rearranged and formatted using
 static methods based on the context of the information.
 ```java
-    ...
     if (logArray[0].equals("start")) {
         return SecureNUSLogFormatter.startOfSessionLog(record);
-    }
-    ...
-
-    public static String startOfSessionLog(LogRecord record) {
-        String alert = "-------------------------------------------------" +
-        "| Session began at: " + record.getInstant() + " |" +
-        "-------------------------------------------------";
-        return alert;
     }
 ```
 <br>
