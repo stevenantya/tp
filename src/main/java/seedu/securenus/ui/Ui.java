@@ -87,14 +87,6 @@ public class Ui {
         return "";
     }
 
-    public static String readCommand(Scanner in) {
-        while (in.hasNextLine()) {
-            String line = in.nextLine();
-            return removeExtraWhiteSpaces(line);
-        }
-        return "";
-    }
-
     /**
      * Reads a line of input from the user through the console.
      *
@@ -109,15 +101,6 @@ public class Ui {
         return "";
     }
 
-    public static String readLine(Scanner in) {
-        while (in.hasNextLine()) {
-            String line = in.nextLine();
-
-            return line;
-        }
-        return "";
-    }
-
     /**
      * Removing the trailing backslashes
      * This is commonly used when preparing strings for use in regular expressions or when saving to a file.
@@ -126,7 +109,7 @@ public class Ui {
      * @return the input string with all backslashes removed
      */
     public static String removeBackSlashes(String input) {
-        return input.replaceAll("\\\\", "\\\\\\\\");
+        return input.replace("\\", "\\\\");
     }
 
     /**
