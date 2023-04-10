@@ -40,7 +40,7 @@ Class and Sequence Diagram in the <a href="https://ay2223s2-cs2113-t15-2.github.
     <td class="tg-0lax">Adding a password<br></td>
     <td class="tg-0lax">Adding a new basic password, URL, StudentID, NUSNet passwords. 
         The password names need to be unique. Verify if the adding is valid and exception handling
-        T<br><br>This is medium complexity as there are different types of passwords, parsing handling, and exception handling for various errors
+        <br><br>This is medium complexity as there are different types of passwords, parsing handling, and exception handling for various errors
         such as invalid URL (not xxx.yyy), and integration to the Storage (SecretMaster).</td>
     <td class="tg-0lax">* *</td>
   </tr>
