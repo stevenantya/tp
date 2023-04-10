@@ -394,11 +394,12 @@ JAR file using `java -jar [CS2113-T15-2][SecureNUS].jar` and observe the followi
 </table>
 
 * In case of `2.`, users can follow 2 troubleshooting steps: 
-  * Recommended: Users can still manually save their secrets using the `save` command to rewrite everything at the 
-  current point. That way all the corrupted data in `database.txt` will be overwritten by the new secrets, thus leading 
-  to no loss of data. 
-  * If have tampered with the `database.txt` file, please revert the `database.txt` to the original contents before 
-  its corruption by using `Ctrl+Z`. 
+  * Recommended: Users can use the `save` command OR continue using the app as per normal. 
+All previous data will be erased when new data is loaded in. 
+  * Try to recover the state of `database.txt` by using the `Ctrl + Z` shortcut. You may have accidentally 
+edited some characters in the `database.txt` file causing the corruption. 
+In such cases, undoing these edits by using the `Ctrl + Z` shortcuts will cause the application to import the 
+previous data on next load.
   
 ##### General Format: `save`
 
