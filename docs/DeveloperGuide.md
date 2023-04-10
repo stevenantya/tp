@@ -70,7 +70,7 @@ If you plan to use Intellij IDEA (highly recommended):
 
 
 1. **Configure the JDK:** Follow the guide [[se-edu/guides] IDEA: Configuring the JDK](https://se-education.org/guides/tutorials/intellijJdk.html) to ensure Intellij is configured to use JDK 11.
-2. **Import the project as a Gradle project:** Follow the guide [[se-edu/guides] IDEA: Importing a Gradle project](https://se-education.org/guides/tutorials/intellijImportGradleProject.html) to import the project into IDEA. \
+2. **Import the project as a Gradle project:** Follow the guide [[se-edu/guides] IDEA: Importing a Gradle project](https://se-education.org/guides/tutorials/intellijImportGradleProject.html) to import the project into IDEA.
 
 <img src="./DGDiagramsCreator/DGUsedDiagrams/ExclamationMark.png" width="4%" />
 Note: Importing a Gradle project is slightly different from importing a normal Java project.
