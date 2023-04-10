@@ -8,10 +8,6 @@ wifi password, NUS Student ID secret, and many more!
 The features of SecureNUS include adding, deleting, editing, listing, revealing, searching, 
 and auto-save & auto-load your password!
 
-
-1. Creation and Deletion of Password Fields
-2. Different classes for different passwords
-
 ## Summary of Contributions
 
 ### Code contributed
