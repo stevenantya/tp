@@ -13,12 +13,12 @@
   - [Add Basic Password](#add-basic-password)
   - [Delete a Password](#delete-a-password)
   - [List all Secrets](#list-all-secrets)
-- [Appendix: Requirements](#appendix--requirements)
+- [Appendix: Requirements](#appendix-requirements)
   - [Product Scope](#product-scope)
   - [User Stories](#user-stories)
   - [Non-Functional Requirements](#non-functional-requirements)
   - [Glossary](#glossary)
-- [Appendix: Instructions for manual testing](#appendix--requirements)
+- [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
   - [Launch and shutdown](#launch-and-shutdown)
   - [Saving data](#saving-data)
   - [Menu of all Commands](#menu-of-all-commands)
@@ -28,7 +28,9 @@
   - [View Password](#view-password)
   - [Edit Password](#edit-password)
   - [Deleting Password](#delete-password)
+
 ---
+
 ## Acknowledgements
 
 
@@ -529,9 +531,9 @@ This simplified sequence diagram shows what happens when a user lists all passwo
 ---
 
 
-### Instructions for manual testing
+## Appendix: Instructions for manual testing
 
-#### Launch and shutdown
+### Launch and shutdown
 1. Initial launch 
    1. Download the jar file and copy it into an empty folder. 
    2. Open a command window (If you are on Windows, use the DOS prompt or the PowerShell). 
@@ -541,7 +543,7 @@ This simplified sequence diagram shows what happens when a user lists all passwo
    1. Enter the `exit` command 
       Expected: Exits the program gracefully. All data is saved.
 
-#### Saving data 
+### Saving data 
 The following directory and file will be created upon initial launch of SecureNUS:
 ```
 assets/database.txt
@@ -557,11 +559,11 @@ Stored passwords are saved after exiting the program gracefully.
    1. Simulate by forcefully exiting the program (i.e. exit without entering the `exit` command)
    2. Expected: All unsaved data is lost
 
-#### Menu of all commands
+### Menu of all commands
 1. `menu`
    Expected: Displays menu.
 
-#### Adding a password
+### Adding a password
 1. `new myBasicPassword1`
    Expected: Input fields are displayed and user keys in the relevant details. The basic password is then stored successfully.
 2. `new myBasicPassword2 f/myFolder`
@@ -569,7 +571,7 @@ Stored passwords are saved after exiting the program gracefully.
 3. Incorrect format like `new`, `new o/`, `new o/InvalidPasswordType`
    Expected: Error message displayed.
 
-#### Listing all passwords
+### Listing all passwords
 1. `list`
    Expected: Lists `myBasicPassword1`, `myBasicPassword2` and `myNUSNetPassword` and their details
 2. `list f/myFolder`
@@ -577,23 +579,23 @@ Stored passwords are saved after exiting the program gracefully.
    Incorrect format like `list f/nonExistentFolder`
    Expected: Error message displayed.
 
-#### Search for password
+### Search for password
 1. `search my`
    Expected: Displays three passwords with names containing “my”
 
-#### View password
+### View password
 1. `view myBasicPassword1`
    Expected: Displays password and details of `myBasicPassword1`
 2. Incorrect format like `view`, `view nonExistentPassword`
    Expected: Error message displayed.
    
-#### Edit password
+### Edit password
 1. `edit myBasicPassword1`
    Expected: Input field displayed for user to enter new password for `myBasicPassword1`
 2. Incorrect format like `edit`, `edit nonExistentPassword`
    Expected: Error message displayed.
 
-#### Delete password
+### Delete password
 1. `delete myBasicPassword1`
    Expected: `myBasicPassword1` is removed from storage.
 2. Incorrect format like `delete`, `delete nonExistentPassword`
