@@ -72,7 +72,7 @@ If you plan to use Intellij IDEA (highly recommended):
 1. **Configure the JDK:** Follow the guide [[se-edu/guides] IDEA: Configuring the JDK](https://se-education.org/guides/tutorials/intellijJdk.html) to ensure Intellij is configured to use JDK 11.
 2. **Import the project as a Gradle project:** Follow the guide [[se-edu/guides] IDEA: Importing a Gradle project](https://se-education.org/guides/tutorials/intellijImportGradleProject.html) to import the project into IDEA.
 
-<img src="./DGDiagramsCreator/DGUsedDiagrams/ExclamationMark.png" width="4%" />
+<img src="./DGDiagramsCreator/DGUsedDiagrams/ExclamationMark.png" width="2%" />
 Note: Importing a Gradle project is slightly different from importing a normal Java project.
 3. **Verify the setup:**
     1. Run the _seedu.securenus.SecureNUS_ and try a few commands.
@@ -83,7 +83,7 @@ Note: Importing a Gradle project is slightly different from importing a normal J
 
 1. **Configure the coding style** If using IDEA, follow the guide [[se-edu/guides] IDEA: Configuring the code style](https://se-education.org/guides/tutorials/intellijCodeStyle.html) to set up IDEA’s coding style to match ours. 
 
-<img src="./DGDiagramsCreator/DGUsedDiagrams/ExclamationMark.png" width="4%" />
+<img src="./DGDiagramsCreator/DGUsedDiagrams/ExclamationMark.png" width="2%" />
 Tip: Optionally, you can follow the guide [[se-edu/guides] Using Checkstyle](https://se-education.org/guides/tutorials/checkstyle.html) to find how to use the CheckStyle within IDEA e.g., to report problems as you write code.  
 
 2. **Set up CI** This project comes with a GitHub Actions config files (in .github/workflows folder). When GitHub detects those files, it will run the CI for your project automatically at each push to the master branch or to any PR. No set up required.  
@@ -107,7 +107,7 @@ The class diagram visibility / access modifier is represented by the table below
 <img src="./DGimages/image23.png" width="100%" />  
 ### Architecture
 
-<img src="./DGimages/image28.png" width="100%" />
+<p style="text-align:center;"><img src="./DGimages/image28.png" width="65%" /></p>
 
 
 This **Architecture Diagram** explains the high-level design of the App.
@@ -171,7 +171,7 @@ intricately interwoven in every class, across many methods.
     <tr>
         <td> <a href="#developer-guide">Back to Table of Contents </a> </td>
     </tr>
-</table>  
+</table>
 
 ___
 #### How the architecture components interact with each other
@@ -228,7 +228,7 @@ by SecureNUS object.
 
 #### SecretStorage Component
 The API of this component is specified in the package `storage`. The diagram below features the high-level understanding of how this component works. Each rectangle represents a class, while the SecureNUS and Backend nodes represent components.
-<img src="./DGimages/image19.png" width="100%" />
+<p style="text-align:center;"><img src="./DGimages/image19.png" width="65%" /></p>
 
 The **SecretStorage** component abstracts the data that is to be stored into many views/ 
 indexes. This optimizes the speed of queries for many types of queries without developers 
@@ -244,10 +244,10 @@ and Backend will handle encrypting and saving it into an external file.
 The following class diagrams show how these work in the code.
 
 <img src="./DGimages/image22.png" width="200%" height="200%"/>
-<u>Class Diagram of SecretStorage Component</u>
+<p style="text-align:center;"><u>Class Diagram of SecretStorage Component</u></p>
 
-<img src="./DGimages/image3.png" width="100%" />
-<u>Class Diagram of SecretStorage Component without methods</u>
+<p style="text-align:center;"><img src="./DGimages/image3.png" width="80%" /></p>
+<p style="text-align:center;"><u>Class Diagram of SecretStorage Component without methods</u></p>
 
 ---
 
@@ -262,7 +262,12 @@ The backend manages the saving and loading of data from the database.txt file. T
 The following class diagram shows how these work in the code. Details of the secrets and storage packages which are in the other components are removed for better viewability.
 
 <img src="./DGimages/image11.png" width="100%" />
-<u>Class Diagram of Backend Component</u>
+<p style="text-align:center;"><u>Class Diagram of Backend Component</u></p>
+<table>
+    <tr>
+        <td> <a href="#developer-guide">Back to Table of Contents </a> </td>
+    </tr>
+</table>  
 
 ---
 
@@ -270,7 +275,7 @@ The following class diagram shows how these work in the code. Details of the sec
 
 The API of this component is specified in `Ui` The following diagram shows a high level understanding of how the UI Component works. The rectangles represent classes while the cuboids represent Components.
 
-<img src="./DGimages/image17.png" width="100%" />
+<p style="text-align:center;"><img src="./DGimages/image17.png" width="80%" /></p>
 
 The UI consists of the Ui class which handles all the inputs provided by the user. The Ui then sends information to the 
 parser which will interpret the commands provided by user input. The **Parser** will create **Commands** which will be
@@ -278,8 +283,9 @@ sent to **SecureNUS** to execute some command that will alter the data in Secret
 The **Ui** also handles 
 responses/ feedback to the User.
 
-<img src="./DGimages/image2.png" width="100%" />
-<u>Class Diagram for UI Component</u>
+<p style="text-align:center;"><img src="./DGimages/image2.png" width="70%" /></p>
+
+<p style="text-align:center;"><u>Class Diagram for UI Component</u></p>
 <table>
     <tr>
         <td> <a href="#developer-guide">Back to Table of Contents </a> </td>
@@ -319,29 +325,31 @@ Given below is an example usage scenario and how instantiation of basic password
 
 
 **Step 1.** The user launches the application for the first time. The SecureNUS will be initialized. The user will interact directly with SecureNUS Class.
-<img src="./DGimages/image10.png" width="50%" />
+<p style="text-align:center;"><img src="./DGimages/image10.png" width="32%" /></p>
 
 **Step 2.** When the user executes “new basic_password” command to add basic password, the SecureNUS calls parse() method to parse the user’s input
-<img src="./DGimages/step2_add.png" width="100%" />
+<p style="text-align:center;"><img src="./DGimages/step2_add.png" width="65%" /></p>
 
 **Step 3.** AddBasicPasswordCommand is then instantiated by the Parser by calling its constructor.
-<img src="./DGimages/step3_add.png" width="100%" />
+<p style="text-align:center;"><img src="./DGimages/step3_add.png" width="65%" /></p>
 
 **Step 4.** The parser then would return back to the SecureNUS class, which will then call the execute method in the AddBasicPasswordCommand object. The method will return false in this case because it is not an exit command
-<img src="./DGimages/image5.png" width="100%" />
+<p style="text-align:center;"><img src="./DGimages/image5.png" width="65%" /></p>
 
 **Step 5.** In the AddBasicPasswordCommand execute method, it will instantiate a new BasicPassword Secret object.
-<img src="./DGimages/updated_step5_add.png" width="100%" />
+<p style="text-align:center;"><img src="./DGimages/updated_step5_add.png" width="65%" /></p>
 
 **Step 6.** The BasicPassword object will then be written to the SecretMaster that stores all of the password locally
-<img src="./DGimages/updated_step6_add.png" width="100%" />
+
+<p style="text-align:center;"><img src="./DGimages/updated_step6_add.png" width="65%" /></p>
 
 **Step 7.** Finally, when saving, the data in the SecretMaster is then written to the harddisk by the Backend.
-<img src="./DGimages/Backend_Static.png" width="100%" />
+
+<p style="text-align:center;"><img src="./DGimages/Backend_Static.png" width="65%" /></p>
 
 The complete sequence diagram is given below
 <img src="./DGDiagramsCreator/Basic_Intro.png" width="100%" />
-<u>Sequence Diagram of Add Basic Password</u>
+<p style="text-align:center;"><u>Sequence Diagram of Add Basic Password</u></p>
 
 <table>
     <tr>
@@ -369,26 +377,26 @@ Given below is an example usage scenario and how instantiation of basic password
 
 
 **Step 1.** The user launches the application for the first time. The SecureNUS will be initialized. The user will interact directly with SecureNUS Class.
-<img src="./DGimages/image10.png" width="50%" />
+<p style="text-align:center;"><img src="./DGimages/image10.png" width="32%" /></p>
 
 **Step 2.** When the user executes “delete basic_password” command to delete basic password, the SecureNUS calls parse() method to parse the user’s input
-<img src="./DGimages/step2_add.png" width="100%" />
+<p style="text-align:center;"><img src="./DGimages/step2_add.png" width="65%" /></p>
 
 **Step 3.** DeleteCommand is then instantiated by the Parser by calling its constructor.
-<img src="./DGimages/step3_delete.png" width="100%" />
+<p style="text-align:center;"><img src="./DGimages/step3_delete.png" width="65%" /></p>
 
 **Step 4.** The parser then would return back to the SecureNUS, which will then call the execute method in the DeleteCommand object. The method will return false in this case because it is not an exit command
-<img src="./DGimages/image12.png" width="100%" />
+<p style="text-align:center;"><img src="./DGimages/image12.png" width="65%" /></p>
 
 **Step 5.** In the DeleteCommand execute method, it will delete the corresponding Secret object in the SecretMaster.
-<img src="./DGimages/image7.png" width="100%" />
+<p style="text-align:center;"><img src="./DGimages/image7.png" width="65%" /></p>
 
 **Step 6.** Finally when saving, the updated data in the SecretMaster is then written to the harddisk by the Backend.
-<img src="./DGimages/Backend_Static.png" width="100%" />
+<p style="text-align:center;"><img src="./DGimages/Backend_Static.png" width="65%" /></p>
 
 The complete sequence diagram is given below.
-<img src="./DGimages/image27.png" width="100%" />
-<u>Sequence Diagram of Delete Command</u>
+<p style="text-align:center;"><img src="./DGimages/image27.png" width="90%" /></p>
+<p style="text-align:center;"><u>Sequence Diagram of Delete Command</u></p>
 
 <table>
     <tr>
@@ -419,33 +427,33 @@ Given below is an example usage scenario and how instantiation of basic password
 
 
 **Step 1.** The user launches the application for the first time. The SecureNUS will be initialized. The user will interact directly with SecureNUS Class.
-<img src="./DGimages/image10.png" width="50%" />
+<p style="text-align:center;"><img src="./DGimages/image10.png" width="32%" /></p>
 
 **Step 2.** When the user executes “list folderName” command to list all passwords in folder folderName, the SecureNUS calls parse() method to parse the user’s input
-<img src="./DGimages/step2_add.png" width="100%" />
+<p style="text-align:center;"><img src="./DGimages/step2_add.png" width="65%" /></p>
 
 **Step 3.** ListCommand is then instantiated by the Parser by calling its constructor.
-<img src="./DGimages/step3_list.png" width="100%" />
+<p style="text-align:center;"><img src="./DGimages/step3_list.png" width="65%" /></p>
 
 **Step 4.** The parser then would return back to the SecureNUS, which will then call the execute method in the ListCommand object. The method will return false in this case because it is not an exit command
-<img src="./DGimages/image15.png" width="100%" />
+<p style="text-align:center;"><img src="./DGimages/image15.png" width="65%" /></p>
 
 **Step 5.** In the ListCommand execute method, listSecrets will access the secrets from the SecretMaster.
-<img src="./DGimages/image8.png" width="100%" />
+<p style="text-align:center;"><img src="./DGimages/image8.png" width="65%" /></p>
 
 **Step 6.** In the ListCommand execute method, getSecretTypeInfo will return the corresponding secret’s information (Name, username, url, password) from the SecretMaster.
-<img src="./DGimages/image20.png" width="100%" />
+<p style="text-align:center;"><img src="./DGimages/image20.png" width="65%" /></p>
 
 **Step 7.** Finally, it will output using system.out to the terminal.
-<img src="./DGimages/image29.png" width="100%" />
+<p style="text-align:center;"><img src="./DGimages/image29.png" width="65%" /></p>
 
 The complete sequence diagram is given below.
 
 
 This simplified sequence diagram shows what happens when a user lists all passwords in a folder called folderName:
 
-<img src="./DGimages/image26.png" width="100%" />
-<u>Sequence Diagram of List Command</u>
+<img src="./DGimages/image26.png" width="90%" />
+<p style="text-align:center;"><u>Sequence Diagram of List Command</u></p>
 
 <table>
     <tr>
