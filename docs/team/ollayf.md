@@ -37,7 +37,9 @@ or they did not want to save this password anymore
     - Did the first full draft of UG [(Pull Requests)](https://github.com/AY2223S2-CS2113-T15-2/tp/pull/66) 
     - Help with final checks of UG
   - Developers' Guide
-    - 
+    - All of the class diagrams
+    - High level flow of each section and Architecture diagrams
+    - Final checks 
 - Contribution to team based tasks:
 - Setting up the GitHub team org/repo
 1. Necessary general code enhancements 

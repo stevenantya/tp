@@ -113,7 +113,6 @@ public class AddCreditCardCommand extends AddSecretCommand {
         return creditCardNumber;
     }
 
-
     /*
      * Prompts the user to enter their CVC number.
      *
