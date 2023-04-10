@@ -1,9 +1,12 @@
 package seedu.securenus.secrets;
 
 import seedu.securenus.Backend;
+import seedu.securenus.SecureNUSLogger;
 import seedu.securenus.exceptions.secrets.InvalidCreditCardNumberException;
 import seedu.securenus.exceptions.secrets.InvalidCvcNumberException;
 import seedu.securenus.exceptions.secrets.InvalidExpiryDateException;
+
+import java.util.logging.Level;
 
 /**
  * Represents a credit card entry in the user's secrets list.
@@ -42,10 +45,12 @@ public class CreditCard extends Secret {
         this.fullName = fullName;
         this.creditCardNumber = creditCardNumber;
         if (!creditCardNumber.matches(CREDIT_CARD_NUMBER_FMT)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, credit card number format is illegal, " + expiryDate);
             throw new InvalidCreditCardNumberException();
         }
         this.cvcNumber = cvcNumber;
         if (!expiryDate.matches(EXPIRY_DATE_FMT)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error,credit card expiry date format is illegal, " + expiryDate);
             throw new InvalidExpiryDateException();
         }
         this.expiryDate = expiryDate;
@@ -107,11 +112,15 @@ public class CreditCard extends Secret {
     public static boolean isLegalExpiryDate(String expiryDate) {
         assert expiryDate != null;
         if (!expiryDate.matches(EXPIRY_DATE_FMT)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error,credit card expiry date format is illegal, " + expiryDate);
             return false;
         }
         String[] monthAndYear = expiryDate.split("/");
         int month = Integer.parseInt(monthAndYear[0]);
         int year = Integer.parseInt(monthAndYear[1]);
+        if (month < 1 || month > 12 || year < 1) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, credit card expiry date is illegal, " + expiryDate);
+        }
         return month >= 1 && month <= 12 && year >= 1;
     }
     /**
@@ -123,6 +132,9 @@ public class CreditCard extends Secret {
      */
     public static boolean isLegalCreditCardNumber(String creditCardNumber) {
         assert creditCardNumber != null;
+        if (!creditCardNumber.matches(CREDIT_CARD_NUMBER_FMT)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, credit card number is illegal, " + creditCardNumber);
+        }
         return creditCardNumber.matches(CREDIT_CARD_NUMBER_FMT);
     }
 
@@ -135,6 +147,9 @@ public class CreditCard extends Secret {
      */
     public static boolean isLegalCvcNumber(String number) {
         assert number != null;
+        if (!number.matches(CVC_NUMBER_FMT)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, cvc is illegal, " + number);
+        }
         return number.matches(CVC_NUMBER_FMT);
     }
 

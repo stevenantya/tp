@@ -1,5 +1,6 @@
 package seedu.securenus.storage;
 
+import seedu.securenus.SecureNUSLogger;
 import seedu.securenus.exceptions.secrets.InvalidCvcNumberException;
 import seedu.securenus.ui.Ui;
 import seedu.securenus.exceptions.secrets.InvalidCreditCardNumberException;
@@ -21,6 +22,7 @@ import seedu.securenus.secrets.WifiPassword;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.logging.Level;
 
 /**
  * Master class that manages the storage and retrieval of secrets and folders.
@@ -65,6 +67,11 @@ public class SecretMaster {
      */
     public static boolean isLegalFolderName(String name) {
         assert name != null;
+        if (name.equals("")) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, folder name is empty, " + name);
+        } else if (!name.matches(ALLOWED_NAMES_REGEX)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, special characters in folder name, " + name);
+        }
         return !name.equals("") && name.matches(ALLOWED_NAMES_REGEX);
     }
 
@@ -179,6 +186,7 @@ public class SecretMaster {
         assert folderName.length() >= 0;
         assert this.secretEnumerator != null;
         if (!folders.contains(folderName)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, non existent folder, " + folderName);
             throw new NonExistentFolderException();
         }
         return secretEnumerator.getList(folderName);
@@ -197,6 +205,7 @@ public class SecretMaster {
         assert this.secretNames != null;
         assert this.secretSearcher != null;
         if (!secretNames.contains(secretName)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, non existent secret name, " + secretName);
             throw new SecretNotFoundException();
         }
         return secretSearcher.get(secretName);
@@ -221,6 +230,7 @@ public class SecretMaster {
             throw new IllegalSecretNameException();
         }
         if (secretNames.contains(secret.getUid())) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, repeated ID, " + secret.getUid());
             throw new RepeatedIdException();
         }
         String folderName = secret.getFolderName();
@@ -276,10 +286,13 @@ public class SecretMaster {
                 ((CreditCard) secret).setCvcNumber(inquiredFields[2]);
                 ((CreditCard) secret).setExpiryDate(inquiredFields[3]);
             } catch (InvalidCreditCardNumberException e) {
+                SecureNUSLogger.LOGGER.log(Level.WARNING, "error, invalid credit card number, " + inquiredFields[1]);
                 Ui.printError("Invalid Credit Card Number! Must be 16 digits long");
             } catch (InvalidExpiryDateException e) {
+                SecureNUSLogger.LOGGER.log(Level.WARNING, "error, invalid expiry date, " + inquiredFields[3]);
                 Ui.printError("Invalid Expiry Date! Must be in the format \"MM/YY\"");
             } catch (InvalidCvcNumberException e) {
+                SecureNUSLogger.LOGGER.log(Level.WARNING, "error, invalid cvc number, " + inquiredFields[2]);
                 Ui.printError("Invalid CVC Number! Must be in the correct format (e.g. 123):");
             }
         } else if (secret instanceof NUSNet) {
@@ -315,6 +328,7 @@ public class SecretMaster {
         assert this.secretSearcher != null;
 
         if (!secretNames.contains(secret.getUid())) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, secret does not exists, " + secret.getUid());
             throw new SecretNotFoundException();
         }
 

@@ -21,7 +21,6 @@ import seedu.securenus.exceptions.secrets.SecretNotFoundException;
 import seedu.securenus.messages.ErrorMessages;
 import seedu.securenus.storage.SecretMaster;
 
-import java.util.logging.Logger;
 import java.util.logging.Level;
 
 /**
@@ -29,8 +28,6 @@ import java.util.logging.Level;
  * It is responsible for initiating the application, running the application and handling user input.
  */
 public class SecureNUS {
-    private static final Logger LOGGER = SecureNUSLogger.LOGGER;
-    private static final String DUKE_LOG_EXECUTECOMMAND_IDENTIFIER = "Duke - executeCommand";
     private SecretMaster secureNUSData;
 
     /**
@@ -57,7 +54,12 @@ public class SecureNUS {
     public static void main(String[] args) throws FolderExistsException, IllegalFolderNameException,
             IllegalSecretNameException, SecretNotFoundException {
         SecureNUS secureNUS = new SecureNUS();
-        secureNUS.run();
+        try {
+            secureNUS.run();
+        } catch (Exception e) {
+            SecureNUSLogger.LOGGER.log(Level.SEVERE, "fatal, unexpected exception: " + e.getMessage());
+            SecureNUSLogger.close();
+        }
     }
 
     /**
@@ -66,6 +68,7 @@ public class SecureNUS {
     public void run() {
         Ui.greetUser();
 
+        SecureNUSLogger.LOGGER.log(Level.INFO, "start,");
         if (Backend.isCorrupted) {
             Ui.printCorruptedDataMessage();
         } else if (!Backend.isDatabaseEmpty) {
@@ -92,6 +95,8 @@ public class SecureNUS {
         Ui.inform(OperationMessages.SAVE_COMPLETE);
         Ui.inform(OperationMessages.CLOSE);
         Ui.close();
+        SecureNUSLogger.LOGGER.log(Level.INFO, "end,");
+
     }
 
     /**
@@ -154,8 +159,6 @@ public class SecureNUS {
                 Ui.informOperationCancel();
             } catch (ExceptionMain e) {
                 Ui.printError(e.getMessage());
-                LOGGER.log(Level.SEVERE, DUKE_LOG_EXECUTECOMMAND_IDENTIFIER, e);
-                SecureNUSLogger.close();
             }
         }
         return false;

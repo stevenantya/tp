@@ -1,5 +1,6 @@
 package seedu.securenus.command;
 
+import seedu.securenus.SecureNUSLogger;
 import seedu.securenus.exceptions.secrets.IllegalSecretNameException;
 import seedu.securenus.exceptions.secrets.NullSecretException;
 import seedu.securenus.exceptions.secrets.SecretNotFoundException;
@@ -8,6 +9,7 @@ import seedu.securenus.storage.SecretMaster;
 import seedu.securenus.ui.Ui;
 
 import java.util.HashSet;
+import java.util.logging.Level;
 
 /**
  * Represents a class to give a command to view a specific secret.
@@ -61,6 +63,7 @@ public class ViewCommand extends Command {
         } catch (SecretNotFoundException e) {
             Ui.inform("There are no passwords that matches that name!\n" +
                     "Make sure you follow this format: \"view PASSWORD_NAME\"");
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, secret not found, " + this.passwordName);
         }
     }
 }

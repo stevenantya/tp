@@ -1,5 +1,6 @@
 package seedu.securenus.command;
 
+import seedu.securenus.SecureNUSLogger;
 import seedu.securenus.exceptions.secrets.FolderNotFoundException;
 import seedu.securenus.exceptions.secrets.IllegalFolderNameException;
 import seedu.securenus.exceptions.secrets.IllegalSecretNameException;
@@ -10,6 +11,7 @@ import seedu.securenus.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.logging.Level;
 
 /**
  * Represents a class to give a command to search for a secret by name in the SecretMaster.
@@ -61,6 +63,7 @@ public class SearchCommand extends Command {
             throw new IllegalSecretNameException();
         }
         if (folderName != null && !folders.contains(folderName)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, folder name not found, " + folderName);
             throw new FolderNotFoundException();
         }
     }

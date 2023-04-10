@@ -1,5 +1,9 @@
 package seedu.securenus.secrets;
 
+import seedu.securenus.SecureNUSLogger;
+
+import java.util.logging.Level;
+
 /**
  * Represents the basic "Password-like" class, which is intended to be the parent class of all future password classes.
  * This class provides the basic attributes and methods required to store and retrieve password-like information.
@@ -63,6 +67,11 @@ public class Secret {
      * @return if the name contains any illegal characters, false otherwise.
      */
     public static boolean isIllegalName(String name) {
+        if (name.equals("")) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, secret name is empty, " + name);
+        } else if (!name.matches(ILLEGAL_CHARS_PATTERN)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, invalid characters in secret, " + name);
+        }
         return name.equals("") || !name.matches(ILLEGAL_CHARS_PATTERN);
     }
 

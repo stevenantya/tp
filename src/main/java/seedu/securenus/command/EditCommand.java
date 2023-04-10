@@ -1,6 +1,7 @@
 package seedu.securenus.command;
 
 import seedu.securenus.Backend;
+import seedu.securenus.SecureNUSLogger;
 import seedu.securenus.exceptions.OperationCancelException;
 import seedu.securenus.exceptions.secrets.IllegalSecretNameException;
 import seedu.securenus.messages.InquiryMessages;
@@ -18,6 +19,7 @@ import seedu.securenus.storage.SecretMaster;
 import seedu.securenus.ui.Ui;
 
 import java.util.HashSet;
+import java.util.logging.Level;
 
 /**
  * Represents a class to give a command to edit a secret in the secureNUS application.
@@ -45,6 +47,7 @@ public class EditCommand extends Command {
         if (Secret.isIllegalName(name)) {
             throw new IllegalSecretNameException();
         } else if (!usedNames.contains(name)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, non existent secret, " + input);
             throw new SecretNotFoundException();
         }
     }

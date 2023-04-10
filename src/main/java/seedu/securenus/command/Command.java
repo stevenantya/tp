@@ -1,5 +1,6 @@
 package seedu.securenus.command;
 
+import seedu.securenus.SecureNUSLogger;
 import seedu.securenus.exceptions.ExceptionMain;
 import seedu.securenus.exceptions.NullFolderException;
 import seedu.securenus.exceptions.OperationCancelException;
@@ -16,6 +17,7 @@ import seedu.securenus.storage.SecretMaster;
 import seedu.securenus.ui.Ui;
 
 import java.util.HashSet;
+import java.util.logging.Level;
 import java.util.Scanner;
 
 /**
@@ -100,6 +102,7 @@ public abstract class Command {
      */
     public void nameCheck(String name) throws NullSecretException, IllegalSecretNameException {
         if (name == "" || name == null) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, secret name is empty/null, " + name);
             throw new NullSecretException();
         }
         if (Secret.isIllegalName(name)) {
@@ -141,13 +144,14 @@ public abstract class Command {
     public void folderCheckWithExistence(String folderName, HashSet<String> folders) throws NullFolderException,
             FolderNotFoundException, IllegalFolderNameException {
         if (folderName == "" || folderName == null) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, folder is empty/null, " + folderName);
             throw new NullFolderException();
         }
         if (!SecretMaster.isLegalFolderName(folderName)) {
             throw new IllegalFolderNameException();
         }
         if (!folders.contains(folderName)) {
-
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "error, non existent folder name, " + folderName);
             throw new FolderNotFoundException();
         }
     }
@@ -180,6 +184,7 @@ public abstract class Command {
         System.out.println(question);
         String line = Ui.readLine();
         if (line.equals(CANCEL_COMMAND)) {
+            SecureNUSLogger.LOGGER.log(Level.WARNING, "info,>>>>user cancelled operation");
             throw new OperationCancelException();
         }
         return line;

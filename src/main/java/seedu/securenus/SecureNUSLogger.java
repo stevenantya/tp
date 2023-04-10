@@ -29,7 +29,6 @@ public class SecureNUSLogger {
      */
     public static void setUpLogger() {
         LogManager.getLogManager().reset();
-        LOGGER.setLevel(Level.ALL);
 
         try {
             String currentPath = System.getProperty(SecureNUSLogger.USER_DIRECTORY_IDENTIFIER);
@@ -40,11 +39,11 @@ public class SecureNUSLogger {
                 logFiles.createNewFile();
             }
             FileHandler fileHandler = new FileHandler(logFilesPath, true);
-            fileHandler.setLevel(Level.WARNING);
+            fileHandler.setLevel(Level.INFO);
             fileHandler.setFormatter(new SecureNUSLogFormatter());
             LOGGER.addHandler(fileHandler);
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "DUKE logger is not working!");
+            LOGGER.log(Level.SEVERE, "fatal, logger is not functioning");
         }
 
     }
