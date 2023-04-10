@@ -567,35 +567,43 @@ they save their data frequently to avoid losing any unsaved changes.
 **A:** SecureNUS stores your secrets in a structured format in the `database.txt` file located in the `assets` folder. 
 The secrets are stored securely to ensure that your sensitive information is protected.
 <br>
+
 **Q:** What is the difference between a basic password and other password options?<br>
 **A:** A basic password is a simple password that only requires a password name and password value to be entered. Other 
 password options provide additional fields for specific types of passwords, such as credit cards or NUSNet ID.
 <br>
+
 **Q:** What if I create a secret without a folder?<br>
 **A:** Secret will assign itself in an `unnamed` folder.
 <br>
+
 **Q:** What should I do if I forget my secret for SecureNUS?<br>
 **A:** You can use the `list` command to view the details of the all the secrets you stored. Do note that the 
 sensitive information is masked to ensure security and can be viewed by using the `view` command.
 <br>
+
 [//]: # (@@author kairuler)
+
 **Q:** How can I ensure the security of my secrets in SecureNUS?<br>
 **A:** At SecureNUS, we strive to keep the secrets of the users secure. Keeping this in consideration, we mask 
 sensitive information using asterisks when the user creates a new secret using `new` command or list the secrets using 
 `list` command.
 <br>
+
 **Q:** Can I export my secrets stored in SecureNUS to another device?<br>
 **A:** Yes, you can export your secrets to another device by opening the same JAR file in another machine. 
 Do ensure to save `database.txt` in the root directory's `assets/database.txt`
 As a user, you ou can ensure the security of your secrets in SecureNUS by using strong and unique secrets, 
 keeping your secrets private and secure, and regularly updating your secrets.
 <br>
+
 **Q:** Will all the key commands native to the command line work eg. `Ctrl-C` for program termination, `Ctrl-V` for 
 paste, `Up arrow` to move to previous commands e.t.c.?<br>
 **A:** The functionality for the key operations differ between terminals and operating systems. To avoid any unknown 
 errors and exceptions, users are requested to refrain from using the key shortcuts especially the `Ctrl+C` shortcut 
 which may lead to termination of the program.
 <br>
+
 **Q:** I forgot to save before exiting. Are all my secrets lost?<br>
 **A:** SecureNUS realizes the importance of keeping the passwords safe and secure. So we ensure that the secrets added 
 are stored conveniently.
