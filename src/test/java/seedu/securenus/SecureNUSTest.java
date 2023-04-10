@@ -74,36 +74,4 @@ public class SecureNUSTest {
         assertEquals(expected.replaceAll("(\\r|\\n)", ""),
                 output.toString().replaceAll("(\\r|\\n)", ""));
     }
-
-    /*
-    @Test
-    public void parseCommand_insufficientParams_exceptionThrown() {
-        String userInput = "delete";
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(userInput.getBytes());
-        System.setIn(inputStream);
-
-        secureNUS.parseCommand();
-
-        String expected = "Enter Command:_____________________________________________________\n" +
-                ErrorMessages.INSUFFICIENT_PARAMS +
-                "_____________________________________________________\n";
-        assertEquals(expected.replaceAll("(\\r|\\n)", ""),
-                output.toString().replaceAll("(\\r|\\n)", ""));
-    }
-
-    @Test
-    public void parseCommand_illegalSecretName_exceptionThrown() {
-        String userInput = "view $";
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(userInput.getBytes());
-        System.setIn(inputStream);
-
-        secureNUS.parseCommand();
-
-        String expected = "Enter Command:_____________________________________________________\n" +
-                ErrorMessages.ILLEGAL_SECRET_NAME +
-                "_____________________________________________________\n";
-        assertEquals(expected.replaceAll("(\\r|\\n)", ""),
-                output.toString().replaceAll("(\\r|\\n)", ""));
-    }
-    */
 }

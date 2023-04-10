@@ -18,6 +18,7 @@ class AddCreditCardCommandTest {
             throw new RuntimeException(e);
         }
     }
+
     @Test
     void isExit() throws InvalidExpiryDateException, OperationCancelException {
         AddCreditCardCommand addCreditCard = new AddCreditCardCommand(
