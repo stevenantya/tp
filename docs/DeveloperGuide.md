@@ -1,36 +1,67 @@
 [//]: # (@@author DeepanjaliDhawan)
 # Developer Guide
-
-
+- [Acknowledgements](#acknowledgements)
+- [Setting up, getting started](#setting-up-getting-started)
+- [Design](#design)
+  - [Legend](#legend)
+  - [Architecture](#architecture)
+  - [SecureNUS Component](#securenus-component)
+  - [SecretStorage Component](#secretstorage-component)
+  - [Backend component](#backend-component)
+  - [UI component](#ui-component)
+- [Implementation](#implementation)
+  - [Add Basic Password](#add-basic-password)
+  - [Delete a Password](#delete-a-password)
+  - [List all Secrets](#list-all-secrets)
+- Documentation, logging, testing, configuration, dev-ops
+- [Appendix: Requirements](#appendix--requirements)
+  - [Product Scope](#product-scope)
+  - [User Stories](#user-stories)
+  - [Use cases]()
+  - [Non-Functional Requirements](#non-functional-requirements)
+  - [Glossary](#glossary)
+- [Appendix: Instructions for manual testing](#appendix--requirements)
+  - [Launch and shutdown](#launch-and-shutdown)
+  - [Saving data](#saving-data)
+  - [Menu of all Commands](#menu-of-all-commands)
+  - [Adding a Password](#adding-a-password)
+  - [Listing all Passwords](#listing-all-passwords)
+  - [Search for a password](#search-for-password)
+  - [View Password](#view-password)
+  - [Edit Password](#edit-password)
+  - [Deleting Password](#delete-password)
 ---
+## Acknowledgements
 
 
-# Acknowledgements
-
-
-## [AddressBook Template](https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature)
+### [AddressBook Template](https://se-education.org/addressbook-level3/DeveloperGuide.html#proposed-undoredo-feature)
 
 The format of this Developer’s guide (DG) as well as some basic support is inspired/ taken from the AddressBook 
 project’s DG.
 
 
-## [Bitwarden](https://go.bitwarden.com/password-management-for-business-teams-organizations/?utm_source=google&utm_medium=cpc&utm_campaign=AW_APAC_NU_CL_Bitwarden_en_GSN_DTMB_Brand_KW:Brand_Exact&utm_content=646898599878&utm_term=bitwarden&hsa_acc=2567950947&hsa_cam=11319090405&hsa_grp=114652450007&hsa_ad=646898599878&hsa_src=g&hsa_tgt=kwd-442029814536&hsa_kw=bitwarden&hsa_mt=b&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAjwzuqgBhAcEiwAdj5dRn0X9IDtuPlHiXveE0H8FMOOYNtwMBxX7lUL4yzK8zUTKH_58EV-4xoCrVkQAvD_BwE)
+### [Bitwarden](https://go.bitwarden.com/password-management-for-business-teams-organizations/?utm_source=google&utm_medium=cpc&utm_campaign=AW_APAC_NU_CL_Bitwarden_en_GSN_DTMB_Brand_KW:Brand_Exact&utm_content=646898599878&utm_term=bitwarden&hsa_acc=2567950947&hsa_cam=11319090405&hsa_grp=114652450007&hsa_ad=646898599878&hsa_src=g&hsa_tgt=kwd-442029814536&hsa_kw=bitwarden&hsa_mt=b&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAjwzuqgBhAcEiwAdj5dRn0X9IDtuPlHiXveE0H8FMOOYNtwMBxX7lUL4yzK8zUTKH_58EV-4xoCrVkQAvD_BwE)
 
 The idea for this product stems out from Applications like Bitwarden and the like that serve to store and protect users passwords. Many of our features were inspired by these applications.
 
 
-## CLI Applications
+### CLI Applications
 
 The idea for this product is for users who are familiar with CLI environments. Users are able to see only the necessary information given in text format. Things can be done faster with just a single line of input command compared to navigating through a GUI environment.
 
+<table>
+    <tr>
+        <td> <a href="#developer-guide">Back to Table of Contents </a> </td>
+    </tr>
+</table>
 
 ---
 
 
-# Setting up, getting started
+## Setting up, getting started
 
 
-## Setting up the project in your computer
+### Setting up the project in your computer
 
 First, fork this repo, and clone the fork into your computer.
 
@@ -48,9 +79,7 @@ Note: Importing a Gradle project is slightly different from importing a normal J
     2. [Run the tests](https://se-education.org/addressbook-level3/Testing.html) to ensure they all pass.
 
 
-## Before writing code
-
-
+### Before writing code
 
 1. **Configure the coding style** \
    If using IDEA, follow the guide [[se-edu/guides] IDEA: Configuring the code style](https://se-education.org/guides/tutorials/intellijCodeStyle.html) to set up IDEA’s coding style to match ours. 
@@ -65,17 +94,23 @@ Tip: Optionally, you can follow the guide [[se-edu/guides] Using Checkstyle](htt
     * [Adding a new command](https://se-education.org/addressbook-level3/tutorials/AddRemark.html)
     * [Removing fields](https://se-education.org/addressbook-level3/tutorials/RemovingFields.html)
 
+<table>
+    <tr>
+        <td> <a href="#developer-guide">Back to Table of Contents </a> </td>
+    </tr>
+</table>
 
 ---
 
 [//]: # (@@author ollayf)
 
-# Legend
 
-   The class diagram visibility / access modifier is represented by the table below
-   <img src="./DGimages/image23.png" width="100%" />
-# Design
-## Architecture
+## Design
+### Legend
+
+The class diagram visibility / access modifier is represented by the table below
+<img src="./DGimages/image23.png" width="100%" />  
+### Architecture
 
 <img src="./DGimages/image28.png" width="100%" />
 
@@ -83,7 +118,7 @@ Tip: Optionally, you can follow the guide [[se-edu/guides] Using Checkstyle](htt
 This **Architecture Diagram** explains the high-level design of the App.
 Given below is the quick overview of main components and how they interact with each other.
 
-### Main Components of the architecture
+#### Main Components of the architecture
 
 **SecureNUS** has 1 class called SecureNUS. It is responsible for,
 * At app launch: initializing all the important components in the correct sequence and initializes the appropriate connections between them.
@@ -137,9 +172,14 @@ connected to the Logger. For the sake of better viewability, the **Logger** comp
 will be excluded for better viewability and clarity of the diagram, since it is 
 intricately interwoven in every class, across many methods.
 
+<table>
+    <tr>
+        <td> <a href="#developer-guide">Back to Table of Contents </a> </td>
+    </tr>
+</table>  
 
 ___
-### How the architecture components interact with each other
+#### How the architecture components interact with each other
 
 The Sequence Diagram below shows how the components interact with each other for the 
 scenario where the user creates a new basic password initiated using the command 
@@ -148,7 +188,6 @@ scenario where the user creates a new basic password initiated using the command
 
 [//]: # (@@author stevenantya)
 
-Sequence Diagram
 
 <img src="./DGimages/image4.png" width="100%" />
 
@@ -163,10 +202,15 @@ This command `new password` is being handled by the UI
 
 
 [//]: # (@@author ollayf)
+<table>
+    <tr>
+        <td> <a href="#developer-guide">Back to Table of Contents </a> </td>
+    </tr>
+</table>
 
 ---
 
-## SecureNUS Component
+#### SecureNUS Component
 <img src="./DGimages/image16.png" width="100%" />
 <u>Class Diagram of SecureNUS Component</u>
 
@@ -174,7 +218,7 @@ The above diagram shows how the SecureNUS component works.
 
 **SecureNUS** is the main driver of this java application. All of the user inputs will go through the UI component then parsed through the Parser class, which creates one of the predefined Command objects. The command defined by the Command object is then executed by the SecureNUS object which grants the Command objects access to read or write data from the SecretStorage Component.
 
-### Command
+##### Command
 The API of this component is specified in the package **command**.
 Command is an abstract class that is inherited by various components such as AddBasicPasswordCommand.java
 
@@ -187,7 +231,7 @@ executions through its child classes. Sequentially, the user inputs a command in
 that is parsed in Parser, which then instantiates a Command object, which is then executed
 by SecureNUS object.
 
-## SecretStorage Component
+#### SecretStorage Component
 The API of this component is specified in the package `storage`. The diagram below features the high-level understanding of how this component works. Each rectangle represents a class, while the SecureNUS and Backend nodes represent components.
 <img src="./DGimages/image19.png" width="100%" />
 
@@ -212,7 +256,7 @@ The following class diagrams show how these work in the code.
 
 ---
 
-## Backend Component
+#### Backend Component
 
 The API of this component is specified in the class `Backend.java`. In this diagram, rectangles and cuboids represent classes.
 
@@ -227,7 +271,7 @@ The following class diagram shows how these work in the code. Details of the sec
 
 ---
 
-## UI Component
+#### UI Component
 
 The API of this component is specified in `Ui` The following diagram shows a high level understanding of how the UI Component works. The rectangles represent classes while the cuboids represent Components.
 
@@ -241,16 +285,20 @@ responses/ feedback to the User.
 
 <img src="./DGimages/image2.png" width="100%" />
 <u>Class Diagram for UI Component</u>
+<table>
+    <tr>
+        <td> <a href="#developer-guide">Back to Table of Contents </a> </td>
+    </tr>
+</table>
 
 ---
 
-# Implementation
+## Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
 
----
 
-## Add Basic Password Feature
+### Add Basic Password
 
 The `new` function allows the user to add new basic password stored in the password manager. When the user selects the add basic password function, they will be prompted to enter the name, url, 
 username, and password. Once the users enters the prompt, a new password will be created
@@ -296,10 +344,15 @@ The complete sequence diagram is given below
 <img src="./DGimages/image4.png" width="100%" />
 <u>Sequence Diagram of Add Basic Password</u>
 
+<table>
+    <tr>
+        <td> <a href="#developer-guide">Back to Table of Contents </a> </td>
+    </tr>
+</table>
 
 ---
 
-## Delete a Password
+### Delete a Password
 The `delete` function allows the user to delete a stored password from the password manager. When the user selects the "delete" function, they will be prompted to enter the name of the password they want to delete. Once the user enters the name, the app will delete the password from SecretMaster if it exists.
 
 Delete Password has attribute: name
@@ -338,9 +391,15 @@ The complete sequence diagram is given below.
 <img src="./DGimages/image27.png" width="100%" />
 <u>Sequence Diagram of Delete Command</u>
 
+<table>
+    <tr>
+        <td> <a href="#developer-guide">Back to Table of Contents </a> </td>
+    </tr>
+</table>
+
 ---
 
-## List Function
+### List all Secrets
 The `list` function allows the user to view all the passwords stored in the password 
 manager along with their descriptions. When the user selects the `list` function, the app will display all the stored passwords and their descriptions in a table format. The table will include columns for the name of the password, its description, and the date it was added to the password manager.
 
@@ -388,13 +447,19 @@ This simplified sequence diagram shows what happens when a user lists all passwo
 <img src="./DGimages/image26.png" width="100%" />
 <u>Sequence Diagram of List Command</u>
 
+<table>
+    <tr>
+        <td> <a href="#developer-guide">Back to Table of Contents </a> </td>
+    </tr>
+</table>
+
 ---
 
-
+## Appendix: Requirements
 [//]: # (@@author euzhengxi)
-# Appendix A: Product Scope
+### Product Scope
 
-## Target user profile:
+#### Target user profile:
 * has a need to manage a significant number of passwords
 * prefer desktop apps over other types
 * can type fast
@@ -402,22 +467,33 @@ This simplified sequence diagram shows what happens when a user lists all passwo
 * is reasonably comfortable using CLI apps
 
 
-## Value proposition:
+#### Value proposition:
 * SecureNUS manages passwords faster than a typical mouse/GUI-driven password manager app.
 * SecureNUS allows you to store, search and retrieve passwords based on inputs given.
 * SecureNUS manages and stores passwords locally, there is no risk of a server side failure/ attack leaking your passwords
 
+<table>
+    <tr>
+        <td> <a href="#developer-guide">Back to Table of Contents </a> </td>
+    </tr>
+</table>
+
 ---
 
 [//]: # (@@author kairuler)
-# Appendix B: User Stories
+### User Stories
 
 <table class="c43"><tr class="c22"><td class="c17" colspan="1" rowspan="1"><p class="c4"><span class="c3">Priority</span></p></td><td class="c53" colspan="1" rowspan="1"><p class="c4"><span class="c3">As a &hellip;</span></p></td><td class="c40" colspan="1" rowspan="1"><p class="c4"><span class="c3">I want to &hellip;</span></p></td><td class="c44" colspan="1" rowspan="1"><p class="c4"><span class="c3">So that I can &hellip;</span></p></td></tr><tr class="c22"><td class="c24" colspan="1" rowspan="1"><p class="c4"><span class="c0">***</span></p></td><td class="c35" colspan="1" rowspan="1"><p class="c4"><span class="c0">user</span></p></td><td class="c23" colspan="1" rowspan="1"><p class="c4"><span>view all my passwords in a single location</span></p></td><td class="c25" colspan="1" rowspan="1"><p class="c4"><span>have an overview of all my stored passwords</span></p></td></tr><tr class="c22"><td class="c24" colspan="1" rowspan="1"><p class="c4"><span class="c0">***</span></p></td><td class="c35" colspan="1" rowspan="1"><p class="c4"><span class="c0">user</span></p></td><td class="c23" colspan="1" rowspan="1"><p class="c4"><span>find my passwords in an intuitive and structured manner</span></p></td><td class="c25" colspan="1" rowspan="1"><p class="c4"><span class="c0">easily retrieve a password</span></p></td></tr><tr class="c22"><td class="c24" colspan="1" rowspan="1"><p class="c4"><span class="c0">***</span></p></td><td class="c35" colspan="1" rowspan="1"><p class="c4"><span class="c0">user</span></p></td><td class="c23" colspan="1" rowspan="1"><p class="c4"><span class="c0">Store different types of passwords</span></p></td><td class="c25" colspan="1" rowspan="1"><p class="c4"><span class="c0">easily retrieve passwords with multiple hidden fields like a Credit Card.</span></p></td></tr><tr class="c22"><td class="c24" colspan="1" rowspan="1"><p class="c4"><span class="c0">***</span></p></td><td class="c35" colspan="1" rowspan="1"><p class="c4"><span class="c0">user</span></p></td><td class="c23" colspan="1" rowspan="1"><p class="c4"><span>view all my stored passwords at a glance (without details)</span></p></td><td class="c25" colspan="1" rowspan="1"><p class="c4"><span>quickly see what passwords I have used before</span></p></td></tr><tr class="c22"><td class="c24" colspan="1" rowspan="1"><p class="c4"><span class="c0">***</span></p></td><td class="c35" colspan="1" rowspan="1"><p class="c4"><span class="c0">user</span></p></td><td class="c23" colspan="1" rowspan="1"><p class="c4"><span>delete stored passwords</span></p></td><td class="c25" colspan="1" rowspan="1"><p class="c4"><span class="c0">remove passwords that I no longer use</span></p></td></tr><tr class="c22"><td class="c24" colspan="1" rowspan="1"><p class="c4"><span class="c0">***</span></p></td><td class="c35" colspan="1" rowspan="1"><p class="c4"><span class="c0">user</span></p></td><td class="c23" colspan="1" rowspan="1"><p class="c4"><span class="c0">save my passwords across different sessions</span></p></td><td class="c25" colspan="1" rowspan="1"><p class="c4"><span class="c0">Keep my passwords across different sessions without the need to constantly retype or keep the application online to ensure the storage is not cleared.</span></p></td></tr><tr class="c22"><td class="c24" colspan="1" rowspan="1"><p class="c4"><span class="c0">***</span></p></td><td class="c35" colspan="1" rowspan="1"><p class="c4"><span class="c0">user</span></p></td><td class="c23" colspan="1" rowspan="1"><p class="c4"><span>use local storage to store my passwords</span></p></td><td class="c25" colspan="1" rowspan="1"><p class="c4"><span>have my passwords stored locally so that they are safer from online breaches</span></p></td></tr><tr class="c19"><td class="c24" colspan="1" rowspan="1"><p class="c4"><span class="c0">***</span></p></td><td class="c35" colspan="1" rowspan="1"><p class="c4"><span class="c0">user</span></p></td><td class="c23" colspan="1" rowspan="1"><p class="c4"><span class="c0">encrypt my passwords when saving in the file</span></p></td><td class="c25" colspan="1" rowspan="1"><p class="c4"><span class="c0">ensure that nobody but me has access to the .txt file that stores my passwords</span></p></td></tr><tr class="c19"><td class="c24" colspan="1" rowspan="1"><p class="c4"><span class="c0">**</span></p></td><td class="c35" colspan="1" rowspan="1"><p class="c4"><span class="c0">user</span></p></td><td class="c23" colspan="1" rowspan="1"><p class="c4"><span class="c0">cancel a password addition when i mistype something wrong</span></p></td><td class="c25" colspan="1" rowspan="1"><p class="c4"><span class="c0">Use less commands to rectify my mistake made</span></p></td></tr><tr class="c19"><td class="c24" colspan="1" rowspan="1"><p class="c4"><span class="c0">**</span></p></td><td class="c35" colspan="1" rowspan="1"><p class="c4"><span class="c0">user</span></p></td><td class="c23" colspan="1" rowspan="1"><p class="c4"><span class="c0">authenticate myself before accessing</span></p></td><td class="c25" colspan="1" rowspan="1"><p class="c4"><span class="c0">ensure that nobody else but me gets access to my stored passwords</span></p></td></tr><tr class="c19"><td class="c24" colspan="1" rowspan="1"><p class="c4"><span class="c0">**</span></p></td><td class="c35" colspan="1" rowspan="1"><p class="c4"><span class="c0">user</span></p></td><td class="c23" colspan="1" rowspan="1"><p class="c4"><span class="c0">know when I created a certain password</span></p></td><td class="c25" colspan="1" rowspan="1"><p class="c4"><span class="c0">keep track of how long my passwords have been used for</span></p></td></tr><tr class="c19"><td class="c24" colspan="1" rowspan="1"><p class="c4"><span class="c0">**</span></p></td><td class="c35" colspan="1" rowspan="1"><p class="c4"><span class="c0">user</span></p></td><td class="c23" colspan="1" rowspan="1"><p class="c4"><span class="c0">not have to think of a strong password by myself and let the app handle it</span></p></td><td class="c25" colspan="1" rowspan="1"><p class="c4"><span class="c0">know when to change my password as passwords should be changed periodically</span></p></td></tr><tr class="c19"><td class="c24" colspan="1" rowspan="1"><p class="c4"><span class="c0">**</span></p></td><td class="c35" colspan="1" rowspan="1"><p class="c4"><span class="c0">user</span></p></td><td class="c23" colspan="1" rowspan="1"><p class="c4"><span class="c0">search/filter out specific passwords</span></p></td><td class="c25" colspan="1" rowspan="1"><p class="c4"><span class="c0">quickly refer to a password that is used for a specific login (e.g. password for NUS email)</span></p></td></tr><tr class="c19"><td class="c24" colspan="1" rowspan="1"><p class="c4"><span class="c0">**</span></p></td><td class="c35" colspan="1" rowspan="1"><p class="c4"><span class="c0">user</span></p></td><td class="c23" colspan="1" rowspan="1"><p class="c4"><span class="c0">copy and paste my passwords</span></p></td><td class="c25" colspan="1" rowspan="1"><p class="c4"><span class="c0">not have the password revealed on my terminal, simply paste from clipboard</span></p></td></tr><tr class="c19"><td class="c24" colspan="1" rowspan="1"><p class="c4"><span class="c0">*</span></p></td><td class="c35" colspan="1" rowspan="1"><p class="c4"><span class="c0">user</span></p></td><td class="c23" colspan="1" rowspan="1"><p class="c4"><span class="c0">hide my password while typing it</span></p></td><td class="c25" colspan="1" rowspan="1"><p class="c4"><span>not allow people around me to view my password as I type</span></p></td></tr><tr class="c19"><td class="c24" colspan="1" rowspan="1"><p class="c4"><span class="c0">*</span></p></td><td class="c35" colspan="1" rowspan="1"><p class="c4"><span class="c0">first-time user</span></p></td><td class="c23" colspan="1" rowspan="1"><p class="c4"><span class="c0">want to be able to see the demo to use the password manager</span></p></td><td class="c25" colspan="1" rowspan="1"><p class="c4"><span class="c0">learn how to use SecureNUS</span></p></td></tr><tr class="c19"><td class="c24" colspan="1" rowspan="1"><p class="c4"><span class="c0">*</span></p></td><td class="c35" colspan="1" rowspan="1"><p class="c4"><span class="c0">user</span></p></td><td class="c23" colspan="1" rowspan="1"><p class="c4"><span class="c0">receive notification any of my previous passwords are reused</span></p></td><td class="c25" colspan="1" rowspan="1"><p class="c4"><span class="c0">use a new and different password each time</span></p></td></tr><tr class="c19"><td class="c24" colspan="1" rowspan="1"><p class="c4"><span class="c0">*</span></p></td><td class="c35" colspan="1" rowspan="1"><p class="c4"><span class="c0">user</span></p></td><td class="c23" colspan="1" rowspan="1"><p class="c4"><span class="c0">receive reminder to change passwords that have not been changed for an extended period of time</span></p></td><td class="c25" colspan="1" rowspan="1"><p class="c4"><span class="c0">not have to check every single password manually (but still have the ability to) to know when to change my passwords</span></p></td></tr><tr class="c19"><td class="c24" colspan="1" rowspan="1"><p class="c4"><span class="c0">*</span></p></td><td class="c35" colspan="1" rowspan="1"><p class="c4"><span class="c0">user</span></p></td><td class="c23" colspan="1" rowspan="1"><p class="c4"><span class="c0">select a particular stored password and expand it to reveal details</span></p></td><td class="c25" colspan="1" rowspan="1"><p class="c4"><span class="c0">use the details of the password to make decisions regarding the password (e.g. change the password if it has been used for a long time, create a stronger password the next time if the current one is not strong, etc.)</span></p></td></tr><tr class="c19"><td class="c24" colspan="1" rowspan="1"><p class="c4"><span class="c0">*</span></p></td><td class="c35" colspan="1" rowspan="1"><p class="c4"><span class="c0">user who wishes to use complex passwords</span></p></td><td class="c23" colspan="1" rowspan="1"><p class="c4"><span class="c0">generate complex passwords for me</span></p></td><td class="c25" colspan="1" rowspan="1"><p class="c4"><span class="c0">not have to think of a strong password by myself and let the app handle it</span></p></td></tr><tr class="c19"><td class="c24" colspan="1" rowspan="1"><p class="c4"><span class="c0">*</span></p></td><td class="c35" colspan="1" rowspan="1"><p class="c4"><span class="c0">user</span></p></td><td class="c23" colspan="1" rowspan="1"><p class="c4"><span class="c0">sync my stored passwords manually</span></p></td><td class="c25" colspan="1" rowspan="1"><p class="c4"><span class="c0">have my stored passwords on different devices</span></p></td></tr></table>
 
+<table>
+    <tr>
+        <td> <a href="#developer-guide">Back to Table of Contents </a> </td>
+    </tr>
+</table>
 
 ---
 
-# Appendix C: Non-Functional Requirements
+### Non-Functional Requirements
 
 * Should be responsive and fast, providing quick access to passwords and other information within one or two commands.
 * Should be user-friendly, with intuitive commands that makes it easy for users to create, store, and retrieve passwords.
@@ -428,11 +504,16 @@ This simplified sequence diagram shows what happens when a user lists all passwo
 * Must ensure that user data is not shared with third parties without user consent.
 * Should be secure, using strong encryption to protect user passwords and data from being hacked or stolen.
 
+<table>
+    <tr>
+        <td> <a href="#developer-guide">Back to Table of Contents </a> </td>
+    </tr>
+</table>
 
 ---
 
 
-# Appendix D: Glossary
+### Glossary
 
 * _Secret_ - Represents the basic "Password-like" class, which is the parent class of all password classes.
 * _Database_ - Represents the text file we use to store passwords input by the user
@@ -441,12 +522,18 @@ This simplified sequence diagram shows what happens when a user lists all passwo
 * _Storage/ SecretStorage_: represents the faculties for storing information input by the user into memory in a format that supports different types of functions like exporting, saving, displaying, editing and more.
 * _Exporting/ Saving_: represents the internal processes to convert storage data in the application memory into an output textfile which can be loaded in future sessions.
 
+<table>
+    <tr>
+        <td> <a href="#developer-guide">Back to Table of Contents </a> </td>
+    </tr>
+</table>
+
 ---
 
 
-# Appendix E: Instructions for manual testing
+### Instructions for manual testing
 
-## Launch and shutdown
+#### Launch and shutdown
 1. Initial launch 
    1. Download the jar file and copy it into an empty folder. 
    2. Open a command window (If you are on Windows, use the DOS prompt or the PowerShell). 
@@ -456,7 +543,7 @@ This simplified sequence diagram shows what happens when a user lists all passwo
    1. Enter the `exit` command 
       Expected: Exits the program gracefully. All data is saved.
 
-## Saving data 
+#### Saving data 
 The following directory and file will be created upon initial launch of SecureNUS:
 ```
 assets/database.txt
@@ -472,11 +559,11 @@ Stored passwords are saved after exiting the program gracefully.
    1. Simulate by forcefully exiting the program (i.e. exit without entering the `exit` command)
    2. Expected: All unsaved data is lost
 
-## Menu of all commands
+#### Menu of all commands
 1. `menu`
    Expected: Displays menu.
 
-## Adding a password
+#### Adding a password
 1. `new myBasicPassword1`
    Expected: Input fields are displayed and user keys in the relevant details. The basic password is then stored successfully.
 2. `new myBasicPassword2 f/myFolder`
@@ -484,7 +571,7 @@ Stored passwords are saved after exiting the program gracefully.
 3. Incorrect format like `new`, `new o/`, `new o/InvalidPasswordType`
    Expected: Error message displayed.
 
-## Listing all passwords
+#### Listing all passwords
 1. `list`
    Expected: Lists `myBasicPassword1`, `myBasicPassword2` and `myNUSNetPassword` and their details
 2. `list f/myFolder`
@@ -492,26 +579,31 @@ Stored passwords are saved after exiting the program gracefully.
    Incorrect format like `list f/nonExistentFolder`
    Expected: Error message displayed.
 
-## Search for password
+#### Search for password
 1. `search my`
    Expected: Displays three passwords with names containing “my”
 
-## View password
+#### View password
 1. `view myBasicPassword1`
    Expected: Displays password and details of `myBasicPassword1`
 2. Incorrect format like `view`, `view nonExistentPassword`
    Expected: Error message displayed.
    
-## Edit a password
+#### Edit password
 1. `edit myBasicPassword1`
    Expected: Input field displayed for user to enter new password for `myBasicPassword1`
 2. Incorrect format like `edit`, `edit nonExistentPassword`
    Expected: Error message displayed.
 
-## Deleting a password
+#### Delete password
 1. `delete myBasicPassword1`
    Expected: `myBasicPassword1` is removed from storage.
 2. Incorrect format like `delete`, `delete nonExistentPassword`
    Expected: Error message displayed.
+<table>
+    <tr>
+        <td> <a href="#developer-guide">Back to Table of Contents </a> </td>
+    </tr>
+</table>
 
 ---
