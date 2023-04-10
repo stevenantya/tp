@@ -61,14 +61,14 @@ Class and Sequence Diagram in the <a href="https://ay2223s2-cs2113-t15-2.github.
 
 ### Contributions to the UG (Including Extracts)
 1. Contributed to the UG [Quick Start Guide](https://ay2223s2-cs2113-t15-2.github.io/tp/UserGuide.html#quick-start)
-2. Contributed to the initial draft of UG in google docs
+2. Contributed to the initial draft of UG in [google docs](https://docs.google.com/document/d/1p6DMV0FOJ1tTfo9iTrsbiq37AOpYOsLi8rKUksG0zSM/edit)
 3. Set up the convention to follow in the UG, e.g. `new o/option f/folderName`
 
 ### Contributions to the DG (Including Extracts)
 1. Contributed to the [implementation section](https://ay2223s2-cs2113-t15-2.github.io/tp/DeveloperGuide.html#implementation)
-2. Created the UML class diagram for SecureNUS class
-3. Created UML sequence diagram for adding basic password (Basic_Intro.png)
-4. Fixed UML sequence diagram for list and delete password
+2. Created the UML class diagram for [SecureNUS class](https://ay2223s2-cs2113-t15-2.github.io/tp/DeveloperGuide.html#securenus-component)
+3. Created UML sequence diagram for [adding basic password](https://ay2223s2-cs2113-t15-2.github.io/tp/DeveloperGuide.html#add-basic-password)
+4. Fixed UML sequence diagram for [list password](https://ay2223s2-cs2113-t15-2.github.io/tp/DeveloperGuide.html#list-all-secrets) and [delete password](https://ay2223s2-cs2113-t15-2.github.io/tp/DeveloperGuide.html#delete-a-password)
 
 ### Contributions to team-based tasks
 1. Setting up text-ui-test as we had issues during our first few versions
