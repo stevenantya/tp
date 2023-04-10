@@ -2,7 +2,6 @@ package seedu.securenus.command;
 
 import seedu.securenus.Backend;
 import seedu.securenus.SecureNUSLogger;
-import seedu.securenus.messages.OperationMessages;
 
 import seedu.securenus.ui.Ui;
 import seedu.securenus.exceptions.OperationCancelException;
