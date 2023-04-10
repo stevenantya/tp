@@ -125,6 +125,8 @@ is stored in an `unnamed` folder.
   We recommend using a descriptive name that accurately reflects the contents 
   of the secrets.
 
+* Do not use `Ctrl-C` in the terminal while running the JAR file as it will cause the program to terminate.
+
                                                                  
 <table>                                                               
     <tr>                                                           
@@ -226,8 +228,8 @@ for more details on the `save` command.
 </table>
 
 ##### Examples and Outputs:
-<img src="./UGImages/AddPassword/Addbasicpassword.jpg" width="100%" /> <br>
-<img src="./UGImages/AddPassword/Addccpassword.jpg" width="100%" />
+<img src="./UGImages/AddPassword/Addbasicpassword.jpg" width="65%" /> <br>
+<img src="./UGImages/AddPassword/Addccpassword.jpg" width="65%" />
 
 <table>                                                               
     <tr>                                                           
@@ -250,7 +252,7 @@ for more details on the `save` command.
 ##### General Format: `delete SECRET_NAME1 [SECRET_NAME2] […]`
 
 ##### Examples and Outputs:
-<img src="./UGImages/DeletePassword/deletepassword.jpg" width="100%" />
+<img src="./UGImages/DeletePassword/deletepassword.jpg" width="65%" />
 
 <table>                                                               
     <tr>                                                           
@@ -362,6 +364,11 @@ the `edit` command, the changes are automatically saved in the `database.txt` fi
 JAR file using `java -jar [CS2113-T15-2][SecureNUS].jar` and observe the following in the UI: 
 
 <table>
+    <tr>
+        <td> S.no</td>
+        <td> UI on re-running the JAR file </td>
+        <td> Description </td>
+    </tr>
     <tr>
         <td> 1. </td>
         <td> <img src="./UGImages/SavePassword/UserReload.png"> </td>
@@ -482,9 +489,6 @@ before it is complete.
 - To cancel the current operation, simply type `c/` followed by the Enter key. SecureNUS will immediately terminate the 
 current operation and return the user to the main command prompt.
 
-- Can also use `Ctrl-C` in the terminal to cancel the current operation but note that the functionality of `Ctrl-C`
-may vary with different terminals and operating systems. 
-
 - Note that cancelling an operation may result in data loss or other unintended consequences, depending on the specific 
 operation being performed. It is recommended that users use the `c/` command only when absolutely necessary and that 
 they save their data frequently to avoid losing any unsaved changes.
@@ -542,11 +546,11 @@ keeping your secrets private and secure, and regularly updating your secrets.
 
 <br>
 
-**Q:** Will all the key commands native to the command line work eg. `Ctrl-C` for cancel, `Ctrl-V` for paste, `Up
-arrow` to move to previous commands e.t.c.?
+**Q:** Will all the key commands native to the command line work eg. `Ctrl-C` for program termination, `Ctrl-V` for 
+paste, `Up arrow` to move to previous commands e.t.c.?
 **A:** The functionality for the key operations differ between terminals and operating systems. To avoid any unknown 
-errors and exceptions, users are requested to refrain from using the key shortcuts. One can use the `c/` command to 
-cancel the operation at any moment. 
+errors and exceptions, users are requested to refrain from using the key shortcuts especially the `Ctrl+C` shortcut 
+which may lead to termination of the program.
 
 <br>
 
