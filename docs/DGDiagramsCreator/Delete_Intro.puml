@@ -1,0 +1,41 @@
+!include Style.puml
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+actor User #FFFBBB
+  -> "secureNUS:SecureNUS"#00cccc: run()
+"secureNUS:SecureNUS" -> "<<class>>\nUi"#F00000: greetUser()
+return
+loop while !isExit
+
+    "secureNUS:SecureNUS" -> "secureNUS:SecureNUS"#FF0AB0: parseCommand()
+    "secureNUS:SecureNUS" -> "<<class>>\nUi"#F00000: readCommand()
+    User-> "<<class>>\nUi" #FFBBBB: "delete password"
+    return
+    return
+    "secureNUS:SecureNUS" -> "<<class>>\nParser"#BBFFFF: parse(command, usedNames, folders)
+
+    "<<class>>\nParser" -> ":DeleteCommand" **
+    activate ":DeleteCommand"#BBB
+    ":DeleteCommand"-> ":DeleteCommand"#FFFAAA:extractName(input, keyword)
+    return
+
+    return
+    return DeleteCommand
+    return
+    "secureNUS:SecureNUS" -> "secureNUS:SecureNUS"#BBFFFB:executeCommand(c)
+    "secureNUS:SecureNUS" -> ":DeleteCommand"#FFAAFF:execute(secureNUSData)
+    ":DeleteCommand" -> ":SecretMaster":getByName(name)
+    return deleteData
+    ":DeleteCommand" -> ":SecretMaster":removeSecret(deleteData)
+    return
+    return
+    destroy ":DeleteCommand"
+
+    "secureNUS:SecureNUS" -> "<<class>>\nBackend"#317821: updateStorage(input)
+    return
+    return isExit = false
+
+end
+@enduml
