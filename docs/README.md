@@ -1,3 +1,4 @@
+[//]: # (@@author DeepanjaliDhawan)
 # SecureNUS
 SecureNUS is a password manager application that allows users to store and manage their secrets and 
 other sensitive information securely.
