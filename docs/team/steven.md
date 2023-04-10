@@ -30,7 +30,7 @@ and auto-save & auto-load your password!
     <td class="tg-0lax">App foundation</td>
     <td class="tg-0lax">The basic foundation of the app including SecureNUS, Ui (scanning and printing), Parser, 
         and Exception handlings. Alongside with vital classes such as Secret parent class, 
-Command parent abstract class<br><br>This is high in complexity because the app must be 
+Command parent abstract class.<br><br>This is high in complexity because the app must be 
 designed in a way it is easily scalable, understandable, and efficient.<br>The foundation 
 went through several iterations of upgrade through the development. Major changes was added during v2.0 and v2.1. The 
 Class and Sequence Diagram in the <a href="https://ay2223s2-cs2113-t15-2.github.io/tp/DeveloperGuide.html#securenus-component">developer guide </a>is representative on how complex the app foundation is.</td>
@@ -39,7 +39,7 @@ Class and Sequence Diagram in the <a href="https://ay2223s2-cs2113-t15-2.github.
   <tr>
     <td class="tg-0lax">Adding a password<br></td>
     <td class="tg-0lax">Adding a new basic password, URL, StudentID, NUSNet passwords. 
-        The password names need to be unique. Verify if the adding is valid and exception handling
+        The password names need to be unique. Verify if the adding is valid and exception handling.
         <br><br>This is medium complexity as there are different types of passwords, parsing handling, and exception handling for various errors
         such as invalid URL (not xxx.yyy), and integration to the Storage (SecretMaster).</td>
     <td class="tg-0lax">* *</td>
